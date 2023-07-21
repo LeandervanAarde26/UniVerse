@@ -4,8 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
+    <Color x:Key="Primary">#F6F7FB</Color>
+    <Color x:Key="Secondary">#407BFF</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
@@ -31,14 +31,17 @@
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
 
-    <Color x:Key="Yellow100Accent">#F7B548</Color>
-    <Color x:Key="Yellow200Accent">#FFD590</Color>
-    <Color x:Key="Yellow300Accent">#FFE5B9</Color>
-    <Color x:Key="Cyan100Accent">#28C2D1</Color>
-    <Color x:Key="Cyan200Accent">#7BDDEF</Color>
-    <Color x:Key="Cyan300Accent">#C3F2F4</Color>
-    <Color x:Key="Blue100Accent">#3E8EED</Color>
-    <Color x:Key="Blue200Accent">#72ACF1</Color>
-    <Color x:Key="Blue300Accent">#A7CBF6</Color>
+     <Color x:Key="Red">#FF4040</Color>
+    <Color x:Key="Red200">#FFD6D6</Color>
+    <Color x:Key="Orange">#FF7800</Color>
+    <Color x:Key="Orange200">#FFD3AB</Color>
+    <Color x:Key="Yellow">#FFD645</Color>
+    <Color x:Key="Yellow200">#FFF1BF</Color>
+    <Color x:Key="Green">#29BA56</Color>
+    <Color x:Key="Green200">#CBF0D8</Color>
+    <Color x:Key="Blue">#407BFF</Color>
+    <Color x:Key="Blue200">#DFE9FF</Color>
+    <Color x:Key="Purple">#B731FF</Color>
+    <Color x:Key="Purple200">#EDDFFF</Color>
 
 </ResourceDictionary>
