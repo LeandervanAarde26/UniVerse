@@ -40,7 +40,7 @@ namespace UniVerse.Components
             {
                 Text = "Name",
                 FontAttributes = FontAttributes.Bold,
-                TextColor  = Colors.Black,
+                TextColor = Colors.Black,
                 FontSize = 20,
                 HorizontalOptions = LayoutOptions.Center
             };
@@ -68,9 +68,9 @@ namespace UniVerse.Components
                 Text = "\u2B50 Credits",
                 TextColor = Color.FromHex("#717171"),
                 FontSize = 15,
-                HorizontalOptions   = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center
             };
-     
+
 
             Grid grid = new Grid
             {
@@ -84,7 +84,7 @@ namespace UniVerse.Components
                     new RowDefinition { Height = 30 },
                     new RowDefinition { Height = 30 },
                 },
-             
+
             };
 
             // Add elements to the grid with their respective row indices
@@ -103,7 +103,7 @@ namespace UniVerse.Components
             grid.Children.Add(additionalInformation);
             Grid.SetRow(additionalInformation, 4);
 
-  
+
 
             Frame frame = new()
             {
@@ -113,7 +113,7 @@ namespace UniVerse.Components
                 BackgroundColor = Colors.White,
                 Margin = new Thickness(20),
                 Content = grid,
-              
+
             };
 
             Content = frame;
