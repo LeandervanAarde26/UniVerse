@@ -23,7 +23,7 @@ namespace UniVerse.Components
                 Source = ImageSource.FromFile("allen_laing.png"),
 
             };
-            var clip1 = new EllipseGeometry { Center = new Point(125 / 2, 125 / 2), RadiusX = 125 / 2, RadiusY = 125 / 2 };
+            var clip1 = new EllipseGeometry { Center = new Point(124 / 2, 124 / 2), RadiusX = 124 / 2, RadiusY = 124 / 2 };
 
             image.Clip = clip1;
 
@@ -33,7 +33,7 @@ namespace UniVerse.Components
                 HeightRequest = 130,
                 StrokeShape = new Ellipse(),
                 HorizontalOptions = LayoutOptions.Center,
-                StrokeThickness = 8,
+                StrokeThickness = 6,
                 Margin = new Thickness(0, -40, 0, 15),
                 Stroke = Colors.Blue,
                 Content = image
