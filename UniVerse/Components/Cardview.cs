@@ -23,17 +23,17 @@ namespace UniVerse.Components
                 Source = ImageSource.FromFile("allen_laing.png")
             };
 
-            Border imgBorder = new()
+            Frame imgBorder = new Frame
             {
                 WidthRequest = 125,
                 HeightRequest = 125,
-                StrokeShape = new Ellipse(),
+                Padding = 0,
+                CornerRadius = (float)125 / 2, // Set the CornerRadius to half of the width/height to make it a circle
                 HorizontalOptions = LayoutOptions.Center,
-                StrokeThickness = 6,
-                Margin = 0,
-                Stroke = Colors.Blue,
+                VerticalOptions = LayoutOptions.Center,
+                BorderColor = Colors.Blue,
+                HasShadow = false, // Disable shadow to get a clean circle appearance
                 Content = image
-
             };
 
             Label name = new()
