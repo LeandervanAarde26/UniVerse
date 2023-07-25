@@ -34,7 +34,7 @@ namespace UniVerse.Components
                 StrokeShape = new Ellipse(),
                 HorizontalOptions = LayoutOptions.Center,
                 StrokeThickness = 6,
-                Margin = new Thickness(0, -15, 0, 15),
+                Margin = new Thickness(0, -7, 0, 15),
                 Stroke = Colors.Blue,
                 Content = image
 
@@ -85,7 +85,7 @@ namespace UniVerse.Components
                 TextColor = Color.FromHex("#717171"),
                 FontSize = 15,
                 HorizontalOptions = LayoutOptions.Center,
-                Margin = new Thickness(0, 15, 0, 0)
+                Margin = new Thickness(0, 0, 0, 0)
             };
 
             Button textButton = new()
@@ -97,8 +97,6 @@ namespace UniVerse.Components
                 VerticalOptions = LayoutOptions.EndAndExpand,
                 Margin = new Thickness(0, 0, 0, 0)
             };
-
-
 
             StackLayout stack = new()
             {
