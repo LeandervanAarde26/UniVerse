@@ -17,7 +17,8 @@ namespace UniVerse.Components
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Aspect = Aspect.AspectFit,
-                HeightRequest = 110
+                HeightRequest = 110,
+                Margin = new Thickness(2)
             };
 
             Button textButton = new()
@@ -87,7 +88,7 @@ namespace UniVerse.Components
             row.Children.Add(picker);
 
 
-            // Wrap the children in a container to ensure they have enough space
+            
             ContentView container = new()
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -107,8 +108,8 @@ namespace UniVerse.Components
                 BackgroundColor =Color.FromHex("#F6F7FB"),
                 HorizontalOptions = LayoutOptions.FillAndExpand, 
                 VerticalOptions = LayoutOptions.Start,
-                HeightRequest = 160,
-                Padding = 5,
+                HeightRequest = 200,
+                Padding = 10,
                 Children =
                 {
                     image,
@@ -117,9 +118,6 @@ namespace UniVerse.Components
                 }
 
             };
-
-
-
             Border border = new ()
             {
                 StrokeThickness = 1,
@@ -128,7 +126,7 @@ namespace UniVerse.Components
                 StrokeDashOffset = 6,
                 Content = imagePicker,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-             
+                Margin = new Thickness(6),
                
             };
 
