@@ -57,8 +57,6 @@ namespace UniVerse.Components
                 TextColor = Colors.Black,
                 FontSize = 20,
                 HorizontalOptions = LayoutOptions.Center,
-               
-
             };
 
             Label role = new()
