@@ -34,7 +34,7 @@ namespace UniVerse.Components
                 StrokeShape = new Ellipse(),
                 HorizontalOptions = LayoutOptions.Center,
                 StrokeThickness = 6,
-                Margin = new Thickness(0, -40, 0, 15),
+                Margin = new Thickness(0, -15, 0, 15),
                 Stroke = Colors.Blue,
                 Content = image
 
@@ -97,7 +97,7 @@ namespace UniVerse.Components
                 BackgroundColor = Colors.Transparent,
                 TextColor = Colors.Blue,
                 VerticalOptions = LayoutOptions.EndAndExpand,
-                Margin = new Thickness(0, 20, 0, 0)
+                Margin = new Thickness(0, 0, 0, 0)
             };
 
 
