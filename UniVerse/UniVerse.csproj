@@ -53,7 +53,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\Allen_Laing.png" />
 	  <None Remove="Resources\Images\edit_square.svg" />
-	  <None Remove="Resources\Images\edit.png" />
+	  <None Remove="Resources\Images\edit.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -62,6 +62,6 @@
 
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\edit_square.svg" />
-	  <BundleResource Include="Resources\Images\edit.png" />
+	  <BundleResource Include="Resources\Images\edit.svg" />
 	</ItemGroup>
 </Project>

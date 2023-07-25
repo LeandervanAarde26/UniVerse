@@ -34,10 +34,19 @@ namespace UniVerse.Components
                 StrokeShape = new Ellipse(),
                 HorizontalOptions = LayoutOptions.Center,
                 StrokeThickness = 8,
-                Margin = 0,
+                Margin = new Thickness(0, -40, 0, 15),
                 Stroke = Colors.Blue,
                 Content = image
 
+            };
+
+            ImageButton editButton = new()
+            {
+                Source = ImageSource.FromFile("edit.png"),
+                HeightRequest = 2,
+                MaximumHeightRequest = 2,
+                VerticalOptions = LayoutOptions.Start,
+                HorizontalOptions = LayoutOptions.EndAndExpand,
             };
 
             Label name = new()
@@ -47,24 +56,18 @@ namespace UniVerse.Components
                 TextColor = Colors.Black,
                 FontSize = 20,
                 HorizontalOptions = LayoutOptions.Center,
-                Margin = new Thickness(20, 0, 0, 0)
+               
 
             };
 
-            ImageButton editButton = new()
-            {
-                Source = ImageSource.FromFile("edit.png"),
-                HorizontalOptions = LayoutOptions.EndAndExpand,
-                VerticalOptions = LayoutOptions.Start,
-                HeightRequest = 12,
-            };
 
             Label role = new()
             {
                 Text = "Degree student",
                 TextColor = Color.FromHex("#717171"),
                 FontSize = 18,
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                Margin = new Thickness(0, 0, 0, 0)
             };
 
 
@@ -74,15 +77,17 @@ namespace UniVerse.Components
                 Text = "\U0001F4E7 200211@virtualWindow.co.za",
                 TextColor = Color.FromHex("#717171"),
                 FontSize = 15,
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                Margin = new Thickness(0, 15, 0, 0)
             };
 
             Label additionalInformation = new()
             {
-                Text = "\u2B50 Credits",
+                Text = "\u2B50 120 Credits",
                 TextColor = Color.FromHex("#717171"),
                 FontSize = 15,
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                Margin = new Thickness(0, 15, 0, 0)
             };
 
             Button textButton = new()
@@ -96,43 +101,21 @@ namespace UniVerse.Components
             };
 
 
-            Grid grid = new Grid
-            {
-                HorizontalOptions = LayoutOptions.Center,
-                RowDefinitions = new RowDefinitionCollection
-                {
-                    new RowDefinition { Height = 140},
-                    new RowDefinition { Height = 30 },
-                    new RowDefinition { Height = 40 },
-                    new RowDefinition { Height = 35 },
-                    new RowDefinition { Height = 20 },
-                    new RowDefinition { Height = GridLength.Auto },
-                },
 
+            StackLayout stack = new()
+            {
+                Children =
+                {
+                    editButton,
+                    imgBorder,
+                    name,
+                    role,
+                    email,
+                    additionalInformation,
+                    textButton
+                }
             };
 
-
-            grid.Children.Add(imgBorder);
-            grid.Children.Add(editButton);
-            Grid.SetRow(imgBorder, 0);
-
-            
-            
-
-            grid.Children.Add(name);
-            Grid.SetRow(name, 1);
-
-            grid.Children.Add(role);
-            Grid.SetRow(role, 2);
-
-            grid.Children.Add(email);
-            Grid.SetRow(email, 3);
-
-            grid.Children.Add(additionalInformation);
-            Grid.SetRow(additionalInformation, 4);
-
-            grid.Children.Add(textButton);
-            Grid.SetRow(textButton, 5);
 
             Frame frame = new()
             {
@@ -142,7 +125,7 @@ namespace UniVerse.Components
                 WidthRequest = 300,
                 BackgroundColor = Colors.White,
                 Margin = new Thickness(20),
-                Content = grid,
+                Content = stack
 
             };
 
