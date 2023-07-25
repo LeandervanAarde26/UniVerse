@@ -43,8 +43,9 @@ namespace UniVerse.Components
             ImageButton editButton = new()
             {
                 Source = ImageSource.FromFile("edit.png"),
-                HeightRequest = 2,
-                MaximumHeightRequest = 2,
+                HeightRequest = 25,
+                WidthRequest = 25,
+                Aspect = Aspect.Center,
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.EndAndExpand,
             };
@@ -59,7 +60,6 @@ namespace UniVerse.Components
                
 
             };
-
 
             Label role = new()
             {
