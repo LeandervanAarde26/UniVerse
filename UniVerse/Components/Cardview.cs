@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Microsoft.Maui.Graphics;
 
 namespace UniVerse.Components
 {
@@ -13,8 +13,6 @@ namespace UniVerse.Components
 
         public Cardview()
         {
-            // var primaryColor = (Color)Application.Current.Resources["white"];
-            //Components added inside
             Image image = new()
             {
                 Aspect = Aspect.AspectFill,
@@ -23,7 +21,7 @@ namespace UniVerse.Components
                 WidthRequest = 125,
                 HeightRequest = 125,
                 Source = ImageSource.FromFile("allen_laing.png"),
-                
+
             };
             var clip1 = new EllipseGeometry { Center = new Point(125 / 2, 125 / 2), RadiusX = 125 / 2, RadiusY = 125 / 2 };
 
@@ -35,7 +33,7 @@ namespace UniVerse.Components
                 HeightRequest = 130,
                 StrokeShape = new Ellipse(),
                 HorizontalOptions = LayoutOptions.Center,
-                StrokeThickness = 6,
+                StrokeThickness = 8,
                 Margin = 0,
                 Stroke = Colors.Blue,
                 Content = image
@@ -48,7 +46,17 @@ namespace UniVerse.Components
                 FontAttributes = FontAttributes.Bold,
                 TextColor = Colors.Black,
                 FontSize = 20,
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                Margin = new Thickness(20, 0, 0, 0)
+
+            };
+
+            ImageButton editButton = new()
+            {
+                Source = ImageSource.FromFile("edit.png"),
+                HorizontalOptions = LayoutOptions.EndAndExpand,
+                VerticalOptions = LayoutOptions.Start,
+                HeightRequest = 12,
             };
 
             Label role = new()
@@ -77,25 +85,39 @@ namespace UniVerse.Components
                 HorizontalOptions = LayoutOptions.Center
             };
 
+            Button textButton = new()
+            {
+                Text = "View Student",
+                FontSize = 18,
+                BackgroundColor = Colors.Transparent,
+                TextColor = Colors.Blue,
+                VerticalOptions = LayoutOptions.EndAndExpand,
+                Margin = new Thickness(0, 20, 0, 0)
+            };
+
 
             Grid grid = new Grid
             {
                 HorizontalOptions = LayoutOptions.Center,
                 RowDefinitions = new RowDefinitionCollection
                 {
-                    new RowDefinition { Height = GridLength.Star },
-
+                    new RowDefinition { Height = 140},
+                    new RowDefinition { Height = 30 },
                     new RowDefinition { Height = 40 },
-                    new RowDefinition { Height = 30 },
-                    new RowDefinition { Height = 30 },
-                    new RowDefinition { Height = 30 },
+                    new RowDefinition { Height = 35 },
+                    new RowDefinition { Height = 20 },
+                    new RowDefinition { Height = GridLength.Auto },
                 },
 
             };
 
-            // Add elements to the grid with their respective row indices
+
             grid.Children.Add(imgBorder);
+            grid.Children.Add(editButton);
             Grid.SetRow(imgBorder, 0);
+
+            
+            
 
             grid.Children.Add(name);
             Grid.SetRow(name, 1);
@@ -109,22 +131,15 @@ namespace UniVerse.Components
             grid.Children.Add(additionalInformation);
             Grid.SetRow(additionalInformation, 4);
 
-            Ellipse ell = new()
-            {
-                Stroke = Colors.Red,
-                StrokeThickness = 5,
-                WidthRequest = 200,
-                HeightRequest = 200
-            };
-
-
-
+            grid.Children.Add(textButton);
+            Grid.SetRow(textButton, 5);
 
             Frame frame = new()
             {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HeightRequest = 380,
+                WidthRequest = 300,
                 BackgroundColor = Colors.White,
                 Margin = new Thickness(20),
                 Content = grid,

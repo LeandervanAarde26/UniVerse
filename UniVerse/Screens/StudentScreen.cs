@@ -10,18 +10,15 @@ namespace UniVerse.Screens
 
     public class StudentScreen : ContentPage
     {
-      
         public StudentScreen()
         {
-
-            FlexLayout layout = new()
+            FlexLayout layout = new FlexLayout
             {
                 Direction = FlexDirection.Row,
                 Wrap = FlexWrap.Wrap,
-                JustifyContent = FlexJustify.SpaceEvenly,
+                JustifyContent = FlexJustify.Start,
                 AlignItems = FlexAlignItems.Start,
-
-            }; ;
+            };
 
             Content = layout;
             var numbers = new List<int> { 1, 2, 3, 4, 5 };
@@ -30,9 +27,8 @@ namespace UniVerse.Screens
             {
                 var card = new Cardview();
                 layout.Children.Add(card);
-
-                 FlexLayout.SetGrow(card, 1);
             }
         }
     }
+
 }
