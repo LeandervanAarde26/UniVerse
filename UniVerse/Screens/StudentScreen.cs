@@ -12,12 +12,6 @@ namespace UniVerse.Screens
     {
         public StudentScreen()
         {
-
-            Grid grid = new()
-            {
-
-            };
-
             FlexLayout layout = new FlexLayout
             {
                 Direction = FlexDirection.Row,

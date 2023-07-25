@@ -34,7 +34,7 @@ namespace UniVerse.Components
                 StrokeShape = new Ellipse(),
                 HorizontalOptions = LayoutOptions.Center,
                 StrokeThickness = 6,
-                Margin = new Thickness(0, -25, 0, 15),
+                Margin = new Thickness(0, -40, 0, 15),
                 Stroke = Colors.Blue,
                 Content = image
 
@@ -42,15 +42,12 @@ namespace UniVerse.Components
 
             ImageButton editButton = new()
             {
-                HeightRequest = 7,
-                WidthRequest = 7,
                 Source = ImageSource.FromFile("edit.png"),
-                Aspect = Aspect.Center,
+                HeightRequest = 2,
+                MaximumHeightRequest = 2,
                 VerticalOptions = LayoutOptions.Start,
-                HorizontalOptions = LayoutOptions.End,
+                HorizontalOptions = LayoutOptions.EndAndExpand,
             };
-
-           
 
             Label name = new()
             {
@@ -90,7 +87,7 @@ namespace UniVerse.Components
                 TextColor = Color.FromHex("#717171"),
                 FontSize = 15,
                 HorizontalOptions = LayoutOptions.Center,
-                Margin = new Thickness(0, 0, 0, 0)
+                Margin = new Thickness(0, 15, 0, 0)
             };
 
             Button textButton = new()
