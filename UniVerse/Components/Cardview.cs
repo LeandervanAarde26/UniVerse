@@ -20,20 +20,26 @@ namespace UniVerse.Components
                 Aspect = Aspect.AspectFill,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
-                Source = ImageSource.FromFile("allen_laing.png")
-            };
-
-            Frame imgBorder = new Frame
-            {
                 WidthRequest = 125,
                 HeightRequest = 125,
-                Padding = 0,
-                CornerRadius = (float)125 / 2, // Set the CornerRadius to half of the width/height to make it a circle
+                Source = ImageSource.FromFile("allen_laing.png"),
+                
+            };
+            var clip1 = new EllipseGeometry { Center = new Point(125 / 2, 125 / 2), RadiusX = 125 / 2, RadiusY = 125 / 2 };
+
+            image.Clip = clip1;
+
+            Border imgBorder = new()
+            {
+                WidthRequest = 130,
+                HeightRequest = 130,
+                StrokeShape = new Ellipse(),
                 HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center,
-                BorderColor = Colors.Blue,
-                HasShadow = false, // Disable shadow to get a clean circle appearance
+                StrokeThickness = 6,
+                Margin = 0,
+                Stroke = Colors.Blue,
                 Content = image
+
             };
 
             Label name = new()
@@ -102,6 +108,15 @@ namespace UniVerse.Components
 
             grid.Children.Add(additionalInformation);
             Grid.SetRow(additionalInformation, 4);
+
+            Ellipse ell = new()
+            {
+                Stroke = Colors.Red,
+                StrokeThickness = 5,
+                WidthRequest = 200,
+                HeightRequest = 200
+            };
+
 
 
 
