@@ -11,6 +11,15 @@ namespace UniVerse.Components
         public RightBar()
         {
 
+            Style inputStyle = new (typeof(Entry))
+            {
+                Setters =
+                {
+                    new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromHex("#F6F7FB") },
+                    new Setter { Property = InputView.MarginProperty, Value = new Thickness(5, 3) }
+                }
+            };
+
             Image image = new()
             {
                 Source = ImageSource.FromFile("image_picker.png"),
@@ -35,8 +44,9 @@ namespace UniVerse.Components
             Entry name = new()
             {
                 Placeholder = "Student name",
+                Style = inputStyle,
                 BackgroundColor = Color.FromHex("#F6F7FB"),
-                Margin = new Thickness(5, 6)
+             
             };
 
 
@@ -44,51 +54,65 @@ namespace UniVerse.Components
             Entry surname = new()
             {
                 Placeholder = "Student surname",
-                BackgroundColor = Color.FromHex("#F6F7FB"),
-                Margin = new Thickness(5,5)
+                Style = inputStyle
             };
 
 
             Entry email = new()
             {
                 Placeholder = "Student email",
-                BackgroundColor = Color.FromHex("#F6F7FB"),
-                Margin = new Thickness(6,0)
+                Style = inputStyle
             };
 
             Entry studentNumber = new()
             {
                 Placeholder = "Student number",
-                BackgroundColor = Color.FromHex("#F6F7FB"),
-                Margin = new Thickness(6, 0),
+                Style = inputStyle
             };
 
 
             Picker picker = new()
             {
-                Title = "Student Type",
+                Style = inputStyle,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+   
             };
 
+            picker.Items.Add("Select Student type");
             picker.Items.Add("Degree Student");
             picker.Items.Add("Certificate Student");
+            picker.SelectedItem = "Select Student type";
+            picker.TextColor = Colors.Black;
+            picker.TitleColor = Colors.Black;
 
 
 
             StackLayout row = new()
             {
                 Orientation = StackOrientation.Horizontal,
-               Padding = 6
+                Padding = 6
             };
 
-            studentNumber.HorizontalOptions = LayoutOptions.StartAndExpand;
-            picker.HorizontalOptions = LayoutOptions.StartAndExpand;
+            FlexLayout row2 = new()
+            {
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                Direction = FlexDirection.Row,
+                Children =
+                {
+                       studentNumber,
+                       picker
+                }
+            };
+
+   
             picker.BackgroundColor = Color.FromHex("#F6F7FB");
 
             row.Children.Add(studentNumber);
             row.Children.Add(picker);
 
 
-            
+
             ContentView container = new()
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -100,8 +124,7 @@ namespace UniVerse.Components
             Entry cell = new()
             {
                 Placeholder = "Student surname",
-                BackgroundColor = Color.FromHex("#F6F7FB"),
-                Margin = new Thickness(6)
+                Style = inputStyle
             };
             StackLayout imagePicker = new ()
             {
@@ -130,7 +153,7 @@ namespace UniVerse.Components
                
             };
 
-            FlexLayout layout = new FlexLayout
+            FlexLayout layout = new ()
             {
                 BackgroundColor = Colors.White,
                 Padding = 20,
@@ -141,7 +164,8 @@ namespace UniVerse.Components
                     border,
                     name,
                    surname,
-                    container,
+                    studentNumber,
+                    picker,
                     email,
                     cell
                 }
