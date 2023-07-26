@@ -17,8 +17,8 @@ namespace UniVerse.Components
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Aspect = Aspect.AspectFit,
-                HeightRequest = 110,
-                Margin = new Thickness(2)
+                HeightRequest = 170,
+                Margin = new Thickness(10,2)
             };
 
             Button textButton = new()
@@ -108,7 +108,7 @@ namespace UniVerse.Components
                 BackgroundColor =Color.FromHex("#F6F7FB"),
                 HorizontalOptions = LayoutOptions.FillAndExpand, 
                 VerticalOptions = LayoutOptions.Start,
-                HeightRequest = 200,
+                HeightRequest = 260,
                 Padding = 10,
                 Children =
                 {
