@@ -35,7 +35,7 @@ namespace UniVerse.Components
                 HorizontalOptions = LayoutOptions.Center,
                 StrokeThickness = 6,
                 Margin = new Thickness(0, -7, 0, 15),
-                Stroke = Colors.Blue,
+                Stroke = Color.FromHex("#407BFF"),
                 Content = image
 
             };
@@ -93,7 +93,7 @@ namespace UniVerse.Components
                 Text = "View Student",
                 FontSize = 18,
                 BackgroundColor = Colors.Transparent,
-                TextColor = Colors.Blue,
+                TextColor = Color.FromHex("#407BFF"),
                 VerticalOptions = LayoutOptions.EndAndExpand,
                 Margin = new Thickness(0, 0, 0, 0)
             };
@@ -121,7 +121,8 @@ namespace UniVerse.Components
                 WidthRequest = 300,
                 BackgroundColor = Colors.White,
                 Margin = new Thickness(20),
-                Content = stack
+                Content = stack,
+                BorderColor = Colors.White,
 
             };
 

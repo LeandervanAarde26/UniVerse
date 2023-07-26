@@ -37,9 +37,9 @@ namespace UniVerse.Screens
 
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
-        new ColumnDefinition { Width = new GridLength(6, GridUnitType.Star) },
-        new ColumnDefinition { Width = new GridLength(74, GridUnitType.Star) },
-        new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star) }
+                 new ColumnDefinition { Width = new GridLength(6, GridUnitType.Star) },
+                 new ColumnDefinition { Width = new GridLength(74, GridUnitType.Star) },
+                 new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star) }
                 }
             };
 
@@ -52,6 +52,7 @@ namespace UniVerse.Screens
             Grid.SetRow(scrollView, 0);
             Grid.SetColumn(scrollView, 1);
             Grid.SetColumnSpan(scrollView, 1);
+            grid.BackgroundColor = Color.FromHex("#F6F7FB");
 
             grid.Children.Add(right);
             Grid.SetRow(right, 0);
