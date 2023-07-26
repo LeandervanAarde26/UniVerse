@@ -19,11 +19,14 @@ namespace UniVerse.Screens
                 JustifyContent = FlexJustify.Start,
                 AlignItems = FlexAlignItems.Start,
             };
-            ContentView contentView = new ContentView
+
+            ScrollView scrollView = new()
             {
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.Center,
+
                 Content = layout
             };
-
 
             Grid grid = new()
             {
@@ -45,10 +48,10 @@ namespace UniVerse.Screens
 
 
             // Add the ContentView to the Grid
-            grid.Children.Add(contentView);
-            Grid.SetRow(contentView, 0);
-            Grid.SetColumn(contentView, 1);
-            Grid.SetColumnSpan(contentView, 1);
+            grid.Children.Add(scrollView);
+            Grid.SetRow(scrollView, 0);
+            Grid.SetColumn(scrollView, 1);
+            Grid.SetColumnSpan(scrollView, 1);
 
             grid.Children.Add(right);
             Grid.SetRow(right, 0);
@@ -56,7 +59,7 @@ namespace UniVerse.Screens
             Grid.SetColumnSpan(right, 2);
 
             Content = grid;
-            var numbers = new List<int> { 1, 2, 3, 4, 5 };
+            var numbers = new List<int> { 1, 2, 3, 4,  2, 3, 4, 5, 2, 3, 4, 5 };
 
             foreach (var number in numbers)
             {
