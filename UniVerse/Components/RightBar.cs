@@ -49,6 +49,14 @@ namespace UniVerse.Components
              
             };
 
+            Button addStudent = new()
+            {
+                Text = "Add Student",
+                FontSize  = 15,
+                BackgroundColor = Color.FromHex("#2B2B2B"),
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Margin = new Thickness(6)
+            };
 
 
             Entry surname = new()
@@ -167,7 +175,8 @@ namespace UniVerse.Components
                     studentNumber,
                     picker,
                     email,
-                    cell
+                    cell,
+                    addStudent
                 }
             };
 
