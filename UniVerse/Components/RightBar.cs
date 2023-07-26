@@ -135,6 +135,7 @@ namespace UniVerse.Components
                 BackgroundColor = Colors.White,
                 Padding = 20,
                 Direction = FlexDirection.Column,
+                VerticalOptions = LayoutOptions.FillAndExpand,
                 Children =
                 {
                     border,
