@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
 
@@ -9,153 +10,163 @@ namespace UniVerse.Components
     {
         public RightBar()
         {
-            Label heading = new Label
-            {
-                Text = "Add Student",
-                TextColor = Color.FromHex("#2B2B2B"),
-                FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
-                Margin = new Thickness(5, 3),
-                FontAttributes = FontAttributes.Bold,
-            };
-
-            Style inputStyle = new Style(typeof(Entry))
+            Style inputStyle = new(typeof(Entry))
             {
                 Setters =
                 {
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromHex("#F6F7FB") },
-                    new Setter { Property = InputView.MarginProperty, Value = new Thickness(5, 3) }
+                    new Setter { Property = InputView.MarginProperty, Value = new Thickness(6, 3) }
                 }
             };
 
-            Image image = new Image
+            ProfileView profileContainer = new();
+
+            Label heading = new()
+            {
+                Text = "Add new Student",
+                FontSize = 20,
+                HorizontalOptions = LayoutOptions.Start,
+                Margin = new Thickness(5, 3),
+                TextColor = Color.FromHex("#2B2B2B"),
+                FontAttributes = FontAttributes.Bold,
+
+            };
+
+
+            Image defaultimage = new()
             {
                 Source = ImageSource.FromFile("image_picker.png"),
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Aspect = Aspect.AspectFit,
-                HeightRequest = 170,
-                Margin = new Thickness(10, 2)
+                MaximumHeightRequest = 170,
+                MaximumWidthRequest = 160,
             };
 
-            Button textButton = new Button
+            Button imageUploadButton = new()
             {
-                Text = "Add Image",
-                FontSize = 12,
+                Text = "Upload Image",
                 BackgroundColor = Colors.Transparent,
-                TextColor = Colors.Blue,
-                VerticalOptions = LayoutOptions.EndAndExpand
+                FontSize = 12,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.End,
+                Margin = new Thickness(5,0),
+                TextColor = Color.FromHex("#407BFF"),
             };
 
-            Entry name = new Entry
+            FlexLayout innerLayout = new FlexLayout()
             {
-                Placeholder = "Student name",
-                Style = inputStyle
-            };
+                MaximumHeightRequest = 200,
+                MaximumWidthRequest = 200,
 
-            Button addStudent = new Button
-            {
-                Text = "Add Student",
-                FontSize = 15,
-                BackgroundColor = Color.FromHex("#2B2B2B"),
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                Margin = new Thickness(6)
-            };
-
-            Entry surname = new Entry
-            {
-                Placeholder = "Student surname",
-                Style = inputStyle
-            };
-
-            Entry email = new Entry
-            {
-                Placeholder = "Student email",
-                Style = inputStyle
-            };
-
-            Entry studentNumber = new Entry
-            {
-                Placeholder = "Student number",
-                Style = inputStyle
-            };
-
-            Picker picker = new Picker
-            {
-                Style = inputStyle,
-                HorizontalOptions = LayoutOptions.CenterAndExpand
-            };
-
-            picker.Items.Add("Select Student type");
-            picker.Items.Add("Degree Student");
-            picker.Items.Add("Certificate Student");
-            picker.SelectedItem = "Select Student type";
-            picker.TextColor = Colors.Black;
-            picker.TitleColor = Colors.Black;
-
-            StackLayout row = new StackLayout
-            {
-                Orientation = StackOrientation.Horizontal,
-                Padding = 6
-            };
-
-            picker.BackgroundColor = Color.FromHex("#F6F7FB");
-
-            row.Children.Add(studentNumber);
-            row.Children.Add(picker);
-
-            Entry cell = new Entry
-            {
-                Placeholder = "Student cell",
-                Style = inputStyle
-            };
-
-            StackLayout imagePicker = new StackLayout
-            {
-                BackgroundColor = Color.FromHex("#F6F7FB"),
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.Start,
-                Padding = new Thickness(10, 0),
+                Direction = FlexDirection.Column,
                 Children =
                 {
-                    image,
-                    textButton
+                    defaultimage,
+                    imageUploadButton
                 }
             };
 
-            Border border = new Border
+            Border border = new()
             {
                 StrokeThickness = 1,
                 Stroke = Color.FromHex("#2B2B2B"),
                 StrokeDashArray = new DoubleCollection(new double[] { 8, 3 }),
                 StrokeDashOffset = 6,
-                Content = imagePicker,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                Margin = new Thickness(6)
+                Content = innerLayout,
+                BackgroundColor = Color.FromHex("#F6F7FB"),
+                Margin = new Thickness(6),
+                Padding = new Thickness(10,2),
+                StrokeShape = new RoundRectangle
+                {
+                    CornerRadius = new CornerRadius(6)
+                },
             };
 
-            FlexLayout layout = new FlexLayout
+            Entry name = new Entry()
+            {
+                Placeholder = "Student Name",
+                Style = inputStyle
+
+            };
+
+            Entry surname = new()
+            {
+                Placeholder = "Student Surname",
+                Style = inputStyle
+            };
+
+            Entry studentNumber = new()
+            {
+                Placeholder = "Student Number",
+                Style = inputStyle
+            };
+
+            var listOptions = new List<String>      
+            {
+                "Student Type",
+                "Degree Student",
+                "Certificate Student"
+            };
+
+            Picker studentRole = new()
+            {
+                Style = inputStyle,
+              
+
+            };
+
+             foreach (var option in listOptions)
+            {
+                studentRole.Items.Add(option);
+            }
+            studentRole.SelectedItem = "Student Type";
+            studentRole.TextColor = Colors.Black;
+            studentRole.TitleColor = Colors.Black;
+
+            Entry email = new()
+            {
+                Placeholder = "email",
+                Style = inputStyle
+
+            };
+
+            Entry phoneNumber = new()
+            {
+                Placeholder = "email",
+                Style = inputStyle,
+                MaxLength = 10
+            };
+
+
+            Button button = new()
+            {
+                Text =  "Add Student",
+                BackgroundColor = Color.FromHex("#2B2B2B"),
+                Margin = new Thickness(6, 3)
+            };
+
+
+
+            FlexLayout layout = new()
             {
                 BackgroundColor = Colors.White,
-                Padding = 20,
                 Direction = FlexDirection.Column,
-                VerticalOptions = LayoutOptions.FillAndExpand,
+       
                 Children =
                 {
+                    profileContainer,
                     heading,
                     border,
                     name,
                     surname,
-                    row,
-                    email,
-                    addStudent
-                }
-            };
+                    studentNumber, 
+                    studentRole,
+                    phoneNumber,
+                    button
+                },
 
-       
-            Content = new ScrollView
-            {
-                Content = layout
+               
             };
+            Content = layout;
         }
     }
 }
