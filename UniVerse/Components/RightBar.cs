@@ -15,7 +15,8 @@ namespace UniVerse.Components
                 Setters =
                 {
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromHex("#F6F7FB") },
-                    new Setter { Property = InputView.MarginProperty, Value = new Thickness(6, 3) }
+                    new Setter { Property = InputView.MarginProperty, Value = new Thickness(6, 5) },
+                    new Setter { Property = InputView.TextColorProperty, Value = Color.FromHex("#2B2B2B") }
                 }
             };
 
@@ -37,7 +38,7 @@ namespace UniVerse.Components
             {
                 Source = ImageSource.FromFile("image_picker.png"),
                 Aspect = Aspect.AspectFit,
-                MaximumHeightRequest = 170,
+                MaximumHeightRequest = 200,
                 MaximumWidthRequest = 160,
             };
 
@@ -141,7 +142,23 @@ namespace UniVerse.Components
             {
                 Text =  "Add Student",
                 BackgroundColor = Color.FromHex("#2B2B2B"),
-                Margin = new Thickness(6, 3)
+                Margin = new Thickness(6, 6)
+            };
+
+            StackLayout stack = new()
+            {
+                VerticalOptions = LayoutOptions.Center,
+                Children =
+                {
+                    heading,
+                    border,
+                    name,
+                    surname,
+                    studentNumber,
+                    studentRole,
+                    phoneNumber,
+                    button
+                }
             };
 
 
@@ -150,22 +167,17 @@ namespace UniVerse.Components
             {
                 BackgroundColor = Colors.White,
                 Direction = FlexDirection.Column,
-       
+
+                JustifyContent = FlexJustify.Start,
                 Children =
                 {
                     profileContainer,
-                    heading,
-                    border,
-                    name,
-                    surname,
-                    studentNumber, 
-                    studentRole,
-                    phoneNumber,
-                    button
+                    stack
                 },
 
                
             };
+            //FlexLayout.SetGrow(stack, 1);
             Content = layout;
         }
     }
