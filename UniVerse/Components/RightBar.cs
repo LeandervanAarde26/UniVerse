@@ -2,7 +2,6 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
-using System;
 
 namespace UniVerse.Components
 {
@@ -10,8 +9,16 @@ namespace UniVerse.Components
     {
         public RightBar()
         {
+            Label heading = new Label
+            {
+                Text = "Add Student",
+                TextColor = Color.FromHex("#2B2B2B"),
+                FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
+                Margin = new Thickness(5, 3),
+                FontAttributes = FontAttributes.Bold,
+            };
 
-            Style inputStyle = new (typeof(Entry))
+            Style inputStyle = new Style(typeof(Entry))
             {
                 Setters =
                 {
@@ -20,70 +27,62 @@ namespace UniVerse.Components
                 }
             };
 
-            Image image = new()
+            Image image = new Image
             {
                 Source = ImageSource.FromFile("image_picker.png"),
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Aspect = Aspect.AspectFit,
                 HeightRequest = 170,
-                Margin = new Thickness(10,2)
+                Margin = new Thickness(10, 2)
             };
 
-            Button textButton = new()
+            Button textButton = new Button
             {
                 Text = "Add Image",
                 FontSize = 12,
                 BackgroundColor = Colors.Transparent,
                 TextColor = Colors.Blue,
-                VerticalOptions = LayoutOptions.EndAndExpand,
-                Margin = new Thickness(0, 0, 0, 0)
+                VerticalOptions = LayoutOptions.EndAndExpand
             };
 
-
-            Entry name = new()
+            Entry name = new Entry
             {
                 Placeholder = "Student name",
-                Style = inputStyle,
-                BackgroundColor = Color.FromHex("#F6F7FB"),
-             
+                Style = inputStyle
             };
 
-            Button addStudent = new()
+            Button addStudent = new Button
             {
                 Text = "Add Student",
-                FontSize  = 15,
+                FontSize = 15,
                 BackgroundColor = Color.FromHex("#2B2B2B"),
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 Margin = new Thickness(6)
             };
 
-
-            Entry surname = new()
+            Entry surname = new Entry
             {
                 Placeholder = "Student surname",
                 Style = inputStyle
             };
 
-
-            Entry email = new()
+            Entry email = new Entry
             {
                 Placeholder = "Student email",
                 Style = inputStyle
             };
 
-            Entry studentNumber = new()
+            Entry studentNumber = new Entry
             {
                 Placeholder = "Student number",
                 Style = inputStyle
             };
 
-
-            Picker picker = new()
+            Picker picker = new Picker
             {
                 Style = inputStyle,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-   
+                HorizontalOptions = LayoutOptions.CenterAndExpand
             };
 
             picker.Items.Add("Select Student type");
@@ -93,63 +92,37 @@ namespace UniVerse.Components
             picker.TextColor = Colors.Black;
             picker.TitleColor = Colors.Black;
 
-
-
-            StackLayout row = new()
+            StackLayout row = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
                 Padding = 6
             };
 
-            FlexLayout row2 = new()
-            {
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center,
-                Direction = FlexDirection.Row,
-                Children =
-                {
-                       studentNumber,
-                       picker
-                }
-            };
-
-   
             picker.BackgroundColor = Color.FromHex("#F6F7FB");
 
             row.Children.Add(studentNumber);
             row.Children.Add(picker);
 
-
-
-            ContentView container = new()
+            Entry cell = new Entry
             {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                Content  = row
-            };
-
-        
-
-            Entry cell = new()
-            {
-                Placeholder = "Student surname",
+                Placeholder = "Student cell",
                 Style = inputStyle
             };
-            StackLayout imagePicker = new ()
+
+            StackLayout imagePicker = new StackLayout
             {
-                BackgroundColor =Color.FromHex("#F6F7FB"),
-                HorizontalOptions = LayoutOptions.FillAndExpand, 
+                BackgroundColor = Color.FromHex("#F6F7FB"),
+                HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.Start,
-                HeightRequest = 260,
-                Padding = 10,
+                Padding = new Thickness(10, 0),
                 Children =
                 {
                     image,
-                    textButton,
-
+                    textButton
                 }
-
             };
-            Border border = new ()
+
+            Border border = new Border
             {
                 StrokeThickness = 1,
                 Stroke = Color.FromHex("#2B2B2B"),
@@ -157,11 +130,10 @@ namespace UniVerse.Components
                 StrokeDashOffset = 6,
                 Content = imagePicker,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                Margin = new Thickness(6),
-               
+                Margin = new Thickness(6)
             };
 
-            FlexLayout layout = new ()
+            FlexLayout layout = new FlexLayout
             {
                 BackgroundColor = Colors.White,
                 Padding = 20,
@@ -169,18 +141,21 @@ namespace UniVerse.Components
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 Children =
                 {
+                    heading,
                     border,
                     name,
-                   surname,
-                    studentNumber,
-                    picker,
+                    surname,
+                    row,
                     email,
-                    cell,
                     addStudent
                 }
             };
 
-            Content = layout;
+       
+            Content = new ScrollView
+            {
+                Content = layout
+            };
         }
     }
 }
