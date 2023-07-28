@@ -15,7 +15,7 @@ namespace UniVerse.Components
                 Setters =
                 {
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromHex("#F6F7FB") },
-                    new Setter { Property = InputView.MarginProperty, Value = new Thickness(6, 5) },
+                    new Setter { Property = InputView.MarginProperty, Value = new Thickness(22, 5) },
                     new Setter { Property = InputView.TextColorProperty, Value = Color.FromHex("#2B2B2B") }
                 }
             };
@@ -27,7 +27,7 @@ namespace UniVerse.Components
                 Text = "Add new Student",
                 FontSize = 20,
                 HorizontalOptions = LayoutOptions.Start,
-                Margin = new Thickness(5, 3),
+                Margin = new Thickness(22, 5),
                 TextColor = Color.FromHex("#2B2B2B"),
                 FontAttributes = FontAttributes.Bold,
 
@@ -38,8 +38,8 @@ namespace UniVerse.Components
             {
                 Source = ImageSource.FromFile("image_picker.png"),
                 Aspect = Aspect.AspectFit,
-                MaximumHeightRequest = 200,
-                MaximumWidthRequest = 160,
+                MaximumHeightRequest = 230,
+                MaximumWidthRequest = 200,
             };
 
             Button imageUploadButton = new()
@@ -71,10 +71,11 @@ namespace UniVerse.Components
                 StrokeThickness = 1,
                 Stroke = Color.FromHex("#2B2B2B"),
                 StrokeDashArray = new DoubleCollection(new double[] { 8, 3 }),
+                HeightRequest = 230,
                 StrokeDashOffset = 6,
                 Content = innerLayout,
                 BackgroundColor = Color.FromHex("#F6F7FB"),
-                Margin = new Thickness(6),
+                Margin = new Thickness(22, 8),
                 Padding = new Thickness(10,2),
                 StrokeShape = new RoundRectangle
                 {
@@ -123,16 +124,37 @@ namespace UniVerse.Components
             studentRole.TextColor = Colors.Black;
             studentRole.TitleColor = Colors.Black;
 
+            StackLayout showcase = new()
+            {
+                
+                Children =
+                {
+                    studentNumber,
+                    studentRole
+                }
+            };
+
+
+            FlexLayout showcase2 = new()
+            {
+                Direction = FlexDirection.Row,
+                Children =
+                {
+                    studentNumber,
+                    studentRole
+                }
+            };
+
             Entry email = new()
             {
-                Placeholder = "email",
+                Placeholder = "Student Email",
                 Style = inputStyle
 
             };
 
             Entry phoneNumber = new()
             {
-                Placeholder = "email",
+                Placeholder = "Student Cell Number",
                 Style = inputStyle,
                 MaxLength = 10
             };
@@ -142,7 +164,7 @@ namespace UniVerse.Components
             {
                 Text =  "Add Student",
                 BackgroundColor = Color.FromHex("#2B2B2B"),
-                Margin = new Thickness(6, 6)
+                Margin = new Thickness(18, 6)
             };
 
             StackLayout stack = new()
@@ -154,14 +176,15 @@ namespace UniVerse.Components
                     border,
                     name,
                     surname,
+                    //showcase,
+                    //showcase2,
                     studentNumber,
                     studentRole,
+                    email,
                     phoneNumber,
                     button
                 }
             };
-
-
 
             FlexLayout layout = new()
             {
