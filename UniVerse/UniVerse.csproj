@@ -58,9 +58,19 @@
 	<ItemGroup>
 	  <None Remove="Components\" />
 	  <None Remove="Screens\" />
+	  <None Remove="Resources\Images\ui_ux_design.svg" />
+	  <None Remove="Resources\Images\edit.svg" />
+	  <None Remove="Resources\Images\kelly.png" />
+	  <None Remove="Resources\Images\leander.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
 	  <Folder Include="Screens\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\ui_ux_design.svg" />
+	  <BundleResource Include="Resources\Images\edit.svg" />
+	  <BundleResource Include="Resources\Images\kelly.png" />
+	  <BundleResource Include="Resources\Images\leander.png" />
 	</ItemGroup>
 </Project>

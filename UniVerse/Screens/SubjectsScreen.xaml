@@ -5,7 +5,7 @@
              x:Class="UniVerse.Screens.SubjectsScreen"
              Title="SubjectsScreen"
              BackgroundColor="{DynamicResource Key=Primary}">
-    <VerticalStackLayout Padding="20">
+    <VerticalStackLayout Padding="20" HorizontalOptions="Start">
         <Label 
             Text="Subjects"
             FontSize="35"
