@@ -35,6 +35,7 @@
                 <!--Students-->
                 <HorizontalStackLayout>
                     <HorizontalStackLayout WidthRequest="425">
+                        <!-- <components:StudentList/> ehh?-->
                         <Image Aspect="AspectFill"
                                 Source="kelly.png"
                                 WidthRequest="60"
