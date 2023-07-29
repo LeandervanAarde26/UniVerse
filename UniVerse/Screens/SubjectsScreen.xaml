@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:UniVerse.Components"
+             x:Class="UniVerse.Screens.SubjectsScreen"
+             Title="SubjectsScreen"
+             BackgroundColor="{DynamicResource Key=Primary}">
+    <VerticalStackLayout Padding="20">
+        <Label 
+            Text="Subjects"
+            FontSize="35"
+            FontAttributes="Bold"
+            TextColor="{DynamicResource Key=Gray900}"
+            Padding="0, 0, 0, 20"/>
+        <ScrollView>
+            <components:SubjectCard/>
+
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>
