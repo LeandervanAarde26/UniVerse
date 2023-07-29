@@ -4,15 +4,15 @@
              x:Class="UniVerse.Components.SubjectCard">
 
     <!--Subject Card-->
-    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" MaximumWidthRequest="1010" Padding="30">
+    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" MaximumWidthRequest="1010" Padding="50, 40, 50,40">
         <HorizontalStackLayout >
             <!--Subject Image-->
             <Image Source="ui_ux_design.png"/>
 
             <!--Subject Information-->
-            <FlexLayout Direction="Column" JustifyContent="SpaceBetween" HorizontalOptions="CenterAndExpand">
+            <FlexLayout Margin="40,0, 0, 0" Direction="Column" JustifyContent="SpaceBetween" HorizontalOptions="CenterAndExpand">
                 <!--Subject name & Code-->
-                <HorizontalStackLayout Padding="30 , 0, 0, 0">
+                <HorizontalStackLayout>
                     <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="500">
                         <Label Text="Subject Name"
                            TextColor="{DynamicResource Gray900}"
@@ -31,11 +31,10 @@
                 <!--Subject Description-->
                 <Label Text="Subject Description"
                        TextColor="{DynamicResource Gray900}"
-                       FontSize="16"
-                       Margin="10, 0, 0, 0"/>
+                       FontSize="16"/>
                 <!--Students-->
-                <HorizontalStackLayout Padding="20, 0, 0, 0">
-                    <HorizontalStackLayout Padding="20, 0, 0, 0" WidthRequest="425">
+                <HorizontalStackLayout>
+                    <HorizontalStackLayout WidthRequest="425">
                         <Image Aspect="AspectFill"
                                 Source="kelly.png"
                                 WidthRequest="60"
