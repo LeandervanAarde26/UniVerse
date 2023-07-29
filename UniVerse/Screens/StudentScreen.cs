@@ -102,8 +102,13 @@ namespace UniVerse.Screens
                 }
             };
 
-
-            RightBar right = new();
+            var list = new List<String>
+            {
+                "Student Type",
+                "Degree Student",
+                "Certificate Student"
+            };
+            RightBar right = new("Student", list);
 
 
             // Add the ContentView to the Grid
@@ -129,7 +134,7 @@ namespace UniVerse.Screens
 
             foreach (var number in numbers)
             {
-                var card = new Cardview("Leander van Aarde", "Degree Student", "200211@virtualwindow.co.za", "\u2B50 120 Credits", "student");
+                var card = new Cardview("Leander van Aarde", "Degree Student", "200211@virtualwindow.co.za", "⭐️ 120 Credits", "student");
                 layout.Children.Add(card);
             }
         }

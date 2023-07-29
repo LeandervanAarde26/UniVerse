@@ -104,8 +104,15 @@ namespace UniVerse.Screens
                 }
             };
 
+            var list = new List<String>
+            {
+                "Staff Member Type",
+                "Admin Staff",
+                "Academic Staff"
+            };
 
-            RightBar right = new();
+
+            RightBar right = new("Staff Member", list);
 
 
             // Add the ContentView to the Grid
@@ -132,7 +139,7 @@ namespace UniVerse.Screens
             foreach (var number in numbers)
             {
                
-                var card = new Cardview("Armand Pretorius", "Academic", "Armand@openwindow.co.za", "\u2B50 DV300", "Staff Member");
+                var card = new Cardview("Armand Pretorius", "Academic", "Armand@openwindow.co.za", "📚 DV300", "Staff Member");
 
                 layout.Children.Add(card);
 

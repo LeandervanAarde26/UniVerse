@@ -6,10 +6,17 @@ using Microsoft.Maui.Layouts;
 
 namespace UniVerse.Components
 {
+
+
     public class RightBar : ContentView
     {
-        public RightBar()
+        public string PageType { get; set; }
+        public List<String> DropList {get; set; }
+        public RightBar(string pgType, List<String> dropLst)
         {
+
+            PageType = pgType;
+            DropList = dropLst;
             Style inputStyle = new(typeof(Entry))
             {
                 Setters =
@@ -24,7 +31,7 @@ namespace UniVerse.Components
 
             Label heading = new()
             {
-                Text = "Add new Student",
+                Text = "Add new " + PageType,
                 FontSize = 20,
                 HorizontalOptions = LayoutOptions.Start,
                 Margin = new Thickness(22, 5),
@@ -85,29 +92,24 @@ namespace UniVerse.Components
 
             Entry name = new Entry()
             {
-                Placeholder = "Student Name",
+                Placeholder = PageType +  " Name",
                 Style = inputStyle
 
             };
 
             Entry surname = new()
             {
-                Placeholder = "Student Surname",
+                Placeholder = PageType +  " Surname",
                 Style = inputStyle
             };
 
             Entry studentNumber = new()
             {
-                Placeholder = "Student Number",
+                Placeholder = PageType + " Number",
                 Style = inputStyle
             };
 
-            var listOptions = new List<String>      
-            {
-                "Student Type",
-                "Degree Student",
-                "Certificate Student"
-            };
+            var listOptions = DropList;
 
             Picker studentRole = new()
             {
@@ -120,7 +122,7 @@ namespace UniVerse.Components
             {
                 studentRole.Items.Add(option);
             }
-            studentRole.SelectedItem = "Student Type";
+            studentRole.SelectedItem = PageType + " Type";
             studentRole.TextColor = Colors.Black;
             studentRole.TitleColor = Colors.Black;
 
@@ -147,14 +149,14 @@ namespace UniVerse.Components
 
             Entry email = new()
             {
-                Placeholder = "Student Email",
+                Placeholder = PageType + " Email",
                 Style = inputStyle
 
             };
 
             Entry phoneNumber = new()
             {
-                Placeholder = "Student Cell Number",
+                Placeholder =  PageType + " Number",
                 Style = inputStyle,
                 MaxLength = 10
             };
@@ -162,7 +164,7 @@ namespace UniVerse.Components
 
             Button button = new()
             {
-                Text =  "Add Student",
+                Text =  "Add " + PageType,
                 BackgroundColor = Color.FromHex("#2B2B2B"),
                 Margin = new Thickness(18, 6)
             };
