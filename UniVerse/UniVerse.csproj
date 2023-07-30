@@ -34,6 +34,9 @@
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\image_picker.svg" />
+	</ItemGroup>
+	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
@@ -62,6 +65,7 @@
 	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\kelly.png" />
 	  <None Remove="Resources\Images\leander.png" />
+	  <None Remove="Resources\Images\image_picker.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -72,5 +76,6 @@
 	  <BundleResource Include="Resources\Images\edit.svg" />
 	  <BundleResource Include="Resources\Images\kelly.png" />
 	  <BundleResource Include="Resources\Images\leander.png" />
+	  <BundleResource Include="Resources\Images\image_picker.svg" />
 	</ItemGroup>
 </Project>

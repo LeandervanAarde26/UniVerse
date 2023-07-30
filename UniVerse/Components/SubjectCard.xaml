@@ -4,7 +4,7 @@
              x:Class="UniVerse.Components.SubjectCard">
 
     <!--Subject Card-->
-    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" MaximumWidthRequest="1010" Padding="50, 40, 50,40">
+    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" MaximumWidthRequest="1100" Padding="50, 40, 50,40">
         <HorizontalStackLayout >
             <!--Subject Image-->
             <Image Source="ui_ux_design.png"/>
@@ -13,7 +13,7 @@
             <FlexLayout Margin="40,0, 0, 0" Direction="Column" JustifyContent="SpaceBetween" HorizontalOptions="CenterAndExpand">
                 <!--Subject name & Code-->
                 <HorizontalStackLayout>
-                    <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="500">
+                    <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="600">
                         <Label Text="Subject Name"
                            TextColor="{DynamicResource Gray900}"
                            FontSize="20"
@@ -34,7 +34,7 @@
                        FontSize="16"/>
                 <!--Students-->
                 <HorizontalStackLayout>
-                    <HorizontalStackLayout WidthRequest="425">
+                    <HorizontalStackLayout WidthRequest="520">
                         <!-- <components:StudentList/> ehh?-->
                         <Image Aspect="AspectFill"
                                 Source="kelly.png"
