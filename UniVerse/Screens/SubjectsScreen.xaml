@@ -47,9 +47,8 @@
                                 FontSize="18"
                                 BackgroundColor="Transparent"
                                 TextColor="#407BFF"
-                                VerticalOptions="Center"
-                                Margin="0,0,0,0" Grid.Row="1"
-                                />
+                                Margin="0,20,0,0"
+                                Grid.Row="1"/>
                     </Grid>
                 </Border>
                 <Entry Placeholder="Subject Name" BackgroundColor="{DynamicResource Primary}" Margin="20, 5" TextColor="#2B2B2B"/>
