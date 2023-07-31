@@ -4,7 +4,7 @@
              x:Class="UniVerse.Components.SubjectCard">
 
     <!--Subject Card-->
-    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" MaximumWidthRequest="1100" Padding="50, 40, 50,40">
+    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" Padding="50, 40, 50,40" FlexLayout.Grow="1">
         <HorizontalStackLayout >
             <!--Subject Image-->
             <Image Source="ui_ux_design.png"/>
@@ -29,6 +29,7 @@
                                  MaximumWidthRequest="25"/>
                 </HorizontalStackLayout>
                 <!--Subject Description-->
+
                 <Label Text="Subject Description"
                        TextColor="{DynamicResource Gray900}"
                        FontSize="16"/>

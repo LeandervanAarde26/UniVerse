@@ -7,11 +7,11 @@
              BackgroundColor="{DynamicResource Key=Primary}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="10*"/>
             <!-- Three-quarters of the page for the first column -->
-            <ColumnDefinition Width="1100" />
+            <ColumnDefinition Width="70*"/>
             <!-- One-quarter of the page for the second column -->
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
 
         <!--Just an indication for the Nav-->
