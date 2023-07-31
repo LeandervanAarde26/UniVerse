@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks> 
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
@@ -53,6 +53,11 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Resources\Images\Allen_Laing.png" />
+	  <None Remove="Resources\Images\edit_square.svg" />
+	  <None Remove="Resources\Images\edit.svg" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
@@ -77,5 +82,14 @@
 	  <BundleResource Include="Resources\Images\kelly.png" />
 	  <BundleResource Include="Resources\Images\leander.png" />
 	  <BundleResource Include="Resources\Images\image_picker.svg" />
+
+    <BundleResource Include="Resources\Images\ui_ux_design.svg" />
+	  <BundleResource Include="Resources\Images\edit.svg" />
+	  <BundleResource Include="Resources\Images\kelly.png" />
+	  <BundleResource Include="Resources\Images\leander.png" />
+	  <BundleResource Include="Resources\Images\image_picker.svg" />
+	  <BundleResource Include="Resources\Images\edit_square.svg" />
+	  <BundleResource Include="Resources\Images\edit.svg" />
+
 	</ItemGroup>
 </Project>
