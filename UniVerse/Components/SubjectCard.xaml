@@ -25,8 +25,10 @@
                     <!--Edit Button-->
                     <!--Trying to figure out how to get this image to stay at the end even when resising the screen?-->
                     <ImageButton Source="edit.png"
-                                 MaximumHeightRequest="25"
-                                 MaximumWidthRequest="25"/>
+                                 WidthRequest="25"
+                                 HeightRequest="25"
+                                 Aspect="Center"
+                                 HorizontalOptions="End"/>
                 </HorizontalStackLayout>
                 <!--Subject Description-->
 
