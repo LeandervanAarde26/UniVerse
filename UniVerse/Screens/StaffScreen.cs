@@ -98,9 +98,9 @@ namespace UniVerse.Screens
 
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
-                 new ColumnDefinition { Width = new GridLength(6, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(79, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(25, GridUnitType.Star) }
+                 new ColumnDefinition { Width = new GridLength(10, GridUnitType.Star) },
+                 new ColumnDefinition { Width = new GridLength(70, GridUnitType.Star) },
+                 new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star) }
                 }
             };
 
