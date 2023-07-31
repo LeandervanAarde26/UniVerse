@@ -1,16 +1,18 @@
 ﻿using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using UniVerse.Components;
+
 
 namespace UniVerse.Screens
 {
-
-    public class StudentScreen : ContentPage
+    public class StaffScreen : ContentPage
     {
-        public StudentScreen()
+        public StaffScreen()
         {
 
             Style inputStyle = new(typeof(Entry))
@@ -18,7 +20,7 @@ namespace UniVerse.Screens
                 Setters =
                 {
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromHex("#2b2b2b") },
-                
+
                     new Setter { Property = InputView.TextColorProperty, Value = Color.FromHex("#2B2B2B") }
                 }
             };
@@ -26,7 +28,7 @@ namespace UniVerse.Screens
 
             Label pageHeading = new()
             {
-                Text = "Students",
+                Text = "Staff",
                 FontSize = 32,
                 FontAttributes = FontAttributes.Bold,
                 TextColor = Color.FromHex("#2B2B2B"),
@@ -41,7 +43,7 @@ namespace UniVerse.Screens
                 Style = inputStyle,
                 HorizontalOptions = LayoutOptions.End,
                 VerticalOptions = LayoutOptions.Center,
-                    Margin = new Thickness(0, 10, 20, 10)
+                Margin = new Thickness(0, 10, 20, 10)
             };
 
             FlexLayout topContainer = new()
@@ -56,21 +58,21 @@ namespace UniVerse.Screens
 
             var listOptions = new List<String>
             {
-                "All Students",
-                "Degree Student",
-                "Certificate Student"
+                "All Staff",
+                "Admin Staff",
+                "Academic Staff"
             };
 
             foreach (var option in listOptions)
             {
                 studentRole.Items.Add(option);
             }
-            studentRole.SelectedItem = "All Students";
+            studentRole.SelectedItem = "All Staff";
             studentRole.TextColor = Colors.White;
             studentRole.TitleColor = Colors.White;
 
 
-            FlexLayout layout = new FlexLayout
+            FlexLayout layout = new()
             {
                 Direction = FlexDirection.Row,
                 Wrap = FlexWrap.Wrap,
@@ -104,11 +106,13 @@ namespace UniVerse.Screens
 
             var list = new List<String>
             {
-                "Student Type",
-                "Degree Student",
-                "Certificate Student"
+                "Staff Member Type",
+                "Admin Staff",
+                "Academic Staff"
             };
-            RightBar right = new("Student", list);
+
+
+            RightBar right = new("Staff Member", list);
 
 
             // Add the ContentView to the Grid
@@ -121,7 +125,7 @@ namespace UniVerse.Screens
             grid.Children.Add(right);
             Grid.SetColumn(right, 2);
             Grid.SetColumnSpan(right, 2);
-            Grid.SetRowSpan(right, 2);  
+            Grid.SetRowSpan(right, 2);
 
             // Add the Flexlayout for heading to the Grid
 
@@ -130,12 +134,15 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 1);
 
             Content = grid;
-            var numbers = new List<int> { 1, 2, 3, 4,  2, 3, 4, 5, 2, 3, 4, 5 };
+            var numbers = new List<int> { 1, 2, 3, 4, 2, 3, 4, 5, 2, 3, 4, 5 };
 
             foreach (var number in numbers)
             {
-                var card = new Cardview("Leander van Aarde", "Degree Student", "200211@virtualwindow.co.za", "⭐️ 120 Credits", "student");
+               
+                var card = new Cardview("Armand Pretorius", "Academic", "Armand@openwindow.co.za", "📚 DV300", "Staff Member");
+
                 layout.Children.Add(card);
+
             }
         }
     }

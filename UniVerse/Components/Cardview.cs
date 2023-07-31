@@ -5,14 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Maui.Graphics;
+using System.Data;
 
 namespace UniVerse.Components
 {
+
     public class Cardview : ContentView
     {
 
-        public Cardview()
+        public string Name { get; set; }
+        public string Role { get; set; }
+        public string Email { get; set; }
+        public string AdditionalInformation { get; set; }
+
+        public string Buttontext { get; set; }
+
+        public Cardview(string nme, string rle, string eml, string addinfo, string btnText)
         {
+
+            Name = nme;
+            Role = rle;
+            Email = eml;
+            AdditionalInformation = addinfo;
+            Buttontext = btnText;
+
             Image image = new()
             {
                 Aspect = Aspect.AspectFill,
@@ -52,7 +68,7 @@ namespace UniVerse.Components
 
             Label name = new()
             {
-                Text = "Name",
+                Text = Name,
                 FontAttributes = FontAttributes.Bold,
                 TextColor = Colors.Black,
                 FontSize = 20,
@@ -61,7 +77,7 @@ namespace UniVerse.Components
 
             Label role = new()
             {
-                Text = "Degree student",
+                Text = Role,
                 TextColor = Color.FromHex("#717171"),
                 FontSize = 18,
                 HorizontalOptions = LayoutOptions.Center,
@@ -70,18 +86,20 @@ namespace UniVerse.Components
 
 
             Label email = new()
-
+            //200211@virtualWindow.co.za"
             {
-                Text = "\U0001F4E7 200211@virtualWindow.co.za",
+                Text = "\U0001F4E7"  + Role,
                 TextColor = Color.FromHex("#717171"),
                 FontSize = 15,
                 HorizontalOptions = LayoutOptions.Center,
                 Margin = new Thickness(0, 15, 0, 0)
             };
 
+            //\u2B50 120 Credits
+
             Label additionalInformation = new()
             {
-                Text = "\u2B50 120 Credits",
+                Text = AdditionalInformation,
                 TextColor = Color.FromHex("#717171"),
                 FontSize = 15,
                 HorizontalOptions = LayoutOptions.Center,
@@ -90,7 +108,7 @@ namespace UniVerse.Components
 
             Button textButton = new()
             {
-                Text = "View Student",
+                Text = "View " + Buttontext,
                 FontSize = 18,
                 BackgroundColor = Colors.Transparent,
                 TextColor = Color.FromHex("#407BFF"),
@@ -117,8 +135,8 @@ namespace UniVerse.Components
             {
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                HeightRequest = 380,
-                WidthRequest = 300,
+               
+                WidthRequest = 280,
                 BackgroundColor = Colors.White,
                 Margin = new Thickness(20),
                 Content = stack,
