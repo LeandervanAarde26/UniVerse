@@ -18,19 +18,19 @@ namespace UniVerse.Screens
             Image image = new()
             {
                 Aspect = Aspect.AspectFill,
-                WidthRequest = 250,
-                HeightRequest = 250,
+                WidthRequest = 230,
+                HeightRequest = 230,
                 Source = ImageSource.FromFile("allen_laing.png"),
 
             };
-            var clip1 = new EllipseGeometry { Center = new Point(248 / 2, 248 / 2), RadiusX = 248 / 2, RadiusY = 248 / 2 };
+            var clip1 = new EllipseGeometry { Center = new Point(230 / 2, 230 / 2), RadiusX = 230 / 2, RadiusY = 230 / 2 };
 
             image.Clip = clip1;
 
             Border imgBorder = new()
             {
-                WidthRequest = 260,
-                HeightRequest = 260,
+                WidthRequest = 235,
+                HeightRequest = 235,
                 StrokeShape = new Ellipse(),
                 HorizontalOptions = LayoutOptions.Center,
                 StrokeThickness = 6,
@@ -136,7 +136,7 @@ namespace UniVerse.Screens
             {
                 var card = new AssignedSubject();
 
-                FlexLayout.SetBasis(card, new FlexBasis(0.45f, true));
+                FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
 
                 layout.Children.Add(card);
             }
@@ -145,16 +145,18 @@ namespace UniVerse.Screens
 
             ScrollView scrollView = new()
             {
-         
+             
                 Content = layout
             };
+
+            StaffMemberRightBar right = new();
 
 
             Grid grid = new()
             {
                 RowDefinitions = new RowDefinitionCollection
                 {
-                    new RowDefinition{Height = 290},
+                    new RowDefinition{Height = 245},
                     new RowDefinition{Height = GridLength.Star}
                 },
 
@@ -176,7 +178,13 @@ namespace UniVerse.Screens
             Grid.SetRow(scrollView, 1);
             Grid.SetColumn(scrollView, 1);
             Grid.SetColumnSpan(scrollView, 1);
+            grid.BackgroundColor = Color.FromHex("#F6F7FB");
 
+
+            grid.Children.Add(right);
+            Grid.SetColumn(right, 2);
+            Grid.SetColumnSpan(right, 2);
+            Grid.SetRowSpan(right, 2);
 
 
             grid.BackgroundColor = Color.FromHex("#F6F7FB");

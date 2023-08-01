@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Layouts;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,16 @@ using System.Text;
 namespace UniVerse.Components
 {
 	public class AssignedSubject : ContentView
+
 	{
-		public AssignedSubject ()
+
+        public float CornerRadius { get; set; }
+        public AssignedSubject ()
 		{
+            CornerRadius = 20;
             Label subjectName = new()
             {
+             
                 Text = "Interactive Development",
                 TextColor = Color.FromHex("#2B2B2B"),
                 FontAttributes = FontAttributes.Bold,
@@ -31,6 +37,7 @@ namespace UniVerse.Components
             {
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
+ 
                 Children =
                 {
                       subjectName,
@@ -43,17 +50,19 @@ namespace UniVerse.Components
             {
 
                 Aspect = Aspect.AspectFit,
-                MaximumHeightRequest = 160,
+                MaximumHeightRequest = 180,
                 VerticalOptions = LayoutOptions.Center,
-                Source = ImageSource.FromFile("development.png"),
+                Source = "devreplace.png",
+                Margin = new Thickness(0, 0, 20, 0)
+
 
             };
+
+  
 
             FlexLayout innerLayout = new()
             {
                 Direction = FlexDirection.Row,
-
-
                 Children =
                 {
                     subjectImage,
@@ -63,19 +72,17 @@ namespace UniVerse.Components
             };
 
 
-
-            FlexLayout.SetBasis(stack, new FlexBasis(0.4f, true));
-
             Frame frame = new()
             {
+                CornerRadius = 20,
+                HeightRequest = 240,
                 BackgroundColor = Color.FromHex("#DFE9FF"),
-                HeightRequest = 200,
-                BorderColor = Colors.Transparent,
+                BorderColor = Color.FromHex("#DFE9FF"),
+                Margin = new Thickness(12, 10),
+     
                 Content = innerLayout,
-                CornerRadius = 10,
-                Margin = new Thickness(12, 10)
+           
             };
-
 
             Content = frame;
         }
