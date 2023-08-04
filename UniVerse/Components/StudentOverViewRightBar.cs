@@ -36,8 +36,8 @@ namespace UniVerse.Components
             {
                 BarSpacing = 0,
                 BarThickness = 8,
-                WidthRequest = 200,
-                HeightRequest = 300,
+                WidthRequest = 400,
+                HeightRequest = 400,
                 FontSize = 12,
                 MaxValue = 100,
                 BarBackgroundColor = Color.FromArgb("#E9F0FF"),

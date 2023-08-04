@@ -1,41 +1,37 @@
-﻿using Microsoft.Maui.Controls;
-using Microsoft.Maui.Layouts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace UniVerse.Components
+﻿namespace UniVerse.Components
 {
-	public class AssignedSubject : ContentView
+    public class AssignedSubject : ContentView
 
-	{
-
-        public float CornerRadius { get; set; }
+    { 
         public AssignedSubject ()
 		{
-            CornerRadius = 20;
+            
             Label subjectName = new()
             {
              
                 Text = "Interactive Development",
                 TextColor = Color.FromArgb("#2B2B2B"),
                 FontAttributes = FontAttributes.Bold,
-                FontSize = 20
+                FontSize = 20,
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Center
             };
 
             Label subjectCode = new()
             {
                 Text = "IDV 300",
                 TextColor = Color.FromArgb("#717171"),
-                FontSize = 14
+                FontSize = 14,
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Center,
+                
             };
 
 
 
             StackLayout stack = new()
             {
-                HorizontalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.Center,
  
                 Children =
@@ -50,27 +46,42 @@ namespace UniVerse.Components
             {
 
                 Aspect = Aspect.AspectFit,
-                MaximumHeightRequest = 180,
+                MaximumHeightRequest = 150,
                 VerticalOptions = LayoutOptions.Center,
                 Source = "devreplace.png",
-                Margin = new Thickness(0, 0, 20, 0)
+                Margin = new Thickness(-10, 0, 10, 0)
 
 
             };
 
-  
 
-            FlexLayout innerLayout = new()
+
+            Grid grid = new()
             {
-                Direction = FlexDirection.Row,
-                Children =
+                RowDefinitions = new RowDefinitionCollection
                 {
-                    subjectImage,
-                    stack
-                }
+                    new RowDefinition{Height = GridLength.Star}
+                },
 
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                 new ColumnDefinition { Width = new GridLength(40, GridUnitType.Star) },
+                 new ColumnDefinition { Width = new GridLength(60, GridUnitType.Star) }
+                }
             };
 
+            grid.Children.Add(subjectImage);
+            Grid.SetRow(subjectImage, 0);
+            Grid.SetRowSpan(subjectImage, 2);
+            Grid.SetColumn(subjectImage, 0);
+
+            grid.Children.Add(stack);
+            Grid.SetRow(stack, 0);
+            Grid.SetColumn(stack, 1);
+
+            //grid.Children.Add(subjectCode);
+            //Grid.SetRow(subjectCode, 0);
+            //Grid.SetColumn(subjectCode, 1);
 
             Frame frame = new()
             {
@@ -80,7 +91,7 @@ namespace UniVerse.Components
                 BorderColor = Color.FromArgb("#DFE9FF"),
                 Margin = new Thickness(12, 10),
      
-                Content = innerLayout,
+                Content = grid,
            
             };
 

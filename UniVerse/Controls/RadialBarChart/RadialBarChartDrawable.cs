@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Text;
-using Microsoft.UI.Xaml.Controls;
-using Windows.System;
+
 using static System.Net.Mime.MediaTypeNames;
 using Color = Microsoft.Maui.Graphics.Color;
 using Font = Microsoft.Maui.Graphics.Font;
@@ -132,7 +131,7 @@ namespace UniVerse.Controls.RadialBarChart
          VerticalAlignment.Center);
 
 
-            float dotSize = 3;
+            float dotSize = 10;
             var dotCenter = new PointF(center.X - textSize.Width / 1, center.Y + radius - textSize.Height + height);
 
             // Draw the ellipse (dot)
