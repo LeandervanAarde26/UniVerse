@@ -26,7 +26,7 @@ namespace UniVerse.Components
 			Label frameHeading = new()
 			{
 				Text = "Assign Subject",
-                TextColor = Color.FromHex("#2B2B2B"),
+                TextColor = Color.FromArgb("#2B2B2B"),
                 FontAttributes = FontAttributes.Bold,
 				FontSize = 24,
 				Margin = new Thickness(0,10)
@@ -34,9 +34,9 @@ namespace UniVerse.Components
 
 			SearchBar search = new()
 			{
-				BackgroundColor = Color.FromHex("#F6F7FB"),
+				BackgroundColor = Color.FromArgb("#F6F7FB"),
                 Margin = new Thickness(0, 10),
-				TextColor = Color.FromHex("#2B2B2B"),
+				TextColor = Color.FromArgb("#2B2B2B"),
                 Placeholder = "Search Subject",
 			};
 
@@ -44,7 +44,7 @@ namespace UniVerse.Components
             Button button = new()
             {
                 Text = "Assign to Subject ",
-                BackgroundColor = Color.FromHex("#2B2B2B"),
+                BackgroundColor = Color.FromArgb("#2B2B2B"),
                 Margin = new Thickness(0, 12)
             };
 
@@ -54,7 +54,7 @@ namespace UniVerse.Components
 
 				Margin = new Thickness(8, 12),
 				Text = "Delete Staff Member",
-				BackgroundColor = Color.FromHex("#FF4040"),
+				BackgroundColor = Color.FromArgb("#FF4040"),
 				ImageSource = ImageSource.FromFile("trash.png")
 			
 

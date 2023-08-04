@@ -19,7 +19,7 @@ namespace UniVerse.Components
             {
              
                 Text = "Interactive Development",
-                TextColor = Color.FromHex("#2B2B2B"),
+                TextColor = Color.FromArgb("#2B2B2B"),
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 20
             };
@@ -27,7 +27,7 @@ namespace UniVerse.Components
             Label subjectCode = new()
             {
                 Text = "IDV 300",
-                TextColor = Color.FromHex("#717171"),
+                TextColor = Color.FromArgb("#717171"),
                 FontSize = 14
             };
 
@@ -76,8 +76,8 @@ namespace UniVerse.Components
             {
                 CornerRadius = 20,
                 HeightRequest = 240,
-                BackgroundColor = Color.FromHex("#DFE9FF"),
-                BorderColor = Color.FromHex("#DFE9FF"),
+                BackgroundColor = Color.FromArgb("#DFE9FF"),
+                BorderColor = Color.FromArgb("#DFE9FF"),
                 Margin = new Thickness(12, 10),
      
                 Content = innerLayout,

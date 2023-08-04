@@ -17,9 +17,9 @@ namespace UniVerse.Screens
             {
                 Setters =
                 {
-                    new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromHex("#2b2b2b") },
+                    new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromArgb("#2b2b2b") },
                 
-                    new Setter { Property = InputView.TextColorProperty, Value = Color.FromHex("#2B2B2B") }
+                    new Setter { Property = InputView.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
                 }
             };
 
@@ -29,7 +29,7 @@ namespace UniVerse.Screens
                 Text = "Students",
                 FontSize = 32,
                 FontAttributes = FontAttributes.Bold,
-                TextColor = Color.FromHex("#2B2B2B"),
+                TextColor = Color.FromArgb("#2B2B2B"),
                 HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.Center,
                 Margin = new Thickness(15, 10, 0, 10)
@@ -70,7 +70,7 @@ namespace UniVerse.Screens
             studentRole.TitleColor = Colors.White;
 
 
-            FlexLayout layout = new FlexLayout
+            FlexLayout layout = new()
             {
                 Direction = FlexDirection.Row,
                 Wrap = FlexWrap.Wrap,
@@ -80,7 +80,6 @@ namespace UniVerse.Screens
 
             ScrollView scrollView = new()
             {
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
                 VerticalOptions = LayoutOptions.Center,
 
                 Content = layout
@@ -116,7 +115,7 @@ namespace UniVerse.Screens
             Grid.SetRow(scrollView, 1);
             Grid.SetColumn(scrollView, 1);
             Grid.SetColumnSpan(scrollView, 1);
-            grid.BackgroundColor = Color.FromHex("#F6F7FB");
+            grid.BackgroundColor = Color.FromArgb("#F6F7FB");
 
             grid.Children.Add(right);
             Grid.SetColumn(right, 2);

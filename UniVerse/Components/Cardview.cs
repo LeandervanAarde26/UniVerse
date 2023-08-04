@@ -32,8 +32,7 @@ namespace UniVerse.Components
             Image image = new()
             {
                 Aspect = Aspect.AspectFill,
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
+
                 WidthRequest = 125,
                 HeightRequest = 125,
                 Source = ImageSource.FromFile("allen_laing.png"),
@@ -51,7 +50,7 @@ namespace UniVerse.Components
                 HorizontalOptions = LayoutOptions.Center,
                 StrokeThickness = 6,
                 Margin = new Thickness(0, -7, 0, 15),
-                Stroke = Color.FromHex("#407BFF"),
+                Stroke = Color.FromArgb("#407BFF"),
                 Content = image
 
             };
@@ -63,7 +62,7 @@ namespace UniVerse.Components
                 WidthRequest = 25,
                 Aspect = Aspect.Center,
                 VerticalOptions = LayoutOptions.Start,
-                HorizontalOptions = LayoutOptions.EndAndExpand,
+                HorizontalOptions = LayoutOptions.End,
             };
 
             Label name = new()
@@ -78,7 +77,7 @@ namespace UniVerse.Components
             Label role = new()
             {
                 Text = Role,
-                TextColor = Color.FromHex("#717171"),
+                TextColor = Color.FromArgb("#717171"),
                 FontSize = 18,
                 HorizontalOptions = LayoutOptions.Center,
                 Margin = new Thickness(0, 0, 0, 0)
@@ -89,7 +88,7 @@ namespace UniVerse.Components
             //200211@virtualWindow.co.za"
             {
                 Text = "\U0001F4E7"  + Role,
-                TextColor = Color.FromHex("#717171"),
+                TextColor = Color.FromArgb("#717171"),
                 FontSize = 15,
                 HorizontalOptions = LayoutOptions.Center,
                 Margin = new Thickness(0, 15, 0, 0)
@@ -100,7 +99,7 @@ namespace UniVerse.Components
             Label additionalInformation = new()
             {
                 Text = AdditionalInformation,
-                TextColor = Color.FromHex("#717171"),
+                TextColor = Color.FromArgb("#717171"),
                 FontSize = 15,
                 HorizontalOptions = LayoutOptions.Center,
                 Margin = new Thickness(0, 0, 0, 0)
@@ -111,8 +110,8 @@ namespace UniVerse.Components
                 Text = "View " + Buttontext,
                 FontSize = 18,
                 BackgroundColor = Colors.Transparent,
-                TextColor = Color.FromHex("#407BFF"),
-                VerticalOptions = LayoutOptions.EndAndExpand,
+                TextColor = Color.FromArgb("#407BFF"),
+                VerticalOptions = LayoutOptions.End,
                 Margin = new Thickness(0, 0, 0, 0)
             };
 
@@ -134,7 +133,7 @@ namespace UniVerse.Components
             Frame frame = new()
             {
                 HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.Fill,
                
                 WidthRequest = 280,
                 BackgroundColor = Colors.White,

@@ -70,7 +70,7 @@ namespace UniVerse.Components
                  new ColumnDefinition { Width = GridLength.Star },
                  new ColumnDefinition { Width = GridLength.Auto }
                 },
-                HorizontalOptions = LayoutOptions.FillAndExpand,
+          
                 Padding = new Thickness(6),
                 Margin = new Thickness(22, 5),
             };

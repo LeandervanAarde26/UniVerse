@@ -1,10 +1,6 @@
-﻿
-using Microsoft.Maui.ApplicationModel.DataTransfer;
-using Microsoft.Maui.Controls.Shapes;
+﻿using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
-
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +8,10 @@ using UniVerse.Components;
 
 namespace UniVerse.Screens
 {
-	public class StaffMemberOverviewScreen : ContentPage
-	{
-		public StaffMemberOverviewScreen()
-		{
+    public class StudentOverviewScreen : ContentPage
+    {
+        public StudentOverviewScreen()
+        {
             // Top 
             Image image = new()
             {
@@ -26,7 +22,7 @@ namespace UniVerse.Screens
 
             };
 
-            
+
             var clip1 = new EllipseGeometry { Center = new Point(230 / 2, 230 / 2), RadiusX = 230 / 2, RadiusY = 230 / 2 };
 
             image.Clip = clip1;
@@ -46,7 +42,7 @@ namespace UniVerse.Screens
 
             Label name = new()
             {
-                Text = "Armand Pretorius",
+                Text = "Bronwyn Pottie",
                 TextColor = Color.FromArgb("#2B2B2B"),
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 24
@@ -54,7 +50,7 @@ namespace UniVerse.Screens
 
             Label role = new()
             {
-                Text = "Academic",
+                Text = "200211",
                 TextColor = Color.FromArgb("#C5C5C5"),
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 20
@@ -62,7 +58,7 @@ namespace UniVerse.Screens
 
             Label hourlyRate = new()
             {
-                Text = "\U0001F4B2 R400/h",
+                Text = "\U0001F9D1 Degree student",
                 TextColor = Color.FromArgb("#2B2B2B"),
                 FontSize = 16
             };
@@ -130,7 +126,7 @@ namespace UniVerse.Screens
                 Wrap = FlexWrap.Wrap,
                 JustifyContent = FlexJustify.Start,
                 AlignItems = FlexAlignItems.Start,
-              
+
             };
 
 
@@ -149,11 +145,11 @@ namespace UniVerse.Screens
 
             ScrollView scrollView = new()
             {
-             
+
                 Content = layout
             };
 
-            StaffMemberRightBar right = new();
+            StudentOverViewRightBar right = new();
 
 
             Grid grid = new()
@@ -196,7 +192,6 @@ namespace UniVerse.Screens
 
 
             Content = grid;
-
         }
-	}
+    }
 }
