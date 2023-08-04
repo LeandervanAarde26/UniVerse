@@ -2,6 +2,7 @@
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Text;
 using Microsoft.UI.Xaml.Controls;
+using Windows.System;
 using static System.Net.Mime.MediaTypeNames;
 using Color = Microsoft.Maui.Graphics.Color;
 using Font = Microsoft.Maui.Graphics.Font;
@@ -32,7 +33,9 @@ namespace UniVerse.Controls.RadialBarChart
             var fontSize = (float)_chart.FontSize;
             var barThickness = (float)_chart.BarThickness;
             var legend = _chart.LegendText;
-
+            var legend2 = _chart.LegendText2;
+            var firstEntry = _chart.Entries.FirstOrDefault().Color;
+      
             canvas.StrokeSize = barThickness;
             canvas.FontColor = _chart.TextColor;
             canvas.FontSize = fontSize;
@@ -75,8 +78,10 @@ namespace UniVerse.Controls.RadialBarChart
 
             }
             DrawCenterText(canvas, center, fontSize);
-            DrawLegend(canvas, center, radius, fontSize, _chart.BarBackgroundColor, legend);
+            DrawLegend(canvas, center, radius, fontSize, _chart.Entries.FirstOrDefault().Color, legend, legend2);
+        
         }
+
 
         private static void DrawArc(ICanvas canvas, PointF center, float radius, float start, float end)
         {
@@ -116,10 +121,39 @@ namespace UniVerse.Controls.RadialBarChart
                    VerticalAlignment.Center);
         }
 
-       private static void DrawLegend(ICanvas canvas, PointF center, float radius, float fontSize, Color? barBackgroundColor, string legString)
+        private static void DrawLegendCircle(ICanvas canvas, PointF center, string text, float radius, Color dotColor, float fontSize, int height)
         {
-            string legendText = legString;
 
+         var textSize = canvas.GetStringSize(
+         text,
+         Font.Default,
+         fontSize,
+         HorizontalAlignment.Center,
+         VerticalAlignment.Center);
+
+
+            float dotSize = 3;
+            var dotCenter = new PointF(center.X - textSize.Width / 1, center.Y + radius - textSize.Height + height);
+
+            // Draw the ellipse (dot)
+            canvas.StrokeColor = dotColor;
+            canvas.DrawCircle(dotCenter.X - dotSize / 2, dotCenter.Y - dotSize / 2, dotSize);
+
+
+            var dotCenter2 = new PointF(center.X - textSize.Width / 1, center.Y + radius - textSize.Height + height);
+
+            canvas.DrawCircle(dotCenter2.X - dotSize / 2, dotCenter2.Y - dotSize / 2, dotSize);
+
+            canvas.FontSize = fontSize;
+            canvas.FontColor = Colors.Black;
+        }
+       private static void DrawLegend(ICanvas canvas, PointF center, float radius, float fontSize, Color barBackgroundColor, string legString, string legString2)
+        {
+
+       
+            string legendText = legString;
+            string legendText2 = legString2;
+      
             var textSize = canvas.GetStringSize(
                      legendText,
                      Font.Default,
@@ -132,23 +166,28 @@ namespace UniVerse.Controls.RadialBarChart
                 center.Y + radius / 2 + 40,
                 Math.Ceiling(textSize.Width) + fontSize / 3f,
                 Math.Ceiling(textSize.Height) + fontSize / 3f);
-  
 
-            float dotSize = 3;
-            var dotCenter = new PointF(center.X - textSize.Width / 1,  center.Y + radius  - textSize.Height + 32);
+            var textRect2 = new Rect(
+                center.X - textSize.Width / 2,
+                center.Y + radius / 2 + 61,
+                Math.Ceiling(textSize.Width) + fontSize / 3f,
+                Math.Ceiling(textSize.Height) + fontSize / 3f);
 
-            // Draw the ellipse (dot)
-            canvas.FillColor = barBackgroundColor ?? Colors.Black;
-            canvas.DrawCircle(dotCenter.X - dotSize / 2, dotCenter.Y - dotSize / 2, dotSize);
-
-            canvas.FontSize = fontSize;
-            canvas.FontColor = Colors.Black;
             canvas.DrawString(
              legendText,
              textRect,
             HorizontalAlignment.Left,
             VerticalAlignment.Center);
 
+            canvas.DrawString(
+                legendText2,
+                textRect2,
+                HorizontalAlignment.Left,
+                VerticalAlignment.Center);
+
+            //DrawLegendCircle(canvas, center, legendText, radius, barBackgroundColor, fontSize, 31);
+            DrawLegendCircle(canvas, center, legendText, radius, barBackgroundColor, fontSize, 31);
+            DrawLegendCircle(canvas, center, legendText, radius, Color.FromArgb("#E9F0FF"), fontSize, 55);
         }
 
         private static Color ToBackgroundColor(Color color)

@@ -34,45 +34,19 @@ namespace UniVerse.Components
             //Chart
             RadialBarChart radialBarChart = new()
             {
-                BarSpacing = 5,
+                BarSpacing = 0,
                 BarThickness = 8,
                 WidthRequest = 200,
-                HeightRequest = 200,
+                HeightRequest = 300,
                 FontSize = 12,
                 MaxValue = 100,
-                BarBackgroundColor = Color.FromArgb("#C2D5FF"),
+                BarBackgroundColor = Color.FromArgb("#E9F0FF"),
                 Entries = ChartData,
                 VerticalOptions = LayoutOptions.Center,
-                LegendText = "Achieved Credits"
+                LegendText = "Achieved Credits",
+                LegendText2 = "Needed Credits"
             };
 
-            Label legendLabel = new()
-            {
-                Text = "Achieved Credits",
-                TextColor = Colors.Black
-            };
-
-            Ellipse LegendDot = new()
-            {
-                WidthRequest = 20,
-                HeightRequest = 20,
-                Fill = Color.FromArgb("#407BFF"),
-            };
-
-            var clip2 = new EllipseGeometry { Center = new Point(20 / 2, 20 / 2), RadiusX = 20 / 2, RadiusY = 20 / 2 };
-            LegendDot.Clip = clip2;
-
-            HorizontalStackLayout legend = new()
-            {
-                VerticalOptions = LayoutOptions.Center,
-                Children =
-                   
-                {
-                    LegendDot,
-                    legendLabel, 
-                
-                }
-            };
 
             StackLayout chartContainer = new()
             {
@@ -80,7 +54,6 @@ namespace UniVerse.Components
                 Children =
                 {
                     radialBarChart,
-                    legend,
                 }
             };
 
@@ -90,7 +63,7 @@ namespace UniVerse.Components
                 CornerRadius = 15,
                 BorderColor = Colors.Transparent,
                 Margin = new Thickness(5),
-                Content = chartContainer
+                Content = radialBarChart
             };
             //Chart
 
@@ -119,9 +92,9 @@ namespace UniVerse.Components
             {
                 RowDefinitions =
                 {
+                    new RowDefinition { Height = new GridLength(45, GridUnitType.Star) },
                     new RowDefinition { Height = new GridLength(40, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(35, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(25, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(20, GridUnitType.Star) },
                 },
                 ColumnDefinitions =
                 {

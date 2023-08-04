@@ -149,19 +149,20 @@ namespace UniVerse.Controls.RadialBarChart
             get { return (string)GetValue(LegendProperty); }
             set { SetValue(LegendProperty, value); }
         }
-        //public static readonly BindableProperty ShowLabelsProperty =
-        //   BindableProperty.Create(
-        //       //nameof(ShowLabels),
-        //       typeof(bool),
-        //       typeof(RadialBarChart),
-        //       defaultValue: false,
-        //       propertyChanged: Invalidate);
 
-        //public bool ShowLabels
-        //{
-        //    get { return (bool)GetValue(ShowLabelsProperty); }
-        //    set { SetValue(ShowLabelsProperty, value); }
-        //}
+        public static readonly BindableProperty LegendProperty2 =
+     BindableProperty.Create(
+        nameof(LegendText2),
+        typeof(string),
+        typeof(RadialBarChart),
+        defaultValue: null,
+        propertyChanged: Invalidate);
+
+        public string LegendText2
+        {
+            get { return (string)GetValue(LegendProperty2); }
+            set { SetValue(LegendProperty2, value); }
+        }
 
         public static readonly BindableProperty LabelFormatProperty =
           BindableProperty.Create(
