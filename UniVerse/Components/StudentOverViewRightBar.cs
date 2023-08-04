@@ -36,13 +36,13 @@ namespace UniVerse.Components
             {
                 BarSpacing = 0,
                 BarThickness = 8,
-                WidthRequest = 400,
-                HeightRequest = 400,
+                WidthRequest = 350,
+                HeightRequest = 250,
                 FontSize = 12,
                 MaxValue = 100,
                 BarBackgroundColor = Color.FromArgb("#E9F0FF"),
                 Entries = ChartData,
-                VerticalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Start,
                 LegendText = "Achieved Credits",
                 LegendText2 = "Needed Credits"
             };

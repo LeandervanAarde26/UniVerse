@@ -131,11 +131,13 @@ namespace UniVerse.Controls.RadialBarChart
          VerticalAlignment.Center);
 
 
-            float dotSize = 10;
+            float dotSize = 8;
             var dotCenter = new PointF(center.X - textSize.Width / 1, center.Y + radius - textSize.Height + height);
 
             // Draw the ellipse (dot)
             canvas.StrokeColor = dotColor;
+            canvas.StrokeSize = 4;
+            canvas.FillColor = dotColor;
             canvas.DrawCircle(dotCenter.X - dotSize / 2, dotCenter.Y - dotSize / 2, dotSize);
 
 
@@ -168,7 +170,7 @@ namespace UniVerse.Controls.RadialBarChart
 
             var textRect2 = new Rect(
                 center.X - textSize.Width / 2,
-                center.Y + radius / 2 + 61,
+                center.Y + radius / 2 + 75,
                 Math.Ceiling(textSize.Width) + fontSize / 3f,
                 Math.Ceiling(textSize.Height) + fontSize / 3f);
 
@@ -185,8 +187,8 @@ namespace UniVerse.Controls.RadialBarChart
                 VerticalAlignment.Center);
 
             //DrawLegendCircle(canvas, center, legendText, radius, barBackgroundColor, fontSize, 31);
-            DrawLegendCircle(canvas, center, legendText, radius, barBackgroundColor, fontSize, 31);
-            DrawLegendCircle(canvas, center, legendText, radius, Color.FromArgb("#E9F0FF"), fontSize, 55);
+            DrawLegendCircle(canvas, center, legendText, radius, barBackgroundColor, fontSize,40);
+            DrawLegendCircle(canvas, center, legendText, radius, Color.FromArgb("#E9F0FF"), fontSize, 71);
         }
 
         private static Color ToBackgroundColor(Color color)
