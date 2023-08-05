@@ -2,9 +2,20 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniVerse.Components.StudentCard">
-    <Frame BackgroundColor="White">
-        <Label Text="Student name" TextColor="{DynamicResource Gray900}"/>
 
+    <Frame BackgroundColor="White" BorderColor="Transparent">
+        <FlexLayout JustifyContent="SpaceBetween">
+            <HorizontalStackLayout>
+                <Image Aspect="AspectFill" Source="armand.png" WidthRequest="60" HeightRequest="60">
+                    <Image.Clip>
+                        <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
+                    </Image.Clip>
+                </Image>
+                <Label Text="Student name" TextColor="{DynamicResource Gray900}" FontSize="18" VerticalTextAlignment="Center" Padding="15, 0, 0, 0"/>
+            </HorizontalStackLayout>
+            <Label Text="200089" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
+            <Label Text="200089@openwindow.co.za" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
+        </FlexLayout>
     </Frame>
 </ContentView>
 

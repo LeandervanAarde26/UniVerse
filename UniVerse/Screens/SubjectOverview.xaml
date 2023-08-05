@@ -57,10 +57,15 @@
                     </FlexLayout>
 
                     <!--Student List-->
-                    <components:StudentCard/>
+                    <ScrollView>
+                        <components:StudentCard/>
+                    </ScrollView>
                 </VerticalStackLayout>
 
+                <!--assigning students & lecturers-->
                 <VerticalStackLayout Grid.Column="1" Margin="20, 0, 0, 0">
+
+                    <!--Assign Student-->
                     <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 20">
                         <VerticalStackLayout>
                             <Label Text="Add Student to Subject" TextColor="{DynamicResource Gray900}" FontSize="24" FontAttributes="Bold" Margin="0, 0, 0, 20"/>
@@ -69,6 +74,8 @@
                             <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
                         </VerticalStackLayout>
                     </Frame>
+
+                    <!--Assign Lecturer-->
                     <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent">
                         <VerticalStackLayout>
                             <Label Text="Add Lecturer to Subject" TextColor="{DynamicResource Gray900}" FontSize="24" FontAttributes="Bold" Margin="0, 0, 0, 20"/>
