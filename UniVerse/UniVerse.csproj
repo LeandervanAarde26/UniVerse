@@ -55,4 +55,12 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Screens\" />
+	  <None Remove="Components\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Screens\" />
+	  <Folder Include="Components\" />
+	</ItemGroup>
 </Project>
