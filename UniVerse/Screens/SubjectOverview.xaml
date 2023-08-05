@@ -36,6 +36,7 @@
 
             <!--Student list + assigning students & lecturers-->
             <Grid>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="65*"/>
                     <ColumnDefinition Width="35*"/>
@@ -61,7 +62,7 @@
                     </FlexLayout>
 
                     <!--Student List-->
-                    <ScrollView>
+                    <ScrollView VerticalOptions="FillAndExpand">
                         <VerticalStackLayout>
                             <components:StudentCard/>
                             <components:StudentCard/>
