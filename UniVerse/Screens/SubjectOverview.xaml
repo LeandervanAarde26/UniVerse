@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:UniVerse.Components"
              x:Class="UniVerse.Screens.SubjectOverview"
              Title="SubjectOverview"
              BackgroundColor="{DynamicResource Primary}">
@@ -14,7 +15,7 @@
         <VerticalStackLayout></VerticalStackLayout>
 
         <VerticalStackLayout Grid.Column="1" Padding="20">
-            <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Padding="30">
+            <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Padding="30" Margin="0, 0, 0, 20">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="70*"/>
@@ -28,9 +29,51 @@
 
                     <Image Grid.Column="1" Source="ui_ux_design.png"/>
                 </Grid>
-
             </Frame>
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65*"/>
+                    <ColumnDefinition Width="35*"/>
+                </Grid.ColumnDefinitions>
+
+                <FlexLayout JustifyContent="SpaceBetween" Margin="0, 0, 0, 20" AlignItems="Start">
+                    <Label Text="Students" TextColor="{DynamicResource Gray900}" FontSize="35" FontAttributes="Bold"/>
+                    
+                    <Picker BackgroundColor="{DynamicResource Gray900}" Title="Select Year" HorizontalTextAlignment="Center" HeightRequest="10">
+                        <Picker.Items>
+                            <x:String>1st Years</x:String>
+                            <x:String>2nd Years</x:String>
+                            <x:String>3rd Years</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </FlexLayout>
+
+                <VerticalStackLayout Grid.Column="1" Margin="20, 0, 0, 0">
+                    <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 20">
+                        <VerticalStackLayout>
+                            <Label Text="Add Student to Subject" TextColor="{DynamicResource Gray900}" FontSize="24" FontAttributes="Bold" Margin="0, 0, 0, 20"/>
+                            <Entry Placeholder="Student" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B"/>
+                            <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame BackgroundColor="White" BorderColor="Transparent">
+                        <VerticalStackLayout>
+                            <Label Text="Add Lecturer to Subject" TextColor="{DynamicResource Gray900}" FontSize="24" FontAttributes="Bold" Margin="0, 0, 0, 20"/>
+                            <HorizontalStackLayout Margin="0, 0, 0, 30">
+                                
+                                <VerticalStackLayout>
+                                    <Label Text="Armand Pretorious" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource Gray900}"/>
+                                    <Label Text="Armand@openwindow.co.za" FontSize="16" TextColor="{DynamicResource Gray400}"/>
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+                            <Entry Placeholder="Lecturer" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B"/>
+                            <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Grid>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
