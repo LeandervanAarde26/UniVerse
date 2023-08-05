@@ -57,17 +57,20 @@
                             <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
                         </VerticalStackLayout>
                     </Frame>
-                    <Frame BackgroundColor="White" BorderColor="Transparent">
+                    <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent">
                         <VerticalStackLayout>
                             <Label Text="Add Lecturer to Subject" TextColor="{DynamicResource Gray900}" FontSize="24" FontAttributes="Bold" Margin="0, 0, 0, 20"/>
-                            <HorizontalStackLayout Margin="0, 0, 0, 30">
-                                
-                                <VerticalStackLayout>
+                            <FlexLayout Margin="0, 0, 0, 30">
+                                <Image Aspect="AspectFill" Source="armand.png" WidthRequest="60" HeightRequest="60" Margin="0, 0, 10, 0">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
+                                    </Image.Clip>
+                                </Image>
+                                <VerticalStackLayout FlexLayout.AlignSelf="Center">
                                     <Label Text="Armand Pretorious" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource Gray900}"/>
                                     <Label Text="Armand@openwindow.co.za" FontSize="16" TextColor="{DynamicResource Gray400}"/>
                                 </VerticalStackLayout>
-
-                            </HorizontalStackLayout>
+                            </FlexLayout>
                             <Entry Placeholder="Lecturer" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B"/>
                             <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
                         </VerticalStackLayout>

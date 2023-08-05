@@ -59,6 +59,7 @@
 	  <None Remove="Screens\" />
 	  <None Remove="Components\" />
 	  <None Remove="Resources\Images\ui_ux_design.svg" />
+	  <None Remove="Resources\Images\armand.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Screens\" />
@@ -66,5 +67,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\ui_ux_design.svg" />
+	  <BundleResource Include="Resources\Images\armand.png" />
 	</ItemGroup>
 </Project>
