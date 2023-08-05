@@ -33,7 +33,6 @@
                         <Button Text="Pay Salaries" BackgroundColor="{DynamicResource Gray900}" Margin="0, 0, 10, 0"/>
                         <Button Text="View Fees" TextColor="{DynamicResource Gray900}" BorderColor="{DynamicResource Gray900}" BorderWidth="1"/>
                     </HorizontalStackLayout>
-                
                     <Button Text="Close Month" BackgroundColor="{DynamicResource Gray900}"/>
                 </FlexLayout>
 

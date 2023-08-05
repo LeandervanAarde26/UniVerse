@@ -2,8 +2,8 @@
 
 public partial class FundsScreenAndComponents : ContentPage
 {
-	public FundsScreenAndComponents()
-	{
-		InitializeComponent();
-	}
+    public FundsScreenAndComponents()
+    {
+        InitializeComponent();
+    }
 }
