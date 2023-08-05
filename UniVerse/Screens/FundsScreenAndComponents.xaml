@@ -40,6 +40,10 @@
                 <ScrollView>
                     <VerticalStackLayout>
                         <components:LecturerFundsCard/>
+                        <components:LecturerFundsCard/>
+                        <components:LecturerFundsCard/>
+                        <components:StudentFundsCard/>
+                        <components:StudentFundsCard/>
                         <components:StudentFundsCard/>
                     </VerticalStackLayout>
                 </ScrollView>
