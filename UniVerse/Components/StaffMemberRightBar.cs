@@ -96,8 +96,8 @@ namespace UniVerse.Components
                 RowDefinitions =
                 {
                     new RowDefinition { Height = new GridLength(45, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(40, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(20, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(31, GridUnitType.Auto) },
+                    new RowDefinition { Height = new GridLength(24, GridUnitType.Star) },
                 },
                 ColumnDefinitions =
                 {
