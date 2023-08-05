@@ -41,6 +41,11 @@
                     <ColumnDefinition Width="35*"/>
                 </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
                 <!--Student List-->
                 <VerticalStackLayout>
                     <!--heading + picker-->
@@ -58,7 +63,16 @@
 
                     <!--Student List-->
                     <ScrollView>
-                        <components:StudentCard/>
+                        <VerticalStackLayout>
+                            <components:StudentCard/>
+                            <components:StudentCard/>
+                            <components:StudentCard/>
+                            <components:StudentCard/>
+                            <components:StudentCard/>
+                            <components:StudentCard/>
+                            <components:StudentCard/>
+                            <components:StudentCard/>
+                        </VerticalStackLayout>
                     </ScrollView>
                 </VerticalStackLayout>
 
