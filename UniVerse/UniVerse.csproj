@@ -55,4 +55,16 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Screens\" />
+	  <None Remove="Components\" />
+	  <None Remove="Resources\Images\ui_ux_design.svg" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Screens\" />
+	  <Folder Include="Components\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\ui_ux_design.svg" />
+	</ItemGroup>
 </Project>

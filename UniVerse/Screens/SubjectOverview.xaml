@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UniVerse.Screens.SubjectOverview"
+             Title="SubjectOverview"
+             BackgroundColor="{DynamicResource Primary}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="90*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Just an indication for the Nav-->
+        <VerticalStackLayout></VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Column="1" Padding="20">
+            <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Padding="30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70*"/>
+                        <ColumnDefinition Width="30*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <FlexLayout JustifyContent="Center" Direction="Column" Margin="50">
+                        <Label Text="UX/UI Design" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold"/>
+                        <Label Text="Subject Info will go over here" TextColor="{DynamicResource Gray900}" FontSize="18" FontAttributes="Bold"/>
+                    </FlexLayout>
+
+                    <Image Grid.Column="1" Source="ui_ux_design.png"/>
+                </Grid>
+
+            </Frame>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
