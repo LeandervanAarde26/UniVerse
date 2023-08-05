@@ -21,17 +21,28 @@
                 <ColumnDefinition Width="35*"/>
             </Grid.ColumnDefinitions>
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
             <!--List of Staff & Students-->
             <VerticalStackLayout>
                 <Label Text="Funds" FontSize="35" FontAttributes="Bold" TextColor="{DynamicResource Key=Gray900}" Padding="0, 0, 0, 20"/>
-                <FlexLayout JustifyContent="SpaceBetween">
+                <FlexLayout JustifyContent="SpaceBetween" Margin="0, 0, 0, 20">
                     <HorizontalStackLayout>
                         <Button Text="Pay Salaries" BackgroundColor="{DynamicResource Gray900}" Margin="0, 0, 10, 0"/>
                         <Button Text="View Fees" TextColor="{DynamicResource Gray900}" BorderColor="{DynamicResource Gray900}" BorderWidth="1"/>
                     </HorizontalStackLayout>
-
+                
                     <Button Text="Close Month" BackgroundColor="{DynamicResource Gray900}"/>
                 </FlexLayout>
+
+                <ScrollView>
+                    <VerticalStackLayout>
+                        <components:LecturerFundsCard/>
+                        <components:StudentFundsCard/>
+                    </VerticalStackLayout>
+                </ScrollView>
             </VerticalStackLayout>
 
             <!--Image & Counters-->

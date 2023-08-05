@@ -2,11 +2,21 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniVerse.Components.LecturerFundsCard">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 20">
+        <FlexLayout JustifyContent="SpaceBetween">
+            <HorizontalStackLayout>
+                <Image Aspect="AspectFill" Source="armand.png" WidthRequest="60" HeightRequest="60">
+                    <Image.Clip>
+                        <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
+                    </Image.Clip>
+                </Image>
+                <Label Text="Staff name" TextColor="{DynamicResource Gray900}" FontSize="18" VerticalTextAlignment="Center" Padding="15, 0, 0, 0"/>
+            </HorizontalStackLayout>
+            <Label Text="R400/h" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
+            <Label Text="8 Hours" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
+            <Label Text="Total: R3 200" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
+        </FlexLayout>
+    </Frame>
 </ContentView>
 
