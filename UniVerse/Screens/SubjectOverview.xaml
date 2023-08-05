@@ -45,7 +45,6 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-
                 <!--Student List-->
                 <VerticalStackLayout>
                     <!--heading + picker-->
@@ -105,7 +104,7 @@
                                 </VerticalStackLayout>
                             </FlexLayout>
                             <!--I'll make these entries a search, just gotta figure it out-->
-                            <Entry Placeholder="Lecturer" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B"/>
+                            <Entry Placeholder="Lecturer" BackgroundColor="White" TextColor="#2B2B2B"/>
                             <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
                         </VerticalStackLayout>
                     </Frame>
