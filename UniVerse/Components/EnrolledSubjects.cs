@@ -1,14 +1,18 @@
-﻿namespace UniVerse.Components
-{
-    public class AssignedSubject : ContentView
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-    { 
-        public AssignedSubject ()
-		{
-            
+
+namespace UniVerse.Components
+{
+    public class EnrolledSubjects : ContentView
+    {
+        public EnrolledSubjects()
+        {
             Label subjectName = new()
             {
-             
+
                 Text = "Interactive Development",
                 TextColor = Color.FromArgb("#2B2B2B"),
                 FontAttributes = FontAttributes.Bold,
@@ -24,7 +28,17 @@
                 FontSize = 14,
                 HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.Center,
-                
+
+            };
+
+            Label mark = new()
+            {
+                Text = "75%",
+                TextColor = Color.FromArgb("#717171"),
+                FontSize = 18,
+                FontAttributes = FontAttributes.Bold,
+                HorizontalOptions = LayoutOptions.End,
+                VerticalOptions = LayoutOptions.End,
             };
 
 
@@ -33,11 +47,12 @@
             {
                 HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.Center,
- 
+
                 Children =
                 {
                       subjectName,
-                      subjectCode
+                      subjectCode,
+                    
                 }
             };
 
@@ -58,7 +73,9 @@
             {
                 RowDefinitions = new RowDefinitionCollection
                 {
-                    new RowDefinition{Height = new GridLength(90, GridUnitType.Star) }
+                    new RowDefinition{Height = new GridLength(85, GridUnitType.Star) },
+                    new RowDefinition{Height = new GridLength(15, GridUnitType.Star) }
+                      
                 },
 
                 ColumnDefinitions = new ColumnDefinitionCollection
@@ -76,9 +93,9 @@
             Grid.SetRow(stack, 0);
             Grid.SetColumn(stack, 1);
 
-            //grid.Children.Add(subjectCode);
-            //Grid.SetRow(subjectCode, 0);
-            //Grid.SetColumn(subjectCode, 1);
+            grid.Children.Add(mark);
+            Grid.SetRow(mark, 1);
+            Grid.SetColumn(mark, 1);
 
             Frame frame = new()
             {
@@ -87,12 +104,12 @@
                 BackgroundColor = Color.FromArgb("#DFE9FF"),
                 BorderColor = Color.FromArgb("#DFE9FF"),
                 Margin = new Thickness(12, 10),
-     
+
                 Content = grid,
-           
+
             };
 
             Content = frame;
         }
-	}
+    }
 }

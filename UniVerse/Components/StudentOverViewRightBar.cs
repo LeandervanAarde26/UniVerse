@@ -47,16 +47,6 @@ namespace UniVerse.Components
                 LegendText2 = "Needed Credits"
             };
 
-
-            StackLayout chartContainer = new()
-            {
-                VerticalOptions = LayoutOptions.Center,
-                Children =
-                {
-                    radialBarChart,
-                }
-            };
-
             Frame frame = new()
             {
                 BackgroundColor = Colors.White,

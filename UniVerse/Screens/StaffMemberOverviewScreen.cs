@@ -16,6 +16,16 @@ namespace UniVerse.Screens
 	{
 		public StaffMemberOverviewScreen()
 		{
+            Style textStyle = new(typeof(Label))
+            {
+                Setters =
+                {
+                    new Setter { Property = Label.FontSizeProperty, Value =  16},
+
+                    new Setter { Property = Label.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
+                }
+            };
+
             // Top 
             Image image = new()
             {
@@ -63,30 +73,27 @@ namespace UniVerse.Screens
             Label hourlyRate = new()
             {
                 Text = "\U0001F4B2 R400/h",
-                TextColor = Color.FromArgb("#2B2B2B"),
-                FontSize = 16
+                Style = textStyle,
+                Margin = new Thickness(0, 20, 0, 0)
             };
 
             Label cell = new()
             {
                 Text = "\U0000260E 076 887 6675",
-                TextColor = Color.FromArgb("#2B2B2B"),
-                FontSize = 16
+                Style = textStyle,
             };
 
             Label mail = new()
             {
                 Text = "📧 Armand@OpenWindow.co.za",
-                TextColor = Color.FromArgb("#2B2B2B"),
-                FontSize = 16
+                Style = textStyle,
             };
 
 
             Label address = new()
             {
                 Text = "\U0001F4CD 05 Academic drive, Gauteng, Johannesburg, 1724",
-                TextColor = Color.FromArgb("#2B2B2B"),
-                FontSize = 16
+                Style = textStyle,
             };
 
 

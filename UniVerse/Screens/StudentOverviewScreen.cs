@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
+using Microsoft.Maui.Graphics.Text;
 using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
@@ -6,31 +7,42 @@ using System.Linq;
 using System.Text;
 using UniVerse.Components;
 
+
 namespace UniVerse.Screens
 {
     public class StudentOverviewScreen : ContentPage
     {
         public StudentOverviewScreen()
         {
+            Style textStyle = new(typeof(Label))
+            {
+                Setters =
+                {
+                    new Setter { Property = Label.FontSizeProperty, Value =  16},
+
+                    new Setter { Property = Label.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
+                }
+            };
+
+
             // Top 
             Image image = new()
             {
                 Aspect = Aspect.AspectFill,
-                WidthRequest = 230,
-                HeightRequest = 230,
+                MaximumHeightRequest = 200,
+                MaximumWidthRequest = 200,
                 Source = ImageSource.FromFile("allen_laing.png"),
-
             };
 
 
-            var clip1 = new EllipseGeometry { Center = new Point(230 / 2, 230 / 2), RadiusX = 230 / 2, RadiusY = 230 / 2 };
+            var clip1 = new EllipseGeometry { Center = new Point(200 / 2, 200 / 2), RadiusX = 200 / 2, RadiusY = 200 / 2 };
 
             image.Clip = clip1;
 
             Border imgBorder = new()
             {
-                WidthRequest = 235,
-                HeightRequest = 235,
+                MaximumHeightRequest = 210,
+                MaximumWidthRequest = 210,
                 StrokeShape = new Ellipse(),
                 HorizontalOptions = LayoutOptions.Center,
                 StrokeThickness = 6,
@@ -53,36 +65,34 @@ namespace UniVerse.Screens
                 Text = "200211",
                 TextColor = Color.FromArgb("#C5C5C5"),
                 FontAttributes = FontAttributes.Bold,
-                FontSize = 20
+                FontSize = 18,
+              
             };
 
             Label hourlyRate = new()
             {
                 Text = "\U0001F9D1 Degree student",
-                TextColor = Color.FromArgb("#2B2B2B"),
-                FontSize = 16
+                Style = textStyle,
+                Margin = new Thickness(0, 20, 0, 0)
             };
 
             Label cell = new()
             {
                 Text = "\U0000260E 076 887 6675",
-                TextColor = Color.FromArgb("#2B2B2B"),
-                FontSize = 16
+                Style = textStyle,
             };
 
             Label mail = new()
             {
                 Text = "📧 Armand@OpenWindow.co.za",
-                TextColor = Color.FromArgb("#2B2B2B"),
-                FontSize = 16
+                Style = textStyle,
             };
 
 
             Label address = new()
             {
                 Text = "\U0001F4CD 05 Academic drive, Gauteng, Johannesburg, 1724",
-                TextColor = Color.FromArgb("#2B2B2B"),
-                FontSize = 16
+                Style = textStyle,
             };
 
 
@@ -134,7 +144,7 @@ namespace UniVerse.Screens
 
             foreach (var number in numbers)
             {
-                var card = new AssignedSubject();
+                var card = new EnrolledSubjects();
 
                 FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
 
