@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:UniVerse.Components"
              x:Class="UniVerse.Screens.FundsScreenAndComponents"
              Title="FundsScreenAndComponents"
              BackgroundColor="{DynamicResource Primary}">
@@ -33,8 +34,12 @@
                 </FlexLayout>
             </VerticalStackLayout>
 
-            <!--Counters-->
+            <!--Image & Counters-->
             <VerticalStackLayout Grid.Column="1" Margin="20, 0, 0, 0">
+                <!--Image-->
+                <Image Source="funds_image.png" Margin="0, 100, 0, 80"/>
+
+                <!--Counters-->
                 <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Margin="0, 0, 0, 20">
                     <VerticalStackLayout>
                         <Label Text="100 000" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>

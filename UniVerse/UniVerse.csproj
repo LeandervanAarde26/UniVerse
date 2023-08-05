@@ -58,9 +58,13 @@
 	<ItemGroup>
 	  <None Remove="Screens\" />
 	  <None Remove="Components\" />
+	  <None Remove="Resources\Images\funds_image.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Screens\" />
 	  <Folder Include="Components\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\funds_image.svg" />
 	</ItemGroup>
 </Project>
