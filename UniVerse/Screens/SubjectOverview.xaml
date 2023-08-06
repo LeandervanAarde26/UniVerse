@@ -22,7 +22,7 @@
         <!--Just an indication for the Nav-->
         <VerticalStackLayout></VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="20,10" >
+        <VerticalStackLayout Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="20, 20 ,20 , 0" >
             <!--Subject Info card-->
             <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Padding="80, 20" Margin="0, 0, 0, 20">
                 <FlexLayout JustifyContent="SpaceBetween">
@@ -54,7 +54,7 @@
         </VerticalStackLayout>
         
         
-        <ScrollView VerticalOptions="Center"  Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2" Padding="20">
+        <ScrollView VerticalOptions="Center"  Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2" Padding="20, 0, 20, 20">
             <FlexLayout Direction="Column">
                 <components:StudentCard/>
                 <components:StudentCard/>
@@ -78,8 +78,8 @@
                 <VerticalStackLayout>
                     <Label Text="Add Student to Subject" TextColor="{DynamicResource Gray900}" FontSize="24" FontAttributes="Bold" Margin="0, 0, 0, 20"/>
                     <!--I'll make these entries a search, just gotta figure it out-->
-                    <!--<Entry Placeholder="Student" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B"/>-->
-                    <SearchBar PlaceholderColor="{DynamicResource Gray900}" Placeholder="Search..." BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Gray900}"/>
+                    <Entry Placeholder="Student" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B"/>
+                    <!--<SearchBar PlaceholderColor="{DynamicResource Gray900}" Placeholder="Search..." BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Gray900}"/>-->
                     <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
                 </VerticalStackLayout>
             </Frame>
