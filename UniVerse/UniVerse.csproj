@@ -64,6 +64,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+
+	  <None Remove="Screens\" />
+	  <None Remove="Components\" />
+	  <None Remove="Resources\Images\funds_image.svg" />
+	  <None Remove="Resources\Images\armand.png" />
+	  <None Remove="Resources\Images\leander.png" />
 	  <None Remove="Components\" />
 	  <None Remove="Screens\" />
 	  <None Remove="Resources\Images\ui_ux_design.svg" />
@@ -71,6 +77,8 @@
 	  <None Remove="Resources\Images\kelly.png" />
 	  <None Remove="Resources\Images\leander.png" />
 	  <None Remove="Resources\Images\image_picker.svg" />
+	  <None Remove="Resources\Images\funds_image.svg" />
+	  <None Remove="Resources\Images\armand.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Components\" />
@@ -90,6 +98,7 @@
 	  <BundleResource Include="Resources\Images\image_picker.svg" />
 	  <BundleResource Include="Resources\Images\edit_square.svg" />
 	  <BundleResource Include="Resources\Images\edit.svg" />
-
+	  <BundleResource Include="Resources\Images\funds_image.svg" />
+	  <BundleResource Include="Resources\Images\armand.png" />
 	</ItemGroup>
 </Project>
