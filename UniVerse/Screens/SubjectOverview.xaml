@@ -13,15 +13,14 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
 
         <!--Just an indication for the Nav-->
         <VerticalStackLayout></VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Column="1" Grid.ColumnSpan="2" Margin="20, 20, 20, 10">
+        <VerticalStackLayout Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="20, 20, 20, 10">
             <!--Subject Info card-->
             <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Padding="80, 20" Margin="0, 0, 0, 20">
                 <FlexLayout JustifyContent="SpaceBetween">
@@ -37,24 +36,25 @@
             </Frame>
         </VerticalStackLayout>
 
-        <!--Student List-->
-        <VerticalStackLayout Grid.Column="1" Grid.Row="1" Padding="20, 10">
-            <!--heading + picker-->
-            <FlexLayout JustifyContent="SpaceBetween" Margin="0, 0, 0, 20" AlignItems="Start">
-                <Label Text="Students" TextColor="{DynamicResource Gray900}" FontSize="35" FontAttributes="Bold"/>
+        <FlexLayout Grid.Column="1" Grid.Row="1" Direction="Column" Margin="20">
+            <StackLayout HeightRequest="80">
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                    <Label Text="Students" TextColor="{DynamicResource Gray900}" FontSize="35" FontAttributes="Bold"/>
                     
-                <Picker BackgroundColor="{DynamicResource Gray900}" Title="Select Year" HorizontalTextAlignment="Center" HeightRequest="10">
-                    <Picker.Items>
-                        <x:String>1st Years</x:String>
-                        <x:String>2nd Years</x:String>
-                        <x:String>3rd Years</x:String>
-                    </Picker.Items>
-                </Picker>
-            </FlexLayout>
+                    <Picker BackgroundColor="{DynamicResource Gray900}" Title="Select Year" HorizontalTextAlignment="Center" HeightRequest="10">
+                        <Picker.Items>
+                            <x:String>1st Years</x:String>
+                            <x:String>2nd Years</x:String>
+                            <x:String>3rd Years</x:String>
+                        </Picker.Items>
+                    </Picker>
 
-            <!--Student List-->
-            <ScrollView VerticalOptions="FillAndExpand" Grid.Row="1">
-                <VerticalStackLayout>
+                </FlexLayout>
+             
+            </StackLayout>
+
+            <ScrollView VerticalOptions="Center" Grid.Row="1">
+                <FlexLayout Direction="Column">
                     <components:StudentCard/>
                     <components:StudentCard/>
                     <components:StudentCard/>
@@ -63,9 +63,10 @@
                     <components:StudentCard/>
                     <components:StudentCard/>
                     <components:StudentCard/>
-                </VerticalStackLayout>
+                </FlexLayout>
             </ScrollView>
-        </VerticalStackLayout>
+
+        </FlexLayout>
 
         <!--Assign Student + Lecturer-->
         <VerticalStackLayout Grid.Column="2" Grid.Row="1" Padding="0, 0, 20, 0">

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniVerse.Components.StudentCard">
 
-    <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 20">
+    <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 10" MaximumHeightRequest="100">
         <FlexLayout JustifyContent="SpaceBetween">
             <HorizontalStackLayout>
                 <Image Aspect="AspectFill" Source="armand.png" WidthRequest="60" HeightRequest="60">
