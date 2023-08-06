@@ -12,6 +12,11 @@
             <ColumnDefinition Width="35*"/>
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="55*"/>
+        </Grid.RowDefinitions>
+
         <!--Just an indication for the Nav-->
         <VerticalStackLayout></VerticalStackLayout>
 
@@ -25,18 +30,24 @@
                 </HorizontalStackLayout>
                 <Button Text="Close Month" BackgroundColor="{DynamicResource Gray900}"/>
             </FlexLayout>
-
-            <ScrollView>
-                <FlexLayout Direction="Column">
-                    <components:LecturerFundsCard/>
-                    <components:LecturerFundsCard/>
-                    <components:LecturerFundsCard/>
-                    <components:StudentFundsCard/>
-                    <components:StudentFundsCard/>
-                    <components:StudentFundsCard/>
-                </FlexLayout>
-            </ScrollView>
         </VerticalStackLayout>
+
+        <ScrollView Grid.Column="1" Grid.Row="1" Padding="20, 0, 20, 0">
+            <FlexLayout Direction="Column">
+                <components:LecturerFundsCard/>
+                <components:LecturerFundsCard/>
+                <components:LecturerFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+            </FlexLayout>
+        </ScrollView>
 
         <!--Image & Counters-->
         <VerticalStackLayout Grid.Column="2">
