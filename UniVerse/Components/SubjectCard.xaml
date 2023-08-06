@@ -1,0 +1,97 @@
+﻿<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:UniVerse.Components"
+             x:Class="UniVerse.Components.SubjectCard">
+
+    <!--Subject Card-->
+    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" Padding="50, 40, 50,40" FlexLayout.Grow="1">
+        <HorizontalStackLayout >
+            <!--Subject Image-->
+            <Image Source="ui_ux_design.png"/>
+
+            <!--Subject Information-->
+            <FlexLayout Margin="40,0, 0, 0" Direction="Column" JustifyContent="SpaceBetween" HorizontalOptions="CenterAndExpand">
+                <!--Subject name & Code-->
+                <HorizontalStackLayout>
+                    <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="600">
+                        <Label Text="Subject Name"
+                           TextColor="{DynamicResource Gray900}"
+                           FontSize="20"
+                           FontAttributes="Bold"/>
+                        <Label Text="UXD"
+                               TextColor="{DynamicResource Gray400}"
+                               FontSize="18"/>
+                    </VerticalStackLayout>
+                    <!--Edit Button-->
+                    <!--Trying to figure out how to get this image to stay at the end even when resising the screen?-->
+                    <ImageButton Source="edit.png"
+                                 WidthRequest="25"
+                                 HeightRequest="25"
+                                 Aspect="Center"
+                                 HorizontalOptions="End"/>
+                </HorizontalStackLayout>
+                <!--Subject Description-->
+
+                <Label Text="Subject Description"
+                       TextColor="{DynamicResource Gray900}"
+                       FontSize="16"/>
+                <!--Students-->
+                <HorizontalStackLayout>
+                    <HorizontalStackLayout WidthRequest="520">
+                        <!-- <components:StudentList/> ehh?-->
+                        <Image Aspect="AspectFill"
+                                Source="kelly.png"
+                                WidthRequest="60"
+                                HeightRequest="60">
+                            <Image.Clip>
+                                <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
+                            </Image.Clip>
+                        </Image>
+
+                        <Image Aspect="AspectFill"
+                                Source="leander.png"
+                                WidthRequest="60"
+                                HeightRequest="60"
+                                Margin="-25">
+                            <Image.Clip>
+                                <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
+                            </Image.Clip>
+                        </Image>
+
+                        <Image Aspect="AspectFill"
+                                Source="kelly.png"
+                                WidthRequest="60"
+                                HeightRequest="60">
+                            <Image.Clip>
+                                <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
+                            </Image.Clip>
+                        </Image>
+
+                        <Image Aspect="AspectFill"
+                                Source="leander.png"
+                                WidthRequest="60"
+                                HeightRequest="60"
+                                Margin="-25">
+                            <Image.Clip>
+                                <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
+                            </Image.Clip>
+                        </Image>
+
+                        <Frame WidthRequest="60"
+                                HeightRequest="60"
+                                CornerRadius="30" BackgroundColor="{DynamicResource Blue}" BorderColor="Transparent">
+                            <Label Text="5+" FontSize="16" FontAttributes="Bold" TextColor="{DynamicResource Primary}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                    </HorizontalStackLayout>
+                    <Button Text="View Subject"
+                        FontSize="18"
+                        BackgroundColor="Transparent"
+                        TextColor="#407BFF"
+                        VerticalOptions="EndAndExpand"
+                        Margin="0,0,0,0" />
+                </HorizontalStackLayout>
+
+            </FlexLayout>
+        </HorizontalStackLayout>
+    </Frame>
+</ContentView>
