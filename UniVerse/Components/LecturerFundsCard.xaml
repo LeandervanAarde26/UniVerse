@@ -3,20 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniVerse.Components.LecturerFundsCard">
 
-    <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 20">
-        <FlexLayout JustifyContent="SpaceBetween">
-            <HorizontalStackLayout>
+    <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 10" MaximumHeightRequest="100">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <FlexLayout Grid.Column="0" Direction="Row">
                 <Image Aspect="AspectFill" Source="armand.png" WidthRequest="60" HeightRequest="60">
                     <Image.Clip>
                         <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
                     </Image.Clip>
                 </Image>
-                <Label Text="Staff name" TextColor="{DynamicResource Gray900}" FontSize="18" VerticalTextAlignment="Center" Padding="15, 0, 0, 0"/>
-            </HorizontalStackLayout>
-            <Label Text="R400/h" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
-            <Label Text="8 Hours" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
-            <Label Text="Total: R3 200" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
-        </FlexLayout>
+            </FlexLayout>
+
+
+            <Label Text="Leander" TextColor="{DynamicResource Gray900}" Grid.Column="1" FontSize="18" VerticalTextAlignment="Center" Padding="15, 0, 0, 0"/>
+            <Label Text="R400/h" TextColor="{DynamicResource Gray500}" FontSize="16" Grid.Column="2" VerticalTextAlignment="Center"/>
+            <Label Text="8 Hours" TextColor="{DynamicResource Gray500}" FontSize="16" Grid.Column="3" VerticalTextAlignment="Center"/>
+            <Label Text="Total: R3 200" TextColor="{DynamicResource Blue}" FontSize="16" Grid.Column="4" VerticalTextAlignment="Center"/>
+            
+        </Grid>
     </Frame>
 </ContentView>
 

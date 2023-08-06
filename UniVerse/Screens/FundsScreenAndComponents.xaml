@@ -27,14 +27,14 @@
             </FlexLayout>
 
             <ScrollView>
-                <VerticalStackLayout>
+                <FlexLayout Direction="Column">
                     <components:LecturerFundsCard/>
                     <components:LecturerFundsCard/>
                     <components:LecturerFundsCard/>
                     <components:StudentFundsCard/>
                     <components:StudentFundsCard/>
                     <components:StudentFundsCard/>
-                </VerticalStackLayout>
+                </FlexLayout>
             </ScrollView>
         </VerticalStackLayout>
 
@@ -45,16 +45,16 @@
 
             <!--Counters-->
             <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Margin="0, 0, 0, 20">
-                <VerticalStackLayout>
+                <FlexLayout Direction="Column">
                     <Label Text="100 000" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                     <Label Text="Total Income" TextColor="{DynamicResource Blue}" FontSize="24" HorizontalTextAlignment="Center"/>
-                </VerticalStackLayout>
+                </FlexLayout>
             </Frame>
             <Frame BackgroundColor="{DynamicResource Purple200}" BorderColor="Transparent">
-                <VerticalStackLayout>
+                <FlexLayout Direction="Column">
                     <Label Text="100 000" TextColor="{DynamicResource Purple}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                     <Label Text="Total Salaries to be paid" TextColor="{DynamicResource Purple}" FontSize="24" HorizontalTextAlignment="Center"/>
-                </VerticalStackLayout>
+                </FlexLayout>
             </Frame>
         </VerticalStackLayout>
     </Grid>
