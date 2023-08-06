@@ -8,65 +8,54 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="90*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="35*"/>
         </Grid.ColumnDefinitions>
 
         <!--Just an indication for the Nav-->
         <VerticalStackLayout></VerticalStackLayout>
 
-        <!--Container-->
-        <Grid Grid.Column="1" Padding="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="65*"/>
-                <ColumnDefinition Width="35*"/>
-            </Grid.ColumnDefinitions>
+        <!--List of Staff & Students-->
+        <VerticalStackLayout Grid.Column="1" Margin="20">
+            <Label Text="Funds" FontSize="35" FontAttributes="Bold" TextColor="{DynamicResource Key=Gray900}" Padding="0, 0, 0, 20"/>
+            <FlexLayout JustifyContent="SpaceBetween" Margin="0, 0, 0, 20">
+                <HorizontalStackLayout>
+                    <Button Text="Pay Salaries" BackgroundColor="{DynamicResource Gray900}" Margin="0, 0, 10, 0"/>
+                    <Button Text="View Fees" TextColor="{DynamicResource Gray900}" BorderColor="{DynamicResource Gray900}" BorderWidth="1"/>
+                </HorizontalStackLayout>
+                <Button Text="Close Month" BackgroundColor="{DynamicResource Gray900}"/>
+            </FlexLayout>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <ScrollView>
+                <VerticalStackLayout>
+                    <components:LecturerFundsCard/>
+                    <components:LecturerFundsCard/>
+                    <components:LecturerFundsCard/>
+                    <components:StudentFundsCard/>
+                    <components:StudentFundsCard/>
+                    <components:StudentFundsCard/>
+                </VerticalStackLayout>
+            </ScrollView>
+        </VerticalStackLayout>
 
-            <!--List of Staff & Students-->
-            <VerticalStackLayout>
-                <Label Text="Funds" FontSize="35" FontAttributes="Bold" TextColor="{DynamicResource Key=Gray900}" Padding="0, 0, 0, 20"/>
-                <FlexLayout JustifyContent="SpaceBetween" Margin="0, 0, 0, 20">
-                    <HorizontalStackLayout>
-                        <Button Text="Pay Salaries" BackgroundColor="{DynamicResource Gray900}" Margin="0, 0, 10, 0"/>
-                        <Button Text="View Fees" TextColor="{DynamicResource Gray900}" BorderColor="{DynamicResource Gray900}" BorderWidth="1"/>
-                    </HorizontalStackLayout>
-                    <Button Text="Close Month" BackgroundColor="{DynamicResource Gray900}"/>
-                </FlexLayout>
+        <!--Image & Counters-->
+        <VerticalStackLayout Grid.Column="2">
+            <!--Image-->
+            <Image Source="funds_image.png" Margin="0, 100, 0, 80"/>
 
-                <ScrollView>
-                    <VerticalStackLayout>
-                        <components:LecturerFundsCard/>
-                        <components:LecturerFundsCard/>
-                        <components:LecturerFundsCard/>
-                        <components:StudentFundsCard/>
-                        <components:StudentFundsCard/>
-                        <components:StudentFundsCard/>
-                    </VerticalStackLayout>
-                </ScrollView>
-            </VerticalStackLayout>
-
-            <!--Image & Counters-->
-            <VerticalStackLayout Grid.Column="1" Margin="20, 0, 0, 0">
-                <!--Image-->
-                <Image Source="funds_image.png" Margin="0, 100, 0, 80"/>
-
-                <!--Counters-->
-                <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Margin="0, 0, 0, 20">
-                    <VerticalStackLayout>
-                        <Label Text="100 000" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                        <Label Text="Total Income" TextColor="{DynamicResource Blue}" FontSize="24" HorizontalTextAlignment="Center"/>
-                    </VerticalStackLayout>
-                </Frame>
-                <Frame BackgroundColor="{DynamicResource Purple200}" BorderColor="Transparent">
-                    <VerticalStackLayout>
-                        <Label Text="100 000" TextColor="{DynamicResource Purple}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                        <Label Text="Total Salaries to be paid" TextColor="{DynamicResource Purple}" FontSize="24" HorizontalTextAlignment="Center"/>
-                    </VerticalStackLayout>
-                </Frame>
-            </VerticalStackLayout>
-        </Grid>
+            <!--Counters-->
+            <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Margin="0, 0, 0, 20">
+                <VerticalStackLayout>
+                    <Label Text="100 000" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label Text="Total Income" TextColor="{DynamicResource Blue}" FontSize="24" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame BackgroundColor="{DynamicResource Purple200}" BorderColor="Transparent">
+                <VerticalStackLayout>
+                    <Label Text="100 000" TextColor="{DynamicResource Purple}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label Text="Total Salaries to be paid" TextColor="{DynamicResource Purple}" FontSize="24" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>
