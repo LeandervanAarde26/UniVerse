@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:UniVerse.Components"
+             x:Class="UniVerse.Screens.FundsScreenAndComponents"
+             Title="FundsScreenAndComponents"
+             BackgroundColor="{DynamicResource Primary}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="35*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="55*"/>
+        </Grid.RowDefinitions>
+
+        <!--Just an indication for the Nav-->
+        <VerticalStackLayout></VerticalStackLayout>
+
+        <!--List of Staff & Students-->
+        <VerticalStackLayout Grid.Column="1" Margin="20">
+            <Label Text="Funds" FontSize="35" FontAttributes="Bold" TextColor="{DynamicResource Key=Gray900}" Padding="0, 0, 0, 20"/>
+            <FlexLayout JustifyContent="SpaceBetween" Margin="0, 0, 0, 20">
+                <HorizontalStackLayout>
+                    <Button Text="Pay Salaries" BackgroundColor="{DynamicResource Gray900}" Margin="0, 0, 10, 0"/>
+                    <Button Text="View Fees" TextColor="{DynamicResource Gray900}" BorderColor="{DynamicResource Gray900}" BorderWidth="1"/>
+                </HorizontalStackLayout>
+                <Button Text="Close Month" BackgroundColor="{DynamicResource Gray900}"/>
+            </FlexLayout>
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Column="1" Grid.Row="1" Padding="20, 0, 20, 0">
+            <FlexLayout Direction="Column">
+                <components:LecturerFundsCard/>
+                <components:LecturerFundsCard/>
+                <components:LecturerFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+                <components:StudentFundsCard/>
+            </FlexLayout>
+        </ScrollView>
+
+        <!--Image & Counters-->
+        <VerticalStackLayout Grid.Column="2" Padding="10, 10, 20, 20">
+            <!--Image-->
+            <Image Source="funds_image.png" Aspect="AspectFill" MaximumWidthRequest="600" Margin="0, 100, 0, 60"/>
+
+            <!--Counters-->
+            <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Margin="0, 0, 0, 20">
+                <FlexLayout Direction="Column">
+                    <Label Text="100 000" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label Text="Total Income" TextColor="{DynamicResource Blue}" FontSize="24" HorizontalTextAlignment="Center"/>
+                </FlexLayout>
+            </Frame>
+            <Frame BackgroundColor="{DynamicResource Purple200}" BorderColor="Transparent">
+                <FlexLayout Direction="Column">
+                    <Label Text="100 000" TextColor="{DynamicResource Purple}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label Text="Total Salaries to be paid" TextColor="{DynamicResource Purple}" FontSize="24" HorizontalTextAlignment="Center"/>
+                </FlexLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
