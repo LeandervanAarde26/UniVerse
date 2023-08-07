@@ -64,6 +64,7 @@
 	  <None Remove="Resources\Images\coin.png" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logout.png" />
+	  <None Remove="Resources\Images\LoginImage.png" />
 	</ItemGroup>
 
 	<ItemGroup>
