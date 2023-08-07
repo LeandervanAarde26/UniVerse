@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UniVerse.Components.NavbarComponent"
+             Title="NavbarComponent">
+
+    <FlyoutPage>
+        <ContentPage Title="Staff Screen" Background="green">
+            <Label Text="Staff Screen"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Center"/>
+
+        </ContentPage>
+
+    </FlyoutPage>
+
+     <FlyoutPage.Detail>
+        <ContentPage Title="Staff Screen" Background="red">
+            <Label Text="Staff Screen"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Center"/>
+
+        </ContentPage>
+
+    </FlyoutPage.Detail>
+
+</FlyoutPage>

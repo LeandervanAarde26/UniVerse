@@ -57,6 +57,13 @@
 	  <None Remove="Resources\Images\Allen_Laing.png" />
 	  <None Remove="Resources\Images\edit_square.svg" />
 	  <None Remove="Resources\Images\edit.svg" />
+	  <None Remove="Resources\Images\element-3.png" />
+	  <None Remove="Resources\Images\teacher.png" />
+	  <None Remove="Resources\Images\profile.png" />
+	  <None Remove="Resources\Images\book.png" />
+	  <None Remove="Resources\Images\coin.png" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\logout.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -91,5 +98,11 @@
 	  <BundleResource Include="Resources\Images\edit_square.svg" />
 	  <BundleResource Include="Resources\Images\edit.svg" />
 
+	  <BundleResource Include="Resources\Images\teacher.png" />
+	  <BundleResource Include="Resources\Images\profile.png" />
+	  <BundleResource Include="Resources\Images\book.png" />
+	  <BundleResource Include="Resources\Images\coin.png" />
+	  <BundleResource Include="Resources\Images\logo.png" />
+	  <BundleResource Include="Resources\Images\logout.png" />
 	</ItemGroup>
 </Project>
