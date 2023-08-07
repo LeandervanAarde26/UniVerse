@@ -20,13 +20,14 @@ public partial class AppShell : Shell
             
         };
 
-       
 
+       
         FlyoutHeader = image;
-        FlyoutWidth = 250;
+        FlyoutWidth = 260;
         FlyoutBehavior = FlyoutBehavior.Locked;
         FlyoutBackgroundColor = Color.FromArgb("#2B2B2B");
         FlyoutBackground = Color.FromArgb("#2B2B2B");
+        
 
         Button logout = new()
         {

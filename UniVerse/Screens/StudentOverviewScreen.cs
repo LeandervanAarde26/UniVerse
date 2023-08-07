@@ -14,6 +14,7 @@ namespace UniVerse.Screens
     {
         public StudentOverviewScreen()
         {
+            Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style textStyle = new(typeof(Label))
             {
                 Setters =

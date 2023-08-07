@@ -22,28 +22,32 @@ namespace UniVerse.ViewModels
 {
                 new Routes
                 {
+                    FlyoutIcon = "staff_icon.png",
                     Page = new StaffScreen(),
-                    Title = "Staff",
-                    FlyoutIcon = "staff_icon.png"
+                    Title = "  Staff",
+                   
                 },
                 new Routes
                 {
+                    FlyoutIcon = "students_icon.png",
                     Page = new StudentScreen(),
-                    Title = "Students",
-                    FlyoutIcon = "students_icon.png"
+                    Title = "  Students",
+                    
                 },
                  new Routes
                  {
+                      FlyoutIcon = "funds_icon.png",
                      Page = new FundsScreenAndComponents(),
-                     Title = "Funds",
-                     FlyoutIcon = "funds_icon.png"
+                     Title = "  Funds",
+                    
                  },
 
                  new Routes
                  {
+                     FlyoutIcon = "subjects_icon.png",
                      Page = new SubjectsScreen(),
-                     Title = "Subjects",
-                     FlyoutIcon = "subjects_icon.png"
+                     Title = "  Subjects",
+                    
                  }
 };
             foreach (var page in pages)
@@ -53,18 +57,25 @@ namespace UniVerse.ViewModels
                     ContentTemplate = new(() => page.Page)
                 };
 
+                
+
                 FlyoutItem Item = new()
                 {
                     Title = page.Title,
-                    FlyoutIcon = page.FlyoutIcon
+                    FlyoutIcon = page.FlyoutIcon,
+                    
+                    
                 };
 
+        
                 Item.Items.Add(new Tab
                 {
                     Items = { Content },
+                   
                   
                 });
                 Items.Add(Item);
+               
             }
         }
     }

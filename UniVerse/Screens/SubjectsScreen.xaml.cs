@@ -6,8 +6,8 @@ public partial class SubjectsScreen : ContentPage
 	{
 		InitializeComponent();
 
-      
-	}
+        Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+    }
 
 
 

@@ -12,7 +12,7 @@ namespace UniVerse.Screens
     {
         public StudentScreen()
         {
-
+            Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style inputStyle = new(typeof(Entry))
             {
                 Setters =

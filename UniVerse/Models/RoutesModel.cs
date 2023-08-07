@@ -8,8 +8,9 @@ namespace UniVerse.Models
 {
     public struct Routes
     {
+        public string FlyoutIcon { get; set; }
         public ContentPage Page { get; set; }
         public string Title { get; set; }
-        public string FlyoutIcon { get; set; }
+        
     }
 }

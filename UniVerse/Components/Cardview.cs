@@ -135,7 +135,7 @@ namespace UniVerse.Components
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Fill,
                
-                WidthRequest = 265,
+                WidthRequest = 260,
                 BackgroundColor = Colors.White,
                 Margin = new Thickness(20),
                 Content = stack,
