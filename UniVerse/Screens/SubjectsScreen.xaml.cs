@@ -5,5 +5,10 @@ public partial class SubjectsScreen : ContentPage
 	public SubjectsScreen()
 	{
 		InitializeComponent();
+
+      
 	}
+
+
+
 }

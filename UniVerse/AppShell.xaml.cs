@@ -1,53 +1,52 @@
 ﻿using Microsoft.Maui.Controls;
 //using Microsoft.UI.Xaml.Controls;
 using UniVerse.Screens;
-
+using UniVerse.Models;
+using UniVerse.ViewModels;
 namespace UniVerse;
 
 public partial class AppShell : Shell
 {
+    private readonly Navigation _navViewModel;
 	public AppShell()
 	{
-        
-        ShellContent staffFlyoutContent = new()
-        {
-            ContentTemplate = new (() => new StaffScreen())
-        };
+       
+        _navViewModel = new Navigation();
         Image image = new()
         {
             Source = "logo.png",
             MaximumHeightRequest = 80,
-            Aspect = Aspect.Center,
-         
+            Aspect = Aspect.Center, 
+            
         };
+
+       
 
         FlyoutHeader = image;
-        FlyoutBackgroundColor = Color.FromArgb("#2B2B2B");
         FlyoutWidth = 250;
-        
+        FlyoutBehavior = FlyoutBehavior.Locked;
+        FlyoutBackgroundColor = Color.FromArgb("#2B2B2B");
+        FlyoutBackground = Color.FromArgb("#2B2B2B");
 
-        FlyoutItem staffFlyoutItem = new()
+        Button logout = new()
         {
-            Title = "Staff",
-            //FlyoutIcon = "cat.png"
+            BackgroundColor = Color.FromArgb("#000000"),
+            Text = "Logout",
+            ImageSource = "logout_icon.png",
+            MaximumWidthRequest = 200
         };
 
-    
+        FlyoutFooter = logout;
+       
 
-        staffFlyoutItem.Items.Add(new Tab
+        _navViewModel.AddNavItems();
+        foreach (var item in _navViewModel.Items)
         {
-            Items = { staffFlyoutContent }
-        });
-
-        staffFlyoutItem.CurrentItem = staffFlyoutContent;
-
-        Items.Add(staffFlyoutItem);
-
-        FlyoutBehavior = FlyoutBehavior.Locked;
+            Items.Add(item);
+           
+        }        
     }
+
 }
 
-    //<ShellContent
-    //    Title = "Home"
-    //    ContentTemplate="{DataTemplate local:MainPage}"
-    //    Route="MainPage" />
+

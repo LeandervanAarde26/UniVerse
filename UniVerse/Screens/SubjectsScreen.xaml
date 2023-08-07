@@ -3,21 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:UniVerse.Components"
              x:Class="UniVerse.Screens.SubjectsScreen"
-             Title="SubjectsScreen"
+             
              BackgroundColor="{DynamicResource Key=Primary}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
+           
             <!-- Three-quarters of the page for the first column -->
-            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="75*"/>
             <!-- One-quarter of the page for the second column -->
-            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
 
         <!--Just an indication for the Nav-->
         <VerticalStackLayout></VerticalStackLayout>
 
-        <VerticalStackLayout Padding="20" HorizontalOptions="Start" Grid.Column="1">
+        <VerticalStackLayout Padding="20" HorizontalOptions="Start" Grid.Column="0">
             <Label 
                 Text="Subjects"
                 FontSize="35"
@@ -29,7 +29,7 @@
             </ScrollView>
         </VerticalStackLayout>
 
-        <FlexLayout Grid.Column="2" BackgroundColor="White" Direction="Column" JustifyContent="Center">
+        <FlexLayout Grid.Column="1" BackgroundColor="White" Direction="Column" JustifyContent="Center">
             <!-- ProfileView will be inserted here -->
             <StackLayout VerticalOptions="Center" Padding="20">
                 <Label Text="Add new Subject" FontSize="20" HorizontalOptions="Start" Margin="22, 5" TextColor="#2B2B2B" FontAttributes="Bold"/>
