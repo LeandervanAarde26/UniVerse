@@ -23,7 +23,7 @@ public class Dashboard : ContentPage
         {
             JustifyContent = FlexJustify.SpaceBetween,
             Direction = FlexDirection.Row,
-            BackgroundColor = Color.FromHex("#EBEBEB"),
+            BackgroundColor = Color.FromArgb("#F6F7FB"),
 
         Children = {
                 pageHeading,
@@ -64,7 +64,7 @@ public class Dashboard : ContentPage
 
         Image welcomeImage = new()
         {
-            Source = ImageSource.FromFile("image_picker.png"),
+            Source = ImageSource.FromFile("dashboard_welcome.png"),
             Aspect = Aspect.AspectFit,
             MaximumHeightRequest = 630,
             MaximumWidthRequest = 600,
@@ -115,6 +115,11 @@ public class Dashboard : ContentPage
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
+        };
+
+        RadioButton degreeStudent = new()
+        {
+            Content = "Red"
         };
 
         Label diplomaStudentsText = new()
@@ -272,7 +277,7 @@ public class Dashboard : ContentPage
 
         Image fundsImage = new()
         {
-            Source = ImageSource.FromFile("image_picker.png"),
+            Source = ImageSource.FromFile("dashboard_funds.png"),
             Aspect = Aspect.AspectFit,
             MaximumHeightRequest = 150,
             //MaximumWidthRequest = 200,
@@ -385,7 +390,7 @@ public class Dashboard : ContentPage
         Grid.SetColumn(bottom, 0);
         Grid.SetColumnSpan(bottom, 2);
 
-        dashboardGrid.BackgroundColor = Color.FromHex("#EBEBEB");
+        dashboardGrid.BackgroundColor = Color.FromArgb("#F6F7FB");
 
         Grid grid = new()
         {

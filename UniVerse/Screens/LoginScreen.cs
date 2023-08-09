@@ -17,6 +17,7 @@ public class LoginScreen : ContentPage
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromHex("#F6F7FB") },
                     new Setter { Property = InputView.MarginProperty, Value = new Thickness(15, 5) },
                     new Setter { Property = InputView.TextColorProperty, Value = Color.FromHex("#2B2B2B") },
+
                 }
         };
 
@@ -55,9 +56,9 @@ public class LoginScreen : ContentPage
         Entry email = new Entry()
         {
             Placeholder ="Email",
-            Style = inputStyle
-
+            Style = inputStyle, 
         };
+
 
 
         Label passwordLabel = new()
@@ -80,7 +81,7 @@ public class LoginScreen : ContentPage
         {
             Text = "Sign In" ,
             BackgroundColor = Color.FromHex("#2B2B2B"),
-            Margin = new Thickness(18, 6)
+            Margin = new Thickness(18, 15)
         };
 
         FlexLayout login = new()
