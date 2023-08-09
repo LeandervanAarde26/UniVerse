@@ -35,7 +35,7 @@ namespace UniVerse.Components
 
                 WidthRequest = 125,
                 HeightRequest = 125,
-                Source = ImageSource.FromFile("allen_laing.png"),
+                Source = ImageSource.FromFile("arras.png"),
 
             };
             var clip1 = new EllipseGeometry { Center = new Point(124 / 2, 124 / 2), RadiusX = 124 / 2, RadiusY = 124 / 2 };
