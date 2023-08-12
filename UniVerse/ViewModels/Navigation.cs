@@ -19,7 +19,18 @@ namespace UniVerse.ViewModels
         public void AddNavItems()
         {
             var pages = new Routes[]
-{
+
+
+            {
+
+               new Routes
+                {
+                    FlyoutIcon = "dashboard_icon.png",
+                    Page = new Dashboard(),
+                    Title = "  Home",
+
+                },
+
                 new Routes
                 {
                     FlyoutIcon = "staff_icon.png",
@@ -48,8 +59,11 @@ namespace UniVerse.ViewModels
                      Page = new SubjectsScreen(),
                      Title = "  Subjects",
                     
-                 }
-};
+                 },
+
+      
+
+            };
             foreach (var page in pages)
             {
                 ShellContent Content = new()

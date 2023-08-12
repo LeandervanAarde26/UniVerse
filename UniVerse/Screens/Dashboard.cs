@@ -65,7 +65,7 @@ public class Dashboard : ContentPage
         Image welcomeImage = new()
         {
             Source = ImageSource.FromFile("dashboard_welcome.png"),
-            Aspect = Aspect.AspectFit,
+            Aspect = Aspect.Center,
             MaximumHeightRequest = 630,
             MaximumWidthRequest = 600,
         };
@@ -402,7 +402,7 @@ public class Dashboard : ContentPage
             ColumnDefinitions = new ColumnDefinitionCollection
             {
                 new ColumnDefinition { Width = new GridLength(5, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(5, GridUnitType.Star) }
+                new ColumnDefinition { Width = new GridLength(5, GridUnitType.Star) }
             }
         };
 
@@ -437,9 +437,9 @@ public class Dashboard : ContentPage
 
             ColumnDefinitions = new ColumnDefinitionCollection
             {
-                new ColumnDefinition { Width = new GridLength(15, GridUnitType.Star) },
-                new ColumnDefinition { Width = new GridLength(66, GridUnitType.Star) },
-                new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star) }
+            
+                new ColumnDefinition { Width = new GridLength(75, GridUnitType.Star) },
+                new ColumnDefinition { Width = new GridLength(25, GridUnitType.Star) }
             }
         };
 
@@ -447,17 +447,17 @@ public class Dashboard : ContentPage
 
         grid.Children.Add(dashboardGrid);
         Grid.SetRow(dashboardGrid, 1);
-        Grid.SetColumn(dashboardGrid, 1);
+        Grid.SetColumn(dashboardGrid, 0);
         Grid.SetColumnSpan(dashboardGrid, 1);
 
         grid.Children.Add(right);
-        Grid.SetColumn(right, 2);
-        Grid.SetColumnSpan(right, 2);
+        Grid.SetColumn(right, 1);
+        Grid.SetColumnSpan(right, 1);
         Grid.SetRowSpan(right, 2);
 
         grid.Children.Add(topContainer);
         Grid.SetRow(topContainer, 0);
-        Grid.SetColumn(topContainer, 1);
+        Grid.SetColumn(topContainer, 0);
 
         Content = grid;
     }
