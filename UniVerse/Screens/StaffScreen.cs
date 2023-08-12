@@ -100,7 +100,6 @@ namespace UniVerse.Screens
 
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
-               
                  new ColumnDefinition { Width = new GridLength(75, GridUnitType.Star) },
                  new ColumnDefinition { Width = new GridLength(25, GridUnitType.Star) }
                 }
@@ -115,9 +114,15 @@ namespace UniVerse.Screens
 
 
             RightBar right = new("Staff Member", list);
-            //new ColumnDefinition { Width = new GridLength(10, GridUnitType.Star) },
+
 
             // Add the ContentView to the Grid
+            //   grid.Children.Add(navbar);
+            //Grid.SetRow(navbar, 0);
+            //Grid.SetColumn(navbar, 0);
+            //Grid.SetColumnSpan(navbar, 1);
+            //Grid.SetRowSpan(navbar, 2);
+
             grid.Children.Add(scrollView);
             Grid.SetRow(scrollView, 1);
             Grid.SetColumn(scrollView, 0);
