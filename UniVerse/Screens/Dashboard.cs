@@ -290,7 +290,7 @@ public class Dashboard : ContentPage
         {
             HeightRequest = 300,
             BackgroundColor = Color.FromArgb("#FFFFFF"),
-            Margin = new Thickness(10, 10, 0, 0),
+            Margin = new Thickness(10, 20, 0, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = subjectsInfo,
@@ -367,7 +367,7 @@ public class Dashboard : ContentPage
         {
             HeightRequest = 300,
             BackgroundColor = Color.FromArgb("#FFFFFF"),
-            Margin = new Thickness(10, 10, 10, 0),
+            Margin = new Thickness(10, 20, 10, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = fundsInfo,
