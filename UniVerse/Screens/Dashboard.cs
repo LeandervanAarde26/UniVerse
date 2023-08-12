@@ -82,10 +82,10 @@ public class Dashboard : ContentPage
 
         Border welcomeBanner = new Border
         {
-            HeightRequest = 230,
+            HeightRequest = 250,
             BackgroundColor = Color.FromHex("#DFE9FF"),
             Padding = new Thickness(10, 2),
-            Margin = new Thickness(50, 20),
+            Margin = new Thickness(20, 20, 20, 20),
             StrokeThickness = 0,
             Content = welcomeInfo,
             Stroke = Color.FromHex("#DFE9FF"),
@@ -133,6 +133,15 @@ public class Dashboard : ContentPage
             Margin = new Thickness(10, 10, 0, 0)
         };
 
+
+        Button viewStudents = new()
+        {
+            Text = "View Students > ",
+            TextColor = Color.FromArgb("#407BFF"),
+            HorizontalOptions = LayoutOptions.End,
+
+        };
+
         FlexLayout studentInfo = new()
         {
             JustifyContent = FlexJustify.Center,
@@ -140,7 +149,8 @@ public class Dashboard : ContentPage
             Children = {
                 studentsGraph,
                 degreeStudentsText,
-                diplomaStudentsText
+                diplomaStudentsText,
+                viewStudents
             }
         };
 
@@ -175,6 +185,14 @@ public class Dashboard : ContentPage
             Margin = new Thickness(10, 10, 0, 0)
         };
 
+        Button viewStaff = new()
+        {
+            Text = "View Staff > ",
+            TextColor = Color.FromArgb("#407BFF"),
+            HorizontalOptions = LayoutOptions.End,
+
+        };
+
         FlexLayout adminInfo = new()
         {
             JustifyContent = FlexJustify.Center,
@@ -182,7 +200,8 @@ public class Dashboard : ContentPage
             Children = {
                 adminGraph,
                 adminStaffText,
-                academicText
+                academicText,
+                viewStaff
             }
         };
 
@@ -190,9 +209,9 @@ public class Dashboard : ContentPage
         Border studentsBanner = new()
         {
             HeightRequest = 280,
-            WidthRequest = 500,
+            //WidthRequest = 500,
             BackgroundColor = Color.FromHex("#FFFFFF"),
-            Margin = new Thickness(0, 0),
+            Margin = new Thickness(20, 0, 10, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = studentInfo,
@@ -210,9 +229,9 @@ public class Dashboard : ContentPage
         Border adminBanner = new()
         {
             HeightRequest = 280,
-            WidthRequest = 500,
+            //WidthRequest = 500,
             BackgroundColor = Color.FromHex("#FFFFFF"),
-            Margin = new Thickness(0, 0),
+            Margin = new Thickness(10, 0, 20, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = adminInfo,
@@ -248,6 +267,14 @@ public class Dashboard : ContentPage
         };
 
 
+        Button viewSubjects = new()
+        {
+            Text = "View Subjects > ",
+            TextColor = Color.FromArgb("#407BFF"),
+            HorizontalOptions = LayoutOptions.End,
+
+        };
+
 
         FlexLayout subjectsInfo = new()
         {
@@ -255,15 +282,15 @@ public class Dashboard : ContentPage
             Direction = FlexDirection.Column,
             Children = {
                 subjectsNumberText,
-                subjectsTitleText
+                subjectsTitleText,
             }
         };
 
         Border subjects= new()
         {
-            HeightRequest = 250,
+            HeightRequest = 300,
             BackgroundColor = Color.FromArgb("#FFFFFF"),
-            Margin = new Thickness(20, 20),
+            Margin = new Thickness(10, 10, 0, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = subjectsInfo,
@@ -307,13 +334,21 @@ public class Dashboard : ContentPage
         };
 
 
+        Button viewFunds = new()
+        {
+            Text = "View Funds > ",
+            TextColor = Color.FromArgb("#407BFF"),
+            HorizontalOptions = LayoutOptions.End,
+
+        };
+
         FlexLayout fundsTextLayout = new()
         {
             JustifyContent = FlexJustify.Center,
             Direction = FlexDirection.Column,
             Children = {
                 fundsText,
-                totalFundsText
+                totalFundsText,
             }
         };
 
@@ -330,9 +365,9 @@ public class Dashboard : ContentPage
 
         Border funds = new()
         {
-            HeightRequest = 250,
+            HeightRequest = 300,
             BackgroundColor = Color.FromArgb("#FFFFFF"),
-            Margin = new Thickness(20, 20),
+            Margin = new Thickness(10, 10, 10, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = fundsInfo,
@@ -345,7 +380,7 @@ public class Dashboard : ContentPage
 
         FlexLayout bottom = new()
         {
-            JustifyContent = FlexJustify.SpaceBetween,
+            JustifyContent = FlexJustify.Center,
             Direction = FlexDirection.Row,
             Children = {
                 subjects,
@@ -360,8 +395,8 @@ public class Dashboard : ContentPage
             RowDefinitions = new RowDefinitionCollection
             {
                 new RowDefinition{Height = GridLength.Auto}, 
-                new RowDefinition{Height = GridLength.Star},
-                new RowDefinition{Height = GridLength.Star},
+                new RowDefinition{Height = GridLength.Auto},
+                new RowDefinition{Height = GridLength.Auto},
             },
 
             ColumnDefinitions = new ColumnDefinitionCollection

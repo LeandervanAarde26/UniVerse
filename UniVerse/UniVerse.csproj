@@ -65,7 +65,6 @@
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logout.png" />
 	  <None Remove="Resources\Images\LoginImage.png" />
-	  <None Remove="Resources\Images\dashboard-funds-image.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -106,6 +105,5 @@
 	  <BundleResource Include="Resources\Images\coin.png" />
 	  <BundleResource Include="Resources\Images\logo.png" />
 	  <BundleResource Include="Resources\Images\logout.png" />
-	  <BundleResource Include="Resources\Images\dashboard-funds-image.png" />
 	</ItemGroup>
 </Project>
