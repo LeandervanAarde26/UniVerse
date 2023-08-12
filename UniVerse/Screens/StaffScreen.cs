@@ -14,8 +14,8 @@ namespace UniVerse.Screens
     {
         public StaffScreen()
         {
-
-
+            Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+     
 
             Style inputStyle = new(typeof(Entry))
             {
@@ -100,9 +100,8 @@ namespace UniVerse.Screens
 
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
-                 new ColumnDefinition { Width = new GridLength(15, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(66, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star) }
+                 new ColumnDefinition { Width = new GridLength(75, GridUnitType.Star) },
+                 new ColumnDefinition { Width = new GridLength(25, GridUnitType.Star) }
                 }
             };
 
@@ -115,9 +114,6 @@ namespace UniVerse.Screens
 
 
             RightBar right = new("Staff Member", list);
-            //Navbar navbar = new();
-
-
 
 
             // Add the ContentView to the Grid
@@ -129,12 +125,12 @@ namespace UniVerse.Screens
 
             grid.Children.Add(scrollView);
             Grid.SetRow(scrollView, 1);
-            Grid.SetColumn(scrollView, 1);
+            Grid.SetColumn(scrollView, 0);
             Grid.SetColumnSpan(scrollView, 1);
             grid.BackgroundColor = Color.FromArgb("#F6F7FB");
 
             grid.Children.Add(right);
-            Grid.SetColumn(right, 2);
+            Grid.SetColumn(right, 1);
             Grid.SetColumnSpan(right, 2);
             Grid.SetRowSpan(right, 2);
 
@@ -142,7 +138,7 @@ namespace UniVerse.Screens
 
             grid.Children.Add(topContainer);
             Grid.SetRow(topContainer, 0);
-            Grid.SetColumn(topContainer, 1);
+            Grid.SetColumn(topContainer, 0);
 
             Content = grid;
             var numbers = new List<int> { 1, 2, 3, 4, 2, 3, 4, 5, 2, 3, 4, 5 };

@@ -3,31 +3,8 @@
     x:Class="UniVerse.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:UniVerse"
-    xmlns:screens="clr-namespace:UniVerse.Screens"
-    Shell.FlyoutBehavior="Locked">
+   >
 
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />-->
-
-    <FlyoutItem Title="Test"
-                Icon="logo.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate screens:StaffScreen}"/>
-
-        </Tab>
-
-    </FlyoutItem>
-     <FlyoutItem Title="Test"
-                Icon="logo.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate screens:StudentScreen}"/>
-
-        </Tab>
-
-    </FlyoutItem>
 
 </Shell>
 

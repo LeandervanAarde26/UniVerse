@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:UniVerse.Components"
              x:Class="UniVerse.Screens.FundsScreenAndComponents"
-             Title="FundsScreenAndComponents"
+           
              BackgroundColor="{DynamicResource Primary}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="55*"/>
-            <ColumnDefinition Width="35*"/>
+            
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="40*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -17,11 +17,9 @@
             <RowDefinition Height="55*"/>
         </Grid.RowDefinitions>
 
-        <!--Just an indication for the Nav-->
-        <VerticalStackLayout></VerticalStackLayout>
-
+  
         <!--List of Staff & Students-->
-        <VerticalStackLayout Grid.Column="1" Margin="20">
+        <VerticalStackLayout Grid.Column="0" Margin="20">
             <Label Text="Funds" FontSize="35" FontAttributes="Bold" TextColor="{DynamicResource Key=Gray900}" Padding="0, 0, 0, 20"/>
             <FlexLayout JustifyContent="SpaceBetween" Margin="0, 0, 0, 20">
                 <HorizontalStackLayout>
@@ -32,7 +30,7 @@
             </FlexLayout>
         </VerticalStackLayout>
 
-        <ScrollView Grid.Column="1" Grid.Row="1" Padding="20, 0, 20, 0">
+        <ScrollView Grid.Column="0" Grid.Row="1" Padding="20, 0, 20, 0">
             <FlexLayout Direction="Column">
                 <components:LecturerFundsCard/>
                 <components:LecturerFundsCard/>
@@ -50,7 +48,7 @@
         </ScrollView>
 
         <!--Image & Counters-->
-        <VerticalStackLayout Grid.Column="2" Padding="10, 10, 20, 20">
+        <VerticalStackLayout Grid.Column="1" Padding="10, 10, 20, 20">
             <!--Image-->
             <Image Source="funds_image.png" Aspect="AspectFill" MaximumWidthRequest="600" Margin="0, 100, 0, 60"/>
 
