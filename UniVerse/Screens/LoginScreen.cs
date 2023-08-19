@@ -84,7 +84,24 @@ namespace UniVerse.Screens
                 Placeholder = "Password",
                 Style = inputStyle,
                 IsPassword = true,
+                Margin = 0,
             };
+
+            Border passwordBorder = new()
+            {
+                Content = password,
+                Margin = new Thickness(10),
+
+                StrokeShape = new RoundRectangle()
+                {
+                    CornerRadius = 10,
+
+
+                },
+                Style = borderStyle,
+
+            };
+
             password.Unfocused += ValidatePassword;
 
             Button signinButton = new Button
@@ -98,7 +115,8 @@ namespace UniVerse.Screens
             {
                 JustifyContent = FlexJustify.Center,
                 Direction = FlexDirection.Column,
-                Children = { loginTitle, emailBorder, password, signinButton }
+                
+                Children = { loginTitle, emailBorder, passwordBorder, signinButton }
             };
 
             Border loginCard = new Border
@@ -116,6 +134,12 @@ namespace UniVerse.Screens
                 {
                     CornerRadius = new CornerRadius(20)
                 },
+            };
+
+            Image bgImage = new()
+            {
+                Source = "login_bg.png",
+                Aspect = Aspect.AspectFill
             };
 
             Grid grid = new Grid
@@ -136,11 +160,18 @@ namespace UniVerse.Screens
             Grid.SetRow(loginMainImage, 0);
             Grid.SetColumn(loginMainImage, 0);
             Grid.SetColumnSpan(loginMainImage, 1);
+            grid.Children.Insert(0, bgImage);
+            Grid.SetRowSpan(bgImage, 1);
+            Grid.SetColumnSpan(bgImage, 2);
 
             grid.Children.Add(loginCard);
             Grid.SetRow(loginCard, 0);
             Grid.SetColumn(loginCard, 1);
             Grid.SetColumnSpan(loginCard, 1);
+
+
+           
+      
 
             Content = grid;
         }
@@ -177,7 +208,23 @@ namespace UniVerse.Screens
         {
             Entry password = (Entry)sender;
 
-            password.BackgroundColor = password.Text.Length >= 8 ? Color.FromArgb("#FFFFFF") : Color.FromArgb("#FF4040");
+            bool isValid = password.Text.Length >= 8 ? true : false;
+            Color colorString;
+
+            if (!isValid)
+            {
+                colorString = Color.FromArgb("#FF4040");
+            }
+            else
+            {
+                colorString = Color.FromArgb("#FFFFFF");
+            }
+
+            Border parentBorder = FindParent<Border>(password);
+            if (parentBorder != null)
+            {
+                parentBorder.BackgroundColor = colorString;
+            }
         }
 
         private E FindParent<E>(Element element) where E : Element
