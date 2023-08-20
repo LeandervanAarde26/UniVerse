@@ -182,6 +182,8 @@ namespace UniVerse.Screens
 
             string emailPattern = @"^[A-Za-z0-9._%+-]+@virtualwindow\.co\.za$";
             string staffEmailPattern = @"^[A-Za-z0-9._%+-]+@openwindow\.co\.za$";
+            if (email.Text == null)
+                return;
             bool isValid = Regex.IsMatch(email.Text, emailPattern);
             bool staffValid = Regex.IsMatch(email.Text, staffEmailPattern);
             Color colorString;
@@ -207,6 +209,8 @@ namespace UniVerse.Screens
         private void ValidatePassword(object sender, EventArgs e)
         {
             Entry password = (Entry)sender;
+            if (password.Text == null)
+                return;
 
             bool isValid = password.Text.Length >= 8 ? true : false;
             Color colorString;
