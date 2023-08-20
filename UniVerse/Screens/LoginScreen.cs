@@ -12,8 +12,6 @@ namespace UniVerse.Screens
         Color borderColor = Colors.Gray;
         public LoginScreen()
         {
-           
-
             Style inputStyle = new(typeof(Entry))
             {
                 Setters =
@@ -21,10 +19,9 @@ namespace UniVerse.Screens
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromArgb("#F6F7FB") },
                     new Setter { Property = InputView.MarginProperty, Value = new Thickness(15, 5) },
                     new Setter { Property = InputView.TextColorProperty, Value = Color.FromArgb("#2B2B2B") },
-                    
                 }
             };
-            Style borderStyle = new Style(typeof(Border))
+            Style borderStyle = new (typeof(Border))
             {
                 Setters =
                 {
@@ -35,7 +32,7 @@ namespace UniVerse.Screens
                 }
             };
 
-            Image loginMainImage = new Image
+            Image loginMainImage = new()
             {
                 Source = ImageSource.FromFile("login_image.png"),
                 Aspect = Aspect.AspectFit,
@@ -43,7 +40,7 @@ namespace UniVerse.Screens
                 MaximumWidthRequest = 700,
             };
 
-            Label loginTitle = new Label
+            Label loginTitle = new ()
             {
                 Text = "Sign In",
                 FontSize = 32,
@@ -68,18 +65,13 @@ namespace UniVerse.Screens
                 StrokeShape = new RoundRectangle()
                 {
                     CornerRadius = 10,
-
-     
                 },
                 Style = borderStyle,
-              
             };
 
- 
-   
             email.Unfocused += ValidateEmail;
 
-            Entry password = new Entry
+            Entry password = new()
             {
                 Placeholder = "Password",
                 Style = inputStyle,
@@ -95,23 +87,20 @@ namespace UniVerse.Screens
                 StrokeShape = new RoundRectangle()
                 {
                     CornerRadius = 10,
-
-
                 },
                 Style = borderStyle,
-
             };
 
             password.Unfocused += ValidatePassword;
 
-            Button signinButton = new Button
+            Button signinButton = new()
             {
                 Text = "Sign In",
                 BackgroundColor = Color.FromArgb("#2B2B2B"),
                 Margin = new Thickness(18, 15)
             };
 
-            FlexLayout login = new FlexLayout
+            FlexLayout login = new()
             {
                 JustifyContent = FlexJustify.Center,
                 Direction = FlexDirection.Column,
@@ -119,7 +108,7 @@ namespace UniVerse.Screens
                 Children = { loginTitle, emailBorder, passwordBorder, signinButton }
             };
 
-            Border loginCard = new Border
+            Border loginCard = new()
             {
                 WidthRequest = 500,
                 HeightRequest = 450,
@@ -142,7 +131,7 @@ namespace UniVerse.Screens
                 Aspect = Aspect.AspectFill
             };
 
-            Grid grid = new Grid
+            Grid grid = new()
             {
                 RowDefinitions = new RowDefinitionCollection
                 {
@@ -168,10 +157,6 @@ namespace UniVerse.Screens
             Grid.SetRow(loginCard, 0);
             Grid.SetColumn(loginCard, 1);
             Grid.SetColumnSpan(loginCard, 1);
-
-
-           
-      
 
             Content = grid;
         }
@@ -199,7 +184,7 @@ namespace UniVerse.Screens
             }
 
             // Find the parent Border by traversing the visual tree
-            Border parentBorder = FindParent<Border>(email);
+            Border parentBorder = LoginScreen.FindParent<Border>(email);
             if (parentBorder != null)
             {
                 parentBorder.BackgroundColor = colorString;
@@ -212,7 +197,7 @@ namespace UniVerse.Screens
             if (password.Text == null)
                 return;
 
-            bool isValid = password.Text.Length >= 8 ? true : false;
+            bool isValid = password.Text.Length >= 8;
             Color colorString;
 
             if (!isValid)
@@ -224,14 +209,14 @@ namespace UniVerse.Screens
                 colorString = Color.FromArgb("#FFFFFF");
             }
 
-            Border parentBorder = FindParent<Border>(password);
+            Border parentBorder = LoginScreen.FindParent<Border>(password);
             if (parentBorder != null)
             {
                 parentBorder.BackgroundColor = colorString;
             }
         }
 
-        private E FindParent<E>(Element element) where E : Element
+        private static E FindParent<E>(Element element) where E : Element
         {
             Element parent = element.Parent;
             while (parent != null)
@@ -244,6 +229,5 @@ namespace UniVerse.Screens
             }
             return null;
         }
-
     }
 }
