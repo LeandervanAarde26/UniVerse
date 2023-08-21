@@ -20,7 +20,6 @@ namespace UniVerse.Screens
         public StaffScreen()
         {
             viewModel = new PeopleViewModel(new Services.RestService());
-            BindingContext = viewModel;
 
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
 
