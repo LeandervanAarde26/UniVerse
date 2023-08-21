@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using UniVerse.Models;
 
 namespace UniVerse.Services
 {
-	public class RestService : IRestService
-	{
+    public class RestService : IRestService
+    {
         HttpClient _client;
+
+        //baseApi
+        internal string baseUrl = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
-
-        //Urls
-        internal string peopleUrl = "https://localhost:7050/api/People";
-
-        public List<PeopleModel> Items { get; private set; }
+        public List <PersonModel> People { get; private set; }
 
         public RestService()
         {
@@ -25,18 +28,18 @@ namespace UniVerse.Services
             };
         }
 
-        public async Task<List<PeopleModel>> RefreshDataAsync()
+        public async Task <List<PersonModel>> RefreshDataAsync()
         {
-            Items = new List<PeopleModel>();
+            People = new List<PersonModel>();
 
-            Uri uri = new (string.Format(peopleUrl, string.Empty));
+            Uri uri = new Uri(string.Format(baseUrl + "People/Lecturers"));
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Items = JsonSerializer.Deserialize<List<PeopleModel>>(content, _serializerOptions);
+                    People = JsonSerializer.Deserialize<List<PersonModel>>(content, _serializerOptions);
                 }
             }
             catch (Exception ex)
@@ -44,8 +47,7 @@ namespace UniVerse.Services
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
-            return Items;
+            return People;
         }
     }
 }
-

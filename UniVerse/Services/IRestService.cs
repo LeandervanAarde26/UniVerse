@@ -5,8 +5,6 @@ namespace UniVerse.Services
 {
 	public interface IRestService
 	{
-        //Define methods
-        Task<List<PeopleModel>> RefreshDataAsync(); //GET ALL PEOPLE
+        Task<List<PersonModel>> RefreshDataAsync(); //GET ALL PEOPLE
     }
 }
-

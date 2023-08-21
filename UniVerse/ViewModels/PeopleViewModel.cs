@@ -1,31 +1,32 @@
-﻿using System;
-using UniVerse.Services;
-using UniVerse.Models;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using UniVerse.Models;
+using UniVerse.Services;
 
 namespace UniVerse.ViewModels
 {
-	public class PeopleViewModel : BaseViewModel
-	{
-		public RestService _restService;
-        public List<PeopleModel> PeopleList;
+    public class PeopleViewModel : BaseViewModel
+    {
+        public RestService _restService;
+
+        public ObservableCollection<PersonModel> PeopleList { get; set; }
 
         public PeopleViewModel(RestService restService)
-		{
-			_restService = restService;
-			PeopleList = new List<PeopleModel>();
-		}
+        {
+            _restService = restService;
+            PeopleList = new ObservableCollection<PersonModel>();
+        }
 
-		public async Task GetAllPeople()
-		{
-			var items = await _restService.RefreshDataAsync();
-			PeopleList.Clear();
+        public async Task GetAllStaffMembers()
+        {
+            var StaffMembers = await _restService.RefreshDataAsync();
+            PeopleList.Clear();
 
-			foreach(var item in items)
-			{
-				PeopleList.Add(item);
-				Debug.WriteLine(item);
+            foreach (var StaffMember in StaffMembers)
+            {
+                PeopleList.Add(StaffMember);
+                Debug.WriteLine(StaffMember.email); // Access email property of Person
             }
-		}
-	}
+        }
+    }
 }

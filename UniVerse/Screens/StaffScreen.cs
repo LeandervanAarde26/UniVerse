@@ -7,22 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using UniVerse.Components;
+using UniVerse.Models;
 using UniVerse.ViewModels;
-
 
 namespace UniVerse.Screens
 {
+
     public class StaffScreen : ContentPage
     {
-        private PeopleViewModel _viewModel;
+        private PeopleViewModel viewModel;
 
         public StaffScreen()
         {
-            _viewModel = new PeopleViewModel(new Services.RestService());
-            BindingContext = _viewModel;
+            viewModel = new PeopleViewModel(new Services.RestService());
+            BindingContext = viewModel;
 
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
-     
+
 
             Style inputStyle = new(typeof(Entry))
             {
@@ -148,22 +149,25 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
-            var numbers = new List<int> { 1, 2, 3, 4, 2, 3, 4, 5, 2, 3, 4, 5 };
 
-            foreach (var number in numbers)
+            GetAllStafMembersAsync();
+
+            async void GetAllStafMembersAsync()
             {
-               
-                var card = new Cardview("Armand Pretorius", "Academic", "Armand@openwindow.co.za", "📚 DV300", "Staff Member");
+                await viewModel.GetAllStaffMembers();
 
-                layout.Children.Add(card);
-
+                foreach (var StaffMember in viewModel.PeopleList)
+                {
+                    var card = new Cardview(StaffMember.name, "Academic", StaffMember.email, "📚 DV300", StaffMember.person_system_identifier);
+                    layout.Children.Add(card);
+                }
             }
         }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            Debug.WriteLine("Staff screen");
-            await _viewModel.GetAllPeople();
+            await viewModel.GetAllStaffMembers();
         }
     }
 }
