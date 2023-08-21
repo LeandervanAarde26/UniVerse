@@ -27,7 +27,6 @@ namespace UniVerse.Services
                 WriteIndented = true
             };
         }
-
         public async Task<List<Person>> RefreshDataAsync()
         {
             People = new List<Person>();

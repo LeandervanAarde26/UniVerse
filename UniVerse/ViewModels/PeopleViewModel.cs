@@ -23,7 +23,6 @@ namespace UniVerse.ViewModels
 
             PeopleList = new ObservableCollection<Person>();
         }
-
         public async Task GetAllStaffMembers()
         {
             var members = await _restServive.RefreshDataAsync();
