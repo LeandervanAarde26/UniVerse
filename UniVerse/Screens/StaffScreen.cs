@@ -1,18 +1,9 @@
 ﻿using Microsoft.Maui.Layouts;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 using UniVerse.Components;
-using UniVerse.Models;
 using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
-
     public class StaffScreen : ContentPage
     {
         private PeopleViewModel viewModel;
@@ -149,9 +140,9 @@ namespace UniVerse.Screens
 
             Content = grid;
 
-            GetAllStafMembersAsync();
+            GetAllStaffMembersAsync();
 
-            async void GetAllStafMembersAsync()
+            async void GetAllStaffMembersAsync()
             {
                 await viewModel.GetAllStaffMembers();
 
