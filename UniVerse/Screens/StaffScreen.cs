@@ -2,18 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using UniVerse.Components;
+using UniVerse.ViewModels;
 
 
 namespace UniVerse.Screens
 {
     public class StaffScreen : ContentPage
     {
+        private PeopleViewModel _viewModel;
+
         public StaffScreen()
         {
+            _viewModel = new PeopleViewModel(new Services.RestService());
+            BindingContext = _viewModel;
+
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
      
 
@@ -151,6 +158,12 @@ namespace UniVerse.Screens
                 layout.Children.Add(card);
 
             }
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            Debug.WriteLine("Staff screen");
+            await _viewModel.GetAllPeople();
         }
     }
 }
