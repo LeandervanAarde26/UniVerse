@@ -12,5 +12,6 @@ namespace UniVerse.Services
     public interface IRestService
     {
         Task<List<Person>> RefreshDataAsync();
+        Task<AuthenticatedUser> PostDataAsync(string email, string password);
     }
 }

@@ -17,6 +17,7 @@ namespace UniVerse.Services
         internal string baseURL = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
         public List <Person> People { get; private set; }
+        public AuthenticatedUser AuthenticatedUser { get; private set; }
 
         public RestService()
         {
@@ -31,7 +32,7 @@ namespace UniVerse.Services
         {
             People = new List<Person>();
 
-            Uri uri = new Uri(string.Format(baseURL + "People/Lecturers"));
+            Uri uri = new (string.Format(baseURL + "People/Lecturers"));
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -47,6 +48,36 @@ namespace UniVerse.Services
             }
 
             return People;
+        }
+
+        public async Task<AuthenticatedUser> PostDataAsync(string email, string password)
+        {
+            AuthenticatedUser AuthenticatedUser = null;
+            Uri uri = new (string.Format(baseURL + "People/auth"));
+            var requestData = new
+            {
+                email,
+                password
+            };
+
+            var json = JsonSerializer.Serialize(requestData, _serializerOptions);
+            StringContent stringContent = new(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                HttpResponseMessage res = await _client.PostAsync(uri, stringContent);
+                if(res.IsSuccessStatusCode)
+                {
+                   string responseContent = await res.Content.ReadAsStringAsync();
+                   AuthenticatedUser = JsonSerializer.Deserialize<AuthenticatedUser>(responseContent, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            return AuthenticatedUser;
         }
     }
 }

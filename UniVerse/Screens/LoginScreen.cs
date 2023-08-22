@@ -17,8 +17,10 @@ namespace UniVerse.Screens
         Color borderColor = Colors.Gray;
         public LoginScreen()
         {
-            AuthVM = new LoginViewModel();
+            AuthVM = new LoginViewModel(new Services.RestService(), Navigation);
             BindingContext = AuthVM;
+
+            NavigationPage.SetHasNavigationBar(this, false);
 
             Style inputStyle = new(typeof(Entry))
             {
@@ -115,7 +117,7 @@ namespace UniVerse.Screens
 
             signinButton.Clicked += (sender, args) =>
             {
-                AuthVM.CaptureInputValues();
+              AuthVM.AuthenticatedStream();
             };
 
 
@@ -179,13 +181,6 @@ namespace UniVerse.Screens
 
             Content = grid;
         }
-
-     
-
-
-
-   
-
         private void ValidateEmail(object sender, EventArgs e)
         {
             Entry email = (Entry)sender;
