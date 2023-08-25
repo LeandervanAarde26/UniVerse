@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Authentication;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -59,7 +60,7 @@ namespace UniVerse.Services
                 email,
                 password
             };
-
+ 
             var json = JsonSerializer.Serialize(requestData, _serializerOptions);
             StringContent stringContent = new(json, Encoding.UTF8, "application/json");
 
@@ -71,10 +72,15 @@ namespace UniVerse.Services
                    string responseContent = await res.Content.ReadAsStringAsync();
                    AuthenticatedUser = JsonSerializer.Deserialize<AuthenticatedUser>(responseContent, _serializerOptions);
                 }
+                else
+                {
+                    throw new AuthenticationException("Invalid email or password.");
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
+                throw new AuthenticationException("An error occurred during authentication.");
             }
 
             return AuthenticatedUser;

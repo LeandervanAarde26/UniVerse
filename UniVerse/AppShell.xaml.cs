@@ -8,13 +8,12 @@ namespace UniVerse;
 public partial class AppShell : Shell
 {
     private readonly Navigation _navViewModel;
+
 	public AppShell()
 	{
+        Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+
         InitializeComponent();
-
-        FlyoutBackgroundColor = Color.FromArgb("#2B2B2B");
-        NavigationPage.SetHasNavigationBar(this, false);
-
         _navViewModel = new Navigation();
         Image image = new()
         {
@@ -23,6 +22,15 @@ public partial class AppShell : Shell
             Aspect = Aspect.Center, 
             
         };
+
+        InitializeComponent();
+
+        NavigationPage.SetHasNavigationBar(this, false);
+        NavigationPage.SetHasBackButton(this, false);
+        Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+        {
+            IsVisible = false
+        });
 
         FlyoutHeader = image;
         FlyoutWidth = 260;
@@ -59,6 +67,8 @@ public partial class AppShell : Shell
       
         FlyoutBackgroundColor = color;
         FlyoutBackground = Color.FromArgb("#2B2B2B");
+   
+
     }
 
 }

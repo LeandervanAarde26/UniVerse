@@ -38,6 +38,18 @@ namespace UniVerse.ViewModels
             }
         }
 
+        public string _authError = String.Empty;
+        public string AuthError
+        {
+            get { return _authError; }
+            set
+            {
+                _authError = value;
+                OnPropertyChanged(nameof(AuthError));
+            }
+
+        }
+
         public AuthenticatedUser _authUser = new AuthenticatedUser();
         public AuthenticatedUser AuthUser
         {
@@ -64,12 +76,22 @@ namespace UniVerse.ViewModels
                     Debug.WriteLine(AuthUser.userEmail);
                     EmailEntry = String.Empty;
                     PasswordEntry = String.Empty;
-                    await _navigation.PushAsync(new AppShell());
+                    //await _navigation.PushAsync(new AppShell());
+                    App.Current.MainPage = new AppShell();
+                    AuthError = String.Empty;
                 }
+                else
+                {
+                    // Authentication failed, set an error message
+                    AuthError = "Authentication failed. Please check your credentials.";
+                }
+
+
             }
             catch(Exception ex)
             {
                 Debug.WriteLine(ex);
+                AuthError = "Authentication failed. Please check your credentials.";
             }
         }
 

@@ -15,13 +15,14 @@ namespace UniVerse.Screens
 
     public class StaffScreen : ContentPage
     {
+
         private PeopleViewModel viewModel;
     
         public StaffScreen()
         {
             viewModel = new PeopleViewModel(new Services.RestService());
  
-            Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+       
      
 
             Style inputStyle = new(typeof(Entry))
@@ -34,6 +35,18 @@ namespace UniVerse.Screens
                 }
             };
 
+            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            //{
+            //    IsEnabled = false,
+            //    IsVisible = false,
+            //});
+            //NavigationPage.SetHasNavigationBar(this, false);
+            //NavigationPage.SetHasBackButton(this, false);
+            //Shell.SetTabBarIsVisible(this, false);
+            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            //{
+            //    IsVisible = false
+            //});
 
             Label pageHeading = new()
             {
