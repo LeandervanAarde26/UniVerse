@@ -1,29 +1,46 @@
 ﻿using Microsoft.Maui.Layouts;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
 using UniVerse.Components;
+using UniVerse.Models;
 using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
-
     public class StaffScreen : ContentPage
     {
         private PeopleViewModel viewModel;
-    
+
         public StaffScreen()
         {
             viewModel = new PeopleViewModel(new Services.RestService());
- 
-            Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
 
             Style inputStyle = new(typeof(Entry))
             {
                 Setters =
                 {
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromArgb("#2b2b2b") },
-
                     new Setter { Property = InputView.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
                 }
             };
+
+            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            //{
+            //    IsEnabled = false,
+            //    IsVisible = false,
+            //});
+            //NavigationPage.SetHasNavigationBar(this, false);
+            //NavigationPage.SetHasBackButton(this, false);
+            //Shell.SetTabBarIsVisible(this, false);
+            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            //{
+            //    IsVisible = false
+            //});
 
             Label pageHeading = new()
             {
@@ -35,6 +52,7 @@ namespace UniVerse.Screens
                 VerticalOptions = LayoutOptions.Center,
                 Margin = new Thickness(15, 10, 0, 10)
             };
+
 
             Picker studentRole = new()
             {
@@ -69,6 +87,7 @@ namespace UniVerse.Screens
             studentRole.TextColor = Colors.White;
             studentRole.TitleColor = Colors.White;
 
+
             FlexLayout layout = new()
             {
                 Direction = FlexDirection.Row,
@@ -95,8 +114,8 @@ namespace UniVerse.Screens
 
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
-                     new ColumnDefinition { Width = new GridLength(75, GridUnitType.Star) },
-                     new ColumnDefinition { Width = new GridLength(25, GridUnitType.Star) }
+                 new ColumnDefinition { Width = new GridLength(75, GridUnitType.Star) },
+                 new ColumnDefinition { Width = new GridLength(25, GridUnitType.Star) }
                 }
             };
 
@@ -141,19 +160,17 @@ namespace UniVerse.Screens
             {
                 await viewModel.GetAllStaffMembers();
 
-                layout.Children.Clear();
-                foreach (var member in viewModel.StaffList)
+                foreach (var member in viewModel.PeopleList)
                 {
-                    var card = new Cardview(member.name, member.person_system_identifier, member.email, "📚 DV300", "Staff Member");
+                    var card = new Cardview(member.name, "Academic", "Armand@Openwindow.co.za", "📚 DV300", "Staff Member");
                     layout.Children.Add(card);
                 }
             }
         }
-
         protected override async void OnAppearing()
         {
-         base.OnAppearing();
-         await viewModel.GetAllStaffMembers();
+            base.OnAppearing();
+            await viewModel.GetAllStaffMembers();
         }
     }
 }

@@ -10,45 +10,44 @@ using UniVerse.Services;
 
 namespace UniVerse.ViewModels
 {
-    internal class PeopleViewModel: BaseViewModel
+    internal class PeopleViewModel : BaseViewModel
     {
-        public RestService _restService;
+        public RestService _restServive;
         // All of myt observerd properties 
 
-        public ObservableCollection<Person> StaffList { get; set; }
+        public ObservableCollection<Person> PeopleList { get; set; }
+
+        //Added
         public ObservableCollection<Person> StudentList { get; set; }
 
-        public PeopleViewModel(RestService restService) //instance of the restservice goes here
+        public PeopleViewModel(RestService restServive) //instance of the restservice goes here
         {
-            _restService = restService;
+            _restServive = restServive;
 
-            StaffList = new ObservableCollection<Person>();
+            PeopleList = new ObservableCollection<Person>();
             StudentList = new ObservableCollection<Person>();
         }
-
-        // Get all staff
         public async Task GetAllStaffMembers()
         {
-            var members = await _restService.LoadLecturersAsync();
-            StaffList.Clear();
+            var members = await _restServive.RefreshDataAsync();
+            PeopleList.Clear();
 
             foreach (var member in members)
             {
-                StaffList.Add(member);
+                PeopleList.Add(member);
                 Debug.WriteLine(member.email);
             }
         }
 
         public async Task GetAllStudents()
         {
-            var members = await _restService.RefreshDataAsync();
+            var members = await _restServive.GetStudentsAsync();
             StudentList.Clear();
 
             foreach (var member in members)
             {
                 StudentList.Add(member);
-                Debug.WriteLine(member.email);
-
+                Debug.WriteLine(member.name);
             }
         }
     }
