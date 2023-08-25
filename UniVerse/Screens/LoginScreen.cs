@@ -182,8 +182,8 @@ namespace UniVerse.Screens
 
             Image bgImage = new()
             {
-                Source = "login_bg.png",
-                Aspect = Aspect.AspectFill
+                Source = "test.png",
+                Aspect = Aspect.AspectFit
             };
 
             Grid grid = new()

@@ -47,7 +47,6 @@ namespace UniVerse.ViewModels
                 _authError = value;
                 OnPropertyChanged(nameof(AuthError));
             }
-
         }
 
         public AuthenticatedUser _authUser = new AuthenticatedUser();
