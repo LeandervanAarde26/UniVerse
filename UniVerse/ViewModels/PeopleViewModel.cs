@@ -34,7 +34,6 @@ namespace UniVerse.ViewModels
             {
                 PeopleList.Add(member);
                 Debug.WriteLine(member.email);
-
             }
         }
 

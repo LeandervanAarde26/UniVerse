@@ -1,13 +1,5 @@
 ﻿using Microsoft.Maui.Layouts;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 using UniVerse.Components;
-using UniVerse.Models;
 using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
@@ -22,7 +14,6 @@ namespace UniVerse.Screens
             viewModel = new PeopleViewModel(new Services.RestService());
  
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
-     
 
             Style inputStyle = new(typeof(Entry))
             {
@@ -34,7 +25,6 @@ namespace UniVerse.Screens
                 }
             };
 
-
             Label pageHeading = new()
             {
                 Text = "Staff",
@@ -45,7 +35,6 @@ namespace UniVerse.Screens
                 VerticalOptions = LayoutOptions.Center,
                 Margin = new Thickness(15, 10, 0, 10)
             };
-
 
             Picker studentRole = new()
             {
@@ -80,7 +69,6 @@ namespace UniVerse.Screens
             studentRole.TextColor = Colors.White;
             studentRole.TitleColor = Colors.White;
 
-
             FlexLayout layout = new()
             {
                 Direction = FlexDirection.Row,
@@ -107,8 +95,8 @@ namespace UniVerse.Screens
 
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
-                 new ColumnDefinition { Width = new GridLength(75, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(25, GridUnitType.Star) }
+                     new ColumnDefinition { Width = new GridLength(75, GridUnitType.Star) },
+                     new ColumnDefinition { Width = new GridLength(25, GridUnitType.Star) }
                 }
             };
 
@@ -119,9 +107,7 @@ namespace UniVerse.Screens
                 "Academic Staff"
             };
 
-
             RightBar right = new("Staff Member", list);
-
 
             // Add the ContentView to the Grid
             //   grid.Children.Add(navbar);
@@ -149,9 +135,6 @@ namespace UniVerse.Screens
 
             Content = grid;
 
-
-     
-
             GetAllStafMembersAsync();
 
             async void GetAllStafMembersAsync()
@@ -160,21 +143,16 @@ namespace UniVerse.Screens
 
                 foreach (var member in viewModel.PeopleList)
                 {
-
                     var card = new Cardview(member.name, member.person_system_identifier, member.email, "📚 DV300", "Staff Member");
-
                     layout.Children.Add(card);
                 }
             }
-
-
         }
 
         protected override async void OnAppearing()
         {
          base.OnAppearing();
-         await viewModel.GetAllStaffMembers();  
-
+         await viewModel.GetAllStaffMembers();
         }
     }
 }

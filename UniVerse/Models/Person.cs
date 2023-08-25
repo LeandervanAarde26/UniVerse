@@ -21,6 +21,5 @@ namespace UniVerse.Models
         public int person_credits { get; set; }
 
         public int needed_credits { get; set; }
-
     }
 }

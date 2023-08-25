@@ -142,7 +142,7 @@ namespace UniVerse.Screens
                 foreach (var student in viewModel.PeopleList)
                 {
 
-                    var card = new Cardview(student.name, student.person_system_identifier, student.email, student.person_credits.ToString(), "Staff Member");
+                    var card = new Cardview(student.name, student.person_system_identifier, student.email, student.person_credits.ToString(), "Student");
 
                     layout.Children.Add(card);
                 }

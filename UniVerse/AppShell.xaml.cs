@@ -15,6 +15,9 @@ public partial class AppShell : Shell
         FlyoutBackgroundColor = Color.FromArgb("#2B2B2B");
         NavigationPage.SetHasNavigationBar(this, false);
 
+        Routing.RegisterRoute(nameof(StaffMemberOverviewScreen), typeof(StaffMemberOverviewScreen));
+        Routing.RegisterRoute(nameof(StudentOverviewScreen), typeof(StudentOverviewScreen));
+
         _navViewModel = new Navigation();
         Image image = new()
         {

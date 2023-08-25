@@ -77,7 +77,6 @@ namespace UniVerse.ViewModels
         {
             Debug.WriteLine(EmailEntry);
             Debug.WriteLine(PasswordEntry);
-
         }
     }
 }
