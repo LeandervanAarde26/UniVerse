@@ -23,6 +23,8 @@ namespace UniVerse.ViewModels
 
             PeopleList = new ObservableCollection<Person>();
         }
+
+        // Get all staff
         public async Task GetAllStaffMembers()
         {
             var members = await _restServive.RefreshDataAsync();
@@ -34,8 +36,20 @@ namespace UniVerse.ViewModels
                 Debug.WriteLine(member.email);
 
             }
+        }
 
+        // get all students
+        public async Task GetAllStudents()
+        {
+            var members = await _restServive.RefreshDataAsync();
+            PeopleList.Clear();
 
+            foreach (var member in members)
+            {
+                PeopleList.Add(member);
+                Debug.WriteLine(member.email);
+
+            }
         }
     }
 }

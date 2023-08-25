@@ -4,21 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UniVerse.Components;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
 
     public class StudentScreen : ContentPage
     {
+        private PeopleViewModel viewModel;
+
         public StudentScreen()
         {
+            viewModel = new PeopleViewModel(new Services.RestService());
+
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style inputStyle = new(typeof(Entry))
             {
                 Setters =
                 {
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromArgb("#2b2b2b") },
-                
                     new Setter { Property = InputView.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
                 }
             };
@@ -128,12 +132,20 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
-            var numbers = new List<int> { 1, 2, 3, 4,  2, 3, 4, 5, 2, 3, 4, 5 };
 
-            foreach (var number in numbers)
+            GetAllStudentsAsync();
+
+            async void GetAllStudentsAsync()
             {
-                var card = new Cardview("Leander van Aarde", "Degree Student", "200211@virtualwindow.co.za", "⭐️ 120 Credits", "student");
-                layout.Children.Add(card);
+                await viewModel.GetAllStudents();
+
+                foreach (var student in viewModel.PeopleList)
+                {
+
+                    var card = new Cardview(student.name, student.person_system_identifier, student.email, student.person_credits.ToString(), "Staff Member");
+
+                    layout.Children.Add(card);
+                }
             }
         }
     }
