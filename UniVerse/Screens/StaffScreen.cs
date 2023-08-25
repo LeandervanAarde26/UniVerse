@@ -141,7 +141,8 @@ namespace UniVerse.Screens
             {
                 await viewModel.GetAllStaffMembers();
 
-                foreach (var member in viewModel.PeopleList)
+                layout.Children.Clear();
+                foreach (var member in viewModel.StaffList)
                 {
                     var card = new Cardview(member.name, member.person_system_identifier, member.email, "📚 DV300", "Staff Member");
                     layout.Children.Add(card);

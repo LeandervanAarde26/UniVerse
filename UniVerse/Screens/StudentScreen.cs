@@ -139,11 +139,10 @@ namespace UniVerse.Screens
             {
                 await viewModel.GetAllStudents();
 
-                foreach (var student in viewModel.PeopleList)
+                layout.Children.Clear();
+                foreach (var student in viewModel.StudentList)
                 {
-
                     var card = new Cardview(student.name, student.person_system_identifier, student.email, student.person_credits.ToString(), "Student");
-
                     layout.Children.Add(card);
                 }
             }

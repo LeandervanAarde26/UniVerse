@@ -16,7 +16,8 @@ namespace UniVerse.Services
         //base api URL 
         internal string baseURL = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
-        public List <Person> People { get; private set; }
+        public List <Person> Lecturers { get; private set; }
+        public List<Person> Students { get; private set; }
         public AuthenticatedUser AuthenticatedUser { get; private set; }
 
         public RestService()
@@ -29,42 +30,46 @@ namespace UniVerse.Services
             };
         }
 
-        // get lecturers
-        public async Task<List<Person>> RefreshDataAsync()
+        public async Task RefreshDataAsync()
         {
-            People = new List<Person>();
+            await LoadLecturersAsync();
+            await LoadStudentsAsync();
+        }
 
-            Uri lecturers = new (string.Format(baseURL + "People/Lecturers"));
+        public async Task LoadLecturersAsync()
+        {
+            Uri lecturersUri = new (string.Format(baseURL + "People/Lecturers"));
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(lecturers);
+                HttpResponseMessage response = await _client.GetAsync(lecturersUri);
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    People = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
+                    Lecturers = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
+        }
 
-            Uri students = new(string.Format(baseURL + "People/Students"));
+        public async Task LoadStudentsAsync()
+        {
+            Uri studentsUri = new(string.Format(baseURL + "People/Students"));
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(students);
+                HttpResponseMessage response = await _client.GetAsync(studentsUri);
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    People = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
+                    Students = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-
-            return People;
         }
 
 
@@ -97,6 +102,11 @@ namespace UniVerse.Services
             }
 
             return AuthenticatedUser;
+        }
+
+        Task<List<Person>> IRestService.RefreshDataAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
