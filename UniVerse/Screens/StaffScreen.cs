@@ -162,7 +162,7 @@ namespace UniVerse.Screens
 
                 foreach (var member in viewModel.PeopleList)
                 {
-                    var card = new Cardview(member.name, "Academic", "Armand@Openwindow.co.za", "📚 DV300", "Staff Member");
+                    var card = new Cardview(member.name, "Academic", member.email, member.person_system_identifier, "Staff Member");
                     layout.Children.Add(card);
                 }
             }
