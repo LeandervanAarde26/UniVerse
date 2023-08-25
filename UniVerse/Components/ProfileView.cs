@@ -3,13 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using UniVerse.ViewModels;
 
 namespace UniVerse.Components
 {
     public class ProfileView : ContentView
     {
+        private LoginViewModel loginViewModel;
         public ProfileView() {
+
+            loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
+           
 
             Image image = new()
             {

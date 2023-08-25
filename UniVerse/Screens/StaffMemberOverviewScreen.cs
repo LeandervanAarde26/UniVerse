@@ -1,13 +1,6 @@
 ﻿
-using Microsoft.Maui.ApplicationModel.DataTransfer;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UniVerse.Components;
 
 namespace UniVerse.Screens
@@ -35,7 +28,6 @@ namespace UniVerse.Screens
                 Source = ImageSource.FromFile("allen_laing.png"),
 
             };
-
             
             var clip1 = new EllipseGeometry { Center = new Point(230 / 2, 230 / 2), RadiusX = 230 / 2, RadiusY = 230 / 2 };
 

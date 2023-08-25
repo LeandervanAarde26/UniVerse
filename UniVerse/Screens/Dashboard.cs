@@ -8,6 +8,7 @@ public class Dashboard : ContentPage
 {
     public Dashboard()
     {
+        NavigationPage.SetHasNavigationBar(this, false);
         Label pageHeading = new()
         {
             Text = "Dashboard",
