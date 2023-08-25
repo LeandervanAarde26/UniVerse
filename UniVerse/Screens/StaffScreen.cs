@@ -162,9 +162,6 @@ namespace UniVerse.Screens
 
             Content = grid;
 
-
-     
-
             GetAllStafMembersAsync();
 
             async void GetAllStafMembersAsync()
@@ -181,10 +178,7 @@ namespace UniVerse.Screens
 
                 }
             }
-
-
         }
-
         protected override async void OnAppearing()
         {
          base.OnAppearing();

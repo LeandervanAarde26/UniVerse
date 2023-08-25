@@ -1,17 +1,25 @@
 ﻿using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using UniVerse.Components;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
 
     public class StudentScreen : ContentPage
     {
+
+        private readonly PeopleViewModel viewModel;
         public StudentScreen()
         {
+
+            viewModel = new PeopleViewModel(new Services.RestService());
+
+
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style inputStyle = new(typeof(Entry))
             {
@@ -128,13 +136,32 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
-            var numbers = new List<int> { 1, 2, 3, 4,  2, 3, 4, 5, 2, 3, 4, 5 };
 
-            foreach (var number in numbers)
+
+
+            GetAllStudentsAsync();
+
+            async void GetAllStudentsAsync()
             {
-                var card = new Cardview("Leander van Aarde", "Degree Student", "200211@virtualwindow.co.za", "⭐️ 120 Credits", "student");
-                layout.Children.Add(card);
+                await viewModel.GetAllstudents();
+               
+
+                foreach (var member in viewModel.StudentList)
+                {
+                    var card = new Cardview(member.name, "Academic", "Armand@Openwindow.co.za", "📚 DV300", "Staff Member");
+                    Debug.WriteLine(member.email);
+                    layout.Children.Add(card);
+                }
             }
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await viewModel.GetAllstudents();
+             Debug.WriteLine(viewModel.StudentList.Count);
+
+        }
+
     }
 }

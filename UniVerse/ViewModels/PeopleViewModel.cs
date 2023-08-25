@@ -17,11 +17,15 @@ namespace UniVerse.ViewModels
 
         public ObservableCollection<Person> PeopleList { get; set; }
 
+        //Added
+        public ObservableCollection<Person> StudentList { get; set; }
+
         public PeopleViewModel(RestService restServive) //instance of the restservice goes here
         {
             _restServive = restServive;
 
             PeopleList = new ObservableCollection<Person>();
+            StudentList = new ObservableCollection<Person>();
         }
         public async Task GetAllStaffMembers()
         {
@@ -36,6 +40,18 @@ namespace UniVerse.ViewModels
             }
 
 
+        }
+
+        public async Task GetAllstudents()
+        {
+            var members = await _restServive.GetStudentsAsync();
+            StudentList.Clear();
+
+            foreach (var member in members)
+            {
+                StudentList.Add(member);
+                Debug.WriteLine(member.name);
+            }
         }
     }
 }

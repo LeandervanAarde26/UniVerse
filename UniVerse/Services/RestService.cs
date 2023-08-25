@@ -18,6 +18,7 @@ namespace UniVerse.Services
         internal string baseURL = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
         public List <Person> People { get; private set; }
+        public List<Person> Students { get; private set; }
         public AuthenticatedUser AuthenticatedUser { get; private set; }
 
         public RestService()
@@ -32,7 +33,7 @@ namespace UniVerse.Services
         public async Task<List<Person>> RefreshDataAsync()
         {
             People = new List<Person>();
-
+       
             Uri uri = new (string.Format(baseURL + "People/Lecturers"));
             try
             {
@@ -50,6 +51,29 @@ namespace UniVerse.Services
 
             return People;
         }
+
+
+        public async Task<List<Person>> GetStudentsAsync()
+        {
+            Students = new List<Person>();
+            Uri uri = new(string.Format(baseURL + "People/Students"));
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Students = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return Students;
+        }
+
+        // Could it be that the functions were not seperated? I think they has to be seperate. 
 
         public async Task<AuthenticatedUser> PostDataAsync(string email, string password)
         {
