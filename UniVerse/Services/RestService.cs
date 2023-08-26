@@ -13,7 +13,6 @@ namespace UniVerse.Services
     public class RestService: IRestService
     {
         HttpClient _client;
-
         //base api URL 
         internal string baseURL = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
@@ -51,8 +50,6 @@ namespace UniVerse.Services
 
             return People;
         }
-
-
         public async Task<List<Person>> GetStudentsAsync()
         {
             Students = new List<Person>();
@@ -72,9 +69,7 @@ namespace UniVerse.Services
             }
             return Students;
         }
-
         // Could it be that the functions were not seperated? I think they has to be seperate. 
-
         public async Task<AuthenticatedUser> PostDataAsync(string email, string password)
         {
             AuthenticatedUser AuthenticatedUser = null;

@@ -137,8 +137,6 @@ namespace UniVerse.Screens
 
             Content = grid;
 
-
-
             GetAllStudentsAsync();
 
             async void GetAllStudentsAsync()

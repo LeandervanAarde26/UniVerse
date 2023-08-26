@@ -1,13 +1,20 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+﻿
+using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
+using System.Diagnostics;
 using UniVerse.Components;
+using UniVerse.ViewModels;
+
 
 namespace UniVerse.Screens;
 
 public class Dashboard : ContentPage
 {
+    private readonly LoginViewModel _loginViewModel;
     public Dashboard()
     {
+        _loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
+        BindingContext = _loginViewModel;
 
         Label pageHeading = new()
         {
@@ -33,7 +40,7 @@ public class Dashboard : ContentPage
 
         Label welcomeHeading = new()
         {
-            Text = "Hello, User",
+            
             FontSize = 32,
             FontAttributes = FontAttributes.Bold,
             TextColor = Color.FromArgb("#407BFF"),
@@ -461,5 +468,22 @@ public class Dashboard : ContentPage
         Grid.SetColumn(topContainer, 0);
 
         Content = grid;
+
+        GetUserDetails();
+
+
+        async void GetUserDetails()
+        {
+            await _loginViewModel.GetDetails();
+            welcomeHeading.Text = $"Hello, {_loginViewModel.AuthUser.username} ";
+        }
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _loginViewModel.GetDetails();
+        Debug.WriteLine($"HAHA {_loginViewModel.UserId}");
+
     }
 }

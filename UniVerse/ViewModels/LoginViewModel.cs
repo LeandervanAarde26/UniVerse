@@ -14,7 +14,7 @@ namespace UniVerse.ViewModels
     internal class LoginViewModel : BaseViewModel
     {
       public RestService _restServive;
-      private INavigation _navigation;
+      private readonly INavigation _navigation;
 
         public string _emailEntry = string.Empty;
         public string EmailEntry
@@ -49,7 +49,7 @@ namespace UniVerse.ViewModels
             }
         }
 
-        public AuthenticatedUser _authUser = new AuthenticatedUser();
+        public AuthenticatedUser _authUser = new();
         public AuthenticatedUser AuthUser
         {
             get { return _authUser; }
@@ -57,6 +57,17 @@ namespace UniVerse.ViewModels
             {
                 _authUser = value;
                 OnPropertyChanged(nameof(AuthUser));
+            }
+        }
+
+        public int _userId = 0;
+        public int UserId
+        {
+            get { return _userId; }
+            set
+            {
+                _userId = value;
+                OnPropertyChanged(nameof(UserId));
             }
         }
 
@@ -72,20 +83,18 @@ namespace UniVerse.ViewModels
                 AuthUser = await _restServive.PostDataAsync(EmailEntry, PasswordEntry);
                 if(AuthUser != null)
                 {
-                    Debug.WriteLine(AuthUser.userEmail);
                     EmailEntry = String.Empty;
                     PasswordEntry = String.Empty;
                     //await _navigation.PushAsync(new AppShell());
                     App.Current.MainPage = new AppShell();
                     AuthError = String.Empty;
+                    UserId = AuthUser.user_id;
                 }
                 else
                 {
                     // Authentication failed, set an error message
                     AuthError = "Authentication failed. Please check your credentials.";
                 }
-
-
             }
             catch(Exception ex)
             {
@@ -93,6 +102,12 @@ namespace UniVerse.ViewModels
                 AuthError = "Authentication failed. Please check your credentials.";
             }
         }
+
+        public async Task<AuthenticatedUser> GetDetails()
+        {
+            return AuthUser;
+        }
+
 
         public void CaptureInputValues()
         {
