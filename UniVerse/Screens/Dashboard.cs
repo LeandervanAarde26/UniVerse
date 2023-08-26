@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+﻿using CommunityToolkit.Maui.Views;
+using MauiToolkitPopupSample;
+using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 using UniVerse.Components;
 using UniVerse.Controls.RadialBarChart;
@@ -7,6 +9,7 @@ namespace UniVerse.Screens;
 
 public class Dashboard : ContentPage
 {
+
     public Dashboard()
     {
         Label pageHeading = new()
@@ -142,8 +145,12 @@ public class Dashboard : ContentPage
             Text = "View Students > ",
             TextColor = Color.FromArgb("#407BFF"),
             HorizontalOptions = LayoutOptions.End,
-
         };
+
+
+        //viewStudents.Clicked += ShowThePopup;
+
+
 
         var ChartData = new ChartEntry[]
 {
@@ -181,16 +188,6 @@ public class Dashboard : ContentPage
                 viewStudents
             }
         };
-
-
-        //Image adminGraph = new()
-        //{
-        //    Source = ImageSource.FromFile("image_picker.png"),
-        //    Aspect = Aspect.AspectFit,
-        //    MaximumHeightRequest = 150,
-        //    //MaximumWidthRequest = 200,
-        //};
-
 
 
 
@@ -506,4 +503,20 @@ public class Dashboard : ContentPage
 
         Content = grid;
     }
+
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        ShowThePopup();
+    }
+
+    private void ShowThePopup()
+    {
+        this.ShowPopup(new PopupDashboard());
+    }
+
+
+
 }
