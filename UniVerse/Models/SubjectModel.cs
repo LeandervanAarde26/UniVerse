@@ -9,18 +9,17 @@ namespace UniVerse.Models
 
     public class SubjectModel
     {
-        public int SubjectId { get; set; }
-        public string SubjectName { get; set; }
-        public string SubjectCode { get; set; }
-        public string SubjectDescription { get; set; }
-        public int SubjectCost { get; set; }
-        public string SubjectColor { get; set; }
-        public int LecturerId { get; set; }
-        public int SubjectCredits { get; set; }
-        public int SubjectClassRuntime { get; set; }
-        public int SubjectClassAmount { get; set; }
-        public string SubjectImage { get; set; }
+        public int subject_id { get; set; }
+        public string subject_name { get; set; }
+        public string subject_code { get; set; }
+        public string subject_description { get; set; }
+        public int subject_cost { get; set; }
+        public string subject_color { get; set; }
+        public int lecturer_id { get; set; }
+        public int subject_credits { get; set; }
+        public int subject_class_runtiem { get; set; }
+        public int subject_class_amount { get; set; }
+        public string subjectImage { get; set; }
     }
-
 }
 

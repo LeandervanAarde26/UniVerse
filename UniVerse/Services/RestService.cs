@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Authentication;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using UniVerse.Models;
 
 namespace UniVerse.Services
@@ -19,6 +18,7 @@ namespace UniVerse.Services
         public List<Person> People { get; private set; }
 
         public List<Person> Students { get; private set; }
+        public List<SubjectWithLecturerModel> Subjects { get; private set; }
         public AuthenticatedUser AuthenticatedUser { get; private set; }
 
         public RestService()
@@ -118,6 +118,29 @@ namespace UniVerse.Services
             }
 
             return null;
+        }
+
+        //get subjects
+        public async Task<List<SubjectWithLecturerModel>> GetSubjectsAsync()
+        {
+            Subjects = new List<SubjectWithLecturerModel>();
+            Uri uri = new (string.Format(baseURL + "Subjects"));
+
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Subjects = JsonSerializer.Deserialize<List<SubjectWithLecturerModel>>(content, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return Subjects;
         }
 
         // Could it be that the functions were not seperated? I think they has to be seperate. 

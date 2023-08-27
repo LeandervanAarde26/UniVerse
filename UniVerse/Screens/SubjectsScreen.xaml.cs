@@ -1,14 +1,22 @@
-﻿namespace UniVerse.Screens;
+﻿using UniVerse.ViewModels;
+
+namespace UniVerse.Screens;
 
 public partial class SubjectsScreen : ContentPage
 {
-	public SubjectsScreen()
+    private SubjectViewModel viewModel;
+
+    public SubjectsScreen()
 	{
 		InitializeComponent();
 
         Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+        viewModel = new SubjectViewModel(new Services.RestService());
     }
 
-
-
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await viewModel.GetAllSubjects();
+    }
 }

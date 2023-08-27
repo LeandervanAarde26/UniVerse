@@ -25,7 +25,9 @@
                 TextColor="{DynamicResource Key=Gray900}"
                 Padding="0, 0, 0, 20"/>
             <ScrollView>
-                <components:SubjectCard/>
+                <StackLayout x:Name="subjectStackLayout">
+                    
+                </StackLayout>
             </ScrollView>
         </VerticalStackLayout>
 
