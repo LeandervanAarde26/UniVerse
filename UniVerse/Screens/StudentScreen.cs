@@ -142,10 +142,15 @@ namespace UniVerse.Screens
                 layout.Children.Clear();
                 foreach (var student in viewModel.StudentList)
                 {
-                    var card = new Cardview(student.name, student.person_system_identifier, student.email, student.person_credits.ToString(), "Student");
+                    var card = new Cardview(student.name, student.person_system_identifier, student.email, student.person_credits.ToString(), "Student", student.id);
                     layout.Children.Add(card);
                 }
             }
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await viewModel.GetAllStudents();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace UniVerse.Components
 
         public string Buttontext { get; set; }
 
-        public Cardview(string nme, string rle, string eml, string addinfo, string btnText)
+        public Cardview(string nme, string rle, string eml, string addinfo, string btnText, int id)
         {
 
             Name = nme;
@@ -119,7 +119,7 @@ namespace UniVerse.Components
             var cardViewModel = new CardViewModel();
             textButton.Clicked += async (sender, e) =>
             {
-                await cardViewModel.NavigateToOverviewScreenAsync(Buttontext);
+                await cardViewModel.NavigateToOverviewScreenAsync(Buttontext, id);
             };
 
             StackLayout stack = new()

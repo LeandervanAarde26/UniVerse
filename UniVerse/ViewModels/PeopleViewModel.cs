@@ -12,43 +12,59 @@ namespace UniVerse.ViewModels
 {
     internal class PeopleViewModel : BaseViewModel
     {
-        public RestService _restServive;
+        public RestService _restService;
         // All of myt observerd properties 
 
-        public ObservableCollection<Person> PeopleList { get; set; }
-
-        //Added
+        public ObservableCollection<Person> StaffList { get; set; }
         public ObservableCollection<Person> StudentList { get; set; }
 
-        public PeopleViewModel(RestService restServive) //instance of the restservice goes here
-        {
-            _restServive = restServive;
+        public ObservableCollection<Person> StaffMember { get; set; }
+        public ObservableCollection<Person> Student { get; set; }
 
-            PeopleList = new ObservableCollection<Person>();
+        public PeopleViewModel(RestService restService) //instance of the restservice goes here
+        {
+            _restService = restService;
+
+            StaffList = new ObservableCollection<Person>();
             StudentList = new ObservableCollection<Person>();
         }
+
+        // Get Staff
         public async Task GetAllStaffMembers()
         {
-            var members = await _restServive.RefreshDataAsync();
-            PeopleList.Clear();
+            var members = await _restService.RefreshDataAsync();
+            StaffList.Clear();
 
             foreach (var member in members)
             {
-                PeopleList.Add(member);
-                Debug.WriteLine(member.email);
+                StaffList.Add(member);
             }
         }
 
+        //Get staff member by id
+        public async Task GetStaffMember(int id)
+        {
+            var member = await _restService.GetLecturerByIdAsync(id);
+            StaffMember.Add(member);
+        }
+
+        // Get Students
         public async Task GetAllStudents()
         {
-            var members = await _restServive.GetStudentsAsync();
+            var members = await _restService.GetStudentsAsync();
             StudentList.Clear();
 
             foreach (var member in members)
             {
                 StudentList.Add(member);
-                Debug.WriteLine(member.name);
             }
+        }
+
+        //Get student member by id
+        public async Task GetStudent(int id)
+        {
+            var student = await _restService.GetStudentByIdAsync(id);
+            Student.Add(student);
         }
     }
 }

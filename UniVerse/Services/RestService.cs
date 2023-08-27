@@ -30,6 +30,7 @@ namespace UniVerse.Services
                 WriteIndented = true
             };
         }
+
         public async Task<List<Person>> RefreshDataAsync()
         {
             People = new List<Person>();
@@ -50,6 +51,29 @@ namespace UniVerse.Services
             }
 
             return People;
+        }
+
+        public async Task<Person> GetLecturerByIdAsync(int id)
+        {
+            Uri lecturerUri = new (string.Format(baseURL + "People/Lecturer/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(lecturerUri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Person lecturer = JsonSerializer.Deserialize<Person>(content);
+                    Debug.WriteLine($"Name: {lecturer.name}");
+                    return lecturer;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
         }
 
 
@@ -73,7 +97,28 @@ namespace UniVerse.Services
             return Students;
         }
 
-        // Could it be that the functions were not seperated? I think they has to be seperate. 
+        public async Task<Person> GetStudentByIdAsync(int id)
+        {
+            Uri studentUri = new (string.Format(baseURL + "People/Student/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(studentUri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Person student = JsonSerializer.Deserialize<Person>(content);
+                    Debug.WriteLine($"Name: {student.name}");
+                    return student;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
+        }
 
         public async Task<AuthenticatedUser> PostDataAsync(string email, string password)
         {

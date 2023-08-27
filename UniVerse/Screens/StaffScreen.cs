@@ -160,9 +160,9 @@ namespace UniVerse.Screens
             {
                 await viewModel.GetAllStaffMembers();
 
-                foreach (var member in viewModel.PeopleList)
+                foreach (var member in viewModel.StaffList)
                 {
-                    var card = new Cardview(member.name, "Academic", member.email, member.person_system_identifier, "Staff Member");
+                    var card = new Cardview(member.name, "Academic", member.email, member.person_system_identifier, "Staff Member", member.id);
                     layout.Children.Add(card);
                 }
             }

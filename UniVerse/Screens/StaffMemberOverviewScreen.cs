@@ -1,20 +1,26 @@
 ﻿
+using System.Diagnostics;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 using UniVerse.Components;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
 	public class StaffMemberOverviewScreen : ContentPage
 	{
-		public StaffMemberOverviewScreen()
+        public int StaffId { get; private set; }
+        private PeopleViewModel _viewModel;
+
+        public StaffMemberOverviewScreen()
 		{
+            _viewModel = new PeopleViewModel(new Services.RestService());
+
             Style textStyle = new(typeof(Label))
             {
                 Setters =
                 {
                     new Setter { Property = Label.FontSizeProperty, Value =  16},
-
                     new Setter { Property = Label.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
                 }
             };
@@ -196,5 +202,20 @@ namespace UniVerse.Screens
             Content = grid;
 
         }
-	}
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext is StaffMemberOverviewViewModel viewModel)
+            {
+                if (viewModel.NavigationParameter is int memberIdValue)
+                {
+                    StaffId = memberIdValue;
+                    Debug.WriteLine(StaffId);
+                }
+            }
+
+            await _viewModel.GetStaffMember(StaffId);
+        }
+    }
 }
