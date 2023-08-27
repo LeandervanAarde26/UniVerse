@@ -39,6 +39,7 @@ namespace UniVerse.ViewModels
             foreach (var member in members)
             {
                 StaffList.Add(member);
+                Debug.WriteLine(member.role);
             }
         }
 
