@@ -1,17 +1,27 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
     public class LoginScreen : ContentPage
     {
+        private LoginViewModel AuthVM;
+     
+
         Color borderColor = Colors.Gray;
         public LoginScreen()
         {
+            AuthVM = new LoginViewModel(new Services.RestService(), Navigation);
+            BindingContext = AuthVM;
+
+            NavigationPage.SetHasNavigationBar(this, false);
+
             Style inputStyle = new(typeof(Entry))
             {
                 Setters =
@@ -56,7 +66,10 @@ namespace UniVerse.Screens
                 Placeholder = "Email",
                 Style = inputStyle,
                 Margin = 0,  
+              
             };
+
+            email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: AuthVM));
 
             Border emailBorder = new()
             {
@@ -77,7 +90,9 @@ namespace UniVerse.Screens
                 Style = inputStyle,
                 IsPassword = true,
                 Margin = 0,
+                
             };
+            password.SetBinding(Entry.TextProperty, new Binding("PasswordEntry", source: AuthVM));
 
             Border passwordBorder = new()
             {
@@ -99,6 +114,12 @@ namespace UniVerse.Screens
                 BackgroundColor = Color.FromArgb("#2B2B2B"),
                 Margin = new Thickness(18, 15)
             };
+
+            signinButton.Clicked += (sender, args) =>
+            {
+              AuthVM.AuthenticatedStream();
+            };
+
 
             FlexLayout login = new()
             {
@@ -160,7 +181,6 @@ namespace UniVerse.Screens
 
             Content = grid;
         }
-
         private void ValidateEmail(object sender, EventArgs e)
         {
             Entry email = (Entry)sender;
