@@ -1,11 +1,15 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+﻿using CommunityToolkit.Maui.Views;
+using MauiToolkitPopupSample;
+using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 using UniVerse.Components;
+using UniVerse.Controls.RadialBarChart;
 
 namespace UniVerse.Screens;
 
 public class Dashboard : ContentPage
 {
+
     public Dashboard()
     {
         Label pageHeading = new()
@@ -98,13 +102,13 @@ public class Dashboard : ContentPage
 
 
 
-        Image studentsGraph = new()
-        {
-            Source = ImageSource.FromFile("image_picker.png"),
-            Aspect = Aspect.AspectFit,
-            MaximumHeightRequest = 150,
-            //MaximumWidthRequest = 200,
-        };
+        //Image studentsGraph = new()
+        //{
+        //    Source = ImageSource.FromFile("image_picker.png"),
+        //    Aspect = Aspect.AspectFit,
+        //    MaximumHeightRequest = 150,
+        //    //MaximumWidthRequest = 200,
+        //};
 
         Label degreeStudentsText = new()
         {
@@ -134,12 +138,43 @@ public class Dashboard : ContentPage
         };
 
 
+
+
         Button viewStudents = new()
         {
             Text = "View Students > ",
             TextColor = Color.FromArgb("#407BFF"),
             HorizontalOptions = LayoutOptions.End,
+        };
 
+
+        //viewStudents.Clicked += ShowThePopup;
+
+
+
+        var ChartData = new ChartEntry[]
+{
+            new ChartEntry
+            {
+                Value = 71,
+                Color = Color.FromArgb("#6023FF"),
+                Text = "Visual Studio Code"
+            },
+};
+
+
+        RadialBarChart studentsGraph = new()
+        {
+            BarSpacing = 5,
+            BarThickness = 12,
+            HeightRequest = 150,
+            FontSize = 12,
+            MaxValue = 100,
+            //ShowLabels = false,
+            BarBackgroundColor = Colors.White,
+            Entries = ChartData,
+            HorizontalOptions = LayoutOptions.FillAndExpand,
+            Margin = new Thickness(10, 10, 0, 0)
         };
 
         FlexLayout studentInfo = new()
@@ -155,12 +190,19 @@ public class Dashboard : ContentPage
         };
 
 
-        Image adminGraph = new()
+
+        RadialBarChart adminGraph = new()
         {
-            Source = ImageSource.FromFile("image_picker.png"),
-            Aspect = Aspect.AspectFit,
-            MaximumHeightRequest = 150,
-            //MaximumWidthRequest = 200,
+            BarSpacing = 5,
+            BarThickness = 12,
+            HeightRequest = 150,
+            FontSize = 12,
+            MaxValue = 100,
+            //ShowLabels = false,
+            BarBackgroundColor = Colors.White,
+            Entries = ChartData,
+            HorizontalOptions = LayoutOptions.FillAndExpand,
+            Margin = new Thickness(10, 10, 0, 0)
         };
 
         Label adminStaffText = new()
@@ -231,7 +273,7 @@ public class Dashboard : ContentPage
             HeightRequest = 280,
             //WidthRequest = 500,
             BackgroundColor = Color.FromHex("#FFFFFF"),
-            Margin = new Thickness(10, 0, 20, 0),
+            Margin = new Thickness(10, 0, 20, 10),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = adminInfo,
@@ -290,7 +332,7 @@ public class Dashboard : ContentPage
         {
             HeightRequest = 300,
             BackgroundColor = Color.FromArgb("#FFFFFF"),
-            Margin = new Thickness(10, 20, 0, 0),
+            Margin = new Thickness(10, 10, 0, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = subjectsInfo,
@@ -367,7 +409,7 @@ public class Dashboard : ContentPage
         {
             HeightRequest = 300,
             BackgroundColor = Color.FromArgb("#FFFFFF"),
-            Margin = new Thickness(10, 20, 10, 0),
+            Margin = new Thickness(10, 10, 10, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = fundsInfo,
@@ -461,4 +503,20 @@ public class Dashboard : ContentPage
 
         Content = grid;
     }
+
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        ShowThePopup();
+    }
+
+    private void ShowThePopup()
+    {
+        this.ShowPopup(new PopupDashboard());
+    }
+
+
+
 }

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Class="MauiToolkitPopupSample.PopupDashboard"
+             CanBeDismissedByTappingOutsideOfPopup="True"> 
+<Border WidthRequest="500"
+        HeightRequest="500"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+
+
+    <StackLayout
+          HorizontalOptions="Center"
+        VerticalOptions="Fill">
+   <Label 
+            Text="Welcome to .NET MAUI!"
+            TextColor="Black"
+            HorizontalOptions="Center"
+       Margin="50"/>
+
+         <Label 
+            Text="Before using the platform, please change your password. This is to make sure that you're safe."
+            TextColor="Black"
+            HorizontalOptions="Center"
+       Margin="20"/>   
+
+  <Entry
+          HeightRequest="20"
+          WidthRequest="300"
+          Placeholder="Password"
+          Margin="2"
+          BackgroundColor="LightGray"
+          TextColor="Black"
+      />
+        </StackLayout>
+
+</Border>
+     
+</mct:Popup>
