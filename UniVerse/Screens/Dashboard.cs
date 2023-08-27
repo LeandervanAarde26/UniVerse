@@ -1,14 +1,23 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+using CommunityToolkit.Maui.Views;
+using MauiToolkitPopupSample;
+using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
+using System.Diagnostics;
 using UniVerse.Components;
+using UniVerse.ViewModels;
+using UniVerse.Controls.RadialBarChart;
+
 
 namespace UniVerse.Screens;
 
 public class Dashboard : ContentPage
 {
+    private readonly LoginViewModel _loginViewModel;
     public Dashboard()
     {
-        NavigationPage.SetHasNavigationBar(this, false);
+        _loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
+        BindingContext = _loginViewModel;
+
         Label pageHeading = new()
         {
             Text = "Dashboard",
@@ -33,7 +42,7 @@ public class Dashboard : ContentPage
 
         Label welcomeHeading = new()
         {
-            Text = "Hello, User",
+            
             FontSize = 32,
             FontAttributes = FontAttributes.Bold,
             TextColor = Color.FromArgb("#407BFF"),
@@ -99,13 +108,13 @@ public class Dashboard : ContentPage
 
 
 
-        Image studentsGraph = new()
-        {
-            Source = ImageSource.FromFile("image_picker.png"),
-            Aspect = Aspect.AspectFit,
-            MaximumHeightRequest = 150,
-            //MaximumWidthRequest = 200,
-        };
+        //Image studentsGraph = new()
+        //{
+        //    Source = ImageSource.FromFile("image_picker.png"),
+        //    Aspect = Aspect.AspectFit,
+        //    MaximumHeightRequest = 150,
+        //    //MaximumWidthRequest = 200,
+        //};
 
         Label degreeStudentsText = new()
         {
@@ -135,12 +144,43 @@ public class Dashboard : ContentPage
         };
 
 
+
+
         Button viewStudents = new()
         {
             Text = "View Students > ",
             TextColor = Color.FromArgb("#407BFF"),
             HorizontalOptions = LayoutOptions.End,
+        };
 
+
+        //viewStudents.Clicked += ShowThePopup;
+
+
+
+        var ChartData = new ChartEntry[]
+{
+            new ChartEntry
+            {
+                Value = 71,
+                Color = Color.FromArgb("#6023FF"),
+                Text = "Visual Studio Code"
+            },
+};
+
+
+        RadialBarChart studentsGraph = new()
+        {
+            BarSpacing = 5,
+            BarThickness = 12,
+            HeightRequest = 150,
+            FontSize = 12,
+            MaxValue = 100,
+            //ShowLabels = false,
+            BarBackgroundColor = Colors.White,
+            Entries = ChartData,
+            HorizontalOptions = LayoutOptions.FillAndExpand,
+            Margin = new Thickness(10, 10, 0, 0)
         };
 
         FlexLayout studentInfo = new()
@@ -156,12 +196,19 @@ public class Dashboard : ContentPage
         };
 
 
-        Image adminGraph = new()
+
+        RadialBarChart adminGraph = new()
         {
-            Source = ImageSource.FromFile("image_picker.png"),
-            Aspect = Aspect.AspectFit,
-            MaximumHeightRequest = 150,
-            //MaximumWidthRequest = 200,
+            BarSpacing = 5,
+            BarThickness = 12,
+            HeightRequest = 150,
+            FontSize = 12,
+            MaxValue = 100,
+            //ShowLabels = false,
+            BarBackgroundColor = Colors.White,
+            Entries = ChartData,
+            HorizontalOptions = LayoutOptions.FillAndExpand,
+            Margin = new Thickness(10, 10, 0, 0)
         };
 
         Label adminStaffText = new()
@@ -291,7 +338,7 @@ public class Dashboard : ContentPage
         {
             HeightRequest = 300,
             BackgroundColor = Color.FromArgb("#FFFFFF"),
-            Margin = new Thickness(10, 20, 0, 0),
+            Margin = new Thickness(10, 10, 0, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = subjectsInfo,
@@ -368,7 +415,7 @@ public class Dashboard : ContentPage
         {
             HeightRequest = 300,
             BackgroundColor = Color.FromArgb("#FFFFFF"),
-            Margin = new Thickness(10, 20, 10, 0),
+            Margin = new Thickness(10, 10, 10, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = fundsInfo,
@@ -461,5 +508,39 @@ public class Dashboard : ContentPage
         Grid.SetColumn(topContainer, 0);
 
         Content = grid;
+
+        GetUserDetails();
+
+
+        async void GetUserDetails()
+        {
+            //await _loginViewModel.ge
+            string username = await SecureStorage.Default.GetAsync("username");
+            welcomeHeading.Text = $"Hello, {username} ";
+        }
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        string username = await SecureStorage.Default.GetAsync("username");
+        Debug.WriteLine($"HAHA {username}");
+
+    }
+
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        ShowThePopup();
+    }
+
+    private void ShowThePopup()
+    {
+        this.ShowPopup(new PopupDashboard());
+    }
+
+
+
 }

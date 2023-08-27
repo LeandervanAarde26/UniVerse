@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using UniVerse.Components;
@@ -11,7 +12,7 @@ namespace UniVerse.Screens
 
     public class StudentScreen : ContentPage
     {
-        private PeopleViewModel viewModel;
+        private readonly PeopleViewModel viewModel;
 
         public StudentScreen()
         {
@@ -137,6 +138,7 @@ namespace UniVerse.Screens
 
             async void GetAllStudentsAsync()
             {
+
                 await viewModel.GetAllStudents();
 
                 foreach (var Student in viewModel.StudentList)

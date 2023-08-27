@@ -69,11 +69,22 @@ namespace UniVerse.ViewModels
                 ShellContent Content = new()
                 {
                     ContentTemplate = new(() => page.Page)
+
                 };
 
-                
+                //NavigationPage.SetHasNavigationBar(Content, false);
+                //NavigationPage.SetHasBackButton(Content, false);
+                Shell.SetTabBarIsVisible(Content, false);
+                Shell.SetBackButtonBehavior(Content, new BackButtonBehavior
+                {
+                    IsVisible = false
+                });
 
-                FlyoutItem Item = new()
+
+
+
+
+                            FlyoutItem Item = new()
                 {
                     Title = page.Title,
                     FlyoutIcon = page.FlyoutIcon,

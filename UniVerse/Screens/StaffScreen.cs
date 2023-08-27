@@ -14,14 +14,13 @@ namespace UniVerse.Screens
 {
     public class StaffScreen : ContentPage
     {
+
         private PeopleViewModel viewModel;
 
         public StaffScreen()
         {
             viewModel = new PeopleViewModel(new Services.RestService());
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
-
-
 
             Style inputStyle = new(typeof(Entry))
             {
@@ -145,10 +144,8 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
-
-            GetAllStaffMembersAsync();
-
-            async void GetAllStaffMembersAsync()
+            GetAllStafMembersAsync();
+            async void GetAllStafMembersAsync()
             {
                 await viewModel.GetAllStaffMembers();
                 

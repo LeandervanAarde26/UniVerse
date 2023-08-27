@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Security.Authentication;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
@@ -17,6 +19,13 @@ namespace UniVerse.Screens
         Color borderColor = Colors.Gray;
         public LoginScreen()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);
+            Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            {
+                IsVisible = false
+            });
+
             AuthVM = new LoginViewModel(new Services.RestService(), Navigation);
             BindingContext = AuthVM;
 
@@ -60,6 +69,18 @@ namespace UniVerse.Screens
                 VerticalOptions = LayoutOptions.Center,
                 Margin = new Thickness(15, 10, 0, 10)
             };
+
+            Label ErrorTitle = new()
+            {
+                
+                FontSize = 15,
+                TextColor = Color.FromArgb("#FF4040"),
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Center,
+                Margin = new Thickness(10, 5)
+            };
+
+            ErrorTitle.SetBinding(Label.TextProperty, new Binding("AuthError", source: AuthVM));
 
             Entry email = new()
             {
@@ -115,9 +136,22 @@ namespace UniVerse.Screens
                 Margin = new Thickness(18, 15)
             };
 
-            signinButton.Clicked += (sender, args) =>
+            signinButton.Clicked +=  async (sender, args) =>
             {
-              AuthVM.AuthenticatedStream();
+                try
+                {
+                 await AuthVM.AuthenticatedStream();
+                }
+                catch(AuthenticationException authEx)
+                { 
+                    Debug.WriteLine(authEx.Message);
+                    //ErrorTitle.Text = authEx.Message;
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    //ErrorTitle.Text = ex.Message;
+                }
             };
 
 
@@ -126,7 +160,7 @@ namespace UniVerse.Screens
                 JustifyContent = FlexJustify.Center,
                 Direction = FlexDirection.Column,
                 
-                Children = { loginTitle, emailBorder, passwordBorder, signinButton }
+                Children = { loginTitle, ErrorTitle, emailBorder, passwordBorder, signinButton }
             };
 
             Border loginCard = new()
@@ -148,8 +182,8 @@ namespace UniVerse.Screens
 
             Image bgImage = new()
             {
-                Source = "login_bg.png",
-                Aspect = Aspect.AspectFill
+                Source = "test.png",
+                Aspect = Aspect.AspectFit
             };
 
             Grid grid = new()

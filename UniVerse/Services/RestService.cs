@@ -13,11 +13,11 @@ namespace UniVerse.Services
     public class RestService : IRestService
     {
         HttpClient _client;
-
         //base api URL 
         internal string baseURL = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
         public List<Person> People { get; private set; }
+
         public List<Person> Students { get; private set; }
         public AuthenticatedUser AuthenticatedUser { get; private set; }
 
@@ -77,7 +77,6 @@ namespace UniVerse.Services
             return Lect;
         }
 
-
         public async Task<List<Person>> GetStudentsAsync()
         {
             Students = new List<Person>();
@@ -121,6 +120,7 @@ namespace UniVerse.Services
             return null;
         }
 
+        // Could it be that the functions were not seperated? I think they has to be seperate. 
         public async Task<AuthenticatedUser> PostDataAsync(string email, string password)
         {
             AuthenticatedUser AuthenticatedUser = null;
@@ -130,7 +130,7 @@ namespace UniVerse.Services
                 email,
                 password
             };
-
+ 
             var json = JsonSerializer.Serialize(requestData, _serializerOptions);
             StringContent stringContent = new(json, Encoding.UTF8, "application/json");
 
@@ -141,6 +141,10 @@ namespace UniVerse.Services
                 {
                     string responseContent = await res.Content.ReadAsStringAsync();
                     AuthenticatedUser = JsonSerializer.Deserialize<AuthenticatedUser>(responseContent, _serializerOptions);
+                }
+                else
+                {
+                    throw new AuthenticationException("Invalid email or password.");
                 }
                 else
                 {
