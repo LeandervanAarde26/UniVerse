@@ -19,6 +19,9 @@ namespace UniVerse.ViewModels
         public ObservableCollection<Person> StudentList { get; set; }
         public ObservableCollection<Lecturer> StaffMember { get; set; }
         public ObservableCollection<Person> Student { get; set; }
+        
+        public StudentCounters StudentCounters { get; set; }
+
 
         public PeopleViewModel(RestService restService) //instance of the restservice goes here
         {
@@ -27,6 +30,7 @@ namespace UniVerse.ViewModels
             StudentList = new ObservableCollection<Person>();
             StaffMember = new ObservableCollection<Lecturer>();
             Student = new ObservableCollection<Person>();
+            StudentCounters = new StudentCounters ();
         }
 
         // Get Staff
@@ -78,6 +82,26 @@ namespace UniVerse.ViewModels
                 StudentList.Add(member);
                 Debug.WriteLine(member.name);
             }
+        }
+
+
+        public async Task<StudentCounters> StudentCounter()
+        {
+            await GetAllStudents();
+            int studentCounter = 0;
+            int diplomaCounter = 0;
+            foreach(var student in StudentList)
+            {
+                if(student.role == "Degree student")
+                {
+                    studentCounter++;
+                } else
+                {
+                    diplomaCounter++;
+                }
+            }
+
+            return new StudentCounters() { DegreeStudents = studentCounter, DiplomaStudents = diplomaCounter };
         }
     }
 }

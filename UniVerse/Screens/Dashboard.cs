@@ -53,7 +53,7 @@ public class Dashboard : ContentPage
 
         Label welcomeMessage = new()
         {
-            Text = "Welcome to Universe",
+            Text = "Welcome to Universe! \n It's a great day to manage your portal! ",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
             TextColor = Color.FromArgb("#2B2B2B"),
