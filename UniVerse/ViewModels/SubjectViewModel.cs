@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using UniVerse.Models;
 using UniVerse.Services;
 
 namespace UniVerse.ViewModels
 {
+
     internal class SubjectViewModel : BaseViewModel
     {
         public RestService _restService;
@@ -33,5 +28,10 @@ namespace UniVerse.ViewModels
                 SubjectList.Add(subject);
             }
         }
+    }
+
+    public class SubjectNavigationParameter
+    {
+        public int NavigationParameter { get; set; }
     }
 }
