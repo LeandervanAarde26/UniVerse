@@ -13,6 +13,7 @@ namespace UniVerse.Screens
 	{
         public int StaffId { get; private set; }
         private PeopleViewModel _viewModel;
+
         public StaffMemberOverviewScreen()
 		{
             _viewModel = new PeopleViewModel(new Services.RestService());

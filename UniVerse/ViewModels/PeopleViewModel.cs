@@ -70,7 +70,7 @@ namespace UniVerse.ViewModels
 
         public async Task GetAllstudents()
         {
-            var members = await _restServive.GetStudentsAsync();
+            var members = await _restService.GetStudentsAsync();
             StudentList.Clear();
 
             foreach (var member in members)

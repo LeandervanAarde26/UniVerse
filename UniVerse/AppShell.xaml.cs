@@ -24,11 +24,7 @@ public partial class AppShell : Shell
             Aspect = Aspect.Center, 
             
         };
-
-        InitializeComponent();
-
         NavigationPage.SetHasNavigationBar(this, false);
-        NavigationPage.SetHasBackButton(this, false);
         Shell.SetBackButtonBehavior(this, new BackButtonBehavior
         {
             IsVisible = false

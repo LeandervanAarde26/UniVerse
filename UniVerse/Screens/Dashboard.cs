@@ -520,15 +520,6 @@ public class Dashboard : ContentPage
         }
     }
 
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        string username = await SecureStorage.Default.GetAsync("username");
-        Debug.WriteLine($"HAHA {username}");
-
-    }
-
-
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -540,7 +531,4 @@ public class Dashboard : ContentPage
     {
         this.ShowPopup(new PopupDashboard());
     }
-
-
-
 }

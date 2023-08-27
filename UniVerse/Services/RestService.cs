@@ -146,10 +146,6 @@ namespace UniVerse.Services
                 {
                     throw new AuthenticationException("Invalid email or password.");
                 }
-                else
-                {
-                    throw new AuthenticationException("Invalid email or password.");
-                }
             }
             catch (Exception ex)
             {
