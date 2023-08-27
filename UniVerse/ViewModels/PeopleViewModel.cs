@@ -18,7 +18,7 @@ namespace UniVerse.ViewModels
         public ObservableCollection<Person> StaffList { get; set; }
         public ObservableCollection<Person> StudentList { get; set; }
 
-        public ObservableCollection<Person> StaffMember { get; set; }
+        public ObservableCollection<Lecturer> StaffMember { get; set; }
         public ObservableCollection<Person> Student { get; set; }
 
         public PeopleViewModel(RestService restService) //instance of the restservice goes here
@@ -46,6 +46,7 @@ namespace UniVerse.ViewModels
         {
             var member = await _restService.GetLecturerByIdAsync(id);
             StaffMember.Add(member);
+            Debug.WriteLine(member.name);
         }
 
         // Get Students

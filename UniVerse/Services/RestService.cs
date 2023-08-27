@@ -53,17 +53,17 @@ namespace UniVerse.Services
             return People;
         }
 
-        public async Task<Person> GetLecturerByIdAsync(int id)
+        public async Task<Lecturer> GetLecturerByIdAsync(int id)
         {
             Uri lecturerUri = new (string.Format(baseURL + "People/Lecturer/{0}", id));
-
+            Debug.WriteLine(lecturerUri);
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(lecturerUri);
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Person lecturer = JsonSerializer.Deserialize<Person>(content);
+                    Lecturer lecturer = JsonSerializer.Deserialize<Lecturer>(content);
                     Debug.WriteLine($"Name: {lecturer.name}");
                     return lecturer;
                 }
