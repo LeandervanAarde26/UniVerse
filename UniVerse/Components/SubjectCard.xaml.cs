@@ -1,9 +1,11 @@
-﻿namespace UniVerse.Components;
-
-public partial class SubjectCard : ContentView
+﻿namespace UniVerse.Components
 {
-	public SubjectCard()
-	{
-		InitializeComponent();
-	}
+    public partial class SubjectCard : ContentView
+    {
+        public SubjectCard()
+        {
+            InitializeComponent();
+            BindingContext = this;
+        }
+    }
 }

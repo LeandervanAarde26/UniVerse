@@ -9,9 +9,9 @@
         <Grid.ColumnDefinitions>
            
             <!-- Three-quarters of the page for the first column -->
-            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="70*"/>
             <!-- One-quarter of the page for the second column -->
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
 
         <!--Just an indication for the Nav-->
@@ -24,7 +24,7 @@
                 FontAttributes="Bold"
                 TextColor="{DynamicResource Key=Gray900}"
                 Padding="0, 0, 0, 20"/>
-            <ScrollView>
+            <ScrollView VerticalOptions="Center">
                 <StackLayout x:Name="subjectStackLayout">
                     
                 </StackLayout>
