@@ -55,17 +55,18 @@ namespace UniVerse.Services
 
         public async Task<Lecturer> GetLecturerByIdAsync(int id)
         {
-            Uri lecturerUri = new (string.Format(baseURL + "People/Lecturer/{0}", id));
-            Debug.WriteLine(lecturerUri);
+            Lecturer Lect = new();
+            Uri lecturerUri = new(string.Format(baseURL + "People/Lecturer/{0}", id));
+
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(lecturerUri);
-                if (response.IsSuccessStatusCode)
+
+                if(response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Lecturer lecturer = JsonSerializer.Deserialize<Lecturer>(content);
-                    Debug.WriteLine($"Name: {lecturer.name}");
-                    return lecturer;
+                    Lect = JsonSerializer.Deserialize<Lecturer>(content, _serializerOptions);
+                    Debug.WriteLine($"Name: {Lect.name}");
                 }
             }
             catch (Exception ex)
@@ -73,7 +74,7 @@ namespace UniVerse.Services
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
-            return null;
+            return Lect;
         }
 
 

@@ -15,6 +15,7 @@ namespace UniVerse.Screens
 
         public StudentScreen()
         {
+            viewModel = new PeopleViewModel(new Services.RestService());
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style inputStyle = new(typeof(Entry))
             {
@@ -138,9 +139,9 @@ namespace UniVerse.Screens
             {
                 await viewModel.GetAllStudents();
 
-                foreach (var Student in viewModel.PeopleList)
+                foreach (var Student in viewModel.StudentList)
                 {
-                    var card = new Cardview(student.name, student.person_system_identifier, student.email, student.person_credits.ToString(), "Student", student.id);
+                    var card = new Cardview(Student.name, Student.person_system_identifier, Student.email, Student.person_credits.ToString(), "Student", Student.id);
                     layout.Children.Add(card);
                 }
             }

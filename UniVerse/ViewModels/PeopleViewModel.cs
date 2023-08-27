@@ -27,6 +27,8 @@ namespace UniVerse.ViewModels
 
             StaffList = new ObservableCollection<Person>();
             StudentList = new ObservableCollection<Person>();
+            StaffMember = new ObservableCollection<Lecturer>();
+            Student = new ObservableCollection<Person>();
         }
 
         // Get Staff
@@ -46,7 +48,7 @@ namespace UniVerse.ViewModels
         {
             var member = await _restService.GetLecturerByIdAsync(id);
             StaffMember.Add(member);
-            Debug.WriteLine(member.name);
+     
         }
 
         // Get Students

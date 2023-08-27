@@ -3,7 +3,7 @@ namespace UniVerse.Models
 {
     public class Lecturer
     {
-        //public int id { get; set; }
+        public int id { get; set; }
 
         public string image { get; set; }
 
