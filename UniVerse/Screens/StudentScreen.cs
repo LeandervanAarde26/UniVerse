@@ -12,14 +12,11 @@ namespace UniVerse.Screens
 
     public class StudentScreen : ContentPage
     {
-
         private readonly PeopleViewModel viewModel;
+
         public StudentScreen()
         {
-
             viewModel = new PeopleViewModel(new Services.RestService());
-
-
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style inputStyle = new(typeof(Entry))
             {
@@ -141,25 +138,20 @@ namespace UniVerse.Screens
 
             async void GetAllStudentsAsync()
             {
-                await viewModel.GetAllstudents();
-               
 
-                foreach (var member in viewModel.StudentList)
+                await viewModel.GetAllStudents();
+
+                foreach (var Student in viewModel.StudentList)
                 {
-                    var card = new Cardview(member.name, "Academic", "Armand@Openwindow.co.za", "📚 DV300", "Staff Member");
-                    Debug.WriteLine(member.email);
+                    var card = new Cardview(Student.name, Student.person_system_identifier, Student.email, Student.person_credits.ToString(), "Student", Student.id);
                     layout.Children.Add(card);
                 }
             }
         }
-
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await viewModel.GetAllstudents();
-             Debug.WriteLine(viewModel.StudentList.Count);
-
+            await viewModel.GetAllStudents();
         }
-
     }
 }

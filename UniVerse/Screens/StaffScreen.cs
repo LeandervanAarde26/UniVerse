@@ -12,41 +12,24 @@ using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
-
     public class StaffScreen : ContentPage
     {
 
         private PeopleViewModel viewModel;
-    
+
         public StaffScreen()
         {
             viewModel = new PeopleViewModel(new Services.RestService());
- 
-       
-     
+            Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
 
             Style inputStyle = new(typeof(Entry))
             {
                 Setters =
                 {
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromArgb("#2b2b2b") },
-
                     new Setter { Property = InputView.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
                 }
             };
-
-            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior
-            //{
-            //    IsEnabled = false,
-            //    IsVisible = false,
-            //});
-            //NavigationPage.SetHasNavigationBar(this, false);
-            //NavigationPage.SetHasBackButton(this, false);
-            //Shell.SetTabBarIsVisible(this, false);
-            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior
-            //{
-            //    IsVisible = false
-            //});
 
             Label pageHeading = new()
             {
@@ -161,29 +144,22 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
-
             GetAllStafMembersAsync();
-
             async void GetAllStafMembersAsync()
             {
                 await viewModel.GetAllStaffMembers();
-
-                foreach (var member in viewModel.PeopleList)
+                
+                foreach (var member in viewModel.StaffList)
                 {
-
-                    var card = new Cardview(member.name, "Academic", "Armand@Openwindow.co.za", "📚 DV300", "Staff Member");
-
+                    var card = new Cardview(member.name, "Academic", member.email, member.person_system_identifier, "Staff Member", member.id);
                     layout.Children.Add(card);
-
-
                 }
             }
         }
         protected override async void OnAppearing()
         {
-         base.OnAppearing();
-         await viewModel.GetAllStaffMembers();  
-
+            base.OnAppearing();
+            await viewModel.GetAllStaffMembers();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace UniVerse.Models
 {
     public class Person
     {
-        public int person_id { get; set; }
+        public int id { get; set; }
 
         public string person_system_identifier { get; set; } = string.Empty;
 
@@ -21,6 +21,5 @@ namespace UniVerse.Models
         public int person_credits { get; set; }
 
         public int needed_credits { get; set; }
-
     }
 }

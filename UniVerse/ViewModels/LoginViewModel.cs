@@ -106,9 +106,5 @@ namespace UniVerse.ViewModels
             }
          
         }
-
-
-
-
     }
 }

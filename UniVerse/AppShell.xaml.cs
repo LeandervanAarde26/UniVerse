@@ -11,9 +11,11 @@ public partial class AppShell : Shell
 
 	public AppShell()
 	{
-        Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
-
         InitializeComponent();
+        Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+        Routing.RegisterRoute(nameof(StaffMemberOverviewScreen), typeof(StaffMemberOverviewScreen));
+        Routing.RegisterRoute(nameof(StudentOverviewScreen), typeof(StudentOverviewScreen));
+
         _navViewModel = new Navigation();
         Image image = new()
         {

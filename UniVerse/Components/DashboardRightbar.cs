@@ -15,9 +15,9 @@ public class DashboardRightbar : ContentView
         {
             Setters =
                 {
-                    new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromHex("#F6F7FB") },
+                    new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromArgb("#F6F7FB") },
                     new Setter { Property = InputView.MarginProperty, Value = new Thickness(22, 5) },
-                    new Setter { Property = InputView.TextColorProperty, Value = Color.FromHex("#2B2B2B") }
+                    new Setter { Property = InputView.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
                 }
         };
 
@@ -29,7 +29,7 @@ public class DashboardRightbar : ContentView
             FontSize = 20,
             HorizontalOptions = LayoutOptions.Start,
             Margin = new Thickness(22, 5),
-            TextColor = Color.FromHex("#2B2B2B"),
+            TextColor = Color.FromArgb("#2B2B2B"),
             FontAttributes = FontAttributes.Bold,
 
         };
@@ -59,11 +59,11 @@ public class DashboardRightbar : ContentView
         Border border = new()
         {
             StrokeThickness = 1,
-            Stroke = Color.FromHex("#2B2B2B"),
+            Stroke = Color.FromArgb("#2B2B2B"),
             HeightRequest = 100,
             StrokeDashOffset = 6,
             Content = innerLayout,
-            BackgroundColor = Color.FromHex("#F6F7FB"),
+            BackgroundColor = Color.FromArgb("#F6F7FB"),
             Margin = new Thickness(22, 8),
             Padding = new Thickness(10, 2),
             StrokeShape = new RoundRectangle
