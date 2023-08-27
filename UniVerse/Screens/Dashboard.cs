@@ -1,23 +1,29 @@
-﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Views;
 using MauiToolkitPopupSample;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
+using System.Diagnostics;
 using UniVerse.Components;
+using UniVerse.ViewModels;
 using UniVerse.Controls.RadialBarChart;
+
 
 namespace UniVerse.Screens;
 
 public class Dashboard : ContentPage
 {
-
+    private readonly LoginViewModel _loginViewModel;
     public Dashboard()
     {
+        _loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
+        BindingContext = _loginViewModel;
+
         Label pageHeading = new()
         {
             Text = "Dashboard",
             FontSize = 32,
             FontAttributes = FontAttributes.Bold,
-            TextColor = Color.FromHex("#2B2B2B"),
+            TextColor = Color.FromArgb("#2B2B2B"),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(15, 10, 0, 10)
@@ -36,10 +42,10 @@ public class Dashboard : ContentPage
 
         Label welcomeHeading = new()
         {
-            Text = "Hello, User",
+            
             FontSize = 32,
             FontAttributes = FontAttributes.Bold,
-            TextColor = Color.FromHex("#407BFF"),
+            TextColor = Color.FromArgb("#407BFF"),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(15, 10, 0, 10)
@@ -50,7 +56,7 @@ public class Dashboard : ContentPage
             Text = "Welcome to Universe",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
-            TextColor = Color.FromHex("#2B2B2B"),
+            TextColor = Color.FromArgb("#2B2B2B"),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(15, 10, 0, 10)
@@ -87,12 +93,12 @@ public class Dashboard : ContentPage
         Border welcomeBanner = new Border
         {
             HeightRequest = 250,
-            BackgroundColor = Color.FromHex("#DFE9FF"),
+            BackgroundColor = Color.FromArgb("#DFE9FF"),
             Padding = new Thickness(10, 2),
             Margin = new Thickness(20, 20, 20, 20),
             StrokeThickness = 0,
             Content = welcomeInfo,
-            Stroke = Color.FromHex("#DFE9FF"),
+            Stroke = Color.FromArgb("#DFE9FF"),
             HorizontalOptions = LayoutOptions.FillAndExpand,
                 StrokeShape = new RoundRectangle
                 {
@@ -115,7 +121,7 @@ public class Dashboard : ContentPage
             Text = "Degree Students",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
-            TextColor = Color.FromHex("#2B2B2B"),
+            TextColor = Color.FromArgb("#2B2B2B"),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
@@ -131,7 +137,7 @@ public class Dashboard : ContentPage
             Text = "Diploma Students",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
-            TextColor = Color.FromHex("#2B2B2B"),
+            TextColor = Color.FromArgb("#2B2B2B"),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
@@ -210,7 +216,7 @@ public class Dashboard : ContentPage
             Text = "Admin Staff",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
-            TextColor = Color.FromHex("#2B2B2B"),
+            TextColor = Color.FromArgb("#2B2B2B"),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
@@ -221,7 +227,7 @@ public class Dashboard : ContentPage
             Text = "Academic Staff",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
-            TextColor = Color.FromHex("#2B2B2B"),
+            TextColor = Color.FromArgb("#2B2B2B"),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
@@ -252,12 +258,12 @@ public class Dashboard : ContentPage
         {
             HeightRequest = 280,
             //WidthRequest = 500,
-            BackgroundColor = Color.FromHex("#FFFFFF"),
+            BackgroundColor = Color.FromArgb("#FFFFFF"),
             Margin = new Thickness(20, 0, 10, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = studentInfo,
-            Stroke = Color.FromHex("#FFFFFF"),
+            Stroke = Color.FromArgb("#FFFFFF"),
             StrokeShape = new RoundRectangle
             {
                 CornerRadius = new CornerRadius(20)
@@ -272,12 +278,12 @@ public class Dashboard : ContentPage
         {
             HeightRequest = 280,
             //WidthRequest = 500,
-            BackgroundColor = Color.FromHex("#FFFFFF"),
-            Margin = new Thickness(10, 0, 20, 10),
+            BackgroundColor = Color.FromArgb("#FFFFFF"),
+            Margin = new Thickness(10, 0, 20, 0),
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = adminInfo,
-            Stroke = Color.FromHex("#FFFFFF"),
+            Stroke = Color.FromArgb("#FFFFFF"),
             StrokeShape = new RoundRectangle
             {
                 CornerRadius = new CornerRadius(20)
@@ -291,7 +297,7 @@ public class Dashboard : ContentPage
             Text = "20",
             FontSize = 32,
             FontAttributes = FontAttributes.None,
-            TextColor = Color.FromHex("#407BFF"),
+            TextColor = Color.FromArgb("#407BFF"),
             HorizontalOptions = LayoutOptions.Center,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
@@ -302,7 +308,7 @@ public class Dashboard : ContentPage
             Text = "📚Subjects",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
-            TextColor = Color.FromHex("#2B2B2B"),
+            TextColor = Color.FromArgb("#2B2B2B"),
             HorizontalOptions = LayoutOptions.Center,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
@@ -336,7 +342,7 @@ public class Dashboard : ContentPage
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = subjectsInfo,
-            Stroke = Color.FromHex("#FFFFFF"),
+            Stroke = Color.FromArgb("#FFFFFF"),
             StrokeShape = new RoundRectangle
             {
                 CornerRadius = new CornerRadius(20)
@@ -357,7 +363,7 @@ public class Dashboard : ContentPage
             Text = "R100 000",
             FontSize = 32,
             FontAttributes = FontAttributes.None,
-            TextColor = Color.FromHex("#407BFF"),
+            TextColor = Color.FromArgb("#407BFF"),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
@@ -369,7 +375,7 @@ public class Dashboard : ContentPage
             Text = "Total Funds",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
-            TextColor = Color.FromHex("#2B2B2B"),
+            TextColor = Color.FromArgb("#2B2B2B"),
             HorizontalOptions = LayoutOptions.Start,
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
@@ -413,7 +419,7 @@ public class Dashboard : ContentPage
             Padding = new Thickness(10, 2),
             StrokeThickness = 0,
             Content = fundsInfo,
-            Stroke = Color.FromHex("#FFFFFF"),
+            Stroke = Color.FromArgb("#FFFFFF"),
             StrokeShape = new RoundRectangle
             {
                 CornerRadius = new CornerRadius(20)
@@ -502,6 +508,24 @@ public class Dashboard : ContentPage
         Grid.SetColumn(topContainer, 0);
 
         Content = grid;
+
+        GetUserDetails();
+
+
+        async void GetUserDetails()
+        {
+            //await _loginViewModel.ge
+            string username = await SecureStorage.Default.GetAsync("username");
+            welcomeHeading.Text = $"Hello, {username} ";
+        }
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        string username = await SecureStorage.Default.GetAsync("username");
+        Debug.WriteLine($"HAHA {username}");
+
     }
 
 

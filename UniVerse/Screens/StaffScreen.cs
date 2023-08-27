@@ -2,19 +2,27 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using UniVerse.Components;
-
+using UniVerse.Models;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
+
     public class StaffScreen : ContentPage
     {
+
+        private PeopleViewModel viewModel;
+    
         public StaffScreen()
         {
-            Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+            viewModel = new PeopleViewModel(new Services.RestService());
+ 
+       
      
 
             Style inputStyle = new(typeof(Entry))
@@ -27,6 +35,18 @@ namespace UniVerse.Screens
                 }
             };
 
+            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            //{
+            //    IsEnabled = false,
+            //    IsVisible = false,
+            //});
+            //NavigationPage.SetHasNavigationBar(this, false);
+            //NavigationPage.SetHasBackButton(this, false);
+            //Shell.SetTabBarIsVisible(this, false);
+            //Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            //{
+            //    IsVisible = false
+            //});
 
             Label pageHeading = new()
             {
@@ -141,16 +161,29 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
-            var numbers = new List<int> { 1, 2, 3, 4, 2, 3, 4, 5, 2, 3, 4, 5 };
 
-            foreach (var number in numbers)
+            GetAllStafMembersAsync();
+
+            async void GetAllStafMembersAsync()
             {
-               
-                var card = new Cardview("Armand Pretorius", "Academic", "Armand@openwindow.co.za", "📚 DV300", "Staff Member");
+                await viewModel.GetAllStaffMembers();
 
-                layout.Children.Add(card);
+                foreach (var member in viewModel.PeopleList)
+                {
 
+                    var card = new Cardview(member.name, "Academic", "Armand@Openwindow.co.za", "📚 DV300", "Staff Member");
+
+                    layout.Children.Add(card);
+
+
+                }
             }
+        }
+        protected override async void OnAppearing()
+        {
+         base.OnAppearing();
+         await viewModel.GetAllStaffMembers();  
+
         }
     }
 }

@@ -12,10 +12,23 @@ using UniVerse.Components;
 
 namespace UniVerse.Screens
 {
+
+
 	public class StaffMemberOverviewScreen : ContentPage
 	{
+
+
 		public StaffMemberOverviewScreen()
 		{
+            Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+            NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);
+            Shell.SetTabBarIsVisible(this, false);
+            Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            {
+                IsVisible = false
+            });
+
             Style textStyle = new(typeof(Label))
             {
                 Setters =
