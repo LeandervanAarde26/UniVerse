@@ -6,7 +6,7 @@ using System.Diagnostics;
 using UniVerse.Components;
 using UniVerse.ViewModels;
 using UniVerse.Controls.RadialBarChart;
-
+using UniVerse.Models;
 
 namespace UniVerse.Screens;
 
@@ -516,7 +516,11 @@ public class Dashboard : ContentPage
         {
             //await _loginViewModel.ge
             string username = await SecureStorage.Default.GetAsync("username");
-            welcomeHeading.Text = $"Hello, {username} ";
+
+            // Get the authenticated user from the LoginViewModel class
+            AuthenticatedUser auth = LoginViewModel.AuthUser;
+
+            welcomeHeading.Text = $"Hello, {auth.username} ";
         }
     }
 
