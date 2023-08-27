@@ -1,26 +1,32 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics.Text;
 using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using UniVerse.Components;
-
+using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
     public class StudentOverviewScreen : ContentPage
     {
+        public int StudentId { get; private set; }
+        private PeopleViewModel _viewModel;
+
         public StudentOverviewScreen()
         {
+            _viewModel = new PeopleViewModel(new Services.RestService());
+
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style textStyle = new(typeof(Label))
             {
                 Setters =
                 {
                     new Setter { Property = Label.FontSizeProperty, Value =  16},
-
                     new Setter { Property = Label.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
                 }
             };
@@ -119,10 +125,8 @@ namespace UniVerse.Screens
 
                 Children =
                 {
-
                     imgBorder,
                     stackLayout,
-
                 }
             };
 
@@ -173,27 +177,25 @@ namespace UniVerse.Screens
 
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
-                 new ColumnDefinition { Width = new GridLength(10, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(70, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star) }
+                     new ColumnDefinition { Width = new GridLength(70, GridUnitType.Star) },
+                     new ColumnDefinition { Width = new GridLength(30, GridUnitType.Star) }
                 }
             };
 
 
             grid.Children.Add(topContainer);
             Grid.SetRow(topContainer, 0);
-            Grid.SetColumn(topContainer, 1);
+            Grid.SetColumn(topContainer, 0);
             Grid.SetColumnSpan(topContainer, 1);
 
             grid.Children.Add(scrollView);
             Grid.SetRow(scrollView, 1);
-            Grid.SetColumn(scrollView, 1);
+            Grid.SetColumn(scrollView, 0);
             Grid.SetColumnSpan(scrollView, 1);
             grid.BackgroundColor = Color.FromArgb("#F6F7FB");
 
-
             grid.Children.Add(right);
-            Grid.SetColumn(right, 2);
+            Grid.SetColumn(right, 1);
             Grid.SetColumnSpan(right, 2);
             Grid.SetRowSpan(right, 2);
 
@@ -203,6 +205,22 @@ namespace UniVerse.Screens
 
 
             Content = grid;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext is StudentMemberOverviewViewModel viewModel)
+            {
+                if (viewModel.NavigationParameter is int memberIdValue)
+                {
+                    StudentId = memberIdValue;
+                    Debug.WriteLine(StudentId);
+                }
+            }
+
+            await _viewModel.GetStudent(StudentId);
         }
     }
 }

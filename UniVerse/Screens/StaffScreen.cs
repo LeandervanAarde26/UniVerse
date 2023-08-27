@@ -1,5 +1,13 @@
 ﻿using Microsoft.Maui.Layouts;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
 using UniVerse.Components;
+using UniVerse.Models;
 using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
@@ -11,8 +19,8 @@ namespace UniVerse.Screens
         public StaffScreen()
         {
             viewModel = new PeopleViewModel(new Services.RestService());
-
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+
 
 
             Style inputStyle = new(typeof(Entry))
@@ -20,11 +28,9 @@ namespace UniVerse.Screens
                 Setters =
                 {
                     new Setter { Property = InputView.BackgroundColorProperty, Value = Color.FromArgb("#2b2b2b") },
-
                     new Setter { Property = InputView.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
                 }
             };
-
 
             Label pageHeading = new()
             {
@@ -145,15 +151,14 @@ namespace UniVerse.Screens
             async void GetAllStaffMembersAsync()
             {
                 await viewModel.GetAllStaffMembers();
-
-                foreach (var StaffMember in viewModel.PeopleList)
+                
+                foreach (var member in viewModel.StaffList)
                 {
-                    var card = new Cardview(StaffMember.name, "Academic", StaffMember.email, "📚 DV300", StaffMember.person_system_identifier);
+                    var card = new Cardview(member.name, "Academic", member.email, member.person_system_identifier, "Staff Member", member.id);
                     layout.Children.Add(card);
                 }
             }
         }
-
         protected override async void OnAppearing()
         {
             base.OnAppearing();

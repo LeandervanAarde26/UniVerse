@@ -1,48 +1,71 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UniVerse.Models;
 using UniVerse.Services;
 
 namespace UniVerse.ViewModels
 {
-    public class PeopleViewModel : BaseViewModel
+    internal class PeopleViewModel : BaseViewModel
     {
-
-        //I do have shorter code for this but Ijust need to test it out first
         public RestService _restService;
+        // All of myt observerd properties 
 
-        public ObservableCollection<PersonModel> PeopleList { get; set; }
+        public ObservableCollection<Person> StaffList { get; set; }
+        public ObservableCollection<Person> StudentList { get; set; }
 
-        public PeopleViewModel(RestService restService)
+        public ObservableCollection<Lecturer> StaffMember { get; set; }
+        public ObservableCollection<Person> Student { get; set; }
+
+        public PeopleViewModel(RestService restService) //instance of the restservice goes here
         {
             _restService = restService;
-            PeopleList = new ObservableCollection<PersonModel>();
+
+            StaffList = new ObservableCollection<Person>();
+            StudentList = new ObservableCollection<Person>();
         }
 
-        //Get All Staff Members
+        // Get Staff
         public async Task GetAllStaffMembers()
         {
-            var StaffMembers = await _restService.RefreshDataAsync();
-            PeopleList.Clear();
+            var members = await _restService.RefreshDataAsync();
+            StaffList.Clear();
 
-            foreach (var StaffMember in StaffMembers)
+            foreach (var member in members)
             {
-                PeopleList.Add(StaffMember);
-                Debug.WriteLine(StaffMember.email);
+                StaffList.Add(member);
             }
         }
 
-        //Get All Students
+        //Get staff member by id
+        public async Task GetStaffMember(int id)
+        {
+            var member = await _restService.GetLecturerByIdAsync(id);
+            StaffMember.Add(member);
+            Debug.WriteLine(member.name);
+        }
+
+        // Get Students
         public async Task GetAllStudents()
         {
-            var Students = await _restService.RefreshDataAsync();
-            PeopleList.Clear();
+            var members = await _restService.GetStudentsAsync();
+            StudentList.Clear();
 
-            foreach (var Student in Students)
+            foreach (var member in members)
             {
-                PeopleList.Add(Student);
-                Debug.WriteLine(Student.email);
+                StudentList.Add(member);
             }
+        }
+
+        //Get student member by id
+        public async Task GetStudent(int id)
+        {
+            var student = await _restService.GetStudentByIdAsync(id);
+            Student.Add(student);
         }
     }
 }

@@ -1,5 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Security.Authentication;
+using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using UniVerse.Models;
 
 namespace UniVerse.Services
@@ -8,12 +14,12 @@ namespace UniVerse.Services
     {
         HttpClient _client;
 
-        //I do have shorter code for this but Ijust need to test it out first
-
-        //baseApi
-        internal string baseUrl = "https://localhost:7050/api/";
+        //base api URL 
+        internal string baseURL = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
-        public List <PersonModel> People { get; private set; }
+        public List<Person> People { get; private set; }
+        public List<Person> Students { get; private set; }
+        public AuthenticatedUser AuthenticatedUser { get; private set; }
 
         public RestService()
         {
@@ -25,35 +31,18 @@ namespace UniVerse.Services
             };
         }
 
-        public async Task <List<PersonModel>> RefreshDataAsync()
+        public async Task<List<Person>> RefreshDataAsync()
         {
-            People = new List<PersonModel>();
+            People = new List<Person>();
 
-            // Staff Req
-            Uri StaffUri = new (string.Format(baseUrl + "People/Lecturers"));
+            Uri uri = new(string.Format(baseURL + "People/Lecturers"));
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(StaffUri);
+                HttpResponseMessage response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    People = JsonSerializer.Deserialize<List<PersonModel>>(content, _serializerOptions);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-
-            // Student Req
-            Uri StudentsUri = new (string.Format(baseUrl + "People/Students"));
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(StudentsUri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    People = JsonSerializer.Deserialize<List<PersonModel>>(content, _serializerOptions);
+                    People = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
                 }
             }
             catch (Exception ex)
@@ -62,6 +51,108 @@ namespace UniVerse.Services
             }
 
             return People;
+        }
+
+        public async Task<Lecturer> GetLecturerByIdAsync(int id)
+        {
+            Uri lecturerUri = new (string.Format(baseURL + "People/Lecturer/{0}", id));
+            Debug.WriteLine(lecturerUri);
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(lecturerUri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Lecturer lecturer = JsonSerializer.Deserialize<Lecturer>(content);
+                    Debug.WriteLine($"Name: {lecturer.name}");
+                    return lecturer;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
+        }
+
+
+        public async Task<List<Person>> GetStudentsAsync()
+        {
+            Students = new List<Person>();
+            Uri uri = new(string.Format(baseURL + "People/Students"));
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Students = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return Students;
+        }
+
+        public async Task<Person> GetStudentByIdAsync(int id)
+        {
+            Uri studentUri = new (string.Format(baseURL + "People/Student/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(studentUri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Person student = JsonSerializer.Deserialize<Person>(content);
+                    Debug.WriteLine($"Name: {student.name}");
+                    return student;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return null;
+        }
+
+        public async Task<AuthenticatedUser> PostDataAsync(string email, string password)
+        {
+            AuthenticatedUser AuthenticatedUser = null;
+            Uri uri = new(string.Format(baseURL + "People/auth"));
+            var requestData = new
+            {
+                email,
+                password
+            };
+
+            var json = JsonSerializer.Serialize(requestData, _serializerOptions);
+            StringContent stringContent = new(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                HttpResponseMessage res = await _client.PostAsync(uri, stringContent);
+                if (res.IsSuccessStatusCode)
+                {
+                    string responseContent = await res.Content.ReadAsStringAsync();
+                    AuthenticatedUser = JsonSerializer.Deserialize<AuthenticatedUser>(responseContent, _serializerOptions);
+                }
+                else
+                {
+                    throw new AuthenticationException("Invalid email or password.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                throw new AuthenticationException("An error occurred during authentication.");
+            }
+
+            return AuthenticatedUser;
         }
     }
 }
