@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Net.Security;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using UniVerse.Models;
 using UniVerse.Services;
@@ -88,7 +90,8 @@ namespace UniVerse.ViewModels
                     //await _navigation.PushAsync(new AppShell());
                     App.Current.MainPage = new AppShell();
                     AuthError = String.Empty;
-                    UserId = AuthUser.user_id;
+                    await SecureStorage.Default.SetAsync("userEmail", AuthUser.userEmail);
+                    await SecureStorage.Default.SetAsync("username", AuthUser.username);
                 }
                 else
                 {
@@ -101,19 +104,11 @@ namespace UniVerse.ViewModels
                 Debug.WriteLine(ex);
                 AuthError = "Authentication failed. Please check your credentials.";
             }
-        }
-
-        public async Task<AuthenticatedUser> GetDetails()
-        {
-            return AuthUser;
+         
         }
 
 
-        public void CaptureInputValues()
-        {
-            Debug.WriteLine(EmailEntry);
-            Debug.WriteLine(PasswordEntry);
 
-        }
+
     }
 }

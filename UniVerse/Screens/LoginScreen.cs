@@ -140,7 +140,7 @@ namespace UniVerse.Screens
             {
                 try
                 {
-                 await   AuthVM.AuthenticatedStream();
+                 await AuthVM.AuthenticatedStream();
                 }
                 catch(AuthenticationException authEx)
                 { 

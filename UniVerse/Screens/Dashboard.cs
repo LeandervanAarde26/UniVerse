@@ -474,16 +474,17 @@ public class Dashboard : ContentPage
 
         async void GetUserDetails()
         {
-            await _loginViewModel.GetDetails();
-            welcomeHeading.Text = $"Hello, {_loginViewModel.AuthUser.username} ";
+            //await _loginViewModel.ge
+            string username = await SecureStorage.Default.GetAsync("username");
+            welcomeHeading.Text = $"Hello, {username} ";
         }
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await _loginViewModel.GetDetails();
-        Debug.WriteLine($"HAHA {_loginViewModel.UserId}");
+        string username = await SecureStorage.Default.GetAsync("username");
+        Debug.WriteLine($"HAHA {username}");
 
     }
 }
