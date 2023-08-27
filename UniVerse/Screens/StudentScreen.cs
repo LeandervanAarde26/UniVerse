@@ -4,18 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UniVerse.Components;
-using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
 
     public class StudentScreen : ContentPage
     {
-        private PeopleViewModel viewModel;
-
         public StudentScreen()
         {
-            viewModel = new PeopleViewModel(new Services.RestService());
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style inputStyle = new(typeof(Entry))
             {
@@ -132,24 +128,13 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
+            var numbers = new List<int> { 1, 2, 3, 4,  2, 3, 4, 5, 2, 3, 4, 5 };
 
-            GetAllStudentsAsync();
-
-            async void GetAllStudentsAsync()
+            foreach (var number in numbers)
             {
-                await viewModel.GetAllStudents();
-
-                foreach (var Student in viewModel.StudentList)
-                {
-                    var card = new Cardview(Student.name, Student.person_system_identifier, Student.email, Student.person_credits.ToString(), "Student", Student.id);
-                    layout.Children.Add(card);
-                }
+                var card = new Cardview("Leander van Aarde", "Degree Student", "200211@virtualwindow.co.za", "⭐️ 120 Credits", "student");
+                layout.Children.Add(card);
             }
-        }
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            await viewModel.GetAllStudents();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
-using UniVerse.ViewModels;
 using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
@@ -7,13 +6,13 @@ using System.Linq;
 using System.Text;
 using Microsoft.Maui.Graphics;
 using System.Data;
-using UniVerse.Screens;
 
 namespace UniVerse.Components
 {
 
     public class Cardview : ContentView
     {
+
         public string Name { get; set; }
         public string Role { get; set; }
         public string Email { get; set; }
@@ -21,7 +20,7 @@ namespace UniVerse.Components
 
         public string Buttontext { get; set; }
 
-        public Cardview(string nme, string rle, string eml, string addinfo, string btnText, int id)
+        public Cardview(string nme, string rle, string eml, string addinfo, string btnText)
         {
 
             Name = nme;
@@ -114,12 +113,6 @@ namespace UniVerse.Components
                 TextColor = Color.FromArgb("#407BFF"),
                 VerticalOptions = LayoutOptions.End,
                 Margin = new Thickness(0, 0, 0, 0)
-            };
-
-            var cardViewModel = new CardViewModel();
-            textButton.Clicked += async (sender, e) =>
-            {
-                await cardViewModel.NavigateToOverviewScreenAsync(Buttontext, id);
             };
 
             StackLayout stack = new()
