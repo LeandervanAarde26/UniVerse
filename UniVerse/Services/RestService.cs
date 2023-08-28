@@ -143,6 +143,31 @@ namespace UniVerse.Services
             return Subjects;
         }
 
+        //Get subjects by id
+        public async Task<SubjectModel> GetSubjectByIdAsync(int id)
+        {
+            SubjectModel subject = new();
+            Uri studentUri = new(string.Format(baseURL + "Subjects/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(studentUri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    subject = JsonSerializer.Deserialize<SubjectModel>(content, _serializerOptions);
+                    Debug.WriteLine($"Name: {subject.subject_name}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return subject;
+        }
+
         // Could it be that the functions were not seperated? I think they has to be seperate. 
         public async Task<AuthenticatedUser> PostDataAsync(string email, string password)
         {

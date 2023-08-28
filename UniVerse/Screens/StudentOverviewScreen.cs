@@ -216,7 +216,6 @@ namespace UniVerse.Screens
                 if (viewModel.NavigationParameter is int memberIdValue)
                 {
                     StudentId = memberIdValue;
-                    Debug.WriteLine(StudentId);
                 }
             }
 

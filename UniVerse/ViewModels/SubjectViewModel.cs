@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using UniVerse.Models;
 using UniVerse.Services;
 
@@ -10,11 +11,13 @@ namespace UniVerse.ViewModels
         public RestService _restService;
 
         public ObservableCollection<SubjectWithLecturerModel> SubjectList { get; set; }
+        public ObservableCollection<SubjectModel> Subject { get; set; }
 
         public SubjectViewModel(RestService restService)
         {
             _restService = restService;
             SubjectList = new ObservableCollection<SubjectWithLecturerModel>();
+            Subject = new ObservableCollection<SubjectModel>();
         }
 
         // Get Subjects
@@ -28,10 +31,15 @@ namespace UniVerse.ViewModels
                 SubjectList.Add(subject);
             }
         }
-    }
 
-    public class SubjectNavigationParameter
-    {
-        public int NavigationParameter { get; set; }
+        //Get subject by id
+        public async Task<SubjectModel> GetSubject(int id)
+        {
+            var subject = await _restService.GetSubjectByIdAsync(id);
+            Subject.Clear();
+            Subject.Add(subject);
+            Debug.WriteLine(subject.subject_name);
+            return subject;
+        }
     }
 }

@@ -42,11 +42,11 @@ namespace UniVerse.ViewModels
         }
 
         //Get staff member by id
-        public async Task GetStaffMember(int id)
+        public async Task<Lecturer> GetStaffMember(int id)
         {
             var member = await _restService.GetLecturerByIdAsync(id);
             StaffMember.Add(member);
-     
+            return member;
         }
 
         // Get Students

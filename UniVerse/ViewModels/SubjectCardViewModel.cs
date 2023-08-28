@@ -10,7 +10,6 @@ namespace UniVerse.ViewModels
         {
             var viewModel = new StudentMemberOverviewViewModel { NavigationParameter = id };
             await Shell.Current.Navigation.PushAsync(new SubjectOverview { BindingContext = viewModel });
-            Debug.WriteLine(id);
         }
     }
 }
