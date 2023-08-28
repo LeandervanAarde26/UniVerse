@@ -12,7 +12,6 @@ public partial class SubjectOverview : ContentPage
     public SubjectOverview()
 	{
 		InitializeComponent();
-        Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
 
         _viewModel = new SubjectViewModel(new Services.RestService());
     }
