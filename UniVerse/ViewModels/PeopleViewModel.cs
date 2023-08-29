@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UniVerse.Controls.RadialBarChart;
 using UniVerse.Models;
 using UniVerse.Services;
 
@@ -19,8 +20,9 @@ namespace UniVerse.ViewModels
         public ObservableCollection<Person> StudentList { get; set; }
         public ObservableCollection<Lecturer> StaffMember { get; set; }
         public ObservableCollection<Person> Student { get; set; }
+        public ObservableCollection<ChartEntry> Chart { get; set; }
         
-        public StudentCounters StudentCounters { get; set; }
+    
 
 
         public PeopleViewModel(RestService restService) //instance of the restservice goes here
@@ -30,7 +32,7 @@ namespace UniVerse.ViewModels
             StudentList = new ObservableCollection<Person>();
             StaffMember = new ObservableCollection<Lecturer>();
             Student = new ObservableCollection<Person>();
-            StudentCounters = new StudentCounters ();
+            Chart = new ObservableCollection<ChartEntry>();
         }
 
         // Get Staff
@@ -76,32 +78,40 @@ namespace UniVerse.ViewModels
         {
             var members = await _restService.GetStudentsAsync();
             StudentList.Clear();
+            var DegreeStudents = 0;
+            var DiplomaStudents = 0;
+            var maximumChartValue = 0;
+
 
             foreach (var member in members)
             {
                 StudentList.Add(member);
                 Debug.WriteLine(member.name);
-            }
-        }
+                maximumChartValue++;
 
-
-        public async Task<StudentCounters> StudentCounter()
-        {
-            await GetAllStudents();
-            int studentCounter = 0;
-            int diplomaCounter = 0;
-            foreach(var student in StudentList)
-            {
-                if(student.role == "Degree student")
+                if(member.role == "Degree student")
                 {
-                    studentCounter++;
-                } else
+                    DegreeStudents++;
+                }
+                else
                 {
-                    diplomaCounter++;
+                    DiplomaStudents++;
                 }
             }
+            Debug.WriteLine($"Students: {(double)DegreeStudents / (double)maximumChartValue * 100}");
+            Debug.WriteLine($"Diploma students: {DiplomaStudents}");
+            Debug.WriteLine($"Maximum value on Chart: {maximumChartValue}");
+            double DegreePercent = Math.Round((double)DegreeStudents / (double)maximumChartValue * 100, 1);
+            Chart.Add(new ChartEntry
+            {
+                Value = DegreePercent,
+                Color = Color.FromArgb("#6023FF"),
+                Text = "Visual Studio Code"
+            });
 
-            return new StudentCounters() { DegreeStudents = studentCounter, DiplomaStudents = diplomaCounter };
+            Chart.ToArray();
+
+            Debug.WriteLine($"Degree Percent = {DegreePercent}, {Chart[0].Value}");
         }
     }
 }

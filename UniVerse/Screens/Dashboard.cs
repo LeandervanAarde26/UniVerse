@@ -13,10 +13,13 @@ namespace UniVerse.Screens;
 public class Dashboard : ContentPage
 {
     private readonly LoginViewModel _loginViewModel;
+    private readonly PeopleViewModel _peopleViewModel;
     public Dashboard()
     {
         _loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
         BindingContext = _loginViewModel;
+        _peopleViewModel = new PeopleViewModel(new Services.RestService());
+        BindingContext = _peopleViewModel;
 
         Label pageHeading = new()
         {
@@ -162,7 +165,7 @@ public class Dashboard : ContentPage
 {
             new ChartEntry
             {
-                Value = 71,
+                Value = 10,
                 Color = Color.FromArgb("#6023FF"),
                 Text = "Visual Studio Code"
             },
@@ -177,7 +180,7 @@ public class Dashboard : ContentPage
             FontSize = 12,
             MaxValue = 100,
             //ShowLabels = false,
-            BarBackgroundColor = Colors.White,
+            BarBackgroundColor = Color.FromArgb("#E9F0FF"),
             Entries = ChartData,
             HorizontalOptions = LayoutOptions.FillAndExpand,
             Margin = new Thickness(10, 10, 0, 0)
@@ -514,9 +517,12 @@ public class Dashboard : ContentPage
 
         async void GetUserDetails()
         {
+            await _peopleViewModel.GetAllstudents();
+
             //await _loginViewModel.ge
             string username = await SecureStorage.Default.GetAsync("username");
-
+            studentsGraph.Entries = _peopleViewModel.Chart;
+            
             // Get the authenticated user from the LoginViewModel class
             AuthenticatedUser auth = LoginViewModel.AuthUser;
 
