@@ -17,12 +17,14 @@ namespace UniVerse.ViewModels
         // All of myt observerd properties 
 
         public ObservableCollection<Person> StaffList { get; set; }
+        public ObservableCollection<Person> AllStaffList { get; set; }
         public ObservableCollection<Person> StudentList { get; set; }
         public ObservableCollection<Lecturer> StaffMember { get; set; }
         public ObservableCollection<Person> Student { get; set; }
         public ObservableCollection<ChartEntry> Chart { get; set; }
-        
-    
+        public ObservableCollection<ChartEntry> StaffChart { get; set; }
+
+
 
 
         public PeopleViewModel(RestService restService) //instance of the restservice goes here
@@ -33,6 +35,8 @@ namespace UniVerse.ViewModels
             StaffMember = new ObservableCollection<Lecturer>();
             Student = new ObservableCollection<Person>();
             Chart = new ObservableCollection<ChartEntry>();
+            StaffChart = new ObservableCollection<ChartEntry>();
+            AllStaffList = new ObservableCollection<Person>();
         }
 
         // Get Staff
@@ -98,9 +102,6 @@ namespace UniVerse.ViewModels
                     DiplomaStudents++;
                 }
             }
-            Debug.WriteLine($"Students: {(double)DegreeStudents / (double)maximumChartValue * 100}");
-            Debug.WriteLine($"Diploma students: {DiplomaStudents}");
-            Debug.WriteLine($"Maximum value on Chart: {maximumChartValue}");
             double DegreePercent = Math.Round((double)DegreeStudents / (double)maximumChartValue * 100, 1);
             Chart.Add(new ChartEntry
             {
@@ -110,8 +111,42 @@ namespace UniVerse.ViewModels
             });
 
             Chart.ToArray();
+        }
 
-            Debug.WriteLine($"Degree Percent = {DegreePercent}, {Chart[0].Value}");
+
+        public async Task GetAllStaff()
+        {
+            var members = await _restService.GetStaffMembersAsync();
+            AllStaffList.Clear();
+            var LecturerStaff = 0;
+            var AdminStaff = 0;
+            var maximumChartValue = 0;
+
+
+            foreach (var member in members)
+            {
+                AllStaffList.Add(member);
+                Debug.WriteLine(member.name);
+                maximumChartValue++;
+
+                if (member.role == "Lecturer")
+                {
+                    LecturerStaff++;
+                }
+                else
+                {
+                    AdminStaff++;
+                }
+            }
+            double LecturerPerecent = Math.Round((double)LecturerStaff / (double)maximumChartValue * 100, 1);
+            StaffChart.Add(new ChartEntry
+            {
+                Value = LecturerPerecent,
+                Color = Color.FromArgb("#6023FF"),
+                Text = "Visual Studio Code"
+            });
+
+            StaffChart.ToArray();
         }
     }
 }

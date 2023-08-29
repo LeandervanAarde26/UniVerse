@@ -19,8 +19,6 @@ namespace UniVerse.ViewModels
         public void AddNavItems()
         {
             var pages = new Routes[]
-
-
             {
 
                new Routes
@@ -80,24 +78,16 @@ namespace UniVerse.ViewModels
                     IsVisible = false
                 });
 
-
-
-
-
-                            FlyoutItem Item = new()
+                FlyoutItem Item = new()
                 {
                     Title = page.Title,
                     FlyoutIcon = page.FlyoutIcon,
                     
                     
                 };
-
-        
                 Item.Items.Add(new Tab
                 {
                     Items = { Content },
-                   
-                  
                 });
                 Items.Add(Item);
                

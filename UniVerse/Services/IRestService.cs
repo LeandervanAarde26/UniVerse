@@ -8,5 +8,6 @@ namespace UniVerse.Services
         Task<List<Person>> RefreshDataAsync();
         Task<List<Person>> GetStudentsAsync();
         Task<AuthenticatedUser> PostDataAsync(string email, string password);
+        Task<List<Person>> GetStaffMembersAsync();
     }
 }
