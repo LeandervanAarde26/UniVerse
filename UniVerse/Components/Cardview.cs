@@ -18,9 +18,7 @@ namespace UniVerse.Components
         public string Role { get; set; }
         public string Email { get; set; }
         public string AdditionalInformation { get; set; }
-
         public string Buttontext { get; set; }
-
         public Cardview(string nme, string rle, string eml, string addinfo, string btnText, int id)
         {
 
@@ -147,7 +145,6 @@ namespace UniVerse.Components
                 Margin = new Thickness(20),
                 Content = stack,
                 BorderColor = Colors.White,
-
             };
 
             Content = frame;

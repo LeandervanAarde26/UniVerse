@@ -91,9 +91,7 @@
     <None Remove="Resources\Images\trash_icon.svg" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Components\" />
 	  <Folder Include="Screens\" />
-	  <Folder Include="Services\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\ui_ux_design.svg" />
