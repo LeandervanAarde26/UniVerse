@@ -26,7 +26,6 @@ namespace UniVerse.Services.EventsServices
                 WriteIndented = true
             };
         }
-
         public async Task<List<Events>> GetEventsAsync()
         {
             Events = new List<Events>();

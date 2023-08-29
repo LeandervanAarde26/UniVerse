@@ -45,7 +45,7 @@ public class DashboardRightbar : ContentView
 
         StackLayout stack = new()
         {
-            VerticalOptions = LayoutOptions.Center,
+            VerticalOptions = LayoutOptions.Start,
             Children =
                 {
                     heading
@@ -54,7 +54,7 @@ public class DashboardRightbar : ContentView
 
         ScrollView scrollView = new()
         {
-            MaximumHeightRequest = 500,
+         
         };
         FlexLayout layout = new()
         {
@@ -79,12 +79,13 @@ public class DashboardRightbar : ContentView
             foreach (var ev in _eventsViewModel.EventsList)
             {
                 EventsCard card = new EventsCard(ev.event_name, ev.event_date, ev.staff_organiser);
+                //Label name = new() { Text = ev.event_name };
                 scrollContent.Children.Add(card);
             }
             scrollView.Content = scrollContent;
         }
 
-        //FlexLayout.SetGrow(stack, 1);
+        FlexLayout.SetBasis(scrollView, new FlexBasis(0.85f, true));
         Content = layout;
     }
 }

@@ -21,7 +21,7 @@ namespace UniVerse.Components
             {
                 Text = EventName,
                 FontAttributes = FontAttributes.Bold,
-                FontSize = 15, 
+                FontSize = 12, 
                 HorizontalOptions = LayoutOptions.Start,
                 TextColor = Color.FromArgb("#2b2b2b")
             };
@@ -40,14 +40,16 @@ namespace UniVerse.Components
                 Text = EventOrganiser,
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 13,
-                HorizontalOptions = LayoutOptions.Start,
+                HorizontalOptions = LayoutOptions.Fill,
                 TextColor = Color.FromArgb("#A7A7A7")
             };
 
 
             StackLayout textLayout = new()
             {
-              
+
+                HorizontalOptions = LayoutOptions.Start,    
+                //MaximumWidthRequest = 150,
                 Children =
                 {
                     eventName, 
@@ -61,19 +63,18 @@ namespace UniVerse.Components
             {
                 Source = ImageSource.FromFile("event_image.png"),
                 Aspect = Aspect.AspectFill,
-            
+                HorizontalOptions = LayoutOptions.End,
                 HeightRequest = 100,
             };
 
-            FlexLayout layout = new()
+            HorizontalStackLayout stackLayout = new()
             {
-                Direction = Microsoft.Maui.Layouts.FlexDirection.Row,
-                Children = {
+                Children =
+                {
                     textLayout,
                     image
                 }
             };
-
 
             Frame frame = new()
             {
@@ -84,7 +85,7 @@ namespace UniVerse.Components
                 BackgroundColor = Color.FromArgb("#F6F7FB"),
                 BorderColor = Color.FromArgb("#F6F7FB"),
                 Margin = new Thickness(20, 10),
-                Content = layout
+                Content = stackLayout
             };
 
             Content = frame;
