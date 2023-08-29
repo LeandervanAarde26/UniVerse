@@ -24,9 +24,6 @@ namespace UniVerse.ViewModels
         public ObservableCollection<ChartEntry> Chart { get; set; }
         public ObservableCollection<ChartEntry> StaffChart { get; set; }
 
-
-
-
         public PeopleViewModel(RestService restService) //instance of the restservice goes here
         {
             _restService = restService;

@@ -9,7 +9,6 @@ using UniVerse.Controls.RadialBarChart;
 using UniVerse.Models;
 
 namespace UniVerse.Screens;
-
 public class Dashboard : ContentPage
 {
     private readonly LoginViewModel _loginViewModel;
@@ -108,9 +107,6 @@ public class Dashboard : ContentPage
                     CornerRadius = new CornerRadius(20)
                 },
         };
-
-
-
         //Image studentsGraph = new()
         //{
         //    Source = ImageSource.FromFile("image_picker.png"),
@@ -130,9 +126,6 @@ public class Dashboard : ContentPage
             Margin = new Thickness(10, 10, 0, 0)
         };
 
-
-
-
         Button viewStudents = new()
         {
             Text = "View Students > ",
@@ -140,10 +133,7 @@ public class Dashboard : ContentPage
             HorizontalOptions = LayoutOptions.End,
         };
 
-
         //viewStudents.Clicked += ShowThePopup;
-
-
 
         var ChartData = new ChartEntry[]
         {
@@ -154,7 +144,6 @@ public class Dashboard : ContentPage
                 Text = "Visual Studio Code"
             },
         };
-
 
         RadialBarChart studentsGraph = new()
         {
@@ -203,7 +192,6 @@ public class Dashboard : ContentPage
             //ShowLabels = false,
             BarBackgroundColor = Colors.White,
             Entries = AdminChartData,
-          
             //Margin = new Thickness(10, 10, 0, 0),
             LegendText = "Lecturer",
             LegendText2 = "Admin",

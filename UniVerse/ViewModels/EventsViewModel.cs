@@ -18,10 +18,7 @@ namespace UniVerse.ViewModels
         public EventsViewModel(EventsService eventsService) {
             _eventsService = eventsService;
             EventsList = new ObservableCollection<Events>();
-
-
         }
-
         public async Task GetAllEvents()
         {
             var events = await _eventsService.GetEventsAsync();

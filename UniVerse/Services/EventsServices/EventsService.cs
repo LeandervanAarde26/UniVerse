@@ -16,7 +16,6 @@ namespace UniVerse.Services.EventsServices
         internal string baseURL = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
         public List<Events> Events { get; private set; }
-
         public EventsService()
         {
             _client = new HttpClient();
