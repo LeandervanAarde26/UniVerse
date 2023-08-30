@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
+using System.Diagnostics;
 
 namespace UniVerse.Components
 {
@@ -59,6 +60,23 @@ namespace UniVerse.Components
                 Margin = new Thickness(5,0),
                 TextColor = Color.FromArgb("#407BFF"),
             };
+
+            imageUploadButton.Clicked += async (sender, e) =>
+            {
+                var imagePickerOptions = new PickOptions
+                {
+                    PickerTitle = "Select an image",
+               
+                };
+
+                var selectedImage = await GetImage(imagePickerOptions);
+                if (selectedImage != null)
+                {
+                    // Update the UI to display the selected image
+                    defaultimage.Source = selectedImage.FullPath;
+                }
+            };
+
 
             FlexLayout innerLayout = new()
             {
@@ -204,6 +222,33 @@ namespace UniVerse.Components
             };
             //FlexLayout.SetGrow(stack, 1);
             Content = layout;
+        }
+
+
+        public async Task<FileResult> GetImage(PickOptions pickOptions)
+        {
+            var result = await FilePicker.PickAsync(pickOptions);
+            if (result != null)
+            {
+                if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
+                       result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+                {
+                    using var stream = await result.OpenReadAsync();
+                    var iamge = ImageSource.FromStream(() => stream);
+
+                    return result;
+                }
+            }
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return null;
         }
     }
 }
