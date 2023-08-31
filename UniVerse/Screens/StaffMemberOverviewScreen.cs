@@ -1,5 +1,7 @@
 ﻿
+using System.Data;
 using System.Diagnostics;
+//using Android.Locations;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 using UniVerse.Components;
@@ -7,12 +9,14 @@ using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
-
-
 	public class StaffMemberOverviewScreen : ContentPage
 	{
         public int StaffId { get; private set; }
         private PeopleViewModel _viewModel;
+
+        private readonly Label name;
+        private readonly Label role;
+        private readonly Label mail;
 
         public StaffMemberOverviewScreen()
 		{
@@ -62,15 +66,14 @@ namespace UniVerse.Screens
 
             };
 
-            Label name = new()
+            name = new Label
             {
-                Text = "Armand Pretorius",
                 TextColor = Color.FromArgb("#2B2B2B"),
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 24
             };
 
-            Label role = new()
+            role = new Label
             {
                 Text = "Academic",
                 TextColor = Color.FromArgb("#C5C5C5"),
@@ -91,9 +94,8 @@ namespace UniVerse.Screens
                 Style = textStyle,
             };
 
-            Label mail = new()
+            mail = new Label
             {
-                Text = "📧 Armand@OpenWindow.co.za",
                 Style = textStyle,
             };
 
@@ -225,7 +227,14 @@ namespace UniVerse.Screens
                 }
             }
 
-            await _viewModel.GetStaffMember(StaffId);
+            var staffMember = await _viewModel.GetStaffMember(StaffId);
+
+            if (staffMember != null)
+            {
+                name.Text = staffMember.name;
+                role.Text = staffMember.role;
+                mail.Text = staffMember.email;
+            }
         }
     }
 }
