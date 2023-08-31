@@ -7,7 +7,6 @@
              BackgroundColor="{DynamicResource Primary}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="5.5*"/>
             <ColumnDefinition Width="3.5*"/>
         </Grid.ColumnDefinitions>
@@ -22,7 +21,7 @@
         <!--Just an indication for the Nav-->
         <VerticalStackLayout></VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="20, 20 ,20 , 0" >
+        <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2" Margin="20, 20 ,20 , 0" >
             <!--Subject Info card-->
             <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Padding="80, 20" Margin="0, 0, 0, 20">
                 <FlexLayout JustifyContent="SpaceBetween">
@@ -38,7 +37,7 @@
             </Frame>
         </VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Padding="20">
+        <VerticalStackLayout Grid.ColumnSpan="1" Grid.Row="1" Padding="20">
             <FlexLayout  Direction="Row" JustifyContent="SpaceBetween" AlignItems="Start" >
 
                 <Label Text="Students" TextColor="{DynamicResource Gray900}" FontSize="35" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
@@ -54,7 +53,7 @@
         </VerticalStackLayout>
         
         
-        <ScrollView VerticalOptions="Center"  Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2" Padding="20, 0, 20, 20">
+        <ScrollView VerticalOptions="Center" Grid.ColumnSpan="1" Grid.Row="2" Padding="20, 0, 20, 20">
             <FlexLayout Direction="Column">
                 <components:StudentCard/>
                 <components:StudentCard/>
@@ -72,7 +71,7 @@
         </ScrollView>
 
         <!--Assign Student + Lecturer-->
-        <VerticalStackLayout Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Padding="0, 20, 20, 0">
+        <VerticalStackLayout Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Padding="0, 20, 20, 0">
             <!--Assign Student-->
             <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 20">
                 <VerticalStackLayout>

@@ -1,10 +1,13 @@
 ﻿<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:UniVerse.Components"
+             xmlns:viewmodels="clr-namespace:UniVerse.ViewModels"
+             xmlns:models="clr-namespace:UniVerse.Models"
+             x:DataType="models:SubjectModel"
              x:Class="UniVerse.Components.SubjectCard">
 
     <!--Subject Card-->
-    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" Padding="50, 40, 50,40" FlexLayout.Grow="1">
+    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" Padding="50, 40, 50,40" Margin="0, 0, 0, 20">
         <HorizontalStackLayout >
             <!--Subject Image-->
             <Image Source="ui_ux_design.png"/>
@@ -14,11 +17,11 @@
                 <!--Subject name & Code-->
                 <HorizontalStackLayout>
                     <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="600">
-                        <Label Text="Subject Name"
+                        <Label Text="{Binding subject_name}"
                            TextColor="{DynamicResource Gray900}"
                            FontSize="20"
                            FontAttributes="Bold"/>
-                        <Label Text="UXD"
+                        <Label Text="{Binding subject_code}"
                                TextColor="{DynamicResource Gray400}"
                                FontSize="18"/>
                     </VerticalStackLayout>
@@ -32,9 +35,11 @@
                 </HorizontalStackLayout>
                 <!--Subject Description-->
 
-                <Label Text="Subject Description"
+                <Label Text="{Binding subject_description}"
+                       MaxLines="2"
                        TextColor="{DynamicResource Gray900}"
-                       FontSize="16"/>
+                       FontSize="16"
+                       MaximumWidthRequest="650"/>
                 <!--Students-->
                 <HorizontalStackLayout>
                     <HorizontalStackLayout WidthRequest="520">
@@ -88,7 +93,8 @@
                         BackgroundColor="Transparent"
                         TextColor="#407BFF"
                         VerticalOptions="EndAndExpand"
-                        Margin="0,0,0,0" />
+                        Margin="0,0,0,0"
+                        Clicked="ViewSubject"/>
                 </HorizontalStackLayout>
 
             </FlexLayout>

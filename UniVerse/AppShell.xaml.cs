@@ -15,6 +15,7 @@ public partial class AppShell : Shell
         Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
         Routing.RegisterRoute(nameof(StaffMemberOverviewScreen), typeof(StaffMemberOverviewScreen));
         Routing.RegisterRoute(nameof(StudentOverviewScreen), typeof(StudentOverviewScreen));
+        Routing.RegisterRoute(nameof(SubjectOverview), typeof(SubjectOverview));
 
         _navViewModel = new Navigation();
         Image image = new()
