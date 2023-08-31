@@ -18,7 +18,6 @@ namespace UniVerse.Services
         public List<Person> People { get; private set; }
 
         public List<Person> Students { get; private set; }
-        public List<SubjectWithLecturerModel> Subjects { get; private set; }
         public AuthenticatedUser AuthenticatedUser { get; private set; }
 
         public RestService()
@@ -118,54 +117,6 @@ namespace UniVerse.Services
             }
 
             return null;
-        }
-
-        //get subjects
-        public async Task<List<SubjectWithLecturerModel>> GetSubjectsAsync()
-        {
-            Subjects = new List<SubjectWithLecturerModel>();
-            Uri uri = new (string.Format(baseURL + "Subjects"));
-
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    Subjects = JsonSerializer.Deserialize<List<SubjectWithLecturerModel>>(content, _serializerOptions);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-
-            return Subjects;
-        }
-
-        //Get subjects by id
-        public async Task<SubjectModel> GetSubjectByIdAsync(int id)
-        {
-            SubjectModel subject = new();
-            Uri studentUri = new(string.Format(baseURL + "Subjects/{0}", id));
-
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(studentUri);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    subject = JsonSerializer.Deserialize<SubjectModel>(content, _serializerOptions);
-                    Debug.WriteLine($"Name: {subject.subject_name}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-
-            return subject;
         }
 
         // Could it be that the functions were not seperated? I think they has to be seperate. 

@@ -2,18 +2,19 @@
 using System.Diagnostics;
 using UniVerse.Models;
 using UniVerse.Services;
+using UniVerse.Services.SubjectServices;
 
 namespace UniVerse.ViewModels
 {
 
     internal class SubjectViewModel : BaseViewModel
     {
-        public RestService _restService;
+        public SubjectService _restService;
 
         public ObservableCollection<SubjectWithLecturerModel> SubjectList { get; set; }
         public ObservableCollection<SubjectModel> Subject { get; set; }
 
-        public SubjectViewModel(RestService restService)
+        public SubjectViewModel(SubjectService restService)
         {
             _restService = restService;
             SubjectList = new ObservableCollection<SubjectWithLecturerModel>();

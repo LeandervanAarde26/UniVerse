@@ -11,7 +11,7 @@ public partial class SubjectsScreen : ContentPage
 		InitializeComponent();
 
         Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
-        viewModel = new SubjectViewModel(new Services.RestService());
+        viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
     }
 
     protected override async void OnAppearing()

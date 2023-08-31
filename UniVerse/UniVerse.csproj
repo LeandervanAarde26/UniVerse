@@ -66,6 +66,7 @@
 	  <None Remove="Resources\Images\logout.png" />
 	  <None Remove="Resources\Images\LoginImage.png" />
 	  <None Remove="Services\" />
+	  <None Remove="Services\SubjectsServices\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -94,6 +95,7 @@
 	  <Folder Include="Components\" />
 	  <Folder Include="Screens\" />
 	  <Folder Include="Services\" />
+	  <Folder Include="Services\SubjectsServices\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\ui_ux_design.svg" />

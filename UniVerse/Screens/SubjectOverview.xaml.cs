@@ -13,7 +13,7 @@ public partial class SubjectOverview : ContentPage
 	{
 		InitializeComponent();
 
-        _viewModel = new SubjectViewModel(new Services.RestService());
+        _viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
     }
 
     protected override async void OnAppearing()
