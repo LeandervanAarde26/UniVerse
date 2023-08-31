@@ -18,9 +18,9 @@ namespace UniVerse.ViewModels
 
         public ObservableCollection<Person> StaffList { get; set; }
         public ObservableCollection<Person> AllStaffList { get; set; }
-        public ObservableCollection<Person> StudentList { get; set; }
+        public ObservableCollection<Student> StudentList { get; set; }
         public ObservableCollection<Lecturer> StaffMember { get; set; }
-        public ObservableCollection<Person> Student { get; set; }
+        public ObservableCollection<Student> Student { get; set; }
         public ObservableCollection<ChartEntry> Chart { get; set; }
         public ObservableCollection<ChartEntry> StaffChart { get; set; }
 
@@ -28,9 +28,9 @@ namespace UniVerse.ViewModels
         {
             _restService = restService;
             StaffList = new ObservableCollection<Person>();
-            StudentList = new ObservableCollection<Person>();
+            StudentList = new ObservableCollection<Student>();
             StaffMember = new ObservableCollection<Lecturer>();
-            Student = new ObservableCollection<Person>();
+            Student = new ObservableCollection<Student>();
             Chart = new ObservableCollection<ChartEntry>();
             StaffChart = new ObservableCollection<ChartEntry>();
             AllStaffList = new ObservableCollection<Person>();

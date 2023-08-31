@@ -17,7 +17,7 @@ namespace UniVerse.Services
         JsonSerializerOptions _serializerOptions;
         public List<Person> People { get; private set; }
 
-        public List<Person> Students { get; private set; }
+        public List<Student> Students { get; private set; }
         public List<Person> Staff { get; private set; }
         public AuthenticatedUser AuthenticatedUser { get; private set; }
 
@@ -97,9 +97,9 @@ namespace UniVerse.Services
             return Staff;
         }
 
-        public async Task<List<Person>> GetStudentsAsync()
+        public async Task<List<Student>> GetStudentsAsync()
         {
-            Students = new List<Person>();
+            Students = new List<Student>();
             Uri uri = new(string.Format(baseURL + "People/Students"));
             try
             {
@@ -107,7 +107,7 @@ namespace UniVerse.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Students = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
+                    Students = JsonSerializer.Deserialize<List<Student>>(content, _serializerOptions);
                 }
             }
             catch (Exception ex)

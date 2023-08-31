@@ -86,9 +86,9 @@ namespace UniVerse.Components
             Label email = new()
             //200211@virtualWindow.co.za"
             {
-                Text = "\U0001F4E7"  + Role,
+                Text = "\U0001F4E7"  + Email,
                 TextColor = Color.FromArgb("#717171"),
-                FontSize = 15,
+                FontSize = 13,
                 HorizontalOptions = LayoutOptions.Center,
                 Margin = new Thickness(0, 15, 0, 0)
             };
