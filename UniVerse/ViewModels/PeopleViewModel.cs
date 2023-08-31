@@ -45,15 +45,16 @@ namespace UniVerse.ViewModels
             foreach (var member in members)
             {
                 StaffList.Add(member);
+                Debug.WriteLine(member.role);
             }
         }
 
         //Get staff member by id
-        public async Task GetStaffMember(int id)
+        public async Task<Lecturer> GetStaffMember(int id)
         {
             var member = await _restService.GetLecturerByIdAsync(id);
             StaffMember.Add(member);
-     
+            return member;
         }
 
         // Get Students
@@ -69,10 +70,11 @@ namespace UniVerse.ViewModels
         }
 
         //Get student member by id
-        public async Task GetStudent(int id)
+        public async Task<Student> GetStudent(int id)
         {
             var student = await _restService.GetStudentByIdAsync(id);
             Student.Add(student);
+            return student;
         }
 
         public async Task GetAllstudents()
