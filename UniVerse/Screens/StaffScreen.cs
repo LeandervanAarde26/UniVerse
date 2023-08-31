@@ -151,7 +151,7 @@ namespace UniVerse.Screens
                 
                 foreach (var member in viewModel.StaffList)
                 {
-                    var card = new Cardview(member.name, "Academic", member.email, member.person_system_identifier, "Staff Member", member.id);
+                    var card = new Cardview(member.name, member.role, member.email, member.person_system_identifier, "Staff Member", member.id);
                     layout.Children.Add(card);
                 }
             }

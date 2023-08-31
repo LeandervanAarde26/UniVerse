@@ -4,11 +4,13 @@ using Microsoft.Maui.Graphics.Text;
 using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using UniVerse.Components;
 using UniVerse.ViewModels;
+//using static Java.Util.Jar.Attributes;
 
 namespace UniVerse.Screens
 {
@@ -16,6 +18,13 @@ namespace UniVerse.Screens
     {
         public int StudentId { get; private set; }
         private PeopleViewModel _viewModel;
+
+        private readonly Label name;
+        private readonly Label role;
+        private readonly Label mail;
+        private readonly Label studentNumber;
+        private int achievedCredits;
+        private int neededCredites;
 
         public StudentOverviewScreen()
         {
@@ -59,7 +68,7 @@ namespace UniVerse.Screens
 
             };
 
-            Label name = new()
+            name = new Label
             {
                 Text = "Bronwyn Pottie",
                 TextColor = Color.FromArgb("#2B2B2B"),
@@ -67,7 +76,7 @@ namespace UniVerse.Screens
                 FontSize = 24
             };
 
-            Label role = new()
+            studentNumber = new Label
             {
                 Text = "200211",
                 TextColor = Color.FromArgb("#C5C5C5"),
@@ -76,7 +85,7 @@ namespace UniVerse.Screens
               
             };
 
-            Label hourlyRate = new()
+            role = new Label
             {
                 Text = "\U0001F9D1 Degree student",
                 Style = textStyle,
@@ -89,7 +98,7 @@ namespace UniVerse.Screens
                 Style = textStyle,
             };
 
-            Label mail = new()
+            mail = new Label
             {
                 Text = "📧 Armand@OpenWindow.co.za",
                 Style = textStyle,
@@ -111,8 +120,8 @@ namespace UniVerse.Screens
                 Children =
                 {
                     name,
+                    studentNumber,
                     role,
-                    hourlyRate,
                     cell,
                     mail,
                     address
@@ -130,9 +139,7 @@ namespace UniVerse.Screens
                 }
             };
 
-            // Cards 
-
-
+            // Cards
 
             FlexLayout layout = new()
             {
@@ -156,8 +163,6 @@ namespace UniVerse.Screens
                 layout.Children.Add(card);
             }
 
-
-
             ScrollView scrollView = new()
             {
 
@@ -165,7 +170,6 @@ namespace UniVerse.Screens
             };
 
             StudentOverViewRightBar right = new();
-
 
             Grid grid = new()
             {
@@ -219,7 +223,17 @@ namespace UniVerse.Screens
                 }
             }
 
-            await _viewModel.GetStudent(StudentId);
+            var student = await _viewModel.GetStudent(StudentId);
+
+            if (student != null)
+            {
+                name.Text = student.name;
+                role.Text = student.role;
+                mail.Text = student.email;
+                achievedCredits = student.person_credits;
+                neededCredites = student.needed_credits;
+                studentNumber.Text = student.person_system_identifier;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//using Java.Lang.Reflect;
 using UniVerse.Models;
 using UniVerse.Services;
 
@@ -18,7 +19,7 @@ namespace UniVerse.ViewModels
         public ObservableCollection<Person> StaffList { get; set; }
         public ObservableCollection<Person> StudentList { get; set; }
         public ObservableCollection<Lecturer> StaffMember { get; set; }
-        public ObservableCollection<Person> Student { get; set; }
+        public ObservableCollection<Student> Student { get; set; }
 
         public PeopleViewModel(RestService restService) //instance of the restservice goes here
         {
@@ -26,7 +27,7 @@ namespace UniVerse.ViewModels
             StaffList = new ObservableCollection<Person>();
             StudentList = new ObservableCollection<Person>();
             StaffMember = new ObservableCollection<Lecturer>();
-            Student = new ObservableCollection<Person>();
+            Student = new ObservableCollection<Student>();
         }
 
         // Get Staff
@@ -38,6 +39,7 @@ namespace UniVerse.ViewModels
             foreach (var member in members)
             {
                 StaffList.Add(member);
+                Debug.WriteLine(member.role);
             }
         }
 
@@ -62,10 +64,11 @@ namespace UniVerse.ViewModels
         }
 
         //Get student member by id
-        public async Task GetStudent(int id)
+        public async Task<Student> GetStudent(int id)
         {
             var student = await _restService.GetStudentByIdAsync(id);
             Student.Add(student);
+            return student;
         }
 
         public async Task GetAllstudents()
