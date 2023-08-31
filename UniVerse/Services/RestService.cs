@@ -18,6 +18,7 @@ namespace UniVerse.Services
         public List<Person> People { get; private set; }
 
         public List<Person> Students { get; private set; }
+        public List<Person> Staff { get; private set; }
         public AuthenticatedUser AuthenticatedUser { get; private set; }
 
         public RestService()
@@ -74,6 +75,26 @@ namespace UniVerse.Services
             }
 
             return Lect;
+        }
+
+        public async Task<List<Person>> GetStaffMembersAsync()
+        {
+            Staff = new List<Person>();
+            Uri uri = new(string.Format(baseURL + "People/Staff"));
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Staff = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return Staff;
         }
 
         public async Task<List<Person>> GetStudentsAsync()
@@ -155,5 +176,6 @@ namespace UniVerse.Services
 
             return AuthenticatedUser;
         }
+
     }
 }

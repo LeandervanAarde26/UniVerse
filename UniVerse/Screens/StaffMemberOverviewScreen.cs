@@ -150,7 +150,6 @@ namespace UniVerse.Screens
               
             };
 
-
             var numbers = new List<int> { 1, 2, 3, 4, 2, 3, 4, 5, 2, 3, 4, 5 };
 
             foreach (var number in numbers)

@@ -3,19 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UniVerse.Models;
 using UniVerse.ViewModels;
 
 namespace UniVerse.Components
 {
     public class ProfileView : ContentView
     {
-        private LoginViewModel loginViewModel;
+
+        public string Username {get; set;}
+        private readonly LoginViewModel _loginViewModel;
+ 
         public ProfileView() {
 
-            loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
-           
+            _loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
 
-            Image image = new()
+
+    Image image = new()
             {
                 Aspect = Aspect.AspectFill,
                 HorizontalOptions = LayoutOptions.End,
@@ -31,7 +35,7 @@ namespace UniVerse.Components
 
             Label username = new()
             {
-                Text = "Leander van Aarde",
+                
                 FontSize = 16,
                 FontAttributes = FontAttributes.Bold,
                 TextColor = Colors.Black,
@@ -91,6 +95,16 @@ namespace UniVerse.Components
 
 
             Content = profileContainer;
+
+            GetUserDetails();
+
+
+            void GetUserDetails()
+            {
+                AuthenticatedUser auth = LoginViewModel.AuthUser;
+                username.Text = auth.username;
+            }
+
         }
     }
 }

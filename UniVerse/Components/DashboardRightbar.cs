@@ -1,16 +1,22 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
+using UniVerse.Models;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Components;
 
 public class DashboardRightbar : ContentView
 {
-        public string PageType { get; set; }
+    public string PageType { get; set; }
     public List<String> DropList { get; set; }
-    public DashboardRightbar(string pgType)
-    {
+    public  List<Events> Events { get; set; }
 
+    private readonly EventsViewModel _eventsViewModel;
+    public DashboardRightbar(string pgType)
+
+    {
         PageType = pgType;
+        _eventsViewModel = new EventsViewModel(new Services.EventsServices.EventsService());
         Style inputStyle = new(typeof(Entry))
         {
             Setters =
@@ -35,73 +41,51 @@ public class DashboardRightbar : ContentView
         };
 
 
-        Image defaultimage = new()
-        {
-            Source = ImageSource.FromFile("image_picker.png"),
-            Aspect = Aspect.AspectFit,
-            MaximumHeightRequest = 230,
-            MaximumWidthRequest = 200,
-        };
+        //EventsCard card = new EventsCard("International Cultural Exchange Fair", "Saturday, 08 July 2023" , "Maggie De Vos");
 
-
-        FlexLayout innerLayout = new FlexLayout()
-        {
-            MaximumHeightRequest = 200,
-            MaximumWidthRequest = 200,
-
-            Direction = FlexDirection.Column,
-            Children =
-                {
-                    defaultimage,
-                }
-        };
-
-        Border border = new()
-        {
-            StrokeThickness = 1,
-            Stroke = Color.FromArgb("#2B2B2B"),
-            HeightRequest = 100,
-            StrokeDashOffset = 6,
-            Content = innerLayout,
-            BackgroundColor = Color.FromArgb("#F6F7FB"),
-            Margin = new Thickness(22, 8),
-            Padding = new Thickness(10, 2),
-            StrokeShape = new RoundRectangle
-            {
-                CornerRadius = new CornerRadius(6)
-            },
-        };
-
-
-
-
-
-   
         StackLayout stack = new()
         {
-            VerticalOptions = LayoutOptions.Center,
+            VerticalOptions = LayoutOptions.Start,
             Children =
                 {
-                    heading,
-                    border,
+                    heading
                 }
         };
 
+        ScrollView scrollView = new()
+        {
+         
+        };
         FlexLayout layout = new()
         {
             BackgroundColor = Colors.White,
             Direction = FlexDirection.Column,
-
             JustifyContent = FlexJustify.Start,
+
             Children =
                 {
                     profileContainer,
-                    stack
+                    stack,
+                    scrollView,
                 },
-
-
         };
-        //FlexLayout.SetGrow(stack, 1);
+
+        GetAllEvents();
+
+        async void GetAllEvents()
+        {
+            await _eventsViewModel.GetAllEvents();
+            StackLayout scrollContent = new StackLayout();
+            foreach (var ev in _eventsViewModel.EventsList)
+            {
+                EventsCard card = new EventsCard(ev.event_name, ev.event_date, ev.staff_organiser);
+                //Label name = new() { Text = ev.event_name };
+                scrollContent.Children.Add(card);
+            }
+            scrollView.Content = scrollContent;
+        }
+
+        FlexLayout.SetBasis(scrollView, new FlexBasis(0.85f, true));
         Content = layout;
     }
 }
