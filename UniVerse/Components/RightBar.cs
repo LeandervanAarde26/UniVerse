@@ -72,7 +72,7 @@ namespace UniVerse.Components
                 var selectedImage = await GetImage(imagePickerOptions);
                 if (selectedImage != null)
                 {
-                    // Update the UI to display the selected image
+           
                     defaultimage.Source = selectedImage.FullPath;
                 }
             };
@@ -228,19 +228,19 @@ namespace UniVerse.Components
         public async Task<FileResult> GetImage(PickOptions pickOptions)
         {
             var result = await FilePicker.PickAsync(pickOptions);
-            if (result != null)
-            {
-                if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
-                       result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
-                {
-                    using var stream = await result.OpenReadAsync();
-                    var iamge = ImageSource.FromStream(() => stream);
-
-                    return result;
-                }
-            }
             try
             {
+                if (result != null)
+                {
+                    if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
+                           result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+                    {
+                        using var stream = await result.OpenReadAsync();
+                        var iamge = ImageSource.FromStream(() => stream);
+
+                        return result;
+                    }
+                }
 
             }
             catch (Exception ex)
