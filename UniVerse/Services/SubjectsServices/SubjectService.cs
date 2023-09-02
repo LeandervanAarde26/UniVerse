@@ -3,7 +3,6 @@ using System.Text;
 using System.Text.Json;
 using UniVerse.Models;
 using UniVerse.Services.SubjectService;
-using static Android.Provider.SyncStateContract;
 
 namespace UniVerse.Services.SubjectServices
 {

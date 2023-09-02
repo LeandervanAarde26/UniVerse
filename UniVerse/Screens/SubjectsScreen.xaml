@@ -33,6 +33,7 @@
 
         <FlexLayout Grid.Column="1" BackgroundColor="White" Direction="Column" JustifyContent="Center">
             <!-- ProfileView will be inserted here -->
+            <components:ProfileView/>
             <StackLayout VerticalOptions="Center" Padding="20">
                 <Label Text="Add new Subject" FontSize="20" HorizontalOptions="Start" Margin="22, 5" TextColor="#2B2B2B" FontAttributes="Bold"/>
                 <Border Padding="0, 0, 0, 30" StrokeThickness="1.5" Stroke="{DynamicResource Gray900}" StrokeDashArray="8,3" HeightRequest="230" StrokeDashOffset="6" BackgroundColor="{DynamicResource Primary}" Margin="20, 10, 20, 15">
