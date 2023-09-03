@@ -28,7 +28,7 @@ public partial class SubjectOverview : ContentPage
             }
 
             var subject = await _viewModel.GetSubject(SubjectId);
-            Debug.WriteLine(subject.subject_id);
+            Debug.WriteLine(subject.subjectName);
         }
     }
 }
