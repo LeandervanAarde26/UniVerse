@@ -45,7 +45,6 @@ namespace UniVerse.ViewModels
             foreach (var member in members)
             {
                 StaffList.Add(member);
-                Debug.WriteLine(member.role);
             }
         }
 
@@ -89,7 +88,6 @@ namespace UniVerse.ViewModels
             foreach (var member in members)
             {
                 StudentList.Add(member);
-                Debug.WriteLine(member.name);
                 maximumChartValue++;
 
                 if(member.role == "Degree student")
@@ -125,7 +123,6 @@ namespace UniVerse.ViewModels
             foreach (var member in members)
             {
                 AllStaffList.Add(member);
-                Debug.WriteLine(member.name);
                 maximumChartValue++;
 
                 if (member.role == "Lecturer")

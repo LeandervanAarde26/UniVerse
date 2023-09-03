@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:UniVerse.Components"
+             xmlns:screens="clr-namespace:UniVerse.Screens"
+             x:DataType="screens:SubjectsScreen"
              x:Class="UniVerse.Screens.SubjectsScreen"
-             
              BackgroundColor="{DynamicResource Key=Primary}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,7 +40,7 @@
                             </Grid.RowDefinitions>
 
                             <Image Source="image_picker.png" Margin="0, 10, 0, 0"/>
-                             <Button Text="View Subject" FontSize="18" BackgroundColor="Transparent" TextColor="#407BFF" Margin="0,20,0,0" Grid.Row="1"/>
+                            <Button Text="View Subject" FontSize="18" BackgroundColor="Transparent" TextColor="#407BFF" Margin="0,20,0,0" Grid.Row="1"/>
                         </Grid>
                     </Border>
 
@@ -54,12 +55,8 @@
                         <Entry Placeholder="Subject Code" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Margin="0, 0, 5, 0"/>
 
                         <!--I don't know why the title color isn't showing up because it was earlier lol-->
-                        <Picker Grid.Column="1" BackgroundColor="{DynamicResource Primary}" Margin="5, 0, 0, 0" TitleColor="{DynamicResource Gray400}" Title="Select Lecturer">
-                            <Picker.Items>
-                                <x:String>Armand Pretorius</x:String>
-                                <x:String>Mike Maynard</x:String>
-                            </Picker.Items>
-                        </Picker>
+                        <Picker x:Name="picker" Grid.Column="1" BackgroundColor="{DynamicResource Primary}" Margin="5, 0, 0, 0" TitleColor="{DynamicResource Gray400}" Title="Select Lecturer"
+                                ItemsSource="{Binding PickerItems}" ItemDisplayBinding="{Binding Name}"/>
                     </Grid>
 
                     <Grid Padding="20, 5, 20, 5">
