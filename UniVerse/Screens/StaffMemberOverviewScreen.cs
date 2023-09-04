@@ -209,7 +209,7 @@ namespace UniVerse.Screens
 
             if (staffMember != null)
             {
-                var payment = staffMember.role == "Admin" ? "/Month" : "/hour";
+                String payment = staffMember.role == "Admin" ? "/Month" : "/hour";
                 name.Text = staffMember.lecturer_name;
                 role.Text = staffMember.role;
                 mail.Text = staffMember.email;
