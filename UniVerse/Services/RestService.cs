@@ -36,7 +36,7 @@ namespace UniVerse.Services
         {
             People = new List<Person>();
 
-            Uri uri = new(string.Format(baseURL + "People/Lecturers"));
+            Uri uri = new(string.Format(baseURL + "People/Staff"));
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);

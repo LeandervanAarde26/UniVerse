@@ -88,10 +88,6 @@ namespace UniVerse.Components
             Grid.SetRow(stack, 0);
             Grid.SetColumn(stack, 1);
 
-            grid.Children.Add(mark);
-            Grid.SetRow(mark, 1);
-            Grid.SetColumn(mark, 1);
-
             Frame frame = new()
             {
                 CornerRadius = 20,
