@@ -220,10 +220,8 @@ namespace UniVerse.Screens
                 neededCredites = student.needed_credits;
                 studentNumber.Text = student.person_system_identifier;
 
-                // Store the enrollments in the class-level variable
                 enrollments = student.enrollments;
 
-                // Call a method to create and add cards based on enrollments
                 CreateAndAddEnrollmentCards();
             }
         }
@@ -234,7 +232,6 @@ namespace UniVerse.Screens
 
             foreach (var enrollment in enrollments)
             {
-                Debug.WriteLine(enrollment.subject_name);
                 var card = new EnrolledSubjects(enrollment.subject_name, enrollment.subject_code, enrollment.subject_color)
                 {
                     BindingContext = enrollment
