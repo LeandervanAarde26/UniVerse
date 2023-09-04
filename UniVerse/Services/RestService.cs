@@ -6,6 +6,7 @@ using System.Security.Authentication;
 using System.Text;
 using System.Text.Json;
 using UniVerse.Models;
+using static UniVerse.Models.LecturerOverviewModel;
 
 namespace UniVerse.Services
 {
@@ -41,7 +42,7 @@ namespace UniVerse.Services
         {
             People = new List<Person>();
 
-            Uri uri = new(string.Format(baseURL + "People/Lecturers"));
+            Uri uri = new(string.Format(baseURL + "People/Staff"));
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -59,9 +60,9 @@ namespace UniVerse.Services
             return People;
         }
 
-        public async Task<Lecturer> GetLecturerByIdAsync(int id)
+        public async Task<LecturerWithCourses> GetLecturerByIdAsync(int id)
         {
-            Lecturer Lect = new();
+            LecturerWithCourses Lect = new();
             Uri lecturerUri = new(string.Format(baseURL + "People/Lecturer/{0}", id));
 
             try
@@ -71,8 +72,8 @@ namespace UniVerse.Services
                 if(response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Lect = JsonSerializer.Deserialize<Lecturer>(content, _serializerOptions);
-                    Debug.WriteLine($"Name: {Lect.name}");
+                    Lect = JsonSerializer.Deserialize<LecturerWithCourses>(content, _serializerOptions);
+                    Debug.WriteLine($"Name: {Lect.lecturer_name}");
                 }
             }
             catch (Exception ex)
@@ -123,10 +124,10 @@ namespace UniVerse.Services
             return Students;
         }
 
-        public async Task<Student> GetStudentByIdAsync(int id)
+        public async Task<SingleStudentWithCourses> GetStudentByIdAsync(int id)
         {
-            Student Stu = new();
-            Uri studentUri = new(string.Format(baseURL + "People/Lecturer/{0}", id));
+            SingleStudentWithCourses Student = new();
+            Uri studentUri = new(string.Format(baseURL + "People/student/{0}", id));
 
             try
             {
@@ -135,8 +136,8 @@ namespace UniVerse.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Stu = JsonSerializer.Deserialize<Student>(content, _serializerOptions);
-                    Debug.WriteLine($"Name: {Stu.name}");
+                    Student = JsonSerializer.Deserialize<SingleStudentWithCourses>(content, _serializerOptions);
+                    Debug.WriteLine($"Name: {Student.student_name}");
                 }
             }
             catch (Exception ex)
@@ -144,7 +145,7 @@ namespace UniVerse.Services
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
-            return Stu;
+            return Student;
         }
 
         // Could it be that the functions were not seperated? I think they has to be seperate. 

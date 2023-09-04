@@ -9,11 +9,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using UniVerse.Components;
+using UniVerse.Models;
 using UniVerse.ViewModels;
 //using static Java.Util.Jar.Attributes;
 
 namespace UniVerse.Screens
 {
+
     public class StudentOverviewScreen : ContentPage
     {
         public int StudentId { get; private set; }
@@ -22,9 +24,13 @@ namespace UniVerse.Screens
         private readonly Label name;
         private readonly Label role;
         private readonly Label mail;
+        private readonly Label cell;
         private readonly Label studentNumber;
         private int achievedCredits;
         private int neededCredites;
+
+        private List<SubjectEnrollments> enrollments;
+        private readonly FlexLayout layout;
 
         public StudentOverviewScreen()
         {
@@ -92,7 +98,7 @@ namespace UniVerse.Screens
                 Margin = new Thickness(0, 20, 0, 0)
             };
 
-            Label cell = new()
+            cell = new Label
             {
                 Text = "\U0000260E 076 887 6675",
                 Style = textStyle,
@@ -103,14 +109,6 @@ namespace UniVerse.Screens
                 Text = "📧 Armand@OpenWindow.co.za",
                 Style = textStyle,
             };
-
-
-            Label address = new()
-            {
-                Text = "\U0001F4CD 05 Academic drive, Gauteng, Johannesburg, 1724",
-                Style = textStyle,
-            };
-
 
             StackLayout stackLayout = new()
             {
@@ -123,8 +121,7 @@ namespace UniVerse.Screens
                     studentNumber,
                     role,
                     cell,
-                    mail,
-                    address
+                    mail
                 }
             };
 
@@ -141,27 +138,15 @@ namespace UniVerse.Screens
 
             // Cards
 
-            FlexLayout layout = new()
+            layout = new FlexLayout()
             {
-
                 Direction = FlexDirection.Row,
                 Wrap = FlexWrap.Wrap,
                 JustifyContent = FlexJustify.Start,
                 AlignItems = FlexAlignItems.Start,
-
             };
 
-
-            var numbers = new List<int> { 1, 2, 3, 4, 2, 3, 4, 5, 2, 3, 4, 5 };
-
-            foreach (var number in numbers)
-            {
-                var card = new EnrolledSubjects();
-
-                FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
-
-                layout.Children.Add(card);
-            }
+            enrollments = new List<SubjectEnrollments>();
 
             ScrollView scrollView = new()
             {
@@ -227,12 +212,32 @@ namespace UniVerse.Screens
 
             if (student != null)
             {
-                name.Text = student.name;
+                name.Text = student.student_name;
                 role.Text = student.role;
                 mail.Text = student.email;
+                cell.Text = student.student_phoneNumber;
                 achievedCredits = student.person_credits;
                 neededCredites = student.needed_credits;
                 studentNumber.Text = student.person_system_identifier;
+
+                enrollments = student.enrollments;
+
+                CreateAndAddEnrollmentCards();
+            }
+        }
+
+        private void CreateAndAddEnrollmentCards()
+        {
+            layout.Children.Clear();
+
+            foreach (var enrollment in enrollments)
+            {
+                var card = new EnrolledSubjects(enrollment.subject_name, enrollment.subject_code, enrollment.subject_color)
+                {
+                    BindingContext = enrollment
+                };
+                FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
+                layout.Children.Add(card);
             }
         }
     }

@@ -16,6 +16,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(StaffMemberOverviewScreen), typeof(StaffMemberOverviewScreen));
         Routing.RegisterRoute(nameof(StudentOverviewScreen), typeof(StudentOverviewScreen));
         Routing.RegisterRoute(nameof(SubjectOverview), typeof(SubjectOverview));
+        Routing.RegisterRoute(nameof(StudentScreen), typeof(StudentScreen));
+        Routing.RegisterRoute(nameof(StaffScreen), typeof(StaffScreen));
 
         _navViewModel = new Navigation();
         Image image = new()

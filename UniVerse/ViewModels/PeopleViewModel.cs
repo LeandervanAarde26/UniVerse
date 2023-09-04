@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UniVerse.Controls.RadialBarChart;
 using UniVerse.Models;
 using UniVerse.Services;
+using static UniVerse.Models.LecturerOverviewModel;
 
 namespace UniVerse.ViewModels
 {
@@ -17,8 +18,8 @@ namespace UniVerse.ViewModels
         public ObservableCollection<Person> StaffList { get; set; }
         public ObservableCollection<Person> AllStaffList { get; set; }
         public ObservableCollection<Student> StudentList { get; set; }
-        public ObservableCollection<Lecturer> StaffMember { get; set; }
-        public ObservableCollection<Student> Student { get; set; }
+        public ObservableCollection<LecturerWithCourses> StaffMember { get; set; }
+        public ObservableCollection<SingleStudentWithCourses> Student { get; set; }
         public ObservableCollection<ChartEntry> Chart { get; set; }
         public ObservableCollection<ChartEntry> StaffChart { get; set; }
 
@@ -27,8 +28,8 @@ namespace UniVerse.ViewModels
             _restService = restService;
             StaffList = new ObservableCollection<Person>();
             StudentList = new ObservableCollection<Student>();
-            StaffMember = new ObservableCollection<Lecturer>();
-            Student = new ObservableCollection<Student>();
+            StaffMember = new ObservableCollection<LecturerWithCourses>();
+            Student = new ObservableCollection<SingleStudentWithCourses>();
             Chart = new ObservableCollection<ChartEntry>();
             StaffChart = new ObservableCollection<ChartEntry>();
             AllStaffList = new ObservableCollection<Person>();
@@ -43,12 +44,11 @@ namespace UniVerse.ViewModels
             foreach (var member in members)
             {
                 StaffList.Add(member);
-                Debug.WriteLine(member.role);
             }
         }
 
         //Get staff member by id
-        public async Task<Lecturer> GetStaffMember(int id)
+        public async Task<LecturerWithCourses> GetStaffMember(int id)
         {
             var member = await _restService.GetLecturerByIdAsync(id);
             StaffMember.Add(member);
@@ -68,7 +68,7 @@ namespace UniVerse.ViewModels
         }
 
         //Get student member by id
-        public async Task<Student> GetStudent(int id)
+        public async Task<SingleStudentWithCourses> GetStudent(int id)
         {
             var student = await _restService.GetStudentByIdAsync(id);
             Student.Add(student);
@@ -87,7 +87,6 @@ namespace UniVerse.ViewModels
             foreach (var member in members)
             {
                 StudentList.Add(member);
-                Debug.WriteLine(member.name);
                 maximumChartValue++;
 
                 if(member.role == "Degree student")
@@ -123,7 +122,6 @@ namespace UniVerse.ViewModels
             foreach (var member in members)
             {
                 AllStaffList.Add(member);
-                Debug.WriteLine(member.name);
                 maximumChartValue++;
 
                 if (member.role == "Lecturer")
