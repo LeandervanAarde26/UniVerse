@@ -228,12 +228,15 @@ namespace UniVerse.Screens
 
             foreach (var enrollment in enrollments)
             {
-                var card = new EnrolledSubjects(enrollment.subject_name, enrollment.subject_code, enrollment.subject_color)
+                if (enrollment.subject_color != null && enrollment.subject_id != 0)
                 {
-                    BindingContext = enrollment
-                };
-                FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
-                layout.Children.Add(card);
+                    var card = new EnrolledSubjects(enrollment.subject_name, enrollment.subject_code, enrollment.subject_color)
+                    {
+                        BindingContext = enrollment
+                    };
+                    FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
+                    layout.Children.Add(card);
+                }
             }
         }
     }
