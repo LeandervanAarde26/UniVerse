@@ -126,13 +126,6 @@ public class Dashboard : ContentPage
             Margin = new Thickness(10, 10, 0, 0)
         };
 
-        Button viewStudents = new()
-        {
-            Text = "View Students > ",
-            TextColor = Color.FromArgb("#407BFF"),
-            HorizontalOptions = LayoutOptions.End,
-        };
-
         //viewStudents.Clicked += ShowThePopup;
 
         var ChartData = new ChartEntry[]
@@ -166,8 +159,7 @@ public class Dashboard : ContentPage
             JustifyContent = FlexJustify.Center,
             Direction = FlexDirection.Column,
             Children = {
-                studentsGraph,
-                viewStudents
+                studentsGraph
             }
         };
 
@@ -219,21 +211,13 @@ public class Dashboard : ContentPage
             Margin = new Thickness(10, 10, 0, 0)
         };
 
-        Button viewStaff = new()
-        {
-            Text = "View Staff > ",
-            TextColor = Color.FromArgb("#407BFF"),
-            HorizontalOptions = LayoutOptions.End,
-
-        };
 
         FlexLayout adminInfo = new()
         {
             JustifyContent = FlexJustify.Center,
             Direction = FlexDirection.Column,
             Children = {
-                adminGraph,
-                viewStaff
+                adminGraph
             }
         };
 
@@ -296,7 +280,6 @@ public class Dashboard : ContentPage
             Text = "View Subjects > ",
             TextColor = Color.FromArgb("#407BFF"),
             HorizontalOptions = LayoutOptions.End,
-
         };
         FlexLayout subjectsInfo = new()
         {
@@ -358,7 +341,6 @@ public class Dashboard : ContentPage
             Text = "View Funds > ",
             TextColor = Color.FromArgb("#407BFF"),
             HorizontalOptions = LayoutOptions.End,
-
         };
 
         FlexLayout fundsTextLayout = new()
