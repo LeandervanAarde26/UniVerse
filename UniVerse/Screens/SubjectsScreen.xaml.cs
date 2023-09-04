@@ -23,7 +23,7 @@ public partial class SubjectsScreen : ContentPage
         {
             var subjectCard = new Components.SubjectCard
             {
-                BindingContext = subject.Subject
+                BindingContext = subject
             };
             subjectStackLayout.Children.Add(subjectCard);
         }

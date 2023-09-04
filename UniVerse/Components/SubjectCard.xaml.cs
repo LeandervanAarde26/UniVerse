@@ -1,12 +1,10 @@
 ﻿using UniVerse.ViewModels;
 using UniVerse.Models;
-using Microsoft.Maui;
 
 namespace UniVerse.Components
 {
     public partial class SubjectCard : ContentView
     {
-
         public SubjectCard()
         {
             InitializeComponent();
@@ -15,10 +13,9 @@ namespace UniVerse.Components
 
         public async void ViewSubject(object sender, EventArgs e)
         {
-            if (BindingContext is SubjectModel subject)
+            if (BindingContext is SubjectWithEnrollments subject)
             {
-                var subjectCardViewModel = new SubjectCardViewModel();
-                await subjectCardViewModel.NavigateToOverviewScreenAsync(subject.subject_id);
+                await SubjectCardViewModel.NavigateToOverviewScreenAsync(subject.subjectId);
             }
         }
     }

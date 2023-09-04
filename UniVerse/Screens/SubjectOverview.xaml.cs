@@ -14,21 +14,40 @@ public partial class SubjectOverview : ContentPage
 		InitializeComponent();
 
         _viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
+        BindingContext = _viewModel;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        if (BindingContext is SubjectOverviewViewModel viewModel)
+        if (BindingContext is NavOverviewViewModel viewModel)
         {
             if (viewModel.NavigationParameter is int id)
             {
-                Debug.WriteLine(id);
+                SubjectId = id;
             }
 
             var subject = await _viewModel.GetSubject(SubjectId);
-            Debug.WriteLine(subject.subject_id);
+
+            if (subject != null)
+            {
+                nameOfSub.Text = subject.subjectName;
+                descOfSub.Text = subject.subjectDescription;
+                nameOfLect.Text = subject.lecturer_name;
+                emailOfLect.Text = subject.lecturer_email;
+            }
+
+            foreach (var enrollment in subject.enrollments)
+            {
+                Debug.WriteLine($"Student Name: {enrollment.student_name}");
+
+                var studentCard = new Components.StudentCard
+                {
+                    BindingContext = enrollment
+                };
+                studentStackLayout.Children.Add(studentCard);
+            }
         }
     }
 }

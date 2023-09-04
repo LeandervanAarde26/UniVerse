@@ -1,9 +1,7 @@
 ﻿<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:components="clr-namespace:UniVerse.Components"
-             xmlns:viewmodels="clr-namespace:UniVerse.ViewModels"
              xmlns:models="clr-namespace:UniVerse.Models"
-             x:DataType="models:SubjectModel"
+             x:DataType="models:SubjectWithEnrollments"
              x:Class="UniVerse.Components.SubjectCard">
 
     <!--Subject Card-->
@@ -17,7 +15,7 @@
                 <!--Subject name & Code-->
                 <HorizontalStackLayout>
                     <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="600">
-                        <Label Text="{Binding subject_name}"
+                        <Label Text="{Binding subjectName}"
                            TextColor="{DynamicResource Gray900}"
                            FontSize="20"
                            FontAttributes="Bold"/>
@@ -35,7 +33,7 @@
                 </HorizontalStackLayout>
                 <!--Subject Description-->
 
-                <Label Text="{Binding subject_description}"
+                <Label Text="{Binding subjectDescription}"
                        MaxLines="2"
                        TextColor="{DynamicResource Gray900}"
                        FontSize="16"

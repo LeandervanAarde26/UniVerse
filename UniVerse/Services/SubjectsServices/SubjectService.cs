@@ -12,7 +12,7 @@ namespace UniVerse.Services.SubjectServices
         internal string baseURL = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
 
-        public List<SubjectWithLecturerModel> Subjects { get; private set; }
+        public List<SubjectWithEnrollments> Subjects { get; private set; }
 
         public SubjectService()
         {
@@ -25,10 +25,10 @@ namespace UniVerse.Services.SubjectServices
         }
 
         //get subjects
-        public async Task<List<SubjectWithLecturerModel>> GetSubjectsAsync()
+        public async Task<List<SubjectWithEnrollments>> GetSubjectsAsync()
         {
-            Subjects = new List<SubjectWithLecturerModel>();
-            Uri uri = new(string.Format(baseURL + "Subjects"));
+            Subjects = new List<SubjectWithEnrollments>();
+            Uri uri = new(string.Format(baseURL + "CourseEnrollments"));
 
             try
             {
@@ -36,7 +36,7 @@ namespace UniVerse.Services.SubjectServices
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Subjects = JsonSerializer.Deserialize<List<SubjectWithLecturerModel>>(content, _serializerOptions);
+                    Subjects = JsonSerializer.Deserialize<List<SubjectWithEnrollments>>(content, _serializerOptions);
                 }
             }
             catch (Exception ex)
@@ -48,10 +48,10 @@ namespace UniVerse.Services.SubjectServices
         }
 
         //Get subjects by id
-        public async Task<SubjectModel> GetSubjectByIdAsync(int id)
+        public async Task<SubjectWithEnrollments> GetSubjectByIdAsync(int id)
         {
-            SubjectModel subject = new();
-            Uri studentUri = new(string.Format(baseURL + "Subjects/{0}", id));
+            SubjectWithEnrollments subject = new();
+            Uri studentUri = new(string.Format(baseURL + "CourseEnrollments/subject/{0}", id));
 
             try
             {
@@ -60,8 +60,8 @@ namespace UniVerse.Services.SubjectServices
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    subject = JsonSerializer.Deserialize<SubjectModel>(content, _serializerOptions);
-                    Debug.WriteLine($"Name: {subject.subject_name}");
+                    subject = JsonSerializer.Deserialize<SubjectWithEnrollments>(content, _serializerOptions);
+                    Debug.WriteLine($"Name: {subject.subjectName}");
                 }
             }
             catch (Exception ex)
