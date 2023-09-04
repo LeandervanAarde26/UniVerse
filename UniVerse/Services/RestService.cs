@@ -6,6 +6,7 @@ using System.Security.Authentication;
 using System.Text;
 using System.Text.Json;
 using UniVerse.Models;
+using static UniVerse.Models.LecturerOverviewModel;
 
 namespace UniVerse.Services
 {
@@ -53,9 +54,9 @@ namespace UniVerse.Services
             return People;
         }
 
-        public async Task<Lecturer> GetLecturerByIdAsync(int id)
+        public async Task<LecturerWithCourses> GetLecturerByIdAsync(int id)
         {
-            Lecturer Lect = new();
+            LecturerWithCourses Lect = new();
             Uri lecturerUri = new(string.Format(baseURL + "People/Lecturer/{0}", id));
 
             try
@@ -65,8 +66,8 @@ namespace UniVerse.Services
                 if(response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Lect = JsonSerializer.Deserialize<Lecturer>(content, _serializerOptions);
-                    Debug.WriteLine($"Name: {Lect.name}");
+                    Lect = JsonSerializer.Deserialize<LecturerWithCourses>(content, _serializerOptions);
+                    Debug.WriteLine($"Name: {Lect.lecturer_name}");
                 }
             }
             catch (Exception ex)
