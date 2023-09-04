@@ -44,19 +44,19 @@
 
                 <Label Text="Students" TextColor="{DynamicResource Gray900}" FontSize="35" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
 
-                <Picker BackgroundColor="{DynamicResource Gray900}" HorizontalTextAlignment="Center" HorizontalOptions="EndAndExpand" HeightRequest="10">
+                <!--<Picker BackgroundColor="{DynamicResource Gray900}" HorizontalTextAlignment="Center" HorizontalOptions="EndAndExpand" HeightRequest="10">
                     <Picker.Items>
                         <x:String>1st Years</x:String>
                         <x:String>2nd Years</x:String>
                         <x:String>3rd Years</x:String>
                     </Picker.Items>
-                </Picker>
+                </Picker>-->
             </FlexLayout>
         </VerticalStackLayout>
         
         
         <ScrollView VerticalOptions="Center" Grid.ColumnSpan="1" Grid.Row="2" Padding="20, 0, 20, 20">
-            <StackLayout x:Name="studentStackLayout" VerticalOptions="Start" HorizontalOptions="Start">
+            <StackLayout x:Name="studentStackLayout">
 
 
             </StackLayout>
