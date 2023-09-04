@@ -96,7 +96,6 @@ namespace UniVerse.Controls.RadialBarChart
                 clockwise: true,
                 closed: false);
         }
-
         private static void DrawCenterText(ICanvas canvas, PointF center , float fontSize)
         {
             string text = "100 \nCredits";

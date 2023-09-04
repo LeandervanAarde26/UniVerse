@@ -15,8 +15,15 @@ namespace UniVerse.ViewModels
 {
     internal class LoginViewModel : BaseViewModel
     {
-      public RestService _restServive;
-      private readonly INavigation _navigation;
+        public RestService _restServive;
+        public static AuthenticatedUser AuthUser;
+        private readonly INavigation _navigation;
+
+        public LoginViewModel(RestService restService, INavigation navigation)
+        {
+            _restServive = restService;
+            _navigation = navigation;
+        }
 
         public string _emailEntry = string.Empty;
         public string EmailEntry
@@ -51,17 +58,6 @@ namespace UniVerse.ViewModels
             }
         }
 
-        public AuthenticatedUser _authUser = new();
-        public AuthenticatedUser AuthUser
-        {
-            get { return _authUser; }
-            set
-            {
-                _authUser = value;
-                OnPropertyChanged(nameof(AuthUser));
-            }
-        }
-
         public int _userId = 0;
         public int UserId
         {
@@ -72,39 +68,25 @@ namespace UniVerse.ViewModels
                 OnPropertyChanged(nameof(UserId));
             }
         }
-
-        public LoginViewModel(RestService restService, INavigation navigation){
-            _restServive = restService;
-            _navigation = navigation;
-        }
-
         public async Task AuthenticatedStream()
         {
             try
             {
-                AuthUser = await _restServive.PostDataAsync(EmailEntry, PasswordEntry);
-                if(AuthUser != null)
-                {
-                    EmailEntry = String.Empty;
-                    PasswordEntry = String.Empty;
-                    //await _navigation.PushAsync(new AppShell());
-                    App.Current.MainPage = new AppShell();
-                    AuthError = String.Empty;
-                    await SecureStorage.Default.SetAsync("userEmail", AuthUser.userEmail);
-                    await SecureStorage.Default.SetAsync("username", AuthUser.username);
-                }
-                else
-                {
-                    // Authentication failed, set an error message
-                    AuthError = "Authentication failed. Please check your credentials.";
-                }
+                var auth = await _restServive.PostDataAsync(EmailEntry, PasswordEntry);
+                EmailEntry = String.Empty;
+                PasswordEntry = String.Empty;
+                AuthUser = auth;
+                App.Current.MainPage = new AppShell();
+                AuthError = String.Empty;
+
+                await SecureStorage.Default.SetAsync("userEmail", auth.userEmail);
+                await SecureStorage.Default.SetAsync("username", auth.username);
             }
             catch(Exception ex)
             {
                 Debug.WriteLine(ex);
                 AuthError = "Authentication failed. Please check your credentials.";
             }
-         
         }
     }
 }

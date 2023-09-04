@@ -154,7 +154,6 @@ namespace UniVerse.Screens
                 }
             };
 
-
             FlexLayout login = new()
             {
                 JustifyContent = FlexJustify.Center,

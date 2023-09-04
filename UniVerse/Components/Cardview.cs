@@ -18,9 +18,7 @@ namespace UniVerse.Components
         public string Role { get; set; }
         public string Email { get; set; }
         public string AdditionalInformation { get; set; }
-
         public string Buttontext { get; set; }
-
         public Cardview(string nme, string rle, string eml, string addinfo, string btnText, int id)
         {
 
@@ -88,9 +86,9 @@ namespace UniVerse.Components
             Label email = new()
             //200211@virtualWindow.co.za"
             {
-                Text = "\U0001F4E7"  + Role,
+                Text = "\U0001F4E7"  + Email,
                 TextColor = Color.FromArgb("#717171"),
-                FontSize = 15,
+                FontSize = 13,
                 HorizontalOptions = LayoutOptions.Center,
                 Margin = new Thickness(0, 15, 0, 0)
             };
@@ -147,7 +145,6 @@ namespace UniVerse.Components
                 Margin = new Thickness(20),
                 Content = stack,
                 BorderColor = Colors.White,
-
             };
 
             Content = frame;

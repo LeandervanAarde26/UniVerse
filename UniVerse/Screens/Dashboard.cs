@@ -6,17 +6,19 @@ using System.Diagnostics;
 using UniVerse.Components;
 using UniVerse.ViewModels;
 using UniVerse.Controls.RadialBarChart;
-
+using UniVerse.Models;
 
 namespace UniVerse.Screens;
-
 public class Dashboard : ContentPage
 {
     private readonly LoginViewModel _loginViewModel;
+    private readonly PeopleViewModel _peopleViewModel;
     public Dashboard()
     {
         _loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
         BindingContext = _loginViewModel;
+        _peopleViewModel = new PeopleViewModel(new Services.RestService());
+        BindingContext = _peopleViewModel;
 
         Label pageHeading = new()
         {
@@ -53,7 +55,7 @@ public class Dashboard : ContentPage
 
         Label welcomeMessage = new()
         {
-            Text = "Welcome to Universe",
+            Text = "Welcome to Universe! \n It's a great day to manage your portal! ",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
             TextColor = Color.FromArgb("#2B2B2B"),
@@ -105,9 +107,6 @@ public class Dashboard : ContentPage
                     CornerRadius = new CornerRadius(20)
                 },
         };
-
-
-
         //Image studentsGraph = new()
         //{
         //    Source = ImageSource.FromFile("image_picker.png"),
@@ -115,22 +114,6 @@ public class Dashboard : ContentPage
         //    MaximumHeightRequest = 150,
         //    //MaximumWidthRequest = 200,
         //};
-
-        Label degreeStudentsText = new()
-        {
-            Text = "Degree Students",
-            FontSize = 18,
-            FontAttributes = FontAttributes.None,
-            TextColor = Color.FromArgb("#2B2B2B"),
-            HorizontalOptions = LayoutOptions.Start,
-            VerticalOptions = LayoutOptions.Center,
-            Margin = new Thickness(10, 10, 0, 0)
-        };
-
-        RadioButton degreeStudent = new()
-        {
-            Content = "Red"
-        };
 
         Label diplomaStudentsText = new()
         {
@@ -143,9 +126,6 @@ public class Dashboard : ContentPage
             Margin = new Thickness(10, 10, 0, 0)
         };
 
-
-
-
         Button viewStudents = new()
         {
             Text = "View Students > ",
@@ -153,34 +133,32 @@ public class Dashboard : ContentPage
             HorizontalOptions = LayoutOptions.End,
         };
 
-
         //viewStudents.Clicked += ShowThePopup;
 
-
-
         var ChartData = new ChartEntry[]
-{
+        {
             new ChartEntry
             {
-                Value = 71,
+                Value = 10,
                 Color = Color.FromArgb("#6023FF"),
                 Text = "Visual Studio Code"
             },
-};
-
+        };
 
         RadialBarChart studentsGraph = new()
         {
             BarSpacing = 5,
             BarThickness = 12,
-            HeightRequest = 150,
+            WidthRequest = 350,
+            HeightRequest = 250,
             FontSize = 12,
             MaxValue = 100,
             //ShowLabels = false,
-            BarBackgroundColor = Colors.White,
+            BarBackgroundColor = Color.FromArgb("#E9F0FF"),
             Entries = ChartData,
-            HorizontalOptions = LayoutOptions.FillAndExpand,
-            Margin = new Thickness(10, 10, 0, 0)
+            //Margin = new Thickness(10, 5, 0, 0),
+            LegendText = "Degree Students",
+            LegendText2 = "Diploma",
         };
 
         FlexLayout studentInfo = new()
@@ -189,26 +167,34 @@ public class Dashboard : ContentPage
             Direction = FlexDirection.Column,
             Children = {
                 studentsGraph,
-                degreeStudentsText,
-                diplomaStudentsText,
                 viewStudents
             }
         };
 
-
+        var AdminChartData = new ChartEntry[]
+        {
+            new ChartEntry
+            {
+                Value = 10,
+                Color = Color.FromArgb("#6023FF"),
+                Text = "Visual Studio Code"
+            },
+        };
 
         RadialBarChart adminGraph = new()
         {
             BarSpacing = 5,
             BarThickness = 12,
-            HeightRequest = 150,
             FontSize = 12,
             MaxValue = 100,
+            WidthRequest = 350,
+            HeightRequest = 250,
             //ShowLabels = false,
             BarBackgroundColor = Colors.White,
-            Entries = ChartData,
-            HorizontalOptions = LayoutOptions.FillAndExpand,
-            Margin = new Thickness(10, 10, 0, 0)
+            Entries = AdminChartData,
+            //Margin = new Thickness(10, 10, 0, 0),
+            LegendText = "Lecturer",
+            LegendText2 = "Admin",
         };
 
         Label adminStaffText = new()
@@ -247,12 +233,9 @@ public class Dashboard : ContentPage
             Direction = FlexDirection.Column,
             Children = {
                 adminGraph,
-                adminStaffText,
-                academicText,
                 viewStaff
             }
         };
-
 
         Border studentsBanner = new()
         {
@@ -270,10 +253,6 @@ public class Dashboard : ContentPage
             },
         };
 
-
-
-    
-
         Border adminBanner = new()
         {
             HeightRequest = 280,
@@ -289,8 +268,6 @@ public class Dashboard : ContentPage
                 CornerRadius = new CornerRadius(20)
             },
         };
-
-
 
         Label subjectsNumberText = new()
         {
@@ -314,7 +291,6 @@ public class Dashboard : ContentPage
             Margin = new Thickness(10, 10, 0, 0)
         };
 
-
         Button viewSubjects = new()
         {
             Text = "View Subjects > ",
@@ -322,8 +298,6 @@ public class Dashboard : ContentPage
             HorizontalOptions = LayoutOptions.End,
 
         };
-
-
         FlexLayout subjectsInfo = new()
         {
             JustifyContent = FlexJustify.Center,
@@ -349,7 +323,6 @@ public class Dashboard : ContentPage
             },
         };
 
-
         Image fundsImage = new()
         {
             Source = ImageSource.FromFile("dashboard_funds.png"),
@@ -369,7 +342,6 @@ public class Dashboard : ContentPage
             Margin = new Thickness(10, 10, 0, 0)
         };
 
-
         Label totalFundsText = new()
         {
             Text = "Total Funds",
@@ -380,7 +352,6 @@ public class Dashboard : ContentPage
             VerticalOptions = LayoutOptions.Center,
             Margin = new Thickness(10, 10, 0, 0)
         };
-
 
         Button viewFunds = new()
         {
@@ -399,7 +370,6 @@ public class Dashboard : ContentPage
                 totalFundsText,
             }
         };
-
 
         FlexLayout fundsInfo = new()
         {
@@ -511,15 +481,20 @@ public class Dashboard : ContentPage
 
         GetUserDetails();
 
-
         async void GetUserDetails()
         {
-            //await _loginViewModel.ge
+           var studentGet =  _peopleViewModel.GetAllstudents();
+           var staffGet =_peopleViewModel.GetAllStaff();
+
+            await Task.WhenAll(studentGet, staffGet);
+
             string username = await SecureStorage.Default.GetAsync("username");
-            welcomeHeading.Text = $"Hello, {username} ";
+            studentsGraph.Entries = _peopleViewModel.Chart;
+            adminGraph.Entries = _peopleViewModel.StaffChart;
+            AuthenticatedUser auth = LoginViewModel.AuthUser;
+            welcomeHeading.Text = $"Hello, {auth.username} ";
         }
     }
-
     protected override void OnAppearing()
     {
         base.OnAppearing();
