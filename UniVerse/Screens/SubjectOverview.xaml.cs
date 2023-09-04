@@ -20,7 +20,7 @@ public partial class SubjectOverview : ContentPage
     {
         base.OnAppearing();
 
-        if (BindingContext is SubjectOverviewViewModel viewModel)
+        if (BindingContext is NavOverviewViewModel viewModel)
         {
             if (viewModel.NavigationParameter is int id)
             {

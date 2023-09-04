@@ -2,7 +2,7 @@
 
 namespace UniVerse.ViewModels
 {
-    public class SubjectOverviewViewModel
+    public class NavOverviewViewModel
     {
         public int NavigationParameter { get; set; }
     }

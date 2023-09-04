@@ -215,7 +215,7 @@ namespace UniVerse.Screens
         {
             base.OnAppearing();
 
-            if (BindingContext is StudentMemberOverviewViewModel viewModel)
+            if (BindingContext is NavOverviewViewModel viewModel)
             {
                 if (viewModel.NavigationParameter is int memberIdValue)
                 {

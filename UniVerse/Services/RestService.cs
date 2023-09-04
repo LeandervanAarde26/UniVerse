@@ -117,10 +117,10 @@ namespace UniVerse.Services
             return Students;
         }
 
-        public async Task<Student> GetStudentByIdAsync(int id)
+        public async Task<SingleStudentWithCourses> GetStudentByIdAsync(int id)
         {
-            Student Stu = new();
-            Uri studentUri = new(string.Format(baseURL + "People/Lecturer/{0}", id));
+            SingleStudentWithCourses Student = new();
+            Uri studentUri = new(string.Format(baseURL + "People/student/{0}", id));
 
             try
             {
@@ -129,8 +129,8 @@ namespace UniVerse.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Stu = JsonSerializer.Deserialize<Student>(content, _serializerOptions);
-                    Debug.WriteLine($"Name: {Stu.name}");
+                    Student = JsonSerializer.Deserialize<SingleStudentWithCourses>(content, _serializerOptions);
+                    Debug.WriteLine($"Name: {Student.student_name}");
                 }
             }
             catch (Exception ex)
@@ -138,7 +138,7 @@ namespace UniVerse.Services
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
-            return Stu;
+            return Student;
         }
 
         // Could it be that the functions were not seperated? I think they has to be seperate. 

@@ -8,7 +8,7 @@ namespace UniVerse.ViewModels
 	{
         public async Task NavigateToOverviewScreenAsync(int id)
         {
-            var viewModel = new StudentMemberOverviewViewModel { NavigationParameter = id };
+            var viewModel = new NavOverviewViewModel { NavigationParameter = id };
             await Shell.Current.Navigation.PushAsync(new SubjectOverview { BindingContext = viewModel });
         }
     }
