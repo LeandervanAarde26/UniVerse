@@ -51,7 +51,7 @@ namespace UniVerse.Services.SubjectServices
         public async Task<SubjectWithEnrollments> GetSubjectByIdAsync(int id)
         {
             SubjectWithEnrollments subject = new();
-            Uri studentUri = new(string.Format(baseURL + "Subjects/{0}", id));
+            Uri studentUri = new(string.Format(baseURL + "CourseEnrollments/subject/{0}", id));
 
             try
             {

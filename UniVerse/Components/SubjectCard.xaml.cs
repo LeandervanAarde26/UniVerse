@@ -15,8 +15,7 @@ namespace UniVerse.Components
         {
             if (BindingContext is SubjectWithEnrollments subject)
             {
-                var subjectCardViewModel = new SubjectCardViewModel();
-                await subjectCardViewModel.NavigateToOverviewScreenAsync(subject.subjectId);
+                await SubjectCardViewModel.NavigateToOverviewScreenAsync(subject.subjectId);
             }
         }
     }

@@ -5,5 +5,6 @@ public partial class StudentCard : ContentView
 	public StudentCard()
 	{
 		InitializeComponent();
-	}
+        BindingContext = this;
+    }
 }

@@ -4,6 +4,8 @@
              xmlns:components="clr-namespace:UniVerse.Components"
              x:Class="UniVerse.Screens.SubjectOverview"
              Title="SubjectOverview"
+             xmlns:models="clr-namespace:UniVerse.Models"
+             x:DataType="models:SubjectWithEnrollments"
              BackgroundColor="{DynamicResource Primary}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -27,8 +29,8 @@
                 <FlexLayout JustifyContent="SpaceBetween">
                     <!--Subject Information-->
                     <FlexLayout JustifyContent="Center" Direction="Column">
-                        <Label Text="UX/UI Design" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold"/>
-                        <Label Text="Subject Info will go over here" TextColor="{DynamicResource Gray900}" FontSize="18" FontAttributes="Bold"/>
+                        <Label x:Name="nameOfSub" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold"/>
+                        <Label x:Name="descOfSub" TextColor="{DynamicResource Gray900}" FontSize="18" FontAttributes="Bold" MaxLines="4"  MaximumWidthRequest="1100"/>
                     </FlexLayout>
 
                     <!--Subject Image-->
@@ -54,20 +56,10 @@
         
         
         <ScrollView VerticalOptions="Center" Grid.ColumnSpan="1" Grid.Row="2" Padding="20, 0, 20, 20">
-            <FlexLayout Direction="Column">
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-            </FlexLayout>
+            <StackLayout x:Name="studentStackLayout" VerticalOptions="Start" HorizontalOptions="Start">
+
+
+            </StackLayout>
         </ScrollView>
 
         <!--Assign Student + Lecturer-->
@@ -94,8 +86,8 @@
                             </Image.Clip>
                         </Image>
                         <VerticalStackLayout FlexLayout.AlignSelf="Center">
-                            <Label Text="Armand Pretorious" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource Gray900}"/>
-                            <Label Text="Armand@openwindow.co.za" FontSize="16" TextColor="{DynamicResource Gray400}"/>
+                            <Label x:Name="nameOfLect" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource Gray900}"/>
+                            <Label x:Name="emailOfLect" FontSize="16" TextColor="{DynamicResource Gray400}"/>
                         </VerticalStackLayout>
                     </FlexLayout>
                     <!--I'll make these entries a search, just gotta figure it out-->

@@ -33,7 +33,6 @@ namespace UniVerse.ViewModels
                 SubjectList.Add(subject);
                 Debug.WriteLine(subject.subjectName);
             }
-            Debug.WriteLine(SubjectList);
         }
 
         //Get subject by id
