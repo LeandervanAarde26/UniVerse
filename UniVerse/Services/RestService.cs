@@ -21,7 +21,11 @@ namespace UniVerse.Services
         public List<Person> Staff { get; private set; }
         public AuthenticatedUser AuthenticatedUser { get; private set; }
 
-        public List<Fees> Fee { get; private set; }
+        public List<LecturerFees> LecturerFee { get; private set; }
+
+        public List<StudentFees> StudentFee { get; private set; }
+
+        public List<AdminFees> AdminFee { get; private set; }
 
         public RestService()
         {
@@ -182,9 +186,9 @@ namespace UniVerse.Services
 
 
 
-        public async Task<List<Fees>> GetFeesAsync()
+        public async Task<List<LecturerFees>> GetFeesAsync()
         {
-            Fee = new List<Fees>();
+            LecturerFee = new List<LecturerFees>();
             Uri uri = new(string.Format(baseURL + "Subjects/lecturerfees"));
             try
             {
@@ -192,16 +196,60 @@ namespace UniVerse.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Fee = JsonSerializer.Deserialize<List<Fees>>(content, _serializerOptions);
-                    Debug.WriteLine($"Lecturer: {Fee}");
+                    LecturerFee = JsonSerializer.Deserialize<List<LecturerFees>>(content, _serializerOptions);
+                    Debug.WriteLine($"Lecturer: {LecturerFee}");
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-            return Fee;
+            return LecturerFee;
         }
+
+
+        public async Task<List<StudentFees>> GetStudentFeesAsync()
+        {
+            StudentFee = new List<StudentFees>();
+            Uri uri = new(string.Format(baseURL + "CourseEnrollments/studentFees"));
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    StudentFee = JsonSerializer.Deserialize<List<StudentFees>>(content, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return StudentFee;
+        }
+
+
+
+        public async Task<List<AdminFees>> GetAdminFeesAsync()
+        {
+            AdminFee = new List<AdminFees>();
+            Uri uri = new(string.Format(baseURL + "People/AdminFees"));
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    AdminFee = JsonSerializer.Deserialize<List<AdminFees>>(content, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return AdminFee;
+        }
+
 
 
     }

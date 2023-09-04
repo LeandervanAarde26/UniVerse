@@ -9,16 +9,16 @@ using UniVerse.Services;
 
 namespace UniVerse.ViewModels
 {
-    internal class FeesViewModel : BaseViewModel
+    internal class LecturerFeesViewModel : BaseViewModel
     {
         public RestService _restService;
 
-        public ObservableCollection<Fees> FeesList { get; set; }
+        public ObservableCollection<LecturerFees> FeesList { get; set; }
 
-        public FeesViewModel(RestService restService) 
+        public LecturerFeesViewModel(RestService restService) 
         {
             _restService = restService;
-           FeesList = new ObservableCollection<Fees>();
+           FeesList = new ObservableCollection<LecturerFees>();
         }
 
 

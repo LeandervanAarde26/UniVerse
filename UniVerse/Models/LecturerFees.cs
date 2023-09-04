@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 namespace UniVerse.Models
 {
-    public class Fees
+    public class LecturerFees
     {
         public int id { get; set; }
 
         public string lecturer { get; set; }
 
-        public int? totalHoursWorked { get; set; }
+        public decimal totalHoursWorked { get; set; }
 
-        public int? monthlyIncome { get; set; }
+        public decimal monthlyIncome { get; set; }
     }
 }

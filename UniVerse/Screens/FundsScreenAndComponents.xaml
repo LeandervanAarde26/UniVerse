@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:UniVerse.Components"
-             xmlns:screens="clr-namespace:UniVerse.Screens" x:DataType="screens:FundsScreenAndComponents"
              x:Class="UniVerse.Screens.FundsScreenAndComponents"
            
              BackgroundColor="{DynamicResource Primary}">
@@ -32,22 +31,12 @@
               
         </VerticalStackLayout>
 
+
     
 
         <ScrollView Grid.Column="0" Grid.Row="1" Padding="20, 0, 20, 0">
-            <FlexLayout Direction="Column">
-
-                <components:LecturerFundsCard/>
-                <components:LecturerFundsCard/>
-                <components:LecturerFundsCard/>
-                <components:StudentFundsCard/>
-                <components:StudentFundsCard/>
-                <components:StudentFundsCard/>
-                <components:StudentFundsCard/>
-                <components:StudentFundsCard/>
-                <components:StudentFundsCard/>
-                <components:StudentFundsCard/>
-                <components:StudentFundsCard/>
+            <FlexLayout x:Name="fundLayout" Direction="Column" >
+                <!--<components:LecturerFundsCard/>-->
                 <components:StudentFundsCard/>
             </FlexLayout>
         </ScrollView>
@@ -60,13 +49,13 @@
             <!--Counters-->
             <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Margin="0, 0, 0, 20">
                 <FlexLayout Direction="Column">
-                    <Label Text="100 000" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="totalIncomeLabel" Text="100 000" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                     <Label Text="Total Income" TextColor="{DynamicResource Blue}" FontSize="24" HorizontalTextAlignment="Center"/>
                 </FlexLayout>
             </Frame>
             <Frame BackgroundColor="{DynamicResource Purple200}" BorderColor="Transparent">
                 <FlexLayout Direction="Column">
-                    <Label Text="100 000" TextColor="{DynamicResource Purple}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="totalSalaryLabel" Text="100 000" TextColor="{DynamicResource Purple}" FontSize="50" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                     <Label Text="Total Salaries to be paid" TextColor="{DynamicResource Purple}" FontSize="24" HorizontalTextAlignment="Center"/>
                 </FlexLayout>
             </Frame>
