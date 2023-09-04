@@ -125,10 +125,8 @@ namespace UniVerse.Screens
 
                 Children =
                 {
-
                     imgBorder,
                     stackLayout,
-
                 }
             };
 

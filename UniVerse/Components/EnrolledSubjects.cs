@@ -38,18 +38,6 @@ namespace UniVerse.Components
 
             };
 
-            Label mark = new()
-            {
-                Text = "75%",
-                TextColor = Color.FromArgb("#717171"),
-                FontSize = 18,
-                FontAttributes = FontAttributes.Bold,
-                HorizontalOptions = LayoutOptions.End,
-                VerticalOptions = LayoutOptions.End,
-            };
-
-
-
             StackLayout stack = new()
             {
                 HorizontalOptions = LayoutOptions.Start,
