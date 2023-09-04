@@ -21,6 +21,8 @@ namespace UniVerse.Services
         public List<Person> Staff { get; private set; }
         public AuthenticatedUser AuthenticatedUser { get; private set; }
 
+        public List<Fees> Fee { get; private set; }
+
         public RestService()
         {
             _client = new HttpClient();
@@ -177,5 +179,31 @@ namespace UniVerse.Services
             return AuthenticatedUser;
         }
 
+
+
+
+        public async Task<List<Fees>> GetFeesAsync()
+        {
+            Fee = new List<Fees>();
+            Uri uri = new(string.Format(baseURL + "Subjects/lecturerfees"));
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Fee = JsonSerializer.Deserialize<List<Fees>>(content, _serializerOptions);
+                    Debug.WriteLine($"Lecturer: {Fee}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return Fee;
+        }
+
+
     }
+
 }
