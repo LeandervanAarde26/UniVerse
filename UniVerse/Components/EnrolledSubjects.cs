@@ -1,19 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Text;
-
 
 namespace UniVerse.Components
 {
     public class EnrolledSubjects : ContentView
     {
-        public EnrolledSubjects()
+        public string SubjectName { get; set; }
+        public string SubjectCode { get; set; }
+        public string SubjectColor { get; set; }
+
+        public EnrolledSubjects(string name, string code, string color)
         {
+            SubjectName = name;
+            SubjectCode = code;
+            SubjectColor = color;
+
             Label subjectName = new()
             {
 
-                Text = "Interactive Development",
+                Text = SubjectName,
                 TextColor = Color.FromArgb("#2B2B2B"),
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 20,
@@ -23,7 +30,7 @@ namespace UniVerse.Components
 
             Label subjectCode = new()
             {
-                Text = "IDV 300",
+                Text = SubjectCode,
                 TextColor = Color.FromArgb("#717171"),
                 FontSize = 14,
                 HorizontalOptions = LayoutOptions.Start,
@@ -101,8 +108,8 @@ namespace UniVerse.Components
             {
                 CornerRadius = 20,
                 HeightRequest = 240,
-                BackgroundColor = Color.FromArgb("#DFE9FF"),
-                BorderColor = Color.FromArgb("#DFE9FF"),
+                BackgroundColor = Color.FromArgb(SubjectColor),
+                BorderColor = Color.FromArgb(SubjectColor),
                 Margin = new Thickness(12, 10),
 
                 Content = grid,

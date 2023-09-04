@@ -235,7 +235,7 @@ namespace UniVerse.Screens
             foreach (var enrollment in enrollments)
             {
                 Debug.WriteLine(enrollment.subject_name);
-                var card = new EnrolledSubjects()
+                var card = new EnrolledSubjects(enrollment.subject_name, enrollment.subject_code, enrollment.subject_color)
                 {
                     BindingContext = enrollment
                 };
