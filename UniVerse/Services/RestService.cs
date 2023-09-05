@@ -253,6 +253,41 @@ namespace UniVerse.Services
 
 
 
+
+        public async Task<AddStaffModal> AddStaffAsync(string name, string surname, string number, string email)
+        {
+            AddStaffModal AddStaffModal = null;
+            Uri uri = new(string.Format(baseURL + "People"));
+            var requestData = new
+            {
+                name,
+                surname,
+                number,
+                email
+            };
+
+            var json = JsonSerializer.Serialize(requestData, _serializerOptions);
+            StringContent stringContent = new(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                HttpResponseMessage res = await _client.PostAsync(uri, stringContent);
+                if (res.IsSuccessStatusCode)
+                {
+                    string responseContent = await res.Content.ReadAsStringAsync();
+                    AuthenticatedUser = JsonSerializer.Deserialize<AuthenticatedUser>(responseContent, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            return AddStaffModal;
+        }
+
+
+
     }
 
 }

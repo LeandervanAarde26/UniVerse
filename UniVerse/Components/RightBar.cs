@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
 using System.Diagnostics;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Components
 {
@@ -11,10 +12,16 @@ namespace UniVerse.Components
 
     public class RightBar : ContentView
     {
+
+        private AddStaffViewModel StaffVM;
+
         public string PageType { get; set; }
         public List<String> DropList {get; set; }
         public RightBar(string pgType, List<String> dropLst)
         {
+
+            StaffVM = new AddStaffViewModel(new Services.RestService());
+            BindingContext = StaffVM;
 
             PageType = pgType;
             DropList = dropLst;
@@ -115,17 +122,23 @@ namespace UniVerse.Components
 
             };
 
+            name.SetBinding(Entry.TextProperty, new Binding("NameEntry", source: StaffVM));
+
             Entry surname = new()
             {
                 Placeholder = PageType +  " Surname",
                 Style = inputStyle
             };
 
+            surname.SetBinding(Entry.TextProperty, new Binding("SurnameEntry", source: StaffVM));
+
             Entry studentNumber = new()
             {
                 Placeholder = PageType + " Number",
                 Style = inputStyle
             };
+
+            studentNumber.SetBinding(Entry.TextProperty, new Binding("NumberEntry", source: StaffVM));
 
             var listOptions = DropList;
 
@@ -172,6 +185,8 @@ namespace UniVerse.Components
 
             };
 
+            email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: StaffVM));
+
             Entry phoneNumber = new()
             {
                 Placeholder =  PageType + " Number",
@@ -185,6 +200,19 @@ namespace UniVerse.Components
                 Text =  "Add " + PageType,
                 BackgroundColor = Color.FromArgb("#2B2B2B"),
                 Margin = new Thickness(18, 6)
+            };
+
+            button.Clicked += async (sender, args) =>
+            {
+                try
+                {
+                    await StaffVM.AddNewStaff();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    //ErrorTitle.Text = ex.Message;
+                }
             };
 
             StackLayout stack = new()
