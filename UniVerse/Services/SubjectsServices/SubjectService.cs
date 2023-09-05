@@ -88,5 +88,37 @@ namespace UniVerse.Services.SubjectServices
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
         }
+
+        // Add new lecturer
+        public async Task UpdateSubjectLecturerAsync(int subjectId, int newLecturerId)
+        {
+            try
+            {
+                var payload = new
+                {
+                    SubjectId = subjectId,
+                    NewLecturerId = newLecturerId
+                };
+
+                string jsonPayload = JsonSerializer.Serialize(payload, _serializerOptions);
+
+                var content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(baseURL + "Subjects/ChangeLecturer", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("PUT request was successful.");
+                }
+                else
+                {
+                    Debug.WriteLine($"PUT request failed with status code {response.StatusCode}.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($@"ERROR {ex.Message}");
+            }
+        }
     }
 }

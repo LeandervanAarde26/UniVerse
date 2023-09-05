@@ -56,10 +56,25 @@ namespace UniVerse.ViewModels
                 {
                     SubjectList.Remove(SubjectToRemove);
                 }
+                _ = GetAllSubjects();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Error deleting person: " + ex.Message);
+            }
+        }
+
+        // Update Subject Lecturer
+        public async Task UpdateSubjectLecturer(int subjectId, int newLecturerId)
+        {
+            try
+            {
+                await _restService.UpdateSubjectLecturerAsync(subjectId, newLecturerId);
+                _ = GetAllSubjects();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error updating subject lecturer: " + ex.Message);
             }
         }
     }
