@@ -149,7 +149,7 @@ The subject management screen provides a centralised location for managing all s
 
 Within the subject overview screen, users can delve into specific subject details. This includes viewing enrolled students, assigning lecturers to subjects, and adding new students to the subject roster.
 
-![image5](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/TimeLine.png)
+![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/subjectOverview.jpg)
 
 ### Funds Screen
 
