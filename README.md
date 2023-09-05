@@ -18,10 +18,8 @@
 <p align="center">
 
   <a href="https://github.com/">
-    <img src="https://github.com/LeandervanAarde/UniVerse/blob/Develops/UniVerse/Resources/Images/logo.svg" alt="Logo" width="140" height="140">
+    <img src="https://github.com/LeandervanAarde/UniVerse/blob/Develops/UniVerse/Resources/Images/logo.svg" alt="Logo" width="300" height="300">
   </a>
-  
-  <h3 align="center">UniVerse</h3>
 
   <p align="center">
     UniVerse is a cross-platform school management desktop application built using using C# and .NET MAUI  <br>
@@ -111,17 +109,17 @@ Run the following in the command-line to clone the project:
 
 The login system ensures that only administrators have access to the application. This authentication process safeguards sensitive school management data.
 
-![image3](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/HomePage.png)
+![image3](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/login.jpg)
 ### Dashboard View
 
 The dashboard provides snapshots of essential school data. It presents statistics such as the total number of students, staff members, subjects, and the aggregated student fees. Additionally, the dashboard offers a glimpse of upcoming school events, ensuring that administrators are always informed.
 
-![image4](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/ComparisonPage.png)
+![image4](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/dashboard.jpg)
 ### Students Management Screen
 
 The student management section allows users to efficiently handle student-related tasks. Administrators can browse, and add new students, and navigate to the individual student page to gather insights into individual student data.
 
-![image5](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/TimeLine.png)
+![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/studentScreen.jpg)
 
 ### Students Overview Screen
 
@@ -133,7 +131,7 @@ Within the student overview screen, users can access detailed information about 
 
 In the staff management section, administrators can manage all staff members associated with the institution. This includes adding new staff members, and accessing detailed information about each staff member.
 
-![image5](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/TimeLine.png)
+![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/staffScreen.jpg)
 
 ### Staff Overview Screen
 
@@ -145,7 +143,7 @@ Similar to the student overview screen, the staff overview screen offers a compr
 
 The subject management screen provides a centralised location for managing all subjects offered by the institution. Administrators can effortlessly add new subjects and access detailed subject profiles.
 
-![image5](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/TimeLine.png)
+![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/subjectScreen.jpg)
 
 ### Subject Overview Screen
 
@@ -157,7 +155,7 @@ Within the subject overview screen, users can delve into specific subject detail
 
 The financial management section, also known as the funds screen, offers an overview of the institution's financial data. It displays critical financial data, including total income and pending salary payments. Administrators can also use this section to close the month's financial activities, ensuring accurate accounting.
 
-![image5](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/TimeLine.png)
+![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/funds.jpg)
 
 <!-- CONCEPT PROCESS -->
 <!-- Briefly explain your concept ideation process -->
@@ -168,14 +166,12 @@ The `Conceptual Process` is the set of actions, activities and research that was
 
 ### Ideation
 
-![image6](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Ideation.png)
+![image6](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/Ideation.png)
 
 
 ### Wireframes
 
-![image7](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Wireframe1.jpg)
-![image8](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Wireframe2.jpg)
-![image9](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Wireframe3.jpg)
+![image7](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/wireframes.png)
 
 
 
@@ -227,10 +223,10 @@ The `Development Process` is the technical implementations and functionality don
 
 ### Mockups
 
-![image10](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Mockup3.jpg)
+![image8](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Mockup3.jpg)
 <br>
 
-![image11](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Mockup4.jpg)
+![image9](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Mockup4.jpg)
 
 See the [open issues](https://github.com/) for a list of proposed features (and known issues).
 
