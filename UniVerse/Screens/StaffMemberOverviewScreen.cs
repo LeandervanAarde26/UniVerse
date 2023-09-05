@@ -148,8 +148,7 @@ namespace UniVerse.Screens
                 Content = layout
             };
 
-            StaffMemberRightBar right = new();
-
+            StaffMemberRightBar right = new(StaffId);
 
             Grid grid = new()
             {
@@ -201,7 +200,6 @@ namespace UniVerse.Screens
                 if (viewModel.NavigationParameter is int memberIdValue)
                 {
                     StaffId = memberIdValue;
-                    Debug.WriteLine(StaffId);
                 }
             }
 
