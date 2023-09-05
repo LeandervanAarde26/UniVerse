@@ -106,6 +106,26 @@ namespace UniVerse.Services
             return Staff;
         }
 
+        public async Task<List<Person>> GetLecturersAsync()
+        {
+            Staff = new List<Person>();
+            Uri uri = new(string.Format(baseURL + "People/Lecturers"));
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Staff = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return Staff;
+        }
+
         // get students
         public async Task<List<Student>> GetStudentsAsync()
         {

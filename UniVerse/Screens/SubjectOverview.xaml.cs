@@ -8,18 +8,22 @@ public partial class SubjectOverview : ContentPage
 {
     public int SubjectId { get; set; }
     private readonly SubjectViewModel _viewModel;
+    private PeopleViewModel _peopleViewModel;
 
     public SubjectOverview()
 	{
 		InitializeComponent();
 
         _viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
+        _peopleViewModel = new PeopleViewModel(new Services.RestService());
         BindingContext = _viewModel;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+
+        await _peopleViewModel.GetAllStaff();
 
         if (BindingContext is NavOverviewViewModel viewModel)
         {

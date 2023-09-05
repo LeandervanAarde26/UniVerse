@@ -67,6 +67,17 @@ namespace UniVerse.ViewModels
             }
         }
 
+        public async Task GetAllLecturers()
+        {
+            var members = await _restService.GetLecturersAsync();
+            StaffList.Clear();
+
+            foreach (var member in members)
+            {
+                StaffList.Add(member);
+            }
+        }
+
         //Get student member by id
         public async Task<SingleStudentWithCourses> GetStudent(int id)
         {
