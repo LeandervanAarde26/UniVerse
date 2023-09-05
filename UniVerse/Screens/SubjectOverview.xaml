@@ -91,7 +91,7 @@
                         </VerticalStackLayout>
                     </FlexLayout>
                     <!--I'll make these entries a search, just gotta figure it out-->
-                    <Entry Placeholder="Lecturer" BackgroundColor="White" TextColor="#2B2B2B"/>
+                    <SearchBar Placeholder="Search Lecturers..." BackgroundColor="{DynamicResource Primary}" CancelButtonColor="{DynamicResource Blue}"/>
                     <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
                 </VerticalStackLayout>
             </Frame>
