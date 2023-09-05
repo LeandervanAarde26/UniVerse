@@ -26,6 +26,8 @@ public partial class SubjectsScreen : ContentPage
                 BindingContext = subject
             };
             subjectStackLayout.Children.Add(subjectCard);
+
+            Console.WriteLine($"Added subject: {subject.subjectName}");
         }
     }
 }

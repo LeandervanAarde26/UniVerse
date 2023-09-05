@@ -58,7 +58,8 @@ public partial class SubjectOverview : ContentPage
         if (answer)
         {
             await _viewModel.DeleteSubject(SubjectId);
-            await DisplayAlert("Success!", "Subject deleted successfully. It will be removed apon your next login.", "OK");
+            await DisplayAlert("Success!", "Subject deleted successfully.", "OK");
+            _ = Navigation.PopAsync();
         }
         else
         {

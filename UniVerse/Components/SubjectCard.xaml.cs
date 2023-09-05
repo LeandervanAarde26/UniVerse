@@ -5,6 +5,8 @@ namespace UniVerse.Components
 {
     public partial class SubjectCard : ContentView
     {
+        private bool isEventSubscribed = false;
+
         public SubjectCard()
         {
             InitializeComponent();
@@ -13,9 +15,14 @@ namespace UniVerse.Components
 
         public async void ViewSubject(object sender, EventArgs e)
         {
-            if (BindingContext is SubjectWithEnrollments subject)
+            if (!isEventSubscribed)
             {
-                await SubjectCardViewModel.NavigateToOverviewScreenAsync(subject.subjectId);
+                isEventSubscribed = true;
+
+                if (BindingContext is SubjectWithEnrollments subject)
+                {
+                    await SubjectCardViewModel.NavigateToOverviewScreenAsync(subject.subjectId);
+                }
             }
         }
     }
