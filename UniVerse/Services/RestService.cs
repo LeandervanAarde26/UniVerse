@@ -153,7 +153,7 @@ namespace UniVerse.Services
         }
 
         //Delete people
-        public async Task DeletePersonAsync(string id)
+        public async Task DeletePersonAsync(int id)
         {
             Uri uri = new(string.Format(baseURL + "People/{0}", id));
 

@@ -75,6 +75,26 @@ namespace UniVerse.ViewModels
             return student;
         }
 
+        //Delete person
+        public async Task DeletePerson(int id)
+        {
+            try
+            {
+                await _restService.DeletePersonAsync(id);
+                var StaffMemberToRemove = StaffList.FirstOrDefault(p => p.id == id);
+                var StudentToRemove = StudentList.FirstOrDefault(p => p.id == id);
+                if (StaffMemberToRemove != null || StudentToRemove != null)
+                {
+                    StaffList.Remove(StaffMemberToRemove);
+                    StudentList.Remove(StudentToRemove);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error deleting person: " + ex.Message);
+            }
+        }
+
         public async Task GetAllstudents()
         {
             var members = await _restService.GetStudentsAsync();
