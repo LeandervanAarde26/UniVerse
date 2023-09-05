@@ -49,8 +49,8 @@ public partial class SubjectsScreen : ContentPage
         }
     }
 
-    private int _subjectCost;
-    public int SubjectCost
+    private string _subjectCost;
+    public string SubjectCost
     {
         get { return _subjectCost; }
         set
@@ -63,8 +63,8 @@ public partial class SubjectsScreen : ContentPage
         }
     }
 
-    private int _subjectCredits;
-    public int SubjectCredits
+    private string _subjectCredits;
+    public string SubjectCredits
     {
         get { return _subjectCredits; }
         set
@@ -91,8 +91,8 @@ public partial class SubjectsScreen : ContentPage
         }
     }
 
-    private int _subjectRuntime;
-    public int SubjectRuntime
+    private string _subjectRuntime;
+    public string SubjectRuntime
     {
         get { return _subjectRuntime; }
         set
@@ -119,8 +119,8 @@ public partial class SubjectsScreen : ContentPage
         }
     }
 
-    private int _subjectClassAmount;
-    public int SubjectClassAmount
+    private string _subjectClassAmount;
+    public string SubjectClassAmount
     {
         get { return _subjectClassAmount; }
         set
@@ -188,14 +188,15 @@ public partial class SubjectsScreen : ContentPage
     {
         string subjectName = SubjectName;
         string subjectCode = SubjectCode;
-        int subjectCost = SubjectCost;
-        int subjectCredits = SubjectCredits;
         string subjectColor = SubjectColor;
-        int subjectRuntime = SubjectRuntime;
         string subjectDescription = SubjectDescription;
-        int subjectClassAmount = SubjectClassAmount;
         int selectedLecturerId = 0;
         DateTime subjectStartDate = course_start.Date;
+
+        _ = int.TryParse(SubjectCost, out int subjectCost);
+        _ = int.TryParse(SubjectCredits, out int subjectCredits);
+        _ = int.TryParse(SubjectRuntime, out int subjectRuntime);
+        _ = int.TryParse(SubjectClassAmount, out int subjectClassAmount);
 
         if (picker.SelectedItem != null)
         {
@@ -218,16 +219,16 @@ public partial class SubjectsScreen : ContentPage
         };
 
         await viewModel.SaveSubject(newSubject);
-        Debug.WriteLine(newSubject.course_start);
+        //Debug.WriteLine(newSubject.subject_cost);
 
         SubjectName = "";
         SubjectCode = "";
-        SubjectCost = 0;
-        SubjectCredits = 0;
+        SubjectCost = "";
+        SubjectCredits = "";
         SubjectColor = "";
-        SubjectRuntime = 0;
+        SubjectRuntime = "";
         SubjectDescription = "";
-        SubjectClassAmount = 0;
+        SubjectClassAmount = "";
         SubjectStartDate = DateTime.Today;
 
         await viewModel.GetAllSubjects();
