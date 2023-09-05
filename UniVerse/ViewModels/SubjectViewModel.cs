@@ -21,20 +21,6 @@ namespace UniVerse.ViewModels
             Subject = new ObservableCollection<SubjectModel>();
         }
 
-        //add Subject
-        public async Task SaveSubject(SubjectModel subject)
-        {
-            try
-            {
-                await _restService.SaveTodoItemAsync(subject, isNewSubject: true);
-                Debug.WriteLine("Subject successfully saved.");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"ERROR: {ex.Message}");
-            }
-        }
-
         // Get Subjects
         public async Task GetAllSubjects()
         {
@@ -55,6 +41,21 @@ namespace UniVerse.ViewModels
             Subject.Add(subject);
             Debug.WriteLine(subject.subject_name);
             return subject;
+        }
+
+        //add Subject
+        public async Task SaveSubject(SubjectModel subject)
+        {
+            try
+            {
+                await _restService.SaveTodoItemAsync(subject, isNewSubject: true);
+                Debug.WriteLine("Subject successfully saved.");
+                _ = GetAllSubjects();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR: {ex.Message}");
+            }
         }
     }
 }

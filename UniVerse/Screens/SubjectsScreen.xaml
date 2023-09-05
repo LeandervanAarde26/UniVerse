@@ -5,7 +5,8 @@
              xmlns:screens="clr-namespace:UniVerse.Screens" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="screens:SubjectsScreen"
              x:Class="UniVerse.Screens.SubjectsScreen"
-             BackgroundColor="{DynamicResource Key=Primary}">
+             BackgroundColor="{DynamicResource Key=Primary}"
+             xmlns:sys="clr-namespace:System;assembly=netstandard">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70*"/>
@@ -98,7 +99,7 @@
                     </Grid>
 
                     <Entry x:Name="subject_class_amount" Placeholder="Class amount" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Text="{Binding SubjectClassAmount}" Margin="20, 0" Keyboard="Numeric"/>
-                    <DatePicker x:Name="course_start" MinimumDate="03/09/2023" MaximumDate="12/31/2023" Date="03/09/2023" BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Gray900}" Margin="20, 10, 20, 10"/>
+                    <DatePicker x:Name="course_start" MinimumDate="{x:Static sys:DateTime.Today}" MaximumDate="12/31/2023" Date="{x:Static sys:DateTime.Today}" BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Gray900}" Margin="20, 10, 20, 10"/>
 
                     <!--I just need to figure out how to make the text smaller here to match the other entries-->
                     <Editor x:Name="subject_description" Placeholder="Subject Description" BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Gray400}" HeightRequest="200" Text="{Binding SubjectDescription}" Margin="20, 0"/>

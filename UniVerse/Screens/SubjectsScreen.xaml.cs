@@ -155,6 +155,8 @@ public partial class SubjectsScreen : ContentPage
         viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
         peopleViewModel = new PeopleViewModel(new Services.RestService());
 
+        course_start.Date = DateTime.Today;
+
         PickerItems = new List<LecturerPickerItem>();
         BindingContext = this;
     }
@@ -193,16 +195,13 @@ public partial class SubjectsScreen : ContentPage
         string subjectDescription = SubjectDescription;
         int subjectClassAmount = SubjectClassAmount;
         int selectedLecturerId = 0;
-        DateTime subjectStartDate = SubjectStartDate;
-
+        DateTime subjectStartDate = course_start.Date;
 
         if (picker.SelectedItem != null)
         {
             var selectedLecturer = (LecturerPickerItem)picker.SelectedItem;
             selectedLecturerId = selectedLecturer.Id;
         }
-
-
 
         var newSubject = new SubjectModel
         {
@@ -219,6 +218,7 @@ public partial class SubjectsScreen : ContentPage
         };
 
         await viewModel.SaveSubject(newSubject);
+        Debug.WriteLine(newSubject.course_start);
 
         SubjectName = "";
         SubjectCode = "";
@@ -228,7 +228,7 @@ public partial class SubjectsScreen : ContentPage
         SubjectRuntime = 0;
         SubjectDescription = "";
         SubjectClassAmount = 0;
-        SubjectStartDate = DateTime.Now;
+        SubjectStartDate = DateTime.Today;
 
         await viewModel.GetAllSubjects();
     }
