@@ -149,7 +149,9 @@ namespace UniVerse.Components
 
             };
 
-             foreach (var option in listOptions)
+            studentRole.SetBinding(Entry.TextProperty, new Binding("RoleEntry", source: StaffVM));
+
+            foreach (var option in listOptions)
             {
                 studentRole.Items.Add(option);
             }

@@ -12,5 +12,6 @@ namespace UniVerse.Services
         Task<List<LecturerFees>> GetFeesAsync();
         Task<List<StudentFees>> GetStudentFeesAsync();
         Task<List<AdminFees>> GetAdminFeesAsync();
+        Task<AddStaffModal> AddStaffAsync(string person_system_identifier, string first_name, string last_name, int role, string person_email, string person_cell);
     }
 }

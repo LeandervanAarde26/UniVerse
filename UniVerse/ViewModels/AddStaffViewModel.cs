@@ -51,14 +51,36 @@ namespace UniVerse.ViewModels
             get { return _number; }
             set
             {
-                _name = value;
+                _number = value;
                 OnPropertyChanged(nameof(NumberEntry));
+            }
+        }
+
+        public string _cell = string.Empty;
+        public string CellEntry
+        {
+            get { return _cell; }
+            set
+            {
+                _cell = value;
+                OnPropertyChanged(nameof(CellEntry));
             }
         }
 
 
 
         //Picker Member Type
+        public int _role = 0;
+        public int RoleEntry
+        {
+            get { return _role; }
+            set
+            {
+                _role = value;
+                OnPropertyChanged(nameof(RoleEntry));
+            }
+        }
+
 
 
 
@@ -82,10 +104,14 @@ namespace UniVerse.ViewModels
         {
             try
             {
-                var add = await _restServive.AddStaffAsync(NameEntry, SurnameEntry, NumberEntry, EmailEntry);
+                var add = await _restServive.AddStaffAsync(NumberEntry, NameEntry, SurnameEntry, RoleEntry, EmailEntry, CellEntry);
+
+
                 NameEntry = String.Empty;
                 SurnameEntry = String.Empty;
+                CellEntry = String.Empty;
                 NumberEntry = String.Empty;
+                RoleEntry = 0;
                 EmailEntry = String.Empty;
                 AddStaff = add;
 

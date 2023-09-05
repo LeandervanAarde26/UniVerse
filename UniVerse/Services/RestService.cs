@@ -28,6 +28,8 @@ namespace UniVerse.Services
 
         public List<AdminFees> AdminFee { get; private set; }
 
+        public AddStaffModal AddStaff { get; private set; }
+
         public RestService()
         {
             _client = new HttpClient();
@@ -254,17 +256,26 @@ namespace UniVerse.Services
 
 
 
-        public async Task<AddStaffModal> AddStaffAsync(string name, string surname, string number, string email)
+        public async Task<AddStaffModal> AddStaffAsync(string person_system_identifier, string first_name, string last_name, int role, string person_email, string person_cell)
         {
             AddStaffModal AddStaffModal = null;
             Uri uri = new(string.Format(baseURL + "People"));
-            var requestData = new
+            AddStaffModal requestData = new()
             {
-                name,
-                surname,
-                number,
-                email
-            };
+
+                person_id = 0,
+                person_system_identifier = person_system_identifier,
+                first_name = first_name,
+                last_name = last_name,
+                person_email = person_email,
+                added_date = DateTime.Today,
+                person_active = true,
+                role = role,
+                person_credits = 0,
+                person_cell = person_cell,
+                needed_credits = 0,
+                person_password = "",
+    };
 
             var json = JsonSerializer.Serialize(requestData, _serializerOptions);
             StringContent stringContent = new(json, Encoding.UTF8, "application/json");
@@ -275,7 +286,7 @@ namespace UniVerse.Services
                 if (res.IsSuccessStatusCode)
                 {
                     string responseContent = await res.Content.ReadAsStringAsync();
-                    AuthenticatedUser = JsonSerializer.Deserialize<AuthenticatedUser>(responseContent, _serializerOptions);
+                    AddStaffModal = JsonSerializer.Deserialize<AddStaffModal>(responseContent, _serializerOptions);
                 }
             }
             catch (Exception ex)
@@ -283,7 +294,7 @@ namespace UniVerse.Services
                 Console.WriteLine("Error: " + ex.Message);
             }
 
-            return AddStaffModal;
+            return requestData;
         }
 
 
