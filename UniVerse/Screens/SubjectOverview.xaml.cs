@@ -40,13 +40,25 @@ public partial class SubjectOverview : ContentPage
 
             foreach (var enrollment in subject.enrollments)
             {
-                Debug.WriteLine($"Student Name: {enrollment.student_name}");
-
-                var studentCard = new Components.StudentCard
+                if (enrollment.enrollment_id != 0)
                 {
-                    BindingContext = enrollment
-                };
-                studentStackLayout.Children.Add(studentCard);
+                    var studentCard = new Components.StudentCard
+                    {
+                        BindingContext = enrollment
+                    };
+                    studentStackLayout.Children.Add(studentCard);
+                }
+                else
+                {
+                    var image = new Image
+                    {
+                        Source = "nostudents.png",
+                        Aspect = Aspect.AspectFit,
+                        WidthRequest = 700,
+                        HeightRequest = 700,
+                    };
+                    studentStackLayout.Children.Add(image);
+                }
             }
         }
     }
