@@ -235,6 +235,21 @@ namespace UniVerse.Screens
                     FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
                     layout.Children.Add(card);
                 }
+                else
+                {
+                    // If subject_id is null, display an image
+                    var image = new Image
+                    {
+                        Source = "notfound.png",
+                        Aspect = Aspect.AspectFit,
+                        WidthRequest = 700,
+                        HeightRequest = 700,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    };
+                    FlexLayout.SetBasis(image, new FlexBasis(0.50f, true));
+                    layout.Children.Add(image);
+                }
             }
         }
     }
