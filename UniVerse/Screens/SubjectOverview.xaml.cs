@@ -50,4 +50,19 @@ public partial class SubjectOverview : ContentPage
             }
         }
     }
+
+    private async void DeleteSubject(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Delete Subject", "Are you sure you want to delete this subject?", "Yes", "No");
+
+        if (answer)
+        {
+            await _viewModel.DeleteSubject(SubjectId);
+            await DisplayAlert("Success!", "Subject deleted successfully. It will be removed apon your next login.", "OK");
+        }
+        else
+        {
+            await DisplayAlert("Oops!", "The subject was not deleted.", "OK");
+        }
+    }
 }

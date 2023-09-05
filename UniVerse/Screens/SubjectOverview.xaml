@@ -95,6 +95,7 @@
                     <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
                 </VerticalStackLayout>
             </Frame>
+            <Button Text="Delete Subject" BackgroundColor="{DynamicResource Red}" Margin="0, 20, 0, 0" Clicked="DeleteSubject"/>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

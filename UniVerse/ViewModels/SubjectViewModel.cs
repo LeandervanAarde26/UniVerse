@@ -44,5 +44,23 @@ namespace UniVerse.ViewModels
             Debug.WriteLine(subject.subjectName);
             return subject;
         }
+
+        //Delete Subject
+        public async Task DeleteSubject(int id)
+        {
+            try
+            {
+                await _restService.DeletePersonAsync(id);
+                var SubjectToRemove = SubjectList.FirstOrDefault(p => p.subjectId == id);
+                if (SubjectToRemove != null)
+                {
+                    SubjectList.Remove(SubjectToRemove);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error deleting person: " + ex.Message);
+            }
+        }
     }
 }

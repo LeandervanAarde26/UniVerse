@@ -71,5 +71,22 @@ namespace UniVerse.Services.SubjectServices
 
             return subject;
         }
+
+        //Delete subject
+        public async Task DeletePersonAsync(int id)
+        {
+            Uri uri = new(string.Format(baseURL + "Subjects/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine(@"\tSubject successfully deleted.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
     }
 }
