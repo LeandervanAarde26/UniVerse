@@ -10,18 +10,15 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bee2805/)
 
 <!-- HEADER SECTION -->
-<h5 align="center" style="padding:0;margin:0;">Bronwyn Potgieter</h5>
-<h5 align="center" style="padding:0;margin:0;">200089</h5>
-<h5 align="center" style="padding:0;margin:0;">Leander van Aarde</h5>
-<h5 align="center" style="padding:0;margin:0;">200211</h5>
-<h5 align="center" style="padding:0;margin:0;">Simon Riley</h5>
-<h5 align="center" style="padding:0;margin:0;">170044</h5>
+<h5 align="center" style="padding:0;margin:0;">Bronwyn Potgieter - 200089</h5>
+<h5 align="center" style="padding:0;margin:0;">Leander van Aarde - 200211</h5>
+<h5 align="center" style="padding:0;margin:0;">Simon Riley - 170044</h5>
 <h6 align="center">DV300 - Term 3 | 2023</h6>
 </br>
 <p align="center">
 
   <a href="https://github.com/">
-    <img src="src/Img/Logo.png" alt="Logo" width="140" height="140">
+    <img src="https://github.com/LeandervanAarde/UniVerse/blob/Develops/UniVerse/Resources/Images/logo.svg" alt="Logo" width="140" height="140">
   </a>
   
   <h3 align="center">UniVerse</h3>
@@ -73,7 +70,7 @@ UniVerse is a robust and versatile cross-platform school management desktop appl
 
 ### Built With
 
-* [C#]
+* C#
 * [.NET MAUI](https://learn.microsoft.com/en-us/dotnet/maui/)
 * [PostgreSQL](https://www.postgresql.org/)
 
