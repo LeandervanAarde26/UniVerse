@@ -51,7 +51,7 @@ namespace UniVerse.Screens
                 Aspect = Aspect.AspectFill,
                 WidthRequest = 230,
                 HeightRequest = 230,
-                Source = ImageSource.FromFile("allen_laing.png"),
+                Source = ImageSource.FromFile("lecturer_profile.png"),
 
             };
             

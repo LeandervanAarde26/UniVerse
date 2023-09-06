@@ -72,6 +72,7 @@
 	  <None Remove="Resources\Images\admin_profile.svg" />
 	  <None Remove="Resources\Images\lecturer_profile.svg" />
 	  <None Remove="Resources\Images\student_profile.svg" />
+	  <None Remove="Resources\Images\student_no_enroll.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -129,5 +130,6 @@
 	  <BundleResource Include="Resources\Images\admin_profile.svg" />
 	  <BundleResource Include="Resources\Images\lecturer_profile.svg" />
 	  <BundleResource Include="Resources\Images\student_profile.svg" />
+	  <BundleResource Include="Resources\Images\student_no_enroll.svg" />
 	</ItemGroup>
 </Project>
