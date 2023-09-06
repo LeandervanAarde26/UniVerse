@@ -11,7 +11,7 @@ using UniVerse.Screens;
 
 namespace UniVerse.Components
 {
-
+  
     public class Cardview : ContentView
     {
         private bool isActive = false;
@@ -22,14 +22,20 @@ namespace UniVerse.Components
         public string AdditionalInformation { get; set; }
         public string Buttontext { get; set; }
 
-        public Cardview(string nme, string rle, string eml, string addinfo, string btnText, int id)
-        {
+        public int person_id { get; set; }
+        private PeopleViewModel viewModel;
 
+
+        public Cardview(string nme, string rle, string eml, string addinfo, string btnText, int id, bool active)
+        {
+            viewModel = new PeopleViewModel(new Services.RestService());
             Name = nme;
             Role = rle;
             Email = eml;
             AdditionalInformation = addinfo;
             Buttontext = btnText;
+            isActive = active;
+            person_id = id;
 
             Image image = new()
             {
@@ -77,8 +83,8 @@ namespace UniVerse.Components
 
             toggleButton = new Button
             {
-                Text = "Inactive",
-                BackgroundColor = Color.FromArgb("#FF4040"),
+                Text = isActive ? "Active" :"Inactive",
+                BackgroundColor = isActive ? Color.FromArgb("#29BA56") : Color.FromArgb("#FF4040"),
                 Margin = new Thickness(0, 10, 0, 10),
                 WidthRequest = 100,
                 VerticalOptions = LayoutOptions.Start,
@@ -171,8 +177,9 @@ namespace UniVerse.Components
 
             Content = frame;
         }
-        private void ToggleButton(object sender, EventArgs e)
+        private async void ToggleButton(object sender, EventArgs e)
         {
+            await viewModel.SetPersonStatus(person_id);
             isActive = !isActive;
             UpdateButtonAppearance();
         }

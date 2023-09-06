@@ -249,6 +249,11 @@ namespace UniVerse.ViewModels
             StaffChart.ToArray();
         }
 
+        public async Task SetPersonStatus(int id)
+        {
+            await _restService.UpdatePerson(id);
+        }
+
         public async Task<AddpersonModel> AddStudent()
         {
 
