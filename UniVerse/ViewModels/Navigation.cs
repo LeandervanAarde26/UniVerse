@@ -11,10 +11,13 @@ namespace UniVerse.ViewModels
 {
     public class Navigation
     {
+
         public List<FlyoutItem> Items { get; set; }
+
         public Navigation()
         {
             Items = new List<FlyoutItem>();
+         
         }
         public void AddNavItems()
         {

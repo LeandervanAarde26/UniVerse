@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using UniVerse.Models;
+using UniVerse.Screens;
 using UniVerse.Services;
 
 namespace UniVerse.ViewModels
@@ -86,6 +87,19 @@ namespace UniVerse.ViewModels
             {
                 Debug.WriteLine(ex);
                 AuthError = "Authentication failed. Please check your credentials.";
+            }
+        }
+
+        public async Task LogOutUser()
+        {
+            try
+            {
+                AuthUser = null;
+                App.Current.MainPage = new LoginScreen();
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
     }
