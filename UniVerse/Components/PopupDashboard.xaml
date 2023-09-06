@@ -9,16 +9,18 @@
 <Border WidthRequest="500"
         HeightRequest="500"
         HorizontalOptions="Center"
-        VerticalOptions="Center">
+        VerticalOptions="Center"
+        BackgroundColor="#DFE9FF">
 
 
     <StackLayout
           HorizontalOptions="Center"
         VerticalOptions="Fill">
    <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Welcome to UniVerse"
             TextColor="Black"
             HorizontalOptions="Center"
+       FontSize="Large"
        Margin="50"/>
 
          <Label 
@@ -30,15 +32,15 @@
   <Entry
           x:Name="password"
           HeightRequest="20"
-          WidthRequest="300"
+          WidthRequest="400"
           Placeholder="Password"
-          Margin="2"
+          Margin="70"
           BackgroundColor="LightGray"
           TextColor="Black"
           Text="{Binding Password}"
       />
 
-   <Button Command="{Binding OnChangePassword }" Text="Change Password" BackgroundColor="#2B2B2B" Margin="20, 15, 20, 0" />
+   <Button Command="{Binding OnChangePassword }" Text="Change Password" BackgroundColor="#2B2B2B" Margin="20, 40, 20, 0" />
 
         </StackLayout>
 
