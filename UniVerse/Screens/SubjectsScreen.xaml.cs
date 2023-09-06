@@ -191,7 +191,7 @@ public partial class SubjectsScreen : ContentPage
         string subjectColor = SubjectColor;
         string subjectDescription = SubjectDescription;
         int selectedLecturerId = 0;
-        DateTime subjectStartDate = course_start.Date;
+        DateTime subjectStartDate = course_start.Date.ToUniversalTime();
 
         _ = int.TryParse(SubjectCost, out int subjectCost);
         _ = int.TryParse(SubjectCredits, out int subjectCredits);
@@ -219,7 +219,6 @@ public partial class SubjectsScreen : ContentPage
         };
 
         await viewModel.SaveSubject(newSubject);
-        //Debug.WriteLine(newSubject.subject_cost);
 
         SubjectName = "";
         SubjectCode = "";
