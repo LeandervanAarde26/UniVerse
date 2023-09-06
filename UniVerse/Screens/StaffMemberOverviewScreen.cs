@@ -148,7 +148,7 @@ namespace UniVerse.Screens
                 Content = layout
             };
 
-            StaffMemberRightBar right = new(StaffId);
+            StaffMemberRightBar right = new();
 
             Grid grid = new()
             {

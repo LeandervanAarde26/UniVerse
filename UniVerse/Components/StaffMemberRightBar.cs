@@ -7,13 +7,10 @@ using System.Security.AccessControl;
 using System.Text;
 namespace UniVerse.Components
 {
-	public class StaffMemberRightBar : ContentView
-	{
-		public StaffMemberRightBar (int staffId)
-		{
-
-
-
+    public class StaffMemberRightBar : ContentView
+    {
+        public StaffMemberRightBar()
+        {
 
             Image image = new()
             {
@@ -21,8 +18,6 @@ namespace UniVerse.Components
                 Aspect = Aspect.AspectFit,
                 MaximumHeightRequest = 350
             };
-
-            //Chart
 
             Label frameHeading = new()
             {
@@ -120,6 +115,6 @@ namespace UniVerse.Components
 
             Content = grid;
         }
-	}
+    }
 }
 

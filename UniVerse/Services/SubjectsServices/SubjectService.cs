@@ -120,5 +120,28 @@ namespace UniVerse.Services.SubjectServices
                 Debug.WriteLine($@"ERROR {ex.Message}");
             }
         }
+
+        public async Task DeleteCourseEnrollmentsAsync(int id)
+        {
+            Uri uri = new ($"{baseURL}CourseEnrollments/{id}");
+
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("DELETE request was successful.");
+                }
+                else
+                {
+                    Debug.WriteLine($"DELETE request failed with status code {response.StatusCode}.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($@"ERROR {ex.Message}");
+            }
+        }
     }
 }
