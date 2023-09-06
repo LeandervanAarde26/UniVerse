@@ -105,5 +105,21 @@ namespace UniVerse.ViewModels
                 Debug.WriteLine("Error deleting course enrollment: " + ex.Message);
             }
         }
+
+
+        //add Subject
+        public async Task SaveSubject(SubjectModel subject)
+        {
+            try
+            {
+                await _restService.SaveSubjectAsync(subject, isNewSubject: true);
+                Debug.WriteLine("Subject successfully saved.");
+                _ = GetAllSubjects();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR: {ex.Message}");
+            }
+        }
     }
 }

@@ -111,11 +111,11 @@ namespace UniVerse.ViewModels
         public async Task GetAllStaffMembers()
         {
             var members = await _restService.RefreshDataAsync();
-            StaffList.Clear();
+            AllStaffList.Clear();
 
             foreach (var member in members)
             {
-                StaffList.Add(member);
+                AllStaffList.Add(member);
             }
         }
 
