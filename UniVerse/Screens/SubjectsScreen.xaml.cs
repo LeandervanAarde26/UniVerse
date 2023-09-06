@@ -12,20 +12,22 @@ public partial class SubjectsScreen : ContentPage
 
         Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
         viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
+        BindingContext = viewModel;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         await viewModel.GetAllSubjects();
+        
 
-        foreach (var subject in viewModel.SubjectList)
-        {
-            var subjectCard = new Components.SubjectCard
-            {
-                BindingContext = subject
-            };
-            subjectStackLayout.Children.Add(subjectCard);
-        }
+        //foreach (var subject in viewModel.SubjectList)
+        //{
+        //    var subjectCard = new Components.SubjectCard
+        //    {
+        //        BindingContext = subject
+        //    };
+        //    subjectStackLayout.Children.Add(subjectCard);
+        //}
     }
 }

@@ -237,10 +237,11 @@ namespace UniVerse.ViewModels
                 needed_credits = 0,
                 person_password = "password",
             };
+
             
             await _restService.AddStudentAsync(person);
 
-            await GetAllstudents();
+            GetAllstudents();
 
             //NameEntry = String.Empty;
             //EmailEntry = String.Empty;
