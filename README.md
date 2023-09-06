@@ -4,10 +4,10 @@
 <!-- Repository Information & Links-->
 <br />
 
-![GitHub repo size](https://img.shields.io/github/repo-size/bee2805/)
-![GitHub watchers](https://img.shields.io/github/watchers/bee2805/)
-![GitHub language count](https://img.shields.io/github/languages/count/bee2805/)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bee2805/)
+![GitHub repo size](https://img.shields.io/github/repo-size/LeandervanAarde/UniVerse)
+![GitHub watchers](https://img.shields.io/github/watchers/LeandervanAarde/UniVerse)
+![GitHub language count](https://img.shields.io/github/languages/count/LeandervanAarde/UniVerse)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/LeandervanAarde/UniVerse)
 
 <!-- HEADER SECTION -->
 <h5 align="center" style="padding:0;margin:0;">Bronwyn Potgieter - 200089</h5>
@@ -27,9 +27,9 @@
     
    <br />
    <br />
-    <a href="https://github.com/">Report Bug</a>
+    <a href="https://github.com/https://github.com/LeandervanAarde/UniVerse">Report Bug</a>
     ·
-    <a href="https://github.com/">Request Feature</a>
+    <a href="https://github.com/https://github.com/LeandervanAarde/UniVerse">Request Feature</a>
 </p>
 <!-- TABLE OF CONTENTS -->
 
@@ -90,12 +90,12 @@ Ensure that you have latest version of Visual Studio installed and install the .
 Here are a couple of ways to clone this repo:
 
 1. GitHub Desktop </br>
-Enter `https://github.com/bee2805/COVID19Dashboard.git` into the URL field and press the `Clone` button.
+Enter `https://github.com/LeandervanAarde/UniVerse.git` into the URL field and press the `Clone` button.
 
 2. Clone Repository </br>
 Run the following in the command-line to clone the project:
    ```sh
-   git clone https://github.com/bee2805/COVID19Dashboard.git
+   git clone https://github.com/LeandervanAarde/UniVerse.git
    ```
     Open `Software` and select `File | Open...` from the menu. Select cloned directory and press `Open` button
 
