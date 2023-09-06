@@ -163,6 +163,7 @@ namespace UniVerse.Screens
                 BackgroundColor = Color.FromArgb("#FF4040"),
                 ImageSource = ImageSource.FromFile("trash.png")
             };
+            delete.Clicked += DeleteStudent;
 
             StackLayout deleteStack = new()
             {
@@ -245,6 +246,22 @@ namespace UniVerse.Screens
                 enrollments = student.enrollments;
 
                 CreateAndAddEnrollmentCards();
+            }
+        }
+
+        private async void DeleteStudent(object sender, EventArgs e)
+        {
+            bool answer = await DisplayAlert("Delete Student", "Are you sure you want to delete this student?", "Yes", "No");
+
+            if (answer)
+            {
+                await _viewModel.DeletePerson(StudentId);
+                await DisplayAlert("Success!", "Student deleted successfully.", "OK");
+                _ = Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("Oops!", "The student was not deleted.", "OK");
             }
         }
 
