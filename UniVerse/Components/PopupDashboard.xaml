@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
              x:Class="MauiToolkitPopupSample.PopupDashboard"
-             CanBeDismissedByTappingOutsideOfPopup="True"> 
+             CanBeDismissedByTappingOutsideOfPopup="True">
+
+
 <Border WidthRequest="500"
         HeightRequest="500"
         HorizontalOptions="Center"
@@ -26,13 +28,18 @@
        Margin="20"/>   
 
   <Entry
+          x:Name="password"
           HeightRequest="20"
           WidthRequest="300"
           Placeholder="Password"
           Margin="2"
           BackgroundColor="LightGray"
           TextColor="Black"
+          Text="{Binding Password}"
       />
+
+   <Button Command="{Binding OnChangePassword }" Text="Change Password" BackgroundColor="#2B2B2B" Margin="20, 15, 20, 0" />
+
         </StackLayout>
 
 </Border>

@@ -16,7 +16,7 @@ namespace UniVerse.Components
  
         public ProfileView() {
 
-            _loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
+            _loginViewModel = new LoginViewModel(new Services.RestService());
 
 
     Image image = new()

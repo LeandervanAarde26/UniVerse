@@ -19,10 +19,10 @@ namespace UniVerse.ViewModels
         public static AuthenticatedUser AuthUser;
         private readonly INavigation _navigation;
 
-        public LoginViewModel(RestService restService, INavigation navigation)
+        public LoginViewModel(RestService restService)
         {
             _restServive = restService;
-            _navigation = navigation;
+          
         }
 
         public string _emailEntry = string.Empty;
