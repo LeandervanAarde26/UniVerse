@@ -22,7 +22,7 @@
             </Grid.RowDefinitions>
 
             <FlexLayout Grid.Column="0" Direction="Row">
-                <Image Aspect="AspectFill" Source="armand.png" WidthRequest="60" HeightRequest="60">
+                <Image Aspect="AspectFill" Source="lecturer_profile.png" WidthRequest="60" HeightRequest="60">
                     <Image.Clip>
                         <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
                     </Image.Clip>

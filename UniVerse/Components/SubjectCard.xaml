@@ -39,7 +39,7 @@
                     <HorizontalStackLayout WidthRequest="520">
                         <!-- <components:StudentList/> ehh?-->
                         <Image Aspect="AspectFill"
-                                Source="kelly.png"
+                                Source="student_profile.png"
                                 WidthRequest="60"
                                 HeightRequest="60">
                             <Image.Clip>
@@ -48,7 +48,7 @@
                         </Image>
 
                         <Image Aspect="AspectFill"
-                                Source="leander.png"
+                                Source="student_profile.png"
                                 WidthRequest="60"
                                 HeightRequest="60"
                                 Margin="-25">
@@ -58,7 +58,7 @@
                         </Image>
 
                         <Image Aspect="AspectFill"
-                                Source="kelly.png"
+                                Source="student_profile.png"
                                 WidthRequest="60"
                                 HeightRequest="60">
                             <Image.Clip>
@@ -67,7 +67,7 @@
                         </Image>
 
                         <Image Aspect="AspectFill"
-                                Source="leander.png"
+                                Source="student_profile.png"
                                 WidthRequest="60"
                                 HeightRequest="60"
                                 Margin="-25">

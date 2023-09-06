@@ -26,7 +26,7 @@ namespace UniVerse.Components
                 VerticalOptions = LayoutOptions.Center,
                 WidthRequest = 60,
                 HeightRequest = 60,
-                Source = ImageSource.FromFile("allen_laing.png"),
+                Source = ImageSource.FromFile("admin_profile.png"),
 
             };
             var clip1 = new EllipseGeometry { Center = new Point(60 / 2, 60 / 2), RadiusX = 60 / 2, RadiusY = 60 / 2 };

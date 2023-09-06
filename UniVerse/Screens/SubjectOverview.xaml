@@ -80,7 +80,7 @@
                 <VerticalStackLayout>
                     <Label Text="Add Lecturer to Subject" TextColor="{DynamicResource Gray900}" FontSize="24" FontAttributes="Bold" Margin="0, 0, 0, 20"/>
                     <FlexLayout Margin="0, 0, 0, 30">
-                        <Image Aspect="AspectFill" Source="armand.png" WidthRequest="60" HeightRequest="60" Margin="0, 0, 10, 0">
+                        <Image Aspect="AspectFill" Source="lecturer_profile.png" WidthRequest="60" HeightRequest="60" Margin="0, 0, 10, 0">
                             <Image.Clip>
                                 <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
                             </Image.Clip>
