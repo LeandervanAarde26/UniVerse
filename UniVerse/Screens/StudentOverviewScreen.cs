@@ -46,16 +46,14 @@ namespace UniVerse.Screens
                 }
             };
 
-
             // Top 
             Image image = new()
             {
                 Aspect = Aspect.AspectFill,
                 MaximumHeightRequest = 200,
                 MaximumWidthRequest = 200,
-                Source = ImageSource.FromFile(""),
+                Source = ImageSource.FromFile("student_profile.png"),
             };
-
 
             var clip1 = new EllipseGeometry { Center = new Point(200 / 2, 200 / 2), RadiusX = 200 / 2, RadiusY = 200 / 2 };
 
