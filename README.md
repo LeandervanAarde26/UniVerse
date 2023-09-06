@@ -127,7 +127,7 @@ The student management section allows users to efficiently handle student-relate
 
 Within the student overview screen, users can access detailed information about a specific student, including their personal details, and enrolled subjects. Additionally, administrators can allocate additional subjects to the student.
 
-![image5](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/TimeLine.png)
+![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/studentOverview.jpg)
 
 ### Staff Management Screen
 
@@ -139,7 +139,7 @@ In the staff management section, administrators can manage all staff members ass
 
 Similar to the student overview screen, the staff overview screen offers a comprehensive view of a specific staff member's information, assigned subjects, and additional details. Users can also assign new subjects to staff members as needed.
 
-![image5](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/TimeLine.png)
+![image5](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/staffOverview.jpg)
 
 ### Subject Management Screen
 
@@ -200,7 +200,7 @@ The `Development Process` is the technical implementations and functionality don
 
 * Simon was responsible for implementing the Login page, as well as the Dashboard. 
 * Leander was responsible for implementing the staff and staff overview screen, as well as the Students and student overview screen. He also implemented the flyout navigation.
-* Bronwyn was responsible for for implementing the subjects and subject overview screen, as well as the funds screen.
+* Bronwyn created the application designs. She was responsible for for implementing the subjects and subject overview screen, as well as the funds screen.
 
 ##### Following that, we moved onto networking and integration
 
