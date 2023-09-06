@@ -13,6 +13,7 @@ namespace UniVerse.Models
 
     public class SubjectWithEnrollments
     {
+
         public string subjectName { get; set; }
         public string subjectDescription { get; set; }
         public int lecturer_id { get; set; }
