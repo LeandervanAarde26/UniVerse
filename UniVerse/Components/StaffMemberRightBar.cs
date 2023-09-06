@@ -74,7 +74,6 @@ namespace UniVerse.Components
                 BackgroundColor = Color.FromArgb("#FF4040"),
                 ImageSource = ImageSource.FromFile("trash.png")
             };
-            Debug.WriteLine(staffId);
 
             StackLayout deleteStack = new()
             {

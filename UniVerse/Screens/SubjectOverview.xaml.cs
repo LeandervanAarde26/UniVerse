@@ -46,7 +46,7 @@ public partial class SubjectOverview : ContentPage
             {
                 if (enrollment.enrollment_id != 0)
                 {
-                    var studentCard = new Components.StudentCard
+                    var studentCard = new Components.StudentCard(_viewModel)
                     {
                         BindingContext = enrollment
                     };

@@ -8,7 +8,7 @@ using UniVerse.Services.SubjectServices;
 namespace UniVerse.ViewModels
 {
 
-    internal class SubjectViewModel : BaseViewModel
+    public class SubjectViewModel : BaseViewModel
     {
         public SubjectService _restService;
 
@@ -75,6 +75,34 @@ namespace UniVerse.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine("Error updating subject lecturer: " + ex.Message);
+            }
+        }
+
+        // delete course enrolement
+        public async Task DeleteCourseEnrollment(int id)
+        {
+            try
+            {
+                await _restService.DeleteCourseEnrollmentsAsync(id);
+
+                var enrollmentToRemove = Subject.FirstOrDefault(subject =>
+                    subject.enrollments.Any(enrollment => enrollment.enrollment_id == id));
+
+                if (enrollmentToRemove != null)
+                {
+                    var enrollment = enrollmentToRemove.enrollments.FirstOrDefault(enrollment => enrollment.enrollment_id == id);
+
+                    if (enrollment != null)
+                    {
+                        enrollmentToRemove.enrollments.Remove(enrollment);
+                    }
+                }
+
+                _ = GetAllSubjects();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error deleting course enrollment: " + ex.Message);
             }
         }
     }

@@ -247,8 +247,28 @@ namespace UniVerse.Screens
                         HorizontalOptions = LayoutOptions.Center,
                         VerticalOptions = LayoutOptions.Center
                     };
-                    FlexLayout.SetBasis(image, new FlexBasis(0.50f, true));
-                    layout.Children.Add(image);
+                    Grid imageGrid = new()
+                    {
+                        RowDefinitions = new RowDefinitionCollection
+                        {
+                            new RowDefinition
+                            {
+                                Height = GridLength.Star
+                            }
+                        },
+                        ColumnDefinitions = new ColumnDefinitionCollection
+                        {
+                            new ColumnDefinition
+                            {
+                                Width = GridLength.Star
+                            }
+                        }
+                    };
+                    imageGrid.Children.Add(image);
+                    Grid.SetRow(image, 1);
+                    Grid.SetColumn(image, 1);
+                    FlexLayout.SetBasis(imageGrid, new FlexBasis(1f, true));
+                    layout.Children.Add(imageGrid);
                 }
             }
         }

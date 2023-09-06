@@ -121,13 +121,16 @@ namespace UniVerse.Services.SubjectServices
             }
         }
 
+        //Delete Course Enrolement
         public async Task DeleteCourseEnrollmentsAsync(int id)
         {
-            Uri uri = new ($"{baseURL}CourseEnrollments/{id}");
+            Uri uri = new(string.Format(baseURL + "CourseEnrollments/{0}", id));
 
             try
             {
                 HttpResponseMessage response = await _client.DeleteAsync(uri);
+
+                Debug.WriteLine($"DELETE request status code: {response.StatusCode}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -136,6 +139,9 @@ namespace UniVerse.Services.SubjectServices
                 else
                 {
                     Debug.WriteLine($"DELETE request failed with status code {response.StatusCode}.");
+
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Response Content: {responseContent}");
                 }
             }
             catch (Exception ex)
