@@ -364,6 +364,84 @@ namespace UniVerse.Services
             }
         }
 
+        public async Task PayLecturerSalaries()
+        {
+            Uri uri = new(string.Format(baseURL + "PaymentSummaries/PayLecturerFees"));
+
+            try
+            {
+                HttpResponseMessage response = null;
+                response = await _client.PostAsync(uri, null);
+
+                if(response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("Lecturers paid");
+
+                }
+                else
+                {
+                    Debug.WriteLine("Something went wrong");
+                }
+
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public async Task PayAdmins()
+        {
+            Uri uri = new(string.Format(baseURL + "PaymentSummaries/AdminFees"));
+
+            try
+            {
+                HttpResponseMessage response = null;
+                response = await _client.PostAsync(uri, null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("Admins paid");
+
+                }
+                else
+                {
+                    Debug.WriteLine("Something went wrong");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public async Task CollectFromStudents()
+        {
+            Uri uri = new(string.Format(baseURL + "PaymentSummaries/CollectFeesFromStudent"));
+
+            try
+            {
+                HttpResponseMessage response = null;
+                response = await _client.PostAsync(uri, null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("Collected fees from Students, all paid");
+
+                }
+                else
+                {
+                    Debug.WriteLine("Something went wrong");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
 
 
         public async Task<AddpersonModel> AddStaffAsync(AddpersonModel staff)
