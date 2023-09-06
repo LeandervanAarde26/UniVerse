@@ -9,5 +9,7 @@ namespace UniVerse.Services.SubjectService
         Task DeleteCourseEnrollmentsAsync(int id);
         Task SaveSubjectAsync(SubjectModel subject, bool isNewSubject = false);
         Task DeletePersonAsync(int id);
+  
+
     }
 }

@@ -36,6 +36,11 @@ namespace UniVerse.ViewModels
             }
         }
 
-        
+        public async Task PayLecturer()
+        {
+            await _restService.PayLecturerSalaries();
+        }
+
+
     }
 }

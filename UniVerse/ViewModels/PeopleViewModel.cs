@@ -105,6 +105,7 @@ namespace UniVerse.ViewModels
             Number = String.Empty;
             Identifier = String.Empty;
             SurnameEntry = String.Empty;
+    
         }
 
         // Get Staff
@@ -119,6 +120,7 @@ namespace UniVerse.ViewModels
             }
         }
 
+   
         //Get staff member by id
         public async Task<LecturerWithCourses> GetStaffMember(int id)
         {

@@ -38,6 +38,11 @@ namespace UniVerse.ViewModels
             var test = StudentList;
         }
 
-        
+        public async Task CollectFromStudents()
+        {
+            await _restService.CollectFromStudents();
+        }
+
+
     }
 }
