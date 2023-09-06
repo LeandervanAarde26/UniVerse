@@ -4,10 +4,11 @@
              xmlns:components="clr-namespace:UniVerse.Components"
              x:Class="UniVerse.Screens.SubjectOverview"
              Title="SubjectOverview"
+             xmlns:models="clr-namespace:UniVerse.Models"
+             x:DataType="models:SubjectWithEnrollments"
              BackgroundColor="{DynamicResource Primary}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="5.5*"/>
             <ColumnDefinition Width="3.5*"/>
         </Grid.ColumnDefinitions>
@@ -22,14 +23,14 @@
         <!--Just an indication for the Nav-->
         <VerticalStackLayout></VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="20, 20 ,20 , 0" >
+        <VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2" Margin="20, 20 ,20 , 0" >
             <!--Subject Info card-->
             <Frame BackgroundColor="{DynamicResource Blue200}" BorderColor="Transparent" Padding="80, 20" Margin="0, 0, 0, 20">
                 <FlexLayout JustifyContent="SpaceBetween">
                     <!--Subject Information-->
                     <FlexLayout JustifyContent="Center" Direction="Column">
-                        <Label Text="UX/UI Design" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold"/>
-                        <Label Text="Subject Info will go over here" TextColor="{DynamicResource Gray900}" FontSize="18" FontAttributes="Bold"/>
+                        <Label x:Name="nameOfSub" TextColor="{DynamicResource Blue}" FontSize="50" FontAttributes="Bold"/>
+                        <Label x:Name="descOfSub" TextColor="{DynamicResource Gray900}" FontSize="18" FontAttributes="Bold" MaxLines="4"  MaximumWidthRequest="1100"/>
                     </FlexLayout>
 
                     <!--Subject Image-->
@@ -38,41 +39,31 @@
             </Frame>
         </VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Padding="20">
+        <VerticalStackLayout Grid.ColumnSpan="1" Grid.Row="1" Padding="20">
             <FlexLayout  Direction="Row" JustifyContent="SpaceBetween" AlignItems="Start" >
 
                 <Label Text="Students" TextColor="{DynamicResource Gray900}" FontSize="35" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
 
-                <Picker BackgroundColor="{DynamicResource Gray900}" HorizontalTextAlignment="Center" HorizontalOptions="EndAndExpand" HeightRequest="10">
+                <!--<Picker BackgroundColor="{DynamicResource Gray900}" HorizontalTextAlignment="Center" HorizontalOptions="EndAndExpand" HeightRequest="10">
                     <Picker.Items>
                         <x:String>1st Years</x:String>
                         <x:String>2nd Years</x:String>
                         <x:String>3rd Years</x:String>
                     </Picker.Items>
-                </Picker>
+                </Picker>-->
             </FlexLayout>
         </VerticalStackLayout>
         
         
-        <ScrollView VerticalOptions="Center"  Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2" Padding="20, 0, 20, 20">
-            <FlexLayout Direction="Column">
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-                <components:StudentCard/>
-            </FlexLayout>
+        <ScrollView VerticalOptions="Center" Grid.ColumnSpan="1" Grid.Row="2" Padding="20, 0, 20, 20">
+            <StackLayout x:Name="studentStackLayout">
+
+
+            </StackLayout>
         </ScrollView>
 
         <!--Assign Student + Lecturer-->
-        <VerticalStackLayout Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Padding="0, 20, 20, 0">
+        <VerticalStackLayout Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Padding="0, 20, 20, 0">
             <!--Assign Student-->
             <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 20">
                 <VerticalStackLayout>
@@ -89,21 +80,22 @@
                 <VerticalStackLayout>
                     <Label Text="Add Lecturer to Subject" TextColor="{DynamicResource Gray900}" FontSize="24" FontAttributes="Bold" Margin="0, 0, 0, 20"/>
                     <FlexLayout Margin="0, 0, 0, 30">
-                        <Image Aspect="AspectFill" Source="armand.png" WidthRequest="60" HeightRequest="60" Margin="0, 0, 10, 0">
+                        <Image Aspect="AspectFill" Source="lecturer_profile.png" WidthRequest="60" HeightRequest="60" Margin="0, 0, 10, 0">
                             <Image.Clip>
                                 <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
                             </Image.Clip>
                         </Image>
                         <VerticalStackLayout FlexLayout.AlignSelf="Center">
-                            <Label Text="Armand Pretorious" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource Gray900}"/>
-                            <Label Text="Armand@openwindow.co.za" FontSize="16" TextColor="{DynamicResource Gray400}"/>
+                            <Label x:Name="nameOfLect" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource Gray900}"/>
+                            <Label x:Name="emailOfLect" FontSize="16" TextColor="{DynamicResource Gray400}"/>
                         </VerticalStackLayout>
                     </FlexLayout>
                     <!--I'll make these entries a search, just gotta figure it out-->
-                    <Entry Placeholder="Lecturer" BackgroundColor="White" TextColor="#2B2B2B"/>
+                    <SearchBar Placeholder="Search Lecturers..." BackgroundColor="{DynamicResource Primary}" CancelButtonColor="{DynamicResource Blue}"/>
                     <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
                 </VerticalStackLayout>
             </Frame>
+            <Button Text="Delete Subject" BackgroundColor="{DynamicResource Red}" Margin="0, 20, 0, 0" Clicked="DeleteSubject"/>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

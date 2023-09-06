@@ -1,10 +1,11 @@
 ﻿<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:components="clr-namespace:UniVerse.Components"
+             xmlns:models="clr-namespace:UniVerse.Models"
+             x:DataType="models:SubjectWithEnrollments"
              x:Class="UniVerse.Components.SubjectCard">
 
     <!--Subject Card-->
-    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" Padding="50, 40, 50,40" FlexLayout.Grow="1">
+    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" Padding="50, 40, 50,40" Margin="0, 0, 0, 20">
         <HorizontalStackLayout >
             <!--Subject Image-->
             <Image Source="ui_ux_design.png"/>
@@ -14,33 +15,31 @@
                 <!--Subject name & Code-->
                 <HorizontalStackLayout>
                     <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="600">
-                        <Label Text="Subject Name"
+                        <Label Text="{Binding subjectName}"
                            TextColor="{DynamicResource Gray900}"
                            FontSize="20"
                            FontAttributes="Bold"/>
-                        <Label Text="UXD"
+                        <Label Text="{Binding subject_code}"
                                TextColor="{DynamicResource Gray400}"
                                FontSize="18"/>
                     </VerticalStackLayout>
                     <!--Edit Button-->
                     <!--Trying to figure out how to get this image to stay at the end even when resising the screen?-->
-                    <ImageButton Source="edit.png"
-                                 WidthRequest="25"
-                                 HeightRequest="25"
-                                 Aspect="Center"
-                                 HorizontalOptions="End"/>
+                    <Button x:Name="toggleButton" Text="Inactive" BackgroundColor="Red" Clicked="ToggleButton" Margin="0, 20, 0, 0" WidthRequest="100"/>
                 </HorizontalStackLayout>
                 <!--Subject Description-->
 
-                <Label Text="Subject Description"
+                <Label Text="{Binding subjectDescription}"
+                       MaxLines="2"
                        TextColor="{DynamicResource Gray900}"
-                       FontSize="16"/>
+                       FontSize="16"
+                       MaximumWidthRequest="650"/>
                 <!--Students-->
                 <HorizontalStackLayout>
                     <HorizontalStackLayout WidthRequest="520">
                         <!-- <components:StudentList/> ehh?-->
                         <Image Aspect="AspectFill"
-                                Source="kelly.png"
+                                Source="student_profile.png"
                                 WidthRequest="60"
                                 HeightRequest="60">
                             <Image.Clip>
@@ -49,7 +48,7 @@
                         </Image>
 
                         <Image Aspect="AspectFill"
-                                Source="leander.png"
+                                Source="student_profile.png"
                                 WidthRequest="60"
                                 HeightRequest="60"
                                 Margin="-25">
@@ -59,7 +58,7 @@
                         </Image>
 
                         <Image Aspect="AspectFill"
-                                Source="kelly.png"
+                                Source="student_profile.png"
                                 WidthRequest="60"
                                 HeightRequest="60">
                             <Image.Clip>
@@ -68,7 +67,7 @@
                         </Image>
 
                         <Image Aspect="AspectFill"
-                                Source="leander.png"
+                                Source="student_profile.png"
                                 WidthRequest="60"
                                 HeightRequest="60"
                                 Margin="-25">
@@ -83,12 +82,9 @@
                             <Label Text="5+" FontSize="16" FontAttributes="Bold" TextColor="{DynamicResource Primary}" HorizontalOptions="Center" VerticalOptions="Center" />
                         </Frame>
                     </HorizontalStackLayout>
-                    <Button Text="View Subject"
-                        FontSize="18"
-                        BackgroundColor="Transparent"
-                        TextColor="#407BFF"
-                        VerticalOptions="EndAndExpand"
-                        Margin="0,0,0,0" />
+                    <Button Text="View Subject" FontSize="18" BackgroundColor="Transparent" TextColor="#407BFF" VerticalOptions="EndAndExpand"
+                        Margin="50, 0,0,0"
+                        Clicked="ViewSubject"/>
                 </HorizontalStackLayout>
 
             </FlexLayout>

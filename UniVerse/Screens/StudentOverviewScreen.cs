@@ -1,30 +1,50 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics.Text;
 using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using UniVerse.Components;
-
+using UniVerse.Models;
+using UniVerse.ViewModels;
+//using static Java.Util.Jar.Attributes;
 
 namespace UniVerse.Screens
 {
+
     public class StudentOverviewScreen : ContentPage
     {
+        public int StudentId { get; private set; }
+        private PeopleViewModel _viewModel;
+
+        private readonly Label name;
+        private readonly Label role;
+        private readonly Label mail;
+        private readonly Label cell;
+        private readonly Label studentNumber;
+        private int achievedCredits;
+        private int neededCredites;
+
+        private List<SubjectEnrollments> enrollments;
+        private readonly FlexLayout layout;
+
         public StudentOverviewScreen()
         {
+            _viewModel = new PeopleViewModel(new Services.RestService());
+
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style textStyle = new(typeof(Label))
             {
                 Setters =
                 {
                     new Setter { Property = Label.FontSizeProperty, Value =  16},
-
                     new Setter { Property = Label.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
                 }
             };
-
 
             // Top 
             Image image = new()
@@ -32,9 +52,8 @@ namespace UniVerse.Screens
                 Aspect = Aspect.AspectFill,
                 MaximumHeightRequest = 200,
                 MaximumWidthRequest = 200,
-                Source = ImageSource.FromFile("allen_laing.png"),
+                Source = ImageSource.FromFile("student_profile.png"),
             };
-
 
             var clip1 = new EllipseGeometry { Center = new Point(200 / 2, 200 / 2), RadiusX = 200 / 2, RadiusY = 200 / 2 };
 
@@ -53,7 +72,7 @@ namespace UniVerse.Screens
 
             };
 
-            Label name = new()
+            name = new Label
             {
                 Text = "Bronwyn Pottie",
                 TextColor = Color.FromArgb("#2B2B2B"),
@@ -61,7 +80,7 @@ namespace UniVerse.Screens
                 FontSize = 24
             };
 
-            Label role = new()
+            studentNumber = new Label
             {
                 Text = "200211",
                 TextColor = Color.FromArgb("#C5C5C5"),
@@ -70,32 +89,24 @@ namespace UniVerse.Screens
               
             };
 
-            Label hourlyRate = new()
+            role = new Label
             {
                 Text = "\U0001F9D1 Degree student",
                 Style = textStyle,
                 Margin = new Thickness(0, 20, 0, 0)
             };
 
-            Label cell = new()
+            cell = new Label
             {
                 Text = "\U0000260E 076 887 6675",
                 Style = textStyle,
             };
 
-            Label mail = new()
+            mail = new Label
             {
                 Text = "📧 Armand@OpenWindow.co.za",
                 Style = textStyle,
             };
-
-
-            Label address = new()
-            {
-                Text = "\U0001F4CD 05 Academic drive, Gauteng, Johannesburg, 1724",
-                Style = textStyle,
-            };
-
 
             StackLayout stackLayout = new()
             {
@@ -105,11 +116,10 @@ namespace UniVerse.Screens
                 Children =
                 {
                     name,
+                    studentNumber,
                     role,
-                    hourlyRate,
                     cell,
-                    mail,
-                    address
+                    mail
                 }
             };
 
@@ -119,40 +129,22 @@ namespace UniVerse.Screens
 
                 Children =
                 {
-
                     imgBorder,
                     stackLayout,
-
                 }
             };
 
-            // Cards 
+            // Cards
 
-
-
-            FlexLayout layout = new()
+            layout = new FlexLayout()
             {
-
                 Direction = FlexDirection.Row,
                 Wrap = FlexWrap.Wrap,
                 JustifyContent = FlexJustify.Start,
                 AlignItems = FlexAlignItems.Start,
-
             };
 
-
-            var numbers = new List<int> { 1, 2, 3, 4, 2, 3, 4, 5, 2, 3, 4, 5 };
-
-            foreach (var number in numbers)
-            {
-                var card = new EnrolledSubjects();
-
-                FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
-
-                layout.Children.Add(card);
-            }
-
-
+            enrollments = new List<SubjectEnrollments>();
 
             ScrollView scrollView = new()
             {
@@ -160,8 +152,25 @@ namespace UniVerse.Screens
                 Content = layout
             };
 
-            StudentOverViewRightBar right = new();
+            StudentOverViewRightBar right = new(StudentId);
 
+            Button delete = new()
+            {
+                Margin = new Thickness(8, 12),
+                Text = "Delete Staff Member",
+                BackgroundColor = Color.FromArgb("#FF4040"),
+                ImageSource = ImageSource.FromFile("trash.png")
+            };
+            delete.Clicked += DeleteStudent;
+
+            StackLayout deleteStack = new()
+            {
+                VerticalOptions = LayoutOptions.End,
+                Children =
+                {
+                    delete
+                }
+            };
 
             Grid grid = new()
             {
@@ -173,29 +182,32 @@ namespace UniVerse.Screens
 
                 ColumnDefinitions = new ColumnDefinitionCollection
                 {
-                 new ColumnDefinition { Width = new GridLength(10, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(70, GridUnitType.Star) },
-                 new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star) }
+                     new ColumnDefinition { Width = new GridLength(70, GridUnitType.Star) },
+                     new ColumnDefinition { Width = new GridLength(30, GridUnitType.Star) }
                 }
             };
 
 
             grid.Children.Add(topContainer);
             Grid.SetRow(topContainer, 0);
-            Grid.SetColumn(topContainer, 1);
+            Grid.SetColumn(topContainer, 0);
             Grid.SetColumnSpan(topContainer, 1);
 
             grid.Children.Add(scrollView);
             Grid.SetRow(scrollView, 1);
-            Grid.SetColumn(scrollView, 1);
+            Grid.SetColumn(scrollView, 0);
             Grid.SetColumnSpan(scrollView, 1);
             grid.BackgroundColor = Color.FromArgb("#F6F7FB");
 
-
             grid.Children.Add(right);
-            Grid.SetColumn(right, 2);
+            Grid.SetColumn(right, 1);
             Grid.SetColumnSpan(right, 2);
             Grid.SetRowSpan(right, 2);
+
+            grid.Children.Add(deleteStack);
+            Grid.SetColumn(deleteStack, 1);
+            Grid.SetColumnSpan(deleteStack, 1);
+            Grid.SetRowSpan(deleteStack, 3);
 
 
             grid.BackgroundColor = Color.FromArgb("#F6F7FB");
@@ -203,6 +215,106 @@ namespace UniVerse.Screens
 
 
             Content = grid;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext is NavOverviewViewModel viewModel)
+            {
+                if (viewModel.NavigationParameter is int memberIdValue)
+                {
+                    StudentId = memberIdValue;
+                }
+            }
+
+            var student = await _viewModel.GetStudent(StudentId);
+
+            if (student != null)
+            {
+                name.Text = student.student_name;
+                role.Text = student.role;
+                mail.Text = student.email;
+                cell.Text = student.student_phoneNumber;
+                achievedCredits = student.person_credits;
+                neededCredites = student.needed_credits;
+                studentNumber.Text = student.person_system_identifier;
+
+                enrollments = student.enrollments;
+
+                CreateAndAddEnrollmentCards();
+            }
+        }
+
+        private async void DeleteStudent(object sender, EventArgs e)
+        {
+            bool answer = await DisplayAlert("Delete Student", "Are you sure you want to delete this student?", "Yes", "No");
+
+            if (answer)
+            {
+                await _viewModel.DeletePerson(StudentId);
+                await DisplayAlert("Success!", "Student deleted successfully.", "OK");
+                _ = Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("Oops!", "The student was not deleted.", "OK");
+            }
+        }
+
+        private void CreateAndAddEnrollmentCards()
+        {
+            layout.Children.Clear();
+
+            foreach (var enrollment in enrollments)
+            {
+
+                if (enrollment.subject_color != null && enrollment.subject_id != 0)
+                {
+                    var card = new EnrolledSubjects(enrollment.subject_name, enrollment.subject_code, enrollment.subject_color)
+                    {
+                        BindingContext = enrollment
+                    };
+                    FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
+                    layout.Children.Add(card);
+                }
+                else
+                {
+                    // If subject_id is null, display an image
+                    var image = new Image
+                    {
+                        Source = "student_no_enroll.png",
+                        Aspect = Aspect.AspectFit,
+                        WidthRequest = 700,
+                        HeightRequest = 700,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    };
+                    Grid imageGrid = new()
+                    {
+                        RowDefinitions = new RowDefinitionCollection
+                        {
+                            new RowDefinition
+                            {
+                                Height = GridLength.Star
+                            }
+                        },
+                        ColumnDefinitions = new ColumnDefinitionCollection
+                        {
+                            new ColumnDefinition
+                            {
+                                Width = GridLength.Star
+                            }
+                        }
+                    };
+                    imageGrid.Children.Add(image);
+                    Grid.SetRow(image, 1);
+                    Grid.SetColumn(image, 1);
+                    FlexLayout.SetBasis(imageGrid, new FlexBasis(1f, true));
+                    layout.Children.Add(imageGrid);
+                }
+            }
         }
     }
 }

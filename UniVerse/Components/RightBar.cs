@@ -3,6 +3,8 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
+using System.Diagnostics;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Components
 {
@@ -10,11 +12,17 @@ namespace UniVerse.Components
 
     public class RightBar : ContentView
     {
+        private PeopleViewModel viewModel;
         public string PageType { get; set; }
         public List<String> DropList {get; set; }
+
+        public int _selectedRoleIndex;
+
+
         public RightBar(string pgType, List<String> dropLst)
         {
-
+            viewModel = new PeopleViewModel(new Services.RestService());
+            BindingContext = viewModel;
             PageType = pgType;
             DropList = dropLst;
             Style inputStyle = new(typeof(Entry))
@@ -60,6 +68,23 @@ namespace UniVerse.Components
                 TextColor = Color.FromArgb("#407BFF"),
             };
 
+            imageUploadButton.Clicked += async (sender, e) =>
+            {
+                var imagePickerOptions = new PickOptions
+                {
+                    PickerTitle = "Select an image",
+               
+                };
+
+                var selectedImage = await GetImage(imagePickerOptions);
+                if (selectedImage != null)
+                {
+           
+                    defaultimage.Source = selectedImage.FullPath;
+                }
+            };
+
+
             FlexLayout innerLayout = new()
             {
                 MaximumHeightRequest = 200,
@@ -96,18 +121,22 @@ namespace UniVerse.Components
                 Style = inputStyle
 
             };
+            name.SetBinding(Entry.TextProperty, new Binding("NameEntry", source: viewModel));
+
 
             Entry surname = new()
             {
                 Placeholder = PageType +  " Surname",
                 Style = inputStyle
             };
+            surname.SetBinding(Entry.TextProperty, new Binding("SurnameEntry", source: viewModel));
 
             Entry studentNumber = new()
             {
                 Placeholder = PageType + " Number",
                 Style = inputStyle
             };
+            studentNumber.SetBinding(Entry.TextProperty, new Binding("Identifier", source: viewModel));
 
             var listOptions = DropList;
 
@@ -125,6 +154,10 @@ namespace UniVerse.Components
             studentRole.SelectedItem = PageType + " Type";
             studentRole.TextColor = Colors.Black;
             studentRole.TitleColor = Colors.Black;
+
+            studentRole.SetBinding(Picker.SelectedIndexProperty, new Binding("RoleInput", source: viewModel));
+
+
 
             StackLayout showcase = new()
             {
@@ -153,6 +186,7 @@ namespace UniVerse.Components
                 Style = inputStyle
 
             };
+            email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: viewModel));
 
             Entry phoneNumber = new()
             {
@@ -160,7 +194,7 @@ namespace UniVerse.Components
                 Style = inputStyle,
                 MaxLength = 10
             };
-
+            phoneNumber.SetBinding(Entry.TextProperty, new Binding("Number", source: viewModel));
 
             Button button = new()
             {
@@ -168,6 +202,8 @@ namespace UniVerse.Components
                 BackgroundColor = Color.FromArgb("#2B2B2B"),
                 Margin = new Thickness(18, 6)
             };
+
+            button.Clicked += async (sender, e)  => { await viewModel.AddStudent(); };
 
             StackLayout stack = new()
             {
@@ -204,6 +240,33 @@ namespace UniVerse.Components
             };
             //FlexLayout.SetGrow(stack, 1);
             Content = layout;
+        }
+
+
+        public async Task<FileResult> GetImage(PickOptions pickOptions)
+        {
+            var result = await FilePicker.PickAsync(pickOptions);
+            try
+            {
+                if (result != null)
+                {
+                    if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
+                           result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+                    {
+                        using var stream = await result.OpenReadAsync();
+                        var iamge = ImageSource.FromStream(() => stream);
+
+                        return result;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return null;
         }
     }
 }

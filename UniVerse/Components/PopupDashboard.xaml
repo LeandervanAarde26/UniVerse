@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Class="MauiToolkitPopupSample.PopupDashboard"
+             CanBeDismissedByTappingOutsideOfPopup="True">
+
+
+<Border WidthRequest="500"
+        HeightRequest="500"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        BackgroundColor="#DFE9FF">
+
+
+    <StackLayout
+          HorizontalOptions="Center"
+        VerticalOptions="Fill">
+   <Label 
+            Text="Welcome to UniVerse"
+            TextColor="Black"
+            HorizontalOptions="Center"
+       FontSize="Large"
+       Margin="50"/>
+
+         <Label 
+            Text="Before using the platform, please change your password. This is to make sure that you're safe."
+            TextColor="Black"
+            HorizontalOptions="Center"
+       Margin="20"/>   
+
+  <Entry
+          x:Name="password"
+          HeightRequest="20"
+          WidthRequest="400"
+          Placeholder="Password"
+          Margin="70"
+          BackgroundColor="LightGray"
+          TextColor="Black"
+          Text="{Binding Password}"
+      />
+
+   <Button Command="{Binding OnChangePassword }" Text="Change Password" BackgroundColor="#2B2B2B" Margin="20, 40, 20, 0" />
+
+        </StackLayout>
+
+</Border>
+     
+</mct:Popup>

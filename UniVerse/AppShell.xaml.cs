@@ -8,11 +8,15 @@ namespace UniVerse;
 public partial class AppShell : Shell
 {
     private readonly Navigation _navViewModel;
-	public AppShell()
+    private readonly LoginViewModel _loginViewModel;
+    public AppShell()
 	{
         InitializeComponent();
-
-        FlyoutBackgroundColor = Color.FromArgb("#2B2B2B"); 
+        //Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+        Routing.RegisterRoute(nameof(StaffMemberOverviewScreen), typeof(StaffMemberOverviewScreen));
+        Routing.RegisterRoute(nameof(StudentOverviewScreen), typeof(StudentOverviewScreen));
+        Routing.RegisterRoute(nameof(SubjectOverview), typeof(SubjectOverview));
+        _loginViewModel = new LoginViewModel(new Services.RestService());
 
         _navViewModel = new Navigation();
         Image image = new()
@@ -22,6 +26,11 @@ public partial class AppShell : Shell
             Aspect = Aspect.Center, 
             
         };
+        NavigationPage.SetHasNavigationBar(this, false);
+        Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+        {
+            IsVisible = false
+        });
 
         FlyoutHeader = image;
         FlyoutWidth = 260;
@@ -36,6 +45,8 @@ public partial class AppShell : Shell
             BorderColor = Colors.Transparent
         };
 
+        //logout.Clicked += Logout;
+
         FlyoutFooter = logout;
        
         _navViewModel.AddNavItems();
@@ -47,6 +58,11 @@ public partial class AppShell : Shell
         }
         FlyoutBehavior = FlyoutBehavior.Locked;
     }
+    //public async void Logout(object sender, EventArgs e)
+    //{
+    //    await _loginViewModel.LogOutUser();
+    //}
+
 
     async protected override void OnAppearing()
     {

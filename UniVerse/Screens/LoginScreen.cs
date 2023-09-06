@@ -1,17 +1,36 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Security.Authentication;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
     public class LoginScreen : ContentPage
     {
+        private LoginViewModel AuthVM;
+     
+
         Color borderColor = Colors.Gray;
         public LoginScreen()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);
+            Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            {
+                IsVisible = false
+            });
+
+            AuthVM = new LoginViewModel(new Services.RestService());
+            BindingContext = AuthVM;
+
+            NavigationPage.SetHasNavigationBar(this, false);
+
             Style inputStyle = new(typeof(Entry))
             {
                 Setters =
@@ -51,12 +70,27 @@ namespace UniVerse.Screens
                 Margin = new Thickness(15, 10, 0, 10)
             };
 
+            Label ErrorTitle = new()
+            {
+                
+                FontSize = 15,
+                TextColor = Color.FromArgb("#FF4040"),
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Center,
+                Margin = new Thickness(10, 5)
+            };
+
+            ErrorTitle.SetBinding(Label.TextProperty, new Binding("AuthError", source: AuthVM));
+
             Entry email = new()
             {
                 Placeholder = "Email",
                 Style = inputStyle,
                 Margin = 0,  
+              
             };
+
+            email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: AuthVM));
 
             Border emailBorder = new()
             {
@@ -77,7 +111,9 @@ namespace UniVerse.Screens
                 Style = inputStyle,
                 IsPassword = true,
                 Margin = 0,
+                
             };
+            password.SetBinding(Entry.TextProperty, new Binding("PasswordEntry", source: AuthVM));
 
             Border passwordBorder = new()
             {
@@ -100,12 +136,30 @@ namespace UniVerse.Screens
                 Margin = new Thickness(18, 15)
             };
 
+            signinButton.Clicked +=  async (sender, args) =>
+            {
+                try
+                {
+                 await AuthVM.AuthenticatedStream();
+                }
+                catch(AuthenticationException authEx)
+                { 
+                    Debug.WriteLine(authEx.Message);
+                    //ErrorTitle.Text = authEx.Message;
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    //ErrorTitle.Text = ex.Message;
+                }
+            };
+
             FlexLayout login = new()
             {
                 JustifyContent = FlexJustify.Center,
                 Direction = FlexDirection.Column,
                 
-                Children = { loginTitle, emailBorder, passwordBorder, signinButton }
+                Children = { loginTitle, ErrorTitle, emailBorder, passwordBorder, signinButton }
             };
 
             Border loginCard = new()
@@ -127,8 +181,8 @@ namespace UniVerse.Screens
 
             Image bgImage = new()
             {
-                Source = "login_bg.png",
-                Aspect = Aspect.AspectFill
+                Source = "test.png",
+                Aspect = Aspect.AspectFit
             };
 
             Grid grid = new()
@@ -160,7 +214,6 @@ namespace UniVerse.Screens
 
             Content = grid;
         }
-
         private void ValidateEmail(object sender, EventArgs e)
         {
             Entry email = (Entry)sender;

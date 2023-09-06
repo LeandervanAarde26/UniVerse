@@ -11,16 +11,17 @@ namespace UniVerse.ViewModels
 {
     public class Navigation
     {
+
         public List<FlyoutItem> Items { get; set; }
+
         public Navigation()
         {
             Items = new List<FlyoutItem>();
+         
         }
         public void AddNavItems()
         {
             var pages = new Routes[]
-
-
             {
 
                new Routes
@@ -69,9 +70,16 @@ namespace UniVerse.ViewModels
                 ShellContent Content = new()
                 {
                     ContentTemplate = new(() => page.Page)
+
                 };
 
-                
+                //NavigationPage.SetHasNavigationBar(Content, false);
+                //NavigationPage.SetHasBackButton(Content, false);
+                Shell.SetTabBarIsVisible(Content, false);
+                Shell.SetBackButtonBehavior(Content, new BackButtonBehavior
+                {
+                    IsVisible = false
+                });
 
                 FlyoutItem Item = new()
                 {
@@ -80,13 +88,9 @@ namespace UniVerse.ViewModels
                     
                     
                 };
-
-        
                 Item.Items.Add(new Tab
                 {
                     Items = { Content },
-                   
-                  
                 });
                 Items.Add(Item);
                

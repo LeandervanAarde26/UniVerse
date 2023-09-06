@@ -3,22 +3,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using UniVerse.Models;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Components
 {
     public class ProfileView : ContentView
     {
+
+        public string Username {get; set;}
+        private readonly LoginViewModel _loginViewModel;
+ 
         public ProfileView() {
 
-            Image image = new()
+            _loginViewModel = new LoginViewModel(new Services.RestService());
+
+
+    Image image = new()
             {
                 Aspect = Aspect.AspectFill,
                 HorizontalOptions = LayoutOptions.End,
                 VerticalOptions = LayoutOptions.Center,
                 WidthRequest = 60,
                 HeightRequest = 60,
-                Source = ImageSource.FromFile("allen_laing.png"),
+                Source = ImageSource.FromFile("admin_profile.png"),
 
             };
             var clip1 = new EllipseGeometry { Center = new Point(60 / 2, 60 / 2), RadiusX = 60 / 2, RadiusY = 60 / 2 };
@@ -27,7 +35,7 @@ namespace UniVerse.Components
 
             Label username = new()
             {
-                Text = "Leander van Aarde",
+                
                 FontSize = 16,
                 FontAttributes = FontAttributes.Bold,
                 TextColor = Colors.Black,
@@ -87,6 +95,16 @@ namespace UniVerse.Components
 
 
             Content = profileContainer;
+
+            GetUserDetails();
+
+
+            void GetUserDetails()
+            {
+                AuthenticatedUser auth = LoginViewModel.AuthUser;
+                username.Text = auth.username;
+            }
+
         }
     }
 }

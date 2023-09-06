@@ -2,17 +2,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerse.Controls.RadialBarChart;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Components
 {
     public class StudentOverViewRightBar : ContentView
     {
-        public StudentOverViewRightBar()
+        private readonly PeopleViewModel _peopleViewModel;
+
+        public int person_id { get; set; }
+        public StudentOverViewRightBar(int id) 
         {
+            person_id = id; 
+
+            _peopleViewModel = new PeopleViewModel(new Services.RestService());
+            BindingContext = _peopleViewModel;
             var ChartData = new ChartEntry[]
             {
                 new ChartEntry
@@ -59,22 +68,22 @@ namespace UniVerse.Components
 
             //Delete
 
-            Button delete = new()
-            {
-                Margin = new Thickness(8, 12),
-                Text = "Delete Staff Member",
-                BackgroundColor = Color.FromArgb("#FF4040"),
-                ImageSource = ImageSource.FromFile("trash.png")
-            };
+            //Button delete = new()
+            //{
+            //    Margin = new Thickness(8, 12),
+            //    Text = "Delete Staff Member",
+            //    BackgroundColor = Color.FromArgb("#FF4040"),
+            //    ImageSource = ImageSource.FromFile("trash.png")
+            //};
 
-            StackLayout deleteStack = new()
-            {
-                VerticalOptions = LayoutOptions.End,
-                Children =
-                {
-                    delete
-                }
-            };
+            //StackLayout deleteStack = new()
+            //{
+            //    VerticalOptions = LayoutOptions.End,
+            //    Children =
+            //    {
+            //        delete
+            //    }
+            //};
             //Delete
 
             //Page Content
@@ -101,11 +110,20 @@ namespace UniVerse.Components
             Grid.SetRow(frame, 1);
        
 
-            grid.Children.Add(deleteStack); 
-            Grid.SetRow(deleteStack, 2);
+            //grid.Children.Add(deleteStack); 
+            //Grid.SetRow(deleteStack, 2);
             //Page Content
 
             Content = grid;
+
+            GetUserDetails();
+
+            async void GetUserDetails()
+            {
+                await _peopleViewModel.GetStudent(id);
+                radialBarChart.Entries = _peopleViewModel.SingleStudentChart;
+            }
         }
+
     }
 }

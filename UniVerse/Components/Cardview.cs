@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
+using UniVerse.ViewModels;
 using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
@@ -6,41 +7,67 @@ using System.Linq;
 using System.Text;
 using Microsoft.Maui.Graphics;
 using System.Data;
+using UniVerse.Screens;
 
 namespace UniVerse.Components
 {
-
+  
     public class Cardview : ContentView
     {
-
+        private bool isActive = false;
+        private Button toggleButton;
         public string Name { get; set; }
         public string Role { get; set; }
         public string Email { get; set; }
         public string AdditionalInformation { get; set; }
-
         public string Buttontext { get; set; }
 
-        public Cardview(string nme, string rle, string eml, string addinfo, string btnText)
-        {
+        public int person_id { get; set; }
+        private PeopleViewModel viewModel;
 
+
+        public Cardview(string nme, string rle, string eml, string addinfo, string btnText, int id, bool active)
+        {
+            viewModel = new PeopleViewModel(new Services.RestService());
             Name = nme;
             Role = rle;
             Email = eml;
             AdditionalInformation = addinfo;
             Buttontext = btnText;
+            isActive = active;
+            person_id = id;
 
             Image image = new()
             {
                 Aspect = Aspect.AspectFill,
-
                 WidthRequest = 125,
                 HeightRequest = 125,
-                Source = ImageSource.FromFile("arras.png"),
-
             };
             var clip1 = new EllipseGeometry { Center = new Point(124 / 2, 124 / 2), RadiusX = 124 / 2, RadiusY = 124 / 2 };
 
             image.Clip = clip1;
+
+            if (Role.Equals("Diploma Student", StringComparison.OrdinalIgnoreCase))
+            {
+                image.Source = ImageSource.FromFile("student_profile.png");
+            }
+            else if (Role.Equals("Degree student", StringComparison.OrdinalIgnoreCase))
+            {
+                image.Source = ImageSource.FromFile("student_profile.png");
+            }
+            else if (Role.Equals("Lecturer", StringComparison.OrdinalIgnoreCase))
+            {
+                image.Source = ImageSource.FromFile("lecturer_profile.png");
+            }
+            else if (Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                image.Source = ImageSource.FromFile("admin_profile.png");
+            }
+            else
+            {
+                image.Source = ImageSource.FromFile("student_profile.png");
+            }
+    
 
             Border imgBorder = new()
             {
@@ -52,18 +79,18 @@ namespace UniVerse.Components
                 Margin = new Thickness(0, -7, 0, 15),
                 Stroke = Color.FromArgb("#407BFF"),
                 Content = image
-
             };
 
-            ImageButton editButton = new()
+            toggleButton = new Button
             {
-                Source = ImageSource.FromFile("edit.png"),
-                HeightRequest = 25,
-                WidthRequest = 25,
-                Aspect = Aspect.Center,
+                Text = isActive ? "Active" :"Inactive",
+                BackgroundColor = isActive ? Color.FromArgb("#29BA56") : Color.FromArgb("#FF4040"),
+                Margin = new Thickness(0, 10, 0, 10),
+                WidthRequest = 100,
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.End,
             };
+            toggleButton.Clicked += ToggleButton;
 
             Label name = new()
             {
@@ -87,9 +114,9 @@ namespace UniVerse.Components
             Label email = new()
             //200211@virtualWindow.co.za"
             {
-                Text = "\U0001F4E7"  + Role,
+                Text = "\U0001F4E7"  + Email,
                 TextColor = Color.FromArgb("#717171"),
-                FontSize = 15,
+                FontSize = 13,
                 HorizontalOptions = LayoutOptions.Center,
                 Margin = new Thickness(0, 15, 0, 0)
             };
@@ -115,11 +142,17 @@ namespace UniVerse.Components
                 Margin = new Thickness(0, 0, 0, 0)
             };
 
+            var cardViewModel = new CardViewModel();
+            textButton.Clicked += async (sender, e) =>
+            {
+                await cardViewModel.NavigateToOverviewScreenAsync(Buttontext, id);
+            };
+
             StackLayout stack = new()
             {
                 Children =
                 {
-                    editButton,
+                    toggleButton,
                     imgBorder,
                     name,
                     role,
@@ -140,10 +173,21 @@ namespace UniVerse.Components
                 Margin = new Thickness(20),
                 Content = stack,
                 BorderColor = Colors.White,
-
             };
 
             Content = frame;
+        }
+        private async void ToggleButton(object sender, EventArgs e)
+        {
+            await viewModel.SetPersonStatus(person_id);
+            isActive = !isActive;
+            UpdateButtonAppearance();
+        }
+
+        private void UpdateButtonAppearance()
+        {
+            toggleButton.Text = isActive ? "Active" : "Inactive";
+            toggleButton.BackgroundColor = isActive ? Color.FromArgb("#29BA56") : Color.FromArgb("#FF4040");
         }
     }
 }

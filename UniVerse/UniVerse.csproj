@@ -65,11 +65,19 @@
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logout.png" />
 	  <None Remove="Resources\Images\LoginImage.png" />
-	  <None Remove="Resources\Images\loginbg.png" />
+	  <None Remove="Services\" />
+	  <None Remove="Services\SubjectsServices\" />
+	  <None Remove="Resources\Images\notfound.svg" />
+	  <None Remove="Resources\Images\nostudents.svg" />
+	  <None Remove="Resources\Images\admin_profile.svg" />
+	  <None Remove="Resources\Images\lecturer_profile.svg" />
+	  <None Remove="Resources\Images\student_profile.svg" />
+	  <None Remove="Resources\Images\student_no_enroll.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -90,8 +98,8 @@
     <None Remove="Resources\Images\trash_icon.svg" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Components\" />
 	  <Folder Include="Screens\" />
+	  <Folder Include="Services\NewFolder\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\ui_ux_design.svg" />
@@ -117,6 +125,11 @@
 	  <BundleResource Include="Resources\Images\coin.png" />
 	  <BundleResource Include="Resources\Images\logo.png" />
 	  <BundleResource Include="Resources\Images\logout.png" />
-	  <BundleResource Include="Resources\Images\loginbg.png" />
+	  <BundleResource Include="Resources\Images\notfound.svg" />
+	  <BundleResource Include="Resources\Images\nostudents.svg" />
+	  <BundleResource Include="Resources\Images\admin_profile.svg" />
+	  <BundleResource Include="Resources\Images\lecturer_profile.svg" />
+	  <BundleResource Include="Resources\Images\student_profile.svg" />
+	  <BundleResource Include="Resources\Images\student_no_enroll.svg" />
 	</ItemGroup>
 </Project>
