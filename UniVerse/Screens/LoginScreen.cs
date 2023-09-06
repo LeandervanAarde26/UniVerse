@@ -26,7 +26,7 @@ namespace UniVerse.Screens
                 IsVisible = false
             });
 
-            AuthVM = new LoginViewModel(new Services.RestService(), Navigation);
+            AuthVM = new LoginViewModel(new Services.RestService());
             BindingContext = AuthVM;
 
             NavigationPage.SetHasNavigationBar(this, false);

@@ -15,7 +15,7 @@ public class Dashboard : ContentPage
     private readonly PeopleViewModel _peopleViewModel;
     public Dashboard()
     {
-        _loginViewModel = new LoginViewModel(new Services.RestService(), Navigation);
+        _loginViewModel = new LoginViewModel(new Services.RestService());
         BindingContext = _loginViewModel;
         _peopleViewModel = new PeopleViewModel(new Services.RestService());
         BindingContext = _peopleViewModel;

@@ -28,6 +28,7 @@ namespace UniVerse.Services
 
         public List<AdminFees> AdminFee { get; private set; }
 
+
         public RestService()
         {
             _client = new HttpClient();
@@ -342,6 +343,27 @@ namespace UniVerse.Services
             return AdminFee;
         }
 
+        public async Task ChangePasswordAsync(PasswordModel data)
+        {
+            Uri uri = new(string.Format(baseURL + "People/Password"));
+
+            try
+            {
+            string json = JsonSerializer.Serialize(data, _serializerOptions);
+                StringContent content = new(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(uri, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\Password successfully changed.");
+                }     
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
 
 
         public async Task<AddpersonModel> AddStaffAsync(AddpersonModel staff)
@@ -394,10 +416,6 @@ namespace UniVerse.Services
 
             return addStudent;
         }
-
-
-
-
     }
 
 }
