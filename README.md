@@ -18,7 +18,7 @@
 <p align="center">
 
   <a href="https://github.com/">
-    <img src="https://github.com/LeandervanAarde/UniVerse/blob/Develops/UniVerse/Resources/Images/logo.svg" alt="Logo" width="300" height="300">
+    <img src="https://github.com/LeandervanAarde/UniVerse/blob/Develops/UniVerse/Resources/Images/logo.svg" alt="Logo" width="300" height="200">
   </a>
 
   <p align="center">
