@@ -156,6 +156,23 @@ namespace UniVerse.Screens
 
             StudentOverViewRightBar right = new();
 
+            Button delete = new()
+            {
+                Margin = new Thickness(8, 12),
+                Text = "Delete Staff Member",
+                BackgroundColor = Color.FromArgb("#FF4040"),
+                ImageSource = ImageSource.FromFile("trash.png")
+            };
+
+            StackLayout deleteStack = new()
+            {
+                VerticalOptions = LayoutOptions.End,
+                Children =
+                {
+                    delete
+                }
+            };
+
             Grid grid = new()
             {
                 RowDefinitions = new RowDefinitionCollection
@@ -187,6 +204,11 @@ namespace UniVerse.Screens
             Grid.SetColumn(right, 1);
             Grid.SetColumnSpan(right, 2);
             Grid.SetRowSpan(right, 2);
+
+            grid.Children.Add(deleteStack);
+            Grid.SetColumn(deleteStack, 1);
+            Grid.SetColumnSpan(deleteStack, 1);
+            Grid.SetRowSpan(deleteStack, 3);
 
 
             grid.BackgroundColor = Color.FromArgb("#F6F7FB");
