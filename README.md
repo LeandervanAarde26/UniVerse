@@ -60,7 +60,7 @@
 <!--PROJECT DESCRIPTION-->
 ## About the Project
 <!-- header image of project -->
-![image1](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Mockup1.jpg)
+![image1](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/headerMockup.jpg)
 
 ### Project Description
 
