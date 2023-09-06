@@ -103,7 +103,7 @@ Run the following in the command-line to clone the project:
 ## Features and Functionality
 
 <!-- note how you can use your gitHub link. Just make a path to your assets folder -->
-![image2](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Mockup2.jpg)
+![image2](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/featuresMockup.jpg)
 
 ### Login validation and authentication
 
