@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text;
 using System.Text.Json;
 using UniVerse.Models;
 using UniVerse.Services.SubjectService;
@@ -22,6 +23,31 @@ namespace UniVerse.Services.SubjectServices
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 WriteIndented = true
             };
+        }
+
+        //add subject
+        public async Task SaveSubjectAsync(SubjectModel subject, bool isNewSubject = false)
+        {
+            Uri subjectUri = new (string.Format(baseURL + "Subjects", string.Empty));
+
+            try
+            {
+                string json = JsonSerializer.Serialize(subject, _serializerOptions);
+                StringContent content = new(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                if (isNewSubject)
+                    response = await _client.PostAsync(subjectUri, content);
+                else
+                    response = await _client.PutAsync(subjectUri, content);
+
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine(@"\tSubject successfully saved.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
         }
 
         //get subjects

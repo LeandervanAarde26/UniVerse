@@ -45,6 +45,20 @@ namespace UniVerse.ViewModels
             return subject;
         }
 
+ public async Task SaveSubject(SubjectModel subject)
+        {
+            try
+            {
+                await _restService.SaveSubjectAsync(subject, isNewSubject: true);
+                Debug.WriteLine("Subject successfully saved.");
+                _ = GetAllSubjects();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR: {ex.Message}");
+            }
+        }
+        
         //Delete Subject
         public async Task DeleteSubject(int id)
         {
@@ -56,6 +70,7 @@ namespace UniVerse.ViewModels
                 {
                     SubjectList.Remove(SubjectToRemove);
                 }
+
                 _ = GetAllSubjects();
             }
             catch (Exception ex)

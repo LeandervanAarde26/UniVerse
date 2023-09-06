@@ -2,22 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:UniVerse.Components"
+             xmlns:screens="clr-namespace:UniVerse.Screens" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="screens:SubjectsScreen"
              x:Class="UniVerse.Screens.SubjectsScreen"
-             
-             BackgroundColor="{DynamicResource Key=Primary}">
+             BackgroundColor="{DynamicResource Key=Primary}"
+             xmlns:sys="clr-namespace:System;assembly=netstandard">
     <Grid>
         <Grid.ColumnDefinitions>
-           
-            <!-- Three-quarters of the page for the first column -->
             <ColumnDefinition Width="70*"/>
-            <!-- One-quarter of the page for the second column -->
             <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
+        <VerticalStackLayout Padding="20" HorizontalOptions="Start" Grid.Column="0">
 
         <!--Just an indication for the Nav-->
         <VerticalStackLayout></VerticalStackLayout>
 
-        <VerticalStackLayout Padding="20" HorizontalOptions="StartAndExpand" Grid.Column="0">
             <Label 
                 Text="Subjects"
                 FontSize="35"
@@ -33,56 +32,85 @@
             </CollectionView>
         </VerticalStackLayout>
 
-        <FlexLayout Grid.Column="1" BackgroundColor="White" Direction="Column" JustifyContent="Center">
-            <!-- ProfileView will be inserted here -->
-            <StackLayout VerticalOptions="Center" Padding="20">
-                <Label Text="Add new Subject" FontSize="20" HorizontalOptions="Start" Margin="22, 5" TextColor="#2B2B2B" FontAttributes="Bold"/>
-                <Border Padding="0, 0, 0, 30" StrokeThickness="1.5" Stroke="{DynamicResource Gray900}" StrokeDashArray="8,3" HeightRequest="230" StrokeDashOffset="6" BackgroundColor="{DynamicResource Primary}" Margin="20, 10, 20, 15">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="170" />
-                            <!-- Three-quarters of the page for the first column -->
-                            <RowDefinition Height="*" />
-                            <!-- One-quarter of the page for the second column -->
-                        </Grid.RowDefinitions>
+        <StackLayout Grid.Column="1" BackgroundColor="White">
+            <components:ProfileView/>
 
-                        <Image Source="image_picker.png" Margin="0, 10, 0, 0"/>
-                         <Button Text="View Subject"
-                                FontSize="18"
-                                BackgroundColor="Transparent"
-                                TextColor="#407BFF"
-                                Margin="0,20,0,0"
-                                Grid.Row="1"/>
+            <FlexLayout Direction="Column" JustifyContent="Center">
+                <StackLayout VerticalOptions="Center" Padding="20">
+                    <Label Text="Add new Subject" FontSize="20" HorizontalOptions="Start" Margin="22, 5" TextColor="#2B2B2B" FontAttributes="Bold"/>
+                    <Border Padding="0, 0, 0, 30" StrokeThickness="1.5" Stroke="{DynamicResource Gray900}" StrokeDashArray="8,3" HeightRequest="230" StrokeDashOffset="6" BackgroundColor="{DynamicResource Primary}" Margin="20, 10, 20, 15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="170" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Image Source="image_picker.png" Margin="0, 10, 0, 0"/>
+                            <Button Text="View Subject" FontSize="18" BackgroundColor="Transparent" TextColor="#407BFF" Margin="0,20,0,0" Grid.Row="1"/>
+                        </Grid>
+                    </Border>
+
+                    <Entry x:Name="subject_name" Placeholder="Subject Name" BackgroundColor="{DynamicResource Primary}" Margin="20, 5" TextColor="#2B2B2B" Text="{Binding SubjectName}" />
+
+                    <Grid Padding="20, 5, 20, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Entry x:Name="subject_code" Placeholder="Subject Code" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Text="{Binding SubjectCode}"/>
+
+                        <!--I don't know why the title color isn't showing up because it was earlier lol-->
+                        <Picker x:Name="picker" Grid.Column="1" BackgroundColor="{DynamicResource Primary}" Margin="5, 0, 0, 0" TitleColor="{DynamicResource Gray400}" Title="Select Lecturer"
+                                ItemsSource="{Binding PickerItems}" ItemDisplayBinding="{Binding Name}"/>
                     </Grid>
-                </Border>
-                <Entry Placeholder="Subject Name" BackgroundColor="{DynamicResource Primary}" Margin="20, 5" TextColor="#2B2B2B"/>
-                <Grid Padding="20, 5, 20, 5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <!-- Three-quarters of the page for the first column -->
-                        <ColumnDefinition Width="*" />
-                        <!-- One-quarter of the page for the second column -->
-                    </Grid.ColumnDefinitions>
 
-                    <Entry Placeholder="Subject Code" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Margin="0, 0, 5, 0"/>
+                    <Grid Padding="20, 5, 20, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <!--I don't know why the title color isn't showing up because it was earlier lol-->
-                    <Picker Grid.Column="1" BackgroundColor="{DynamicResource Primary}" Margin="5, 0, 0, 0" TitleColor="{DynamicResource Gray400}" Title="Select Lecturer">
-                        <Picker.Items>
-                            <x:String>Armand Pretorius</x:String>
-                            <x:String>Mike Maynard</x:String>
-                        </Picker.Items>
-                    </Picker>
-                </Grid>
+                        <Entry x:Name="subject_cost" Placeholder="Subject Cost" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Text="{Binding SubjectCost}" Margin="0, 0, 5, 0" Keyboard="Numeric">
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="1.0"
+                                    MaximumValue="1000.0"
+                                    MaximumDecimalPlaces="2" />
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry x:Name="subject_credits" Placeholder="Subject Credits" Grid.Column="1" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Text="{Binding SubjectCredits}" Margin="5, 0, 0, 0" Keyboard="Numeric">
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="500"
+                                    MaximumValue="1000"
+                                    MaximumDecimalPlaces="0" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Grid>
 
-                <!--I just need to figure out how to make the text smaller here to match the other entries-->
-                <Editor Placeholder="Subject Description"
-                        BackgroundColor="{DynamicResource Primary}"
-                        Margin="20, 5"
-                        TextColor="{DynamicResource Gray400}"
-                        HeightRequest="200"/>
-                <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="20, 15, 20, 0"/>
-            </StackLayout>
-        </FlexLayout>
+                    <Grid Padding="20, 5, 20, 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--I will figure out the colour picker, I just want to get the main functiality out of the way first-->
+                        <!--I have this recource for the colour picker: https://github.com/nor0x/Maui.ColorPicker-->
+                        <Entry x:Name="subject_color" Placeholder="Colour Hex" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Text="{Binding SubjectColor}" Margin="0, 0, 5, 0"/>
+                        <Entry x:Name="subject_class_runtiem" Placeholder="Subject Runtime (minutes)" Grid.Column="1" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Text="{Binding SubjectRuntime}" Margin="5, 0, 0, 0" Keyboard="Numeric"/>
+                    </Grid>
+
+                    <Entry x:Name="subject_class_amount" Placeholder="Class amount" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Text="{Binding SubjectClassAmount}" Margin="20, 0" Keyboard="Numeric"/>
+                    <DatePicker x:Name="course_start" MinimumDate="{x:Static sys:DateTime.Today}" MaximumDate="12/31/2023" Date="{x:Static sys:DateTime.Today}" BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Gray900}" Margin="20, 10, 20, 10"/>
+
+                    <!--I just need to figure out how to make the text smaller here to match the other entries-->
+                    <Editor x:Name="subject_description" Placeholder="Subject Description" BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Gray400}" HeightRequest="200" Text="{Binding SubjectDescription}" Margin="20, 0"/>
+                    <Button Text="Add Subject" BackgroundColor="#2B2B2B" Margin="20, 15, 20, 0" Clicked="addSubject"/>
+                </StackLayout>
+            </FlexLayout>
+        </StackLayout>
     </Grid>
 </ContentPage>
