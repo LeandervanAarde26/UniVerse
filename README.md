@@ -71,6 +71,7 @@ UniVerse is a robust and versatile cross-platform school management desktop appl
 * C#
 * [.NET MAUI](https://learn.microsoft.com/en-us/dotnet/maui/)
 * [PostgreSQL](https://www.postgresql.org/)
+* [pgAdmin](https://www.pgadmin.org/)
 
 <!-- GETTING STARTED -->
 <!-- Make sure to add appropriate information about what prerequesite technologies the user would need and also the steps to install your project on their own mashines -->
@@ -198,8 +199,10 @@ The `Development Process` is the technical implementations and functionality don
 
 #### Highlights
 <!-- stipulated the highlight you experienced with the project -->
-* Our group dynamic worked really well.
 * Leander enjoyed handling the backend
+* Learning C#
+* Our group dynamic worked really well.
+* Working in a group dynamic and learning more about version control in a group setting
 
 #### Challenges
 <!-- stipulated the challenges you faced with the project and why you think you faced it or how you think you'll solve it (if not solved) -->
@@ -208,7 +211,7 @@ The `Development Process` is the technical implementations and functionality don
 * Updating information
 * Scrollview on the Subject page
 * Cross-platform UI
-* All group members having access to the database
+* Learning of a new programming language (C#)
 
 ### Future Implementation
 <!-- stipulate functionality and improvements that can be implemented in the future. -->
