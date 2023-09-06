@@ -19,15 +19,5 @@ public partial class SubjectsScreen : ContentPage
     {
         base.OnAppearing();
         await viewModel.GetAllSubjects();
-        
-
-        //foreach (var subject in viewModel.SubjectList)
-        //{
-        //    var subjectCard = new Components.SubjectCard
-        //    {
-        //        BindingContext = subject
-        //    };
-        //    subjectStackLayout.Children.Add(subjectCard);
-        //}
     }
 }

@@ -150,7 +150,6 @@ namespace UniVerse.Screens
 
             StaffMemberRightBar right = new();
 
-
             Grid grid = new()
             {
                 RowDefinitions = new RowDefinitionCollection
@@ -236,6 +235,41 @@ namespace UniVerse.Screens
                     };
                     FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
                     layout.Children.Add(card);
+                }
+                else
+                {
+                    // If subject_id is null, display an image
+                    var image = new Image
+                    {
+                        Source = "notfound.png",
+                        Aspect = Aspect.AspectFit,
+                        WidthRequest = 700,
+                        HeightRequest = 700,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    };
+                    Grid imageGrid = new()
+                    {
+                        RowDefinitions = new RowDefinitionCollection
+                        {
+                            new RowDefinition
+                            {
+                                Height = GridLength.Star
+                            }
+                        },
+                        ColumnDefinitions = new ColumnDefinitionCollection
+                        {
+                            new ColumnDefinition
+                            {
+                                Width = GridLength.Star
+                            }
+                        }
+                    };
+                    imageGrid.Children.Add(image);
+                    Grid.SetRow(image, 1);
+                    Grid.SetColumn(image, 1);
+                    FlexLayout.SetBasis(imageGrid, new FlexBasis(1f, true));
+                    layout.Children.Add(imageGrid);
                 }
             }
         }

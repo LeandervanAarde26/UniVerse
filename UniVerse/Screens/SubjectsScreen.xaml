@@ -17,19 +17,13 @@
         <!--Just an indication for the Nav-->
         <VerticalStackLayout></VerticalStackLayout>
 
-        <VerticalStackLayout Padding="20" HorizontalOptions="Start" Grid.Column="0">
+        <VerticalStackLayout Padding="20" HorizontalOptions="StartAndExpand" Grid.Column="0">
             <Label 
                 Text="Subjects"
                 FontSize="35"
                 FontAttributes="Bold"
                 TextColor="{DynamicResource Key=Gray900}"
                 Padding="0, 0, 0, 20"/>
-            <!--<ScrollView VerticalOptions="Center">
-                <StackLayout x:Name="subjectStackLayout">
-                    
-                </StackLayout>
-            </ScrollView>-->
-
             <CollectionView ItemsSource="{Binding SubjectList}" MaximumHeightRequest="900" HorizontalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

@@ -29,35 +29,9 @@
 
 
             <Label Text="{Binding student_name}" TextColor="{DynamicResource Gray900}" Grid.Column="1" FontSize="18" VerticalTextAlignment="Center" Padding="15, 0, 0, 0"/>
-            <Label Text="{Binding student_credits}" TextColor="{DynamicResource Gray500}" FontSize="16" Grid.Column="2" VerticalTextAlignment="Center"/>
+            <Label Text="{Binding student_credits, StringFormat='Credits: {0}'}" TextColor="{DynamicResource Gray500}" FontSize="16" Grid.Column="2" VerticalTextAlignment="Center"/>
             <Label Text="{Binding student_email}" TextColor="{DynamicResource Gray500}" FontSize="16" Grid.Column="3" VerticalTextAlignment="Center"/>
-            <ImageButton Source="trash_icon.png" FlexLayout.AlignSelf="Center" MaximumHeightRequest="32" Grid.Column="4" Aspect="Center"/>
-
-
+            <ImageButton Source="trash_icon.png" FlexLayout.AlignSelf="Center" MaximumHeightRequest="32" Grid.Column="4" Aspect="Center" Clicked="DeleteEnrolement"/>
         </Grid>
     </Frame>
 </ContentView>
-
-<!--<components:StudentCard/>
-<components:StudentCard/>
-<components:StudentCard/>
-<components:StudentCard/>
-<components:StudentCard/>
-<components:StudentCard/>
-<components:StudentCard/>
-<components:StudentCard/>-->
-
-
-<!--<FlexLayout JustifyContent="SpaceBetween">
-    <HorizontalStackLayout>
-        <Image Aspect="AspectFill" Source="armand.png" WidthRequest="60" HeightRequest="60">
-            <Image.Clip>
-                <EllipseGeometry Center="30, 30" RadiusX="29.5" RadiusY="29.5" />
-            </Image.Clip>
-        </Image>
-        <Label Text="Student name" TextColor="{DynamicResource Gray900}" FontSize="18" VerticalTextAlignment="Center" Padding="15, 0, 0, 0"/>
-    </HorizontalStackLayout>
-    <Label Text="200089" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
-    <Label Text="200089@openwindow.co.za" TextColor="{DynamicResource Gray500}" FontSize="16" VerticalTextAlignment="Center"/>
-    <ImageButton Source="trash_icon.png" FlexLayout.AlignSelf="Center" MaximumWidthRequest="30"/>
-</FlexLayout>-->

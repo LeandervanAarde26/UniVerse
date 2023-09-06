@@ -38,6 +38,7 @@ namespace UniVerse.Services
             };
         }
 
+        // Read staff memebers
         public async Task<List<Person>> RefreshDataAsync()
         {
             People = new List<Person>();
@@ -60,6 +61,7 @@ namespace UniVerse.Services
             return People;
         }
 
+        // Get staff members by id
         public async Task<LecturerWithCourses> GetLecturerByIdAsync(int id)
         {
             LecturerWithCourses Lect = new();
@@ -104,6 +106,27 @@ namespace UniVerse.Services
             return Staff;
         }
 
+        public async Task<List<Person>> GetLecturersAsync()
+        {
+            Staff = new List<Person>();
+            Uri uri = new(string.Format(baseURL + "People/Lecturers"));
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Staff = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return Staff;
+        }
+
+        // get students
         public async Task<List<Student>> GetStudentsAsync()
         {
             Students = new List<Student>();
@@ -124,6 +147,7 @@ namespace UniVerse.Services
             return Students;
         }
 
+        // get student by id
         public async Task<SingleStudentWithCourses> GetStudentByIdAsync(int id)
         {
             SingleStudentWithCourses Student = new();
@@ -146,6 +170,23 @@ namespace UniVerse.Services
             }
 
             return Student;
+        }
+
+        //Delete people
+        public async Task DeletePersonAsync(int id)
+        {
+            Uri uri = new(string.Format(baseURL + "People/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine(@"\tTodoItem successfully deleted.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
         }
 
         // Could it be that the functions were not seperated? I think they has to be seperate. 
@@ -280,8 +321,6 @@ namespace UniVerse.Services
             }
             return StudentFee;
         }
-
-
 
         public async Task<List<AdminFees>> GetAdminFeesAsync()
         {
