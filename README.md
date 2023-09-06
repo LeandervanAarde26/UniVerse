@@ -170,10 +170,14 @@ The `Conceptual Process` is the set of actions, activities and research that was
 
 ![image6](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/Ideation.png)
 
+![image7](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/dataRelationalDiagram.svg)
+
+![image8](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/userFlow.svg)
+
 
 ### Wireframes
 
-![image7](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/wireframes.png)
+![image9](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/wireframes.png)
 
 
 
@@ -227,10 +231,10 @@ The `Development Process` is the technical implementations and functionality don
 
 ### Mockups
 
-![image8](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/mockup1.jpg)
+![image10](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/mockup1.jpg)
 <br>
 
-![image9](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/mockup2.jpg)
+![image11](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/mockup2.jpg)
 
 See the [open issues](https://github.com/) for a list of proposed features (and known issues).
 
