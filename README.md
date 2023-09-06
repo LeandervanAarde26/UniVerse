@@ -200,7 +200,7 @@ The `Development Process` is the technical implementations and functionality don
 
 * Simon was responsible for implementing the Login page, as well as the Dashboard. 
 * Leander was responsible for implementing the staff and staff overview screen, as well as the Students and student overview screen. He also implemented the flyout navigation.
-* Bronwyn created the application designs. She was responsible for for implementing the subjects and subject overview screen, as well as the funds screen.
+* Bronwyn created the application designs and she compiled the README. She was responsible for for implementing the subjects and subject overview screen, as well as the funds screen.
 
 ##### Following that, we moved onto networking and integration
 
