@@ -283,7 +283,7 @@ namespace UniVerse.Services
         public async Task<List<LecturerFees>> GetFeesAsync()
         {
             LecturerFee = new List<LecturerFees>();
-            Uri uri = new(string.Format(baseURL + "Subjects/lecturerfees"));
+            Uri uri = new(string.Format(baseURL + "PaymentSummaries/lecturerfees"));
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -305,7 +305,7 @@ namespace UniVerse.Services
         public async Task<List<StudentFees>> GetStudentFeesAsync()
         {
             StudentFee = new List<StudentFees>();
-            Uri uri = new(string.Format(baseURL + "CourseEnrollments/studentFees"));
+            Uri uri = new(string.Format(baseURL + "PaymentSummaries/studentFees"));
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -325,7 +325,7 @@ namespace UniVerse.Services
         public async Task<List<AdminFees>> GetAdminFeesAsync()
         {
             AdminFee = new List<AdminFees>();
-            Uri uri = new(string.Format(baseURL + "People/AdminFees"));
+            Uri uri = new(string.Format(baseURL + "PaymentSummaries/Adminfees"));
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
