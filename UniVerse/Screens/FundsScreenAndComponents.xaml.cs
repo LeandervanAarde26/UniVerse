@@ -83,9 +83,9 @@ public partial class FundsScreenAndComponents : ContentPage
         }
 
 
-        var TotalIncome = totalAdmin + totalLectureFees + totalStudentFees;
+        var TotalIncome = totalStudentFees;
 
-        var TotalSalaries = totalLectureFees;
+        var TotalSalaries = totalAdmin + totalLectureFees;
 
         totalIncomeLabel.Text = TotalIncome.ToString("C");
 
