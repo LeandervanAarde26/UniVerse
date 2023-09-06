@@ -15,6 +15,7 @@ namespace UniVerse.Services
         Task ChangePasswordAsync(PasswordModel data);
         Task<AddpersonModel> AddStudentAsync(AddpersonModel person);
         Task<AddpersonModel> AddStaffAsync(AddpersonModel person);
+        Task DeletePersonAsync(int id);
         Task PayLecturerSalaries();
         Task PayAdmins();
         Task CollectFromStudents();

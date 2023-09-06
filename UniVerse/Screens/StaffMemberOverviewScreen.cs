@@ -146,6 +146,27 @@ namespace UniVerse.Screens
 
             StaffMemberRightBar right = new();
 
+
+            //Delete
+            Button delete = new()
+            {
+                Margin = new Thickness(8, 12),
+                Text = "Delete Staff Member",
+                BackgroundColor = Color.FromArgb("#FF4040"),
+                ImageSource = ImageSource.FromFile("trash.png")
+            };
+            delete.Clicked += DeleteStaffMember;
+
+            StackLayout deleteStack = new()
+            {
+                VerticalOptions = LayoutOptions.End,
+                Children =
+                {
+                    delete
+                }
+            };
+
+
             Grid grid = new()
             {
                 RowDefinitions = new RowDefinitionCollection
@@ -179,6 +200,12 @@ namespace UniVerse.Screens
             Grid.SetColumnSpan(right, 2);
             Grid.SetRowSpan(right, 2);
 
+            grid.Children.Add(deleteStack);
+            Grid.SetColumn(deleteStack, 1);
+            Grid.SetColumnSpan(deleteStack, 1);
+            Grid.SetRowSpan(deleteStack, 3);
+
+
 
             grid.BackgroundColor = Color.FromArgb("#F6F7FB");
             grid.Padding = 6;
@@ -196,7 +223,6 @@ namespace UniVerse.Screens
                 if (viewModel.NavigationParameter is int memberIdValue)
                 {
                     StaffId = memberIdValue;
-                    Debug.WriteLine(StaffId);
                 }
             }
 
@@ -214,6 +240,22 @@ namespace UniVerse.Screens
                 enrollments = staffMember.enrollments;
 
                 CreateAndAddEnrollmentCards();
+            }
+        }
+
+        private async void DeleteStaffMember(object sender, EventArgs e)
+        {
+            bool answer = await DisplayAlert("Delete Staff Member", "Are you sure you want to delete this staff member?", "Yes", "No");
+
+            if (answer)
+            {
+                await _viewModel.DeletePerson(StaffId);
+                await DisplayAlert("Success!", "Staff member deleted successfully.", "OK");
+                _ = Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("Oops!", "The staff member was not deleted.", "OK");
             }
         }
 

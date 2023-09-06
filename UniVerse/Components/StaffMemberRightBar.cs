@@ -66,23 +66,23 @@ namespace UniVerse.Components
             };
             //Chart
 
-            //Delete
-            Button delete = new()
-            {
-                Margin = new Thickness(8, 12),
-                Text = "Delete Staff Member",
-                BackgroundColor = Color.FromArgb("#FF4040"),
-                ImageSource = ImageSource.FromFile("trash.png")
-            };
+            ////Delete
+            //Button delete = new()
+            //{
+            //    Margin = new Thickness(8, 12),
+            //    Text = "Delete Staff Member",
+            //    BackgroundColor = Color.FromArgb("#FF4040"),
+            //    ImageSource = ImageSource.FromFile("trash.png")
+            //};
 
-            StackLayout deleteStack = new()
-            {
-                VerticalOptions = LayoutOptions.End,
-                Children =
-                {
-                    delete
-                }
-            };
+            //StackLayout deleteStack = new()
+            //{
+            //    VerticalOptions = LayoutOptions.End,
+            //    Children =
+            //    {
+            //        delete
+            //    }
+            //};
 
             //Page Content
             Grid grid = new()
@@ -108,8 +108,8 @@ namespace UniVerse.Components
             Grid.SetRow(frame, 1);
 
 
-            grid.Children.Add(deleteStack);
-            Grid.SetRow(deleteStack, 2);
+            //grid.Children.Add(deleteStack);
+            //Grid.SetRow(deleteStack, 2);
             //Page Content
 
             Content = grid;
