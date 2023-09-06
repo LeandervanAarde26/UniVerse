@@ -116,15 +116,7 @@ namespace UniVerse.Screens
             };
 
 
-            RightBar right = new("Staff Member", list);
-
-
-            // Add the ContentView to the Grid
-            //   grid.Children.Add(navbar);
-            //Grid.SetRow(navbar, 0);
-            //Grid.SetColumn(navbar, 0);
-            //Grid.SetColumnSpan(navbar, 1);
-            //Grid.SetRowSpan(navbar, 2);
+            AddStaffBar right = new("Staff Member", list);
 
             grid.Children.Add(scrollView);
             Grid.SetRow(scrollView, 1);
@@ -149,7 +141,7 @@ namespace UniVerse.Screens
             {
                 await viewModel.GetAllStaffMembers();
                 
-                foreach (var member in viewModel.StaffList)
+                foreach (var member in viewModel.AllStaffList)
                 {
                     var card = new Cardview(member.name, member.role, member.email, member.person_system_identifier, "Staff Member", member.id);
                     layout.Children.Add(card);

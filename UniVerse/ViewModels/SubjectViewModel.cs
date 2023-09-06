@@ -8,7 +8,7 @@ using UniVerse.Services.SubjectServices;
 namespace UniVerse.ViewModels
 {
 
-    internal class SubjectViewModel : BaseViewModel
+    public class SubjectViewModel : BaseViewModel
     {
         public SubjectService _restService;
 
@@ -43,6 +43,83 @@ namespace UniVerse.ViewModels
             Subject.Add(subject);
             Debug.WriteLine(subject.subjectName);
             return subject;
+        }
+
+        //Delete Subject
+        public async Task DeleteSubject(int id)
+        {
+            try
+            {
+                await _restService.DeletePersonAsync(id);
+                var SubjectToRemove = SubjectList.FirstOrDefault(p => p.subjectId == id);
+                if (SubjectToRemove != null)
+                {
+                    SubjectList.Remove(SubjectToRemove);
+                }
+                _ = GetAllSubjects();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error deleting person: " + ex.Message);
+            }
+        }
+
+        // Update Subject Lecturer
+        public async Task UpdateSubjectLecturer(int subjectId, int newLecturerId)
+        {
+            try
+            {
+                await _restService.UpdateSubjectLecturerAsync(subjectId, newLecturerId);
+                _ = GetAllSubjects();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error updating subject lecturer: " + ex.Message);
+            }
+        }
+
+        // delete course enrolement
+        public async Task DeleteCourseEnrollment(int id)
+        {
+            try
+            {
+                await _restService.DeleteCourseEnrollmentsAsync(id);
+
+                var enrollmentToRemove = Subject.FirstOrDefault(subject =>
+                    subject.enrollments.Any(enrollment => enrollment.enrollment_id == id));
+
+                if (enrollmentToRemove != null)
+                {
+                    var enrollment = enrollmentToRemove.enrollments.FirstOrDefault(enrollment => enrollment.enrollment_id == id);
+
+                    if (enrollment != null)
+                    {
+                        enrollmentToRemove.enrollments.Remove(enrollment);
+                    }
+                }
+
+                _ = GetAllSubjects();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error deleting course enrollment: " + ex.Message);
+            }
+        }
+
+
+        //add Subject
+        public async Task SaveSubject(SubjectModel subject)
+        {
+            try
+            {
+                await _restService.SaveSubjectAsync(subject, isNewSubject: true);
+                Debug.WriteLine("Subject successfully saved.");
+                _ = GetAllSubjects();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR: {ex.Message}");
+            }
         }
     }
 }

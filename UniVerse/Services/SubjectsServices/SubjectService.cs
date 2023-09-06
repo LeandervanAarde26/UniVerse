@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text;
 using System.Text.Json;
 using UniVerse.Models;
 using UniVerse.Services.SubjectService;
@@ -70,6 +71,108 @@ namespace UniVerse.Services.SubjectServices
             }
 
             return subject;
+        }
+
+        //Delete subject
+        public async Task DeletePersonAsync(int id)
+        {
+            Uri uri = new(string.Format(baseURL + "Subjects/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine(@"\tSubject successfully deleted.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        // Add new lecturer
+        public async Task UpdateSubjectLecturerAsync(int subjectId, int newLecturerId)
+        {
+            try
+            {
+                var payload = new
+                {
+                    SubjectId = subjectId,
+                    NewLecturerId = newLecturerId
+                };
+
+                string jsonPayload = JsonSerializer.Serialize(payload, _serializerOptions);
+
+                var content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(baseURL + "Subjects/ChangeLecturer", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("PUT request was successful.");
+                }
+                else
+                {
+                    Debug.WriteLine($"PUT request failed with status code {response.StatusCode}.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($@"ERROR {ex.Message}");
+            }
+        }
+
+        //Delete Course Enrolement
+        public async Task DeleteCourseEnrollmentsAsync(int id)
+        {
+            Uri uri = new(string.Format(baseURL + "CourseEnrollments/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+
+                Debug.WriteLine($"DELETE request status code: {response.StatusCode}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("DELETE request was successful.");
+                }
+                else
+                {
+                    Debug.WriteLine($"DELETE request failed with status code {response.StatusCode}.");
+
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Response Content: {responseContent}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($@"ERROR {ex.Message}");
+            }
+        }
+
+        public async Task SaveSubjectAsync(SubjectModel subject, bool isNewSubject = false)
+        {
+            Uri subjectUri = new(string.Format(baseURL + "Subjects", string.Empty));
+
+            try
+            {
+                string json = JsonSerializer.Serialize(subject, _serializerOptions);
+                StringContent content = new(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                if (isNewSubject)
+                    response = await _client.PostAsync(subjectUri, content);
+                else
+                    response = await _client.PutAsync(subjectUri, content);
+
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine(@"\tSubject successfully saved.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
         }
     }
 }

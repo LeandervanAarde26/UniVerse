@@ -11,7 +11,7 @@ using static UniVerse.Models.LecturerOverviewModel;
 
 namespace UniVerse.ViewModels
 {
-    internal class PeopleViewModel : BaseViewModel
+    internal class AddStaffViewModel : BaseViewModel
     {
         public RestService _restService;
         // All of myt observerd properties 
@@ -90,7 +90,7 @@ namespace UniVerse.ViewModels
             }
         }
 
-        public PeopleViewModel(RestService restService) //instance of the restservice goes here
+        public AddStaffViewModel(RestService restService) //instance of the restservice goes here
         {
             _restService = restService;
             StaffList = new ObservableCollection<Person>();
@@ -111,11 +111,11 @@ namespace UniVerse.ViewModels
         public async Task GetAllStaffMembers()
         {
             var members = await _restService.RefreshDataAsync();
-            AllStaffList.Clear();
+            StaffList.Clear();
 
             foreach (var member in members)
             {
-                AllStaffList.Add(member);
+                StaffList.Add(member);
             }
         }
 
@@ -126,92 +126,6 @@ namespace UniVerse.ViewModels
             StaffMember.Add(member);
             return member;
         }
-
-        // Get Students
-        public async Task GetAllStudents()
-        {
-            var members = await _restService.GetStudentsAsync();
-            StudentList.Clear();
-
-            foreach (var member in members)
-            {
-                StudentList.Add(member);
-            }
-        }
-
-        public async Task GetAllLecturers()
-        {
-            var members = await _restService.GetLecturersAsync();
-            StaffList.Clear();
-
-            foreach (var member in members)
-            {
-                StaffList.Add(member);
-            }
-        }
-
-        //Get student member by id
-        public async Task<SingleStudentWithCourses> GetStudent(int id)
-        {
-            var student = await _restService.GetStudentByIdAsync(id);
-            Student.Add(student);
-            return student;
-        }
-
-        //Delete person
-        public async Task DeletePerson(int id)
-        {
-            try
-            {
-                await _restService.DeletePersonAsync(id);
-                var StaffMemberToRemove = StaffList.FirstOrDefault(p => p.id == id);
-                var StudentToRemove = StudentList.FirstOrDefault(p => p.id == id);
-                if (StaffMemberToRemove != null || StudentToRemove != null)
-                {
-                    StaffList.Remove(StaffMemberToRemove);
-                    StudentList.Remove(StudentToRemove);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Error deleting person: " + ex.Message);
-            }
-        }
-
-        public async Task GetAllstudents()
-        {
-            var members = await _restService.GetStudentsAsync();
-            StudentList.Clear();
-            var DegreeStudents = 0;
-            var DiplomaStudents = 0;
-            var maximumChartValue = 0;
-
-
-            foreach (var member in members)
-            {
-                StudentList.Add(member);
-                maximumChartValue++;
-
-                if(member.role == "Degree student")
-                {
-                    DegreeStudents++;
-                }
-                else
-                {
-                    DiplomaStudents++;
-                }
-            }
-            double DegreePercent = Math.Round((double)DegreeStudents / (double)maximumChartValue * 100, 1);
-            Chart.Add(new ChartEntry
-            {
-                Value = DegreePercent,
-                Color = Color.FromArgb("#6023FF"),
-                Text = "Visual Studio Code"
-            });
-
-            Chart.ToArray();
-        }
-
 
         public async Task GetAllStaff()
         {
@@ -247,10 +161,10 @@ namespace UniVerse.ViewModels
             StaffChart.ToArray();
         }
 
-        public async Task<AddpersonModel> AddStudent()
+        public async Task<AddpersonModel> AddStaff()
         {
 
-            int userRole = RoleInput == 1 ? 3 : 4;
+            int userRole = RoleInput == 1 ? 1 : 2;
 
             AddpersonModel person = new()
             {
@@ -270,9 +184,15 @@ namespace UniVerse.ViewModels
             };
 
             
-            await _restService.AddStudentAsync(person);
+            await _restService.AddStaffAsync(person);
 
-            GetAllstudents();
+            GetAllStaff();
+
+            NameEntry = String.Empty;
+            EmailEntry = String.Empty;
+            Number = String.Empty;
+            Identifier = String.Empty;
+            SurnameEntry = String.Empty;
 
             //NameEntry = String.Empty;
             //EmailEntry = String.Empty;

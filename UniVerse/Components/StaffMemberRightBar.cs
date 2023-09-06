@@ -1,18 +1,16 @@
 ﻿using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 namespace UniVerse.Components
 {
-	public class StaffMemberRightBar : ContentView
-	{
-		public StaffMemberRightBar ()
-		{
-
-
-
+    public class StaffMemberRightBar : ContentView
+    {
+        public StaffMemberRightBar()
+        {
 
             Image image = new()
             {
@@ -20,8 +18,6 @@ namespace UniVerse.Components
                 Aspect = Aspect.AspectFit,
                 MaximumHeightRequest = 350
             };
-
-            //Chart
 
             Label frameHeading = new()
             {
@@ -71,7 +67,6 @@ namespace UniVerse.Components
             //Chart
 
             //Delete
-
             Button delete = new()
             {
                 Margin = new Thickness(8, 12),
@@ -88,7 +83,6 @@ namespace UniVerse.Components
                     delete
                 }
             };
-            //Delete
 
             //Page Content
             Grid grid = new()
@@ -120,6 +114,6 @@ namespace UniVerse.Components
 
             Content = grid;
         }
-	}
+    }
 }
 
