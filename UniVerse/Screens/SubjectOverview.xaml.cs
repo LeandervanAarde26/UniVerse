@@ -8,18 +8,24 @@ public partial class SubjectOverview : ContentPage
 {
     public int SubjectId { get; set; }
     private readonly SubjectViewModel _viewModel;
+    private PeopleViewModel _peopleViewModel;
 
     public SubjectOverview()
 	{
 		InitializeComponent();
 
         _viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
+        _peopleViewModel = new PeopleViewModel(new Services.RestService());
         BindingContext = _viewModel;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+
+        studentStackLayout.Clear();
+
+        await _peopleViewModel.GetAllStaff();
 
         if (BindingContext is NavOverviewViewModel viewModel)
         {
@@ -40,14 +46,42 @@ public partial class SubjectOverview : ContentPage
 
             foreach (var enrollment in subject.enrollments)
             {
-                Debug.WriteLine($"Student Name: {enrollment.student_name}");
-
-                var studentCard = new Components.StudentCard
+                if (enrollment.enrollment_id != 0)
                 {
-                    BindingContext = enrollment
-                };
-                studentStackLayout.Children.Add(studentCard);
+                    var studentCard = new Components.StudentCard(_viewModel)
+                    {
+                        BindingContext = enrollment
+                    };
+                    studentStackLayout.Children.Add(studentCard);
+                }
+                else
+                {
+                    var image = new Image
+                    {
+                        Source = "nostudents.png",
+                        Aspect = Aspect.AspectFit,
+                        WidthRequest = 700,
+                        HeightRequest = 700,
+                    };
+                    studentStackLayout.Children.Add(image);
+                }
             }
+        }
+    }
+
+    private async void DeleteSubject(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Delete Subject", "Are you sure you want to delete this subject?", "Yes", "No");
+
+        if (answer)
+        {
+            await _viewModel.DeleteSubject(SubjectId);
+            await DisplayAlert("Success!", "Subject deleted successfully.", "OK");
+            _ = Navigation.PopAsync();
+        }
+        else
+        {
+            await DisplayAlert("Oops!", "The subject was not deleted.", "OK");
         }
     }
 }

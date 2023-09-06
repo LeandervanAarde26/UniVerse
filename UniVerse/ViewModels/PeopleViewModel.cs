@@ -67,12 +67,43 @@ namespace UniVerse.ViewModels
             }
         }
 
+        public async Task GetAllLecturers()
+        {
+            var members = await _restService.GetLecturersAsync();
+            StaffList.Clear();
+
+            foreach (var member in members)
+            {
+                StaffList.Add(member);
+            }
+        }
+
         //Get student member by id
         public async Task<SingleStudentWithCourses> GetStudent(int id)
         {
             var student = await _restService.GetStudentByIdAsync(id);
             Student.Add(student);
             return student;
+        }
+
+        //Delete person
+        public async Task DeletePerson(int id)
+        {
+            try
+            {
+                await _restService.DeletePersonAsync(id);
+                var StaffMemberToRemove = StaffList.FirstOrDefault(p => p.id == id);
+                var StudentToRemove = StudentList.FirstOrDefault(p => p.id == id);
+                if (StaffMemberToRemove != null || StudentToRemove != null)
+                {
+                    StaffList.Remove(StaffMemberToRemove);
+                    StudentList.Remove(StudentToRemove);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error deleting person: " + ex.Message);
+            }
         }
 
         public async Task GetAllstudents()
