@@ -24,6 +24,8 @@ namespace UniVerse.ViewModels
         public ObservableCollection<ChartEntry> Chart { get; set; }
         public ObservableCollection<ChartEntry> StaffChart { get; set; }
 
+        public ObservableCollection<ChartEntry> SingleStudentChart { get; set; }
+
         public string _nameEntry = string.Empty;
         public string NameEntry
         {
@@ -99,6 +101,7 @@ namespace UniVerse.ViewModels
             Student = new ObservableCollection<SingleStudentWithCourses>();
             Chart = new ObservableCollection<ChartEntry>();
             StaffChart = new ObservableCollection<ChartEntry>();
+            SingleStudentChart = new ObservableCollection<ChartEntry>();
             AllStaffList = new ObservableCollection<Person>();
             NameEntry = String.Empty;
             EmailEntry = String.Empty;
@@ -157,6 +160,16 @@ namespace UniVerse.ViewModels
         {
             var student = await _restService.GetStudentByIdAsync(id);
             Student.Add(student);
+            double studentCredits = Math.Round((double)student.person_credits / (double)student.needed_credits * 100, 1);
+            SingleStudentChart.Add(new ChartEntry
+            {
+                Value = studentCredits,
+                Color = Color.FromArgb("#6023FF"),
+                Text = "Visual Studio Code"
+            });
+
+            Chart.ToArray();
+
             return student;
         }
 

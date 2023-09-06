@@ -152,7 +152,7 @@ namespace UniVerse.Screens
                 Content = layout
             };
 
-            StudentOverViewRightBar right = new();
+            StudentOverViewRightBar right = new(StudentId);
 
             Button delete = new()
             {

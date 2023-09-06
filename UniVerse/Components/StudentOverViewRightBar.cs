@@ -7,14 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerse.Controls.RadialBarChart;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Components
 {
     public class StudentOverViewRightBar : ContentView
     {
+        private readonly PeopleViewModel _peopleViewModel;
 
-        public StudentOverViewRightBar()
+        public int person_id { get; set; }
+        public StudentOverViewRightBar(int id) 
         {
+            person_id = id; 
+
+            _peopleViewModel = new PeopleViewModel(new Services.RestService());
+            BindingContext = _peopleViewModel;
             var ChartData = new ChartEntry[]
             {
                 new ChartEntry
@@ -108,6 +115,14 @@ namespace UniVerse.Components
             //Page Content
 
             Content = grid;
+
+            GetUserDetails();
+
+            async void GetUserDetails()
+            {
+                await _peopleViewModel.GetStudent(id);
+                radialBarChart.Entries = _peopleViewModel.SingleStudentChart;
+            }
         }
 
     }
