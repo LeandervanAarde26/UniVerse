@@ -199,14 +199,14 @@ The `Development Process` is the technical implementations and functionality don
 ##### We started off by implementing the frontend of the application. 
 
 * Simon was responsible for implementing the Login page, as well as the Dashboard. 
-* Leander was responsible for implementing the staff and staff overview screen, as well as the Students and student overview screen.
+* Leander was responsible for implementing the staff and staff overview screen, as well as the Students and student overview screen. He also implemented the flyout navigation.
 * Bronwyn was responsible for for implementing the subjects and subject overview screen, as well as the funds screen.
 
 ##### Following that, we moved onto networking and integration
 
-* Simon handled the validation on the Login screen, the nav bar, adding students and staff, and the imlemetation of the modal for the user to change their password apon their first login
+* Simon handled the validation on the Login screen, adding students and staff, and the imlemetation of the modal for the user to change their password apon their first login. He was also responsible for fot the networking and integration of the funds screen.
 * Leander was responsible for researching image uploads, handling the requests for the dashboard on the frontend, implementing charts, handling the login functionality as well as implementing all the functionality in the backend.
-* Bronwyn handled the navigation to the overview pages, input capturing, get requests on the frontend for staff, students ans subjects and adding a subject.
+* Bronwyn handled the navigation to the overview pages, input capturing, get requests on the frontend for staff, students ans subjects and adding a subject. She also handled removing an enrollment from a subject.
 
 #### Highlights
 <!-- stipulated the highlight you experienced with the project -->
