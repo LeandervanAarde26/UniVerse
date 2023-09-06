@@ -16,5 +16,7 @@ namespace UniVerse.Models
         public string role { get; set; }
 
         public string subject { get; set; }
+
+        public bool is_active { get; set; }
     }
 }

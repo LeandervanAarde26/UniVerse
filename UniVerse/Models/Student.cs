@@ -18,5 +18,7 @@ namespace UniVerse.Models
         public int needed_credits { get; set; }
 
         public string person_system_identifier { get; set; }
+
+        public bool is_active { get; set; }
     }
 }

@@ -107,6 +107,8 @@ namespace UniVerse.Services
             return Staff;
         }
 
+ 
+
         public async Task<List<Person>> GetLecturersAsync()
         {
             Staff = new List<Person>();
@@ -230,6 +232,29 @@ namespace UniVerse.Services
             }
 
             return AuthenticatedUser;
+        }
+
+        public async Task UpdatePerson(int id)
+        {
+            Uri uri = new(string.Format(baseURL + "People/SetActive"));
+            var json = JsonSerializer.Serialize(id, _serializerOptions);
+            StringContent stringContent = new(json, Encoding.UTF8, "application/json");
+            try
+            {
+                HttpResponseMessage response = await _client.PutAsync(uri, stringContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    Debug.WriteLine("Something went wrong");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"{ex.Message}");
+            }
         }
 
 

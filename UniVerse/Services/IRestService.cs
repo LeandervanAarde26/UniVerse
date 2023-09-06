@@ -19,6 +19,6 @@ namespace UniVerse.Services
         Task PayLecturerSalaries();
         Task PayAdmins();
         Task CollectFromStudents();
-
+        Task UpdatePerson(int id);
     }
 }
