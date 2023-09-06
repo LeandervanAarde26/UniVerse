@@ -69,6 +69,9 @@
 	  <None Remove="Services\SubjectsServices\" />
 	  <None Remove="Resources\Images\notfound.svg" />
 	  <None Remove="Resources\Images\nostudents.svg" />
+	  <None Remove="Resources\Images\admin_profile.svg" />
+	  <None Remove="Resources\Images\lecturer_profile.svg" />
+	  <None Remove="Resources\Images\student_profile.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -123,5 +126,8 @@
 	  <BundleResource Include="Resources\Images\logout.png" />
 	  <BundleResource Include="Resources\Images\notfound.svg" />
 	  <BundleResource Include="Resources\Images\nostudents.svg" />
+	  <BundleResource Include="Resources\Images\admin_profile.svg" />
+	  <BundleResource Include="Resources\Images\lecturer_profile.svg" />
+	  <BundleResource Include="Resources\Images\student_profile.svg" />
 	</ItemGroup>
 </Project>
