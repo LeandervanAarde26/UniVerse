@@ -223,10 +223,10 @@ The `Development Process` is the technical implementations and functionality don
 
 ### Mockups
 
-![image8](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Mockup3.jpg)
+![image8](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/mockup1.jpg)
 <br>
 
-![image9](https://raw.githubusercontent.com/bee2805/COVID19Dashboard/main/src/Img/Mockup4.jpg)
+![image9](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/mockup2.jpg)
 
 See the [open issues](https://github.com/) for a list of proposed features (and known issues).
 
