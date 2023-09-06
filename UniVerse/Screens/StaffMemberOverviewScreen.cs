@@ -200,6 +200,7 @@ namespace UniVerse.Screens
                 if (viewModel.NavigationParameter is int memberIdValue)
                 {
                     StaffId = memberIdValue;
+                    Debug.WriteLine(StaffId);
                 }
             }
 

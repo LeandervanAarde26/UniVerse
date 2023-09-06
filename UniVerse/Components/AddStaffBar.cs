@@ -10,18 +10,18 @@ namespace UniVerse.Components
 {
 
 
-    public class RightBar : ContentView
+    public class AddStaffBar : ContentView
     {
-        private PeopleViewModel viewModel;
+        private AddStaffViewModel viewModel;
         public string PageType { get; set; }
         public List<String> DropList {get; set; }
 
         public int _selectedRoleIndex;
 
 
-        public RightBar(string pgType, List<String> dropLst)
+        public AddStaffBar(string pgType, List<String> dropLst)
         {
-            viewModel = new PeopleViewModel(new Services.RestService());
+            viewModel = new AddStaffViewModel(new Services.RestService());
             BindingContext = viewModel;
             PageType = pgType;
             DropList = dropLst;
@@ -203,7 +203,7 @@ namespace UniVerse.Components
                 Margin = new Thickness(18, 6)
             };
 
-            button.Clicked += async (sender, e)  => { await viewModel.AddStudent(); };
+            button.Clicked += async (sender, e)  => { await viewModel.AddStaff(); };
 
             StackLayout stack = new()
             {

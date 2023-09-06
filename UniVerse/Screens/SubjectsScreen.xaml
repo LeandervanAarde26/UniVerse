@@ -24,11 +24,13 @@
                 FontAttributes="Bold"
                 TextColor="{DynamicResource Key=Gray900}"
                 Padding="0, 0, 0, 20"/>
-            <ScrollView VerticalOptions="FillAndExpand" IsClippedToBounds="False">
-                <StackLayout x:Name="subjectStackLayout">
-                    
-                </StackLayout>
-            </ScrollView>
+            <CollectionView ItemsSource="{Binding SubjectList}" MaximumHeightRequest="900" HorizontalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <components:SubjectCard BindingContext="{Binding}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
 
         <FlexLayout Grid.Column="1" BackgroundColor="White" Direction="Column" JustifyContent="Center">
