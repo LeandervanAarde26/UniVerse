@@ -13,7 +13,7 @@ namespace UniVerse.Services.SubjectServices
         internal string baseURL = "https://localhost:7050/api/";
         JsonSerializerOptions _serializerOptions;
 
-        public List<SubjectWithLecturerModel> Subjects { get; private set; }
+        public List<SubjectWithEnrollments> Subjects { get; private set; }
 
         public SubjectService()
         {
@@ -51,10 +51,10 @@ namespace UniVerse.Services.SubjectServices
         }
 
         //get subjects
-        public async Task<List<SubjectWithLecturerModel>> GetSubjectsAsync()
+        public async Task<List<SubjectWithEnrollments>> GetSubjectsAsync()
         {
-            Subjects = new List<SubjectWithLecturerModel>();
-            Uri uri = new(string.Format(baseURL + "Subjects"));
+            Subjects = new List<SubjectWithEnrollments>();
+            Uri uri = new(string.Format(baseURL + "CourseEnrollments"));
 
             try
             {
@@ -62,7 +62,7 @@ namespace UniVerse.Services.SubjectServices
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Subjects = JsonSerializer.Deserialize<List<SubjectWithLecturerModel>>(content, _serializerOptions);
+                    Subjects = JsonSerializer.Deserialize<List<SubjectWithEnrollments>>(content, _serializerOptions);
                 }
             }
             catch (Exception ex)
@@ -74,10 +74,10 @@ namespace UniVerse.Services.SubjectServices
         }
 
         //Get subjects by id
-        public async Task<SubjectModel> GetSubjectByIdAsync(int id)
+        public async Task<SubjectWithEnrollments> GetSubjectByIdAsync(int id)
         {
-            SubjectModel subject = new();
-            Uri studentUri = new(string.Format(baseURL + "Subjects/{0}", id));
+            SubjectWithEnrollments subject = new();
+            Uri studentUri = new(string.Format(baseURL + "CourseEnrollments/subject/{0}", id));
 
             try
             {
@@ -86,8 +86,8 @@ namespace UniVerse.Services.SubjectServices
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    subject = JsonSerializer.Deserialize<SubjectModel>(content, _serializerOptions);
-                    Debug.WriteLine($"Name: {subject.subject_name}");
+                    subject = JsonSerializer.Deserialize<SubjectWithEnrollments>(content, _serializerOptions);
+                    Debug.WriteLine($"Name: {subject.subjectName}");
                 }
             }
             catch (Exception ex)
@@ -96,6 +96,84 @@ namespace UniVerse.Services.SubjectServices
             }
 
             return subject;
+        }
+
+        //Delete subject
+        public async Task DeletePersonAsync(int id)
+        {
+            Uri uri = new(string.Format(baseURL + "Subjects/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine(@"\tSubject successfully deleted.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        // Add new lecturer
+        public async Task UpdateSubjectLecturerAsync(int subjectId, int newLecturerId)
+        {
+            try
+            {
+                var payload = new
+                {
+                    SubjectId = subjectId,
+                    NewLecturerId = newLecturerId
+                };
+
+                string jsonPayload = JsonSerializer.Serialize(payload, _serializerOptions);
+
+                var content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(baseURL + "Subjects/ChangeLecturer", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("PUT request was successful.");
+                }
+                else
+                {
+                    Debug.WriteLine($"PUT request failed with status code {response.StatusCode}.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($@"ERROR {ex.Message}");
+            }
+        }
+
+        //Delete Course Enrolement
+        public async Task DeleteCourseEnrollmentsAsync(int id)
+        {
+            Uri uri = new(string.Format(baseURL + "CourseEnrollments/{0}", id));
+
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+
+                Debug.WriteLine($"DELETE request status code: {response.StatusCode}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("DELETE request was successful.");
+                }
+                else
+                {
+                    Debug.WriteLine($"DELETE request failed with status code {response.StatusCode}.");
+
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Response Content: {responseContent}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($@"ERROR {ex.Message}");
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ namespace UniVerse.Services.SubjectService
 {
     public interface ISubjectService
     {
-        Task<List<SubjectWithLecturerModel>> GetSubjectsAsync();
+        Task<List<SubjectWithEnrollments>> GetSubjectsAsync();
+        Task DeleteCourseEnrollmentsAsync(int id);
     }
 }

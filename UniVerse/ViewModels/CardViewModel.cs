@@ -12,12 +12,12 @@ namespace UniVerse.ViewModels
         {
             if (buttonText == "Student")
             {
-                var viewModel = new StudentMemberOverviewViewModel { NavigationParameter = id };
+                var viewModel = new NavOverviewViewModel { NavigationParameter = id };
                 await Shell.Current.Navigation.PushAsync(new StudentOverviewScreen { BindingContext = viewModel });
             }
             else if (buttonText == "Staff Member")
             {
-                var viewModel = new StaffMemberOverviewViewModel { NavigationParameter = id };
+                var viewModel = new NavOverviewViewModel { NavigationParameter = id };
                 await Shell.Current.Navigation.PushAsync(new StaffMemberOverviewScreen { BindingContext = viewModel });
             }
         }

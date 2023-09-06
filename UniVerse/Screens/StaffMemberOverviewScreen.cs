@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 using UniVerse.Components;
+using UniVerse.Models;
 using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
@@ -17,6 +18,11 @@ namespace UniVerse.Screens
         private readonly Label name;
         private readonly Label role;
         private readonly Label mail;
+        private readonly Label cell;
+        private readonly Label hourlyRate;
+
+        private List<SubjectEnrollments> enrollments;
+        private readonly FlexLayout layout;
 
         public StaffMemberOverviewScreen()
 		{
@@ -75,20 +81,19 @@ namespace UniVerse.Screens
 
             role = new Label
             {
-                Text = "Academic",
                 TextColor = Color.FromArgb("#C5C5C5"),
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 20
             };
 
-            Label hourlyRate = new()
+            hourlyRate = new Label
             {
                 Text = "\U0001F4B2 R400/h",
                 Style = textStyle,
                 Margin = new Thickness(0, 20, 0, 0)
             };
 
-            Label cell = new()
+            cell = new Label
             {
                 Text = "\U0000260E 076 887 6675",
                 Style = textStyle,
@@ -98,14 +103,6 @@ namespace UniVerse.Screens
             {
                 Style = textStyle,
             };
-
-
-            Label address = new()
-            {
-                Text = "\U0001F4CD 05 Academic drive, Gauteng, Johannesburg, 1724",
-                Style = textStyle,
-            };
-
 
             StackLayout stackLayout = new()
             {
@@ -118,8 +115,7 @@ namespace UniVerse.Screens
                     role,
                     hourlyRate,
                     cell,
-                    mail,
-                    address
+                    mail
                 }
             };
 
@@ -129,39 +125,22 @@ namespace UniVerse.Screens
 
                 Children =
                 {
-
                     imgBorder,
                     stackLayout,
-
                 }
             };
 
             // Cards 
 
-
-
-            FlexLayout layout = new()
+            layout = new FlexLayout()
             {
-
                 Direction = FlexDirection.Row,
                 Wrap = FlexWrap.Wrap,
                 JustifyContent = FlexJustify.Start,
                 AlignItems = FlexAlignItems.Start,
-              
             };
 
-            var numbers = new List<int> { 1, 2, 3, 4, 2, 3, 4, 5, 2, 3, 4, 5 };
-
-            foreach (var number in numbers)
-            {
-                var card = new AssignedSubject();
-
-                FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
-
-                layout.Children.Add(card);
-            }
-
-
+            enrollments = new List<SubjectEnrollments>();
 
             ScrollView scrollView = new()
             {
@@ -170,7 +149,6 @@ namespace UniVerse.Screens
             };
 
             StaffMemberRightBar right = new();
-
 
             Grid grid = new()
             {
@@ -217,7 +195,7 @@ namespace UniVerse.Screens
         {
             base.OnAppearing();
 
-            if (BindingContext is StaffMemberOverviewViewModel viewModel)
+            if (BindingContext is NavOverviewViewModel viewModel)
             {
                 if (viewModel.NavigationParameter is int memberIdValue)
                 {
@@ -230,9 +208,69 @@ namespace UniVerse.Screens
 
             if (staffMember != null)
             {
-                name.Text = staffMember.name;
+                String payment = staffMember.role == "Admin" ? "/Month" : "/hour";
+                name.Text = staffMember.lecturer_name;
                 role.Text = staffMember.role;
                 mail.Text = staffMember.email;
+                cell.Text = staffMember.lecturer_phoneNumber;
+                hourlyRate.Text = staffMember.lecturer_rate.ToString() + payment;
+
+                enrollments = staffMember.enrollments;
+
+                CreateAndAddEnrollmentCards();
+            }
+        }
+
+        private void CreateAndAddEnrollmentCards()
+        {
+            layout.Children.Clear();
+
+            foreach (var enrollment in enrollments)
+            {
+                if (enrollment.subject_color != null && enrollment.subject_id != 0)
+                {
+                    var card = new EnrolledSubjects(enrollment.subject_name, enrollment.subject_code, enrollment.subject_color)
+                    {
+                        BindingContext = enrollment
+                    };
+                    FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
+                    layout.Children.Add(card);
+                }
+                else
+                {
+                    // If subject_id is null, display an image
+                    var image = new Image
+                    {
+                        Source = "notfound.png",
+                        Aspect = Aspect.AspectFit,
+                        WidthRequest = 700,
+                        HeightRequest = 700,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    };
+                    Grid imageGrid = new()
+                    {
+                        RowDefinitions = new RowDefinitionCollection
+                        {
+                            new RowDefinition
+                            {
+                                Height = GridLength.Star
+                            }
+                        },
+                        ColumnDefinitions = new ColumnDefinitionCollection
+                        {
+                            new ColumnDefinition
+                            {
+                                Width = GridLength.Star
+                            }
+                        }
+                    };
+                    imageGrid.Children.Add(image);
+                    Grid.SetRow(image, 1);
+                    Grid.SetColumn(image, 1);
+                    FlexLayout.SetBasis(imageGrid, new FlexBasis(1f, true));
+                    layout.Children.Add(imageGrid);
+                }
             }
         }
     }

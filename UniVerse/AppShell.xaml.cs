@@ -12,7 +12,7 @@ public partial class AppShell : Shell
 	public AppShell()
 	{
         InitializeComponent();
-        Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
+        //Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
         Routing.RegisterRoute(nameof(StaffMemberOverviewScreen), typeof(StaffMemberOverviewScreen));
         Routing.RegisterRoute(nameof(StudentOverviewScreen), typeof(StudentOverviewScreen));
         Routing.RegisterRoute(nameof(SubjectOverview), typeof(SubjectOverview));
@@ -66,8 +66,6 @@ public partial class AppShell : Shell
       
         FlyoutBackgroundColor = color;
         FlyoutBackground = Color.FromArgb("#2B2B2B");
-   
-
     }
 
 }

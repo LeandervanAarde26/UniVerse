@@ -14,11 +14,14 @@ namespace UniVerse.Components
 
     public class Cardview : ContentView
     {
+        private bool isActive = false;
+        private Button toggleButton;
         public string Name { get; set; }
         public string Role { get; set; }
         public string Email { get; set; }
         public string AdditionalInformation { get; set; }
         public string Buttontext { get; set; }
+
         public Cardview(string nme, string rle, string eml, string addinfo, string btnText, int id)
         {
 
@@ -54,15 +57,16 @@ namespace UniVerse.Components
 
             };
 
-            ImageButton editButton = new()
+            toggleButton = new Button
             {
-                Source = ImageSource.FromFile("edit.png"),
-                HeightRequest = 25,
-                WidthRequest = 25,
-                Aspect = Aspect.Center,
+                Text = "Inactive",
+                BackgroundColor = Color.FromArgb("#FF4040"),
+                Margin = new Thickness(0, 10, 0, 10),
+                WidthRequest = 100,
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.End,
             };
+            toggleButton.Clicked += ToggleButton;
 
             Label name = new()
             {
@@ -124,7 +128,7 @@ namespace UniVerse.Components
             {
                 Children =
                 {
-                    editButton,
+                    toggleButton,
                     imgBorder,
                     name,
                     role,
@@ -148,6 +152,17 @@ namespace UniVerse.Components
             };
 
             Content = frame;
+        }
+        private void ToggleButton(object sender, EventArgs e)
+        {
+            isActive = !isActive;
+            UpdateButtonAppearance();
+        }
+
+        private void UpdateButtonAppearance()
+        {
+            toggleButton.Text = isActive ? "Active" : "Inactive";
+            toggleButton.BackgroundColor = isActive ? Color.FromArgb("#29BA56") : Color.FromArgb("#FF4040");
         }
     }
 }

@@ -67,6 +67,8 @@
 	  <None Remove="Resources\Images\LoginImage.png" />
 	  <None Remove="Services\" />
 	  <None Remove="Services\SubjectsServices\" />
+	  <None Remove="Resources\Images\notfound.svg" />
+	  <None Remove="Resources\Images\nostudents.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -93,7 +95,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Screens\" />
-	  <Folder Include="Services\" />
+	  <Folder Include="Services\NewFolder\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\ui_ux_design.svg" />
@@ -119,5 +121,7 @@
 	  <BundleResource Include="Resources\Images\coin.png" />
 	  <BundleResource Include="Resources\Images\logo.png" />
 	  <BundleResource Include="Resources\Images\logout.png" />
+	  <BundleResource Include="Resources\Images\notfound.svg" />
+	  <BundleResource Include="Resources\Images\nostudents.svg" />
 	</ItemGroup>
 </Project>
