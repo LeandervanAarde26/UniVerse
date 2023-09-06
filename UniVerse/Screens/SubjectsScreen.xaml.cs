@@ -230,6 +230,8 @@ public partial class SubjectsScreen : ContentPage
         SubjectClassAmount = "";
         SubjectStartDate = DateTime.Today;
 
+        await DisplayAlert("Success!", "Subject successfully added", "OK");
+
         await viewModel.GetAllSubjects();
     }
 }
