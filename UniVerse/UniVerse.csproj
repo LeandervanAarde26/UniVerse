@@ -93,7 +93,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Screens\" />
-	  <Folder Include="Services\" />
+	  <Folder Include="Services\NewFolder\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\ui_ux_design.svg" />

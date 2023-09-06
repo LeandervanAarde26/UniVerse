@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using UniVerse.Controls.RadialBarChart;
 using UniVerse.Models;
 using UniVerse.Services;
@@ -23,6 +24,72 @@ namespace UniVerse.ViewModels
         public ObservableCollection<ChartEntry> Chart { get; set; }
         public ObservableCollection<ChartEntry> StaffChart { get; set; }
 
+        public string _nameEntry = string.Empty;
+        public string NameEntry
+        {
+            get { return _nameEntry; }
+            set
+            {
+                _nameEntry = value;
+                OnPropertyChanged(nameof(NameEntry));
+            }
+        }
+
+        public string _surnameEntry = string.Empty;
+        public string SurnameEntry
+        {
+            get { return _surnameEntry; }
+            set
+            {
+                _surnameEntry = value;
+                OnPropertyChanged(nameof(SurnameEntry));
+            }
+        }
+
+        public string _identifier = string.Empty;
+        public string Identifier
+        {
+            get { return _identifier; }
+            set
+            {
+                _identifier = value;
+                OnPropertyChanged(nameof(Identifier));
+            }
+        }
+
+        public string _emailEntry = string.Empty;
+        public string EmailEntry
+        {
+            get { return _emailEntry; }
+            set
+            {
+                _emailEntry = value;
+                OnPropertyChanged(nameof(EmailEntry));
+            }
+        }
+
+        public string _number = string.Empty;
+        public string Number
+        {
+            get { return _number; }
+            set
+            {
+                _number = value;
+                OnPropertyChanged(nameof(Number));
+            }
+        }
+
+        public int _role_Input;
+        public int RoleInput
+        {
+            get { return _role_Input; }
+            set
+            {
+                _role_Input = value;
+                OnPropertyChanged(nameof(RoleInput));
+            }
+        }
+
         public PeopleViewModel(RestService restService) //instance of the restservice goes here
         {
             _restService = restService;
@@ -33,6 +100,11 @@ namespace UniVerse.ViewModels
             Chart = new ObservableCollection<ChartEntry>();
             StaffChart = new ObservableCollection<ChartEntry>();
             AllStaffList = new ObservableCollection<Person>();
+            NameEntry = String.Empty;
+            EmailEntry = String.Empty;
+            Number = String.Empty;
+            Identifier = String.Empty;
+            SurnameEntry = String.Empty;
         }
 
         // Get Staff
@@ -142,6 +214,41 @@ namespace UniVerse.ViewModels
             });
 
             StaffChart.ToArray();
+        }
+
+        public async Task<AddpersonModel> AddStudent()
+        {
+
+            int userRole = RoleInput == 1 ? 3 : 4;
+
+            AddpersonModel person = new()
+            {
+                person_id = 0,
+                person_system_identifier = Identifier,
+                first_name = NameEntry,
+                last_name = SurnameEntry,
+                person_email = EmailEntry,
+                added_date = DateTime.UtcNow,
+                person_active = true,
+                role = userRole,
+                person_image = "None",
+                person_credits = 0,
+                person_cell = Number,
+                needed_credits = 0,
+                person_password = "password",
+            };
+            
+            await _restService.AddStudentAsync(person);
+
+            await GetAllstudents();
+
+            //NameEntry = String.Empty;
+            //EmailEntry = String.Empty;
+            //Number = String.Empty;
+            //Identifier = String.Empty;
+            //SurnameEntry = String.Empty;
+
+            return person;
         }
     }
 }

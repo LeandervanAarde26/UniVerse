@@ -185,6 +185,58 @@ namespace UniVerse.Services
         }
 
 
+        public async Task<AddpersonModel> AddStudentAsync(AddpersonModel student)
+        {
+            if(student == null)
+            {
+                return null; 
+            }
+            Uri uri = new(string.Format(baseURL + "People/PostPeople", String.Empty));
+            AddpersonModel addStudent = null;
+            AddpersonModel newPerson = new()
+            {
+                person_id = 0,
+                person_system_identifier = student.person_system_identifier,
+                first_name = student.first_name,
+                last_name = student.last_name,
+                person_email = student.person_email,
+                added_date = DateTime.UtcNow,
+                person_active = true,
+                role = student.role,
+                person_image = "None",
+                person_credits = 10,
+                person_cell = student.person_cell,
+                needed_credits = 180,
+                person_password = "password",
+            };
+            var json = JsonSerializer.Serialize<AddpersonModel>(newPerson, _serializerOptions);
+            StringContent content = new(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+        
+                HttpResponseMessage res = await _client.PostAsync(uri, content);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    string responseContent = await res.Content.ReadAsStringAsync();
+                    addStudent = JsonSerializer.Deserialize<AddpersonModel>(responseContent, _serializerOptions);
+                   
+                }
+                else
+                {
+                    Debug.WriteLine("Returned with unsuccessful response " + res);
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+            }
+
+            return addStudent;
+        }
+
+
 
 
         public async Task<List<LecturerFees>> GetFeesAsync()

@@ -118,24 +118,16 @@ namespace UniVerse.Screens
 
             RightBar right = new("Staff Member", list);
 
-
-            // Add the ContentView to the Grid
-            //   grid.Children.Add(navbar);
-            //Grid.SetRow(navbar, 0);
-            //Grid.SetColumn(navbar, 0);
-            //Grid.SetColumnSpan(navbar, 1);
-            //Grid.SetRowSpan(navbar, 2);
-
             grid.Children.Add(scrollView);
             Grid.SetRow(scrollView, 1);
             Grid.SetColumn(scrollView, 0);
             Grid.SetColumnSpan(scrollView, 1);
             grid.BackgroundColor = Color.FromArgb("#F6F7FB");
 
-            grid.Children.Add(right);
-            Grid.SetColumn(right, 1);
-            Grid.SetColumnSpan(right, 2);
-            Grid.SetRowSpan(right, 2);
+            //grid.Children.Add(right);
+            //Grid.SetColumn(right, 1);
+            //Grid.SetColumnSpan(right, 2);
+            //Grid.SetRowSpan(right, 2);
 
             // Add the Flexlayout for heading to the Grid
 
