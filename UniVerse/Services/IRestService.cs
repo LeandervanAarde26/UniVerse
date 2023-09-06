@@ -16,5 +16,9 @@ namespace UniVerse.Services
         Task<AddpersonModel> AddStudentAsync(AddpersonModel person);
         Task<AddpersonModel> AddStaffAsync(AddpersonModel person);
         Task DeletePersonAsync(int id);
+        Task PayLecturerSalaries();
+        Task PayAdmins();
+        Task CollectFromStudents();
+
     }
 }

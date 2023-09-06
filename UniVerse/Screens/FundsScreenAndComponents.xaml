@@ -23,10 +23,10 @@
             <Label Text="Funds" FontSize="35" FontAttributes="Bold" TextColor="{DynamicResource Key=Gray900}" Padding="0, 0, 0, 20"/>
             <FlexLayout JustifyContent="SpaceBetween" Margin="0, 0, 0, 20">
                 <HorizontalStackLayout>
-                    <Button Text="Pay Salaries" BackgroundColor="{DynamicResource Gray900}" Margin="0, 0, 10, 0"/>
-                    <Button Text="View Fees" TextColor="{DynamicResource Gray900}" BorderColor="{DynamicResource Gray900}" BorderWidth="1"/>
+                    <Button Text="Pay Admins" Clicked="PayAdmins" BackgroundColor="{DynamicResource Gray900}" Margin="0, 0, 10, 0"/>
+                    <Button Text="Pay Lecturers" Clicked="PayTheLecturer" TextColor="{DynamicResource Gray900}" BorderColor="{DynamicResource Gray900}" BorderWidth="1"/>
                 </HorizontalStackLayout>
-                <Button Text="Close Month" BackgroundColor="{DynamicResource Gray900}"/>
+                <Button Text="Collect Student fees" Clicked="Collectfees" BackgroundColor="{DynamicResource Gray900}"/>
             </FlexLayout>
               
         </VerticalStackLayout>

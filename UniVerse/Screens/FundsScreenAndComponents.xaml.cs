@@ -17,8 +17,9 @@ public partial class FundsScreenAndComponents : ContentPage
         viewModel = new LecturerFeesViewModel(new Services.RestService());
         studentViewModel = new StudentFeesViewModel(new Services.RestService());
        adminViewModel = new AdminFeesViewModel(new Services.RestService());
-    }
 
+       
+    }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -91,6 +92,22 @@ public partial class FundsScreenAndComponents : ContentPage
         totalSalaryLabel.Text = TotalSalaries.ToString("C");
 
     }
+
+
+    public async void PayTheLecturer(object sender, EventArgs e)
+    {
+        await viewModel.PayLecturer();
+    }
+
+    public async void Collectfees(object sender, EventArgs e)
+    {
+        await studentViewModel.CollectFromStudents();
+    }
+    public async void PayAdmins(object sender, EventArgs e)
+    {
+        await adminViewModel.PayAdmins();
+    }
+
 }
 
 

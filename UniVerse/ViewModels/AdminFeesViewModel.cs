@@ -37,6 +37,9 @@ namespace UniVerse.ViewModels
 
         }
 
-        
+        public async Task PayAdmins()
+        {
+            await _restService.PayAdmins();
+        }
     }
 }
