@@ -1,11 +1,13 @@
 ﻿using UniVerse.ViewModels;
 using UniVerse.Models;
+using System.Globalization;
 
 namespace UniVerse.Components
 {
     public partial class SubjectCard : ContentView
     {
         private bool isEventSubscribed = false;
+        private bool isActive = false;
 
         public SubjectCard()
         {
@@ -24,6 +26,19 @@ namespace UniVerse.Components
                     await SubjectCardViewModel.NavigateToOverviewScreenAsync(subject.subjectId);
                 }
             }
+        }
+
+        private void ToggleButton(object sender, EventArgs e)
+        {
+            // Toggle the isActive state and update button appearance
+            isActive = !isActive;
+            UpdateButtonAppearance();
+        }
+
+        private void UpdateButtonAppearance()
+        {
+            toggleButton.Text = isActive ? "Active" : "Inactive";
+            toggleButton.BackgroundColor = isActive ? Color.FromArgb("#29BA56") : Color.FromArgb("#FF4040");
         }
     }
 }
