@@ -24,7 +24,7 @@
                 FontAttributes="Bold"
                 TextColor="{DynamicResource Key=Gray900}"
                 Padding="0, 0, 0, 20"/>
-            <CollectionView ItemsSource="{Binding Subjects}" MaximumHeightRequest="900" HorizontalOptions="FillAndExpand">
+            <CollectionView ItemsSource="{Binding Subjects}" MaximumHeightRequest="1300" HorizontalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <components:SubjectCard BindingContext="{Binding}"/>

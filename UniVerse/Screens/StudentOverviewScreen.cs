@@ -46,16 +46,14 @@ namespace UniVerse.Screens
                 }
             };
 
-
             // Top 
             Image image = new()
             {
                 Aspect = Aspect.AspectFill,
                 MaximumHeightRequest = 200,
                 MaximumWidthRequest = 200,
-                Source = ImageSource.FromFile("allen_laing.png"),
+                Source = ImageSource.FromFile("student_profile.png"),
             };
-
 
             var clip1 = new EllipseGeometry { Center = new Point(200 / 2, 200 / 2), RadiusX = 200 / 2, RadiusY = 200 / 2 };
 
@@ -232,12 +230,51 @@ namespace UniVerse.Screens
 
             foreach (var enrollment in enrollments)
             {
-                var card = new EnrolledSubjects(enrollment.subject_name, enrollment.subject_code, enrollment.subject_color)
+
+                if (enrollment.subject_color != null && enrollment.subject_id != 0)
                 {
-                    BindingContext = enrollment
-                };
-                FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
-                layout.Children.Add(card);
+                    var card = new EnrolledSubjects(enrollment.subject_name, enrollment.subject_code, enrollment.subject_color)
+                    {
+                        BindingContext = enrollment
+                    };
+                    FlexLayout.SetBasis(card, new FlexBasis(0.50f, true));
+                    layout.Children.Add(card);
+                }
+                else
+                {
+                    // If subject_id is null, display an image
+                    var image = new Image
+                    {
+                        Source = "student_no_enroll.png",
+                        Aspect = Aspect.AspectFit,
+                        WidthRequest = 700,
+                        HeightRequest = 700,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    };
+                    Grid imageGrid = new()
+                    {
+                        RowDefinitions = new RowDefinitionCollection
+                        {
+                            new RowDefinition
+                            {
+                                Height = GridLength.Star
+                            }
+                        },
+                        ColumnDefinitions = new ColumnDefinitionCollection
+                        {
+                            new ColumnDefinition
+                            {
+                                Width = GridLength.Star
+                            }
+                        }
+                    };
+                    imageGrid.Children.Add(image);
+                    Grid.SetRow(image, 1);
+                    Grid.SetColumn(image, 1);
+                    FlexLayout.SetBasis(imageGrid, new FlexBasis(1f, true));
+                    layout.Children.Add(imageGrid);
+                }
             }
         }
     }

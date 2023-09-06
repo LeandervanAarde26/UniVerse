@@ -34,15 +34,34 @@ namespace UniVerse.Components
             Image image = new()
             {
                 Aspect = Aspect.AspectFill,
-
                 WidthRequest = 125,
                 HeightRequest = 125,
-                Source = ImageSource.FromFile("arras.png"),
-
             };
             var clip1 = new EllipseGeometry { Center = new Point(124 / 2, 124 / 2), RadiusX = 124 / 2, RadiusY = 124 / 2 };
 
             image.Clip = clip1;
+
+            if (Role.Equals("Diploma Student", StringComparison.OrdinalIgnoreCase))
+            {
+                image.Source = ImageSource.FromFile("student_profile.png");
+            }
+            else if (Role.Equals("Degree student", StringComparison.OrdinalIgnoreCase))
+            {
+                image.Source = ImageSource.FromFile("student_profile.png");
+            }
+            else if (Role.Equals("Lecturer", StringComparison.OrdinalIgnoreCase))
+            {
+                image.Source = ImageSource.FromFile("lecturer_profile.png");
+            }
+            else if (Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                image.Source = ImageSource.FromFile("admin_profile.png");
+            }
+            else
+            {
+                image.Source = ImageSource.FromFile("student_profile.png");
+            }
+    
 
             Border imgBorder = new()
             {
@@ -54,7 +73,6 @@ namespace UniVerse.Components
                 Margin = new Thickness(0, -7, 0, 15),
                 Stroke = Color.FromArgb("#407BFF"),
                 Content = image
-
             };
 
             toggleButton = new Button
