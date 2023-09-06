@@ -305,6 +305,60 @@ namespace UniVerse.Services
 
 
 
+        public async Task<AddpersonModel> AddStaffAsync(AddpersonModel staff)
+        {
+            if (staff == null)
+            {
+                return null;
+            }
+            Uri uri = new(string.Format(baseURL + "People/PostPeople", String.Empty));
+            AddpersonModel addStudent = null;
+            AddpersonModel newPerson = new()
+            {
+                person_id = 0,
+                person_system_identifier = staff.person_system_identifier,
+                first_name = staff.first_name,
+                last_name = staff.last_name,
+                person_email = staff.person_email,
+                added_date = DateTime.UtcNow,
+                person_active = true,
+                role = staff.role,
+                person_image = "None",
+                person_credits = 0,
+                person_cell = staff.person_cell,
+                needed_credits = 0,
+                person_password = "password",
+            };
+            var json = JsonSerializer.Serialize<AddpersonModel>(newPerson, _serializerOptions);
+            StringContent content = new(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+
+                HttpResponseMessage res = await _client.PostAsync(uri, content);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    string responseContent = await res.Content.ReadAsStringAsync();
+                    addStudent = JsonSerializer.Deserialize<AddpersonModel>(responseContent, _serializerOptions);
+
+                }
+                else
+                {
+                    Debug.WriteLine("Returned with unsuccessful response " + res);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+            }
+
+            return addStudent;
+        }
+
+
+
+
     }
 
 }

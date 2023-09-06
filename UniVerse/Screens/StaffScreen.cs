@@ -116,7 +116,7 @@ namespace UniVerse.Screens
             };
 
 
-            RightBar right = new("Staff Member", list);
+            AddStaffBar right = new("Staff Member", list);
 
             grid.Children.Add(scrollView);
             Grid.SetRow(scrollView, 1);
@@ -124,10 +124,10 @@ namespace UniVerse.Screens
             Grid.SetColumnSpan(scrollView, 1);
             grid.BackgroundColor = Color.FromArgb("#F6F7FB");
 
-            //grid.Children.Add(right);
-            //Grid.SetColumn(right, 1);
-            //Grid.SetColumnSpan(right, 2);
-            //Grid.SetRowSpan(right, 2);
+            grid.Children.Add(right);
+            Grid.SetColumn(right, 1);
+            Grid.SetColumnSpan(right, 2);
+            Grid.SetRowSpan(right, 2);
 
             // Add the Flexlayout for heading to the Grid
 

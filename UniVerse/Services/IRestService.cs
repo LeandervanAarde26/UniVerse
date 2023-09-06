@@ -13,5 +13,6 @@ namespace UniVerse.Services
         Task<List<StudentFees>> GetStudentFeesAsync();
         Task<List<AdminFees>> GetAdminFeesAsync();
         Task<AddpersonModel> AddStudentAsync(AddpersonModel person);
+        Task<AddpersonModel> AddStaffAsync(AddpersonModel person);
     }
 }
