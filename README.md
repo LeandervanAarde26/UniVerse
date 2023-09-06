@@ -172,6 +172,8 @@ The `Conceptual Process` is the set of actions, activities and research that was
 
 ![image7](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/dataRelationalDiagram.svg)
 
+<br />
+
 ![image8](https://github.com/LeandervanAarde/UniVerse/blob/Develops/README_Assets/userFlow.svg)
 
 
