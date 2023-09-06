@@ -28,6 +28,8 @@ namespace UniVerse.Services
 
         public List<AdminFees> AdminFee { get; private set; }
 
+        public AddStaffModel AddStaff { get; private set; }
+
         public RestService()
         {
             _client = new HttpClient();
@@ -250,6 +252,56 @@ namespace UniVerse.Services
             }
             return AdminFee;
         }
+
+
+
+
+
+
+
+        public async Task<AddStaffModel> AddStaffAsync(string person_system_identifier, string first_name, string last_name, int role, string person_email, string person_cell)
+        {
+            AddStaffModel addStaffModal = null;
+            Uri uri = new(string.Format(baseURL + "People"));
+            AddStaffModel requestData = new()
+            {
+
+                person_id = 30,
+                person_system_identifier = person_system_identifier,
+                first_name = first_name,
+                last_name = last_name,
+                person_email = person_email,
+                added_date = DateTime.Now,
+                person_active = true,
+                role = role,
+                person_credits = 0,
+                person_cell = person_cell,
+                needed_credits = 0,
+                person_password = "",
+            };
+
+            var json = JsonSerializer.Serialize(requestData, _serializerOptions);
+            StringContent stringContent = new(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                HttpResponseMessage res = await _client.PostAsync(uri, stringContent);
+                if (res.IsSuccessStatusCode)
+                {
+                    string responseContent = await res.Content.ReadAsStringAsync();
+                    addStaffModal = JsonSerializer.Deserialize<AddStaffModel>(responseContent, _serializerOptions);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            return addStaffModal;
+        }
+
+
+
 
 
 

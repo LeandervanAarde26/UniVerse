@@ -116,7 +116,7 @@ namespace UniVerse.Screens
             };
 
 
-            RightBar right = new("Staff Member", list);
+            AddStaffBar right = new("Staff Member", list);
 
 
             // Add the ContentView to the Grid

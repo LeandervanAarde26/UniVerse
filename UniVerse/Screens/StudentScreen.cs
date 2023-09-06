@@ -111,7 +111,7 @@ namespace UniVerse.Screens
                 "Degree Student",
                 "Certificate Student"
             };
-            RightBar right = new("Student", list);
+            AddStudentBar right = new("Student", list);
 
 
             // Add the ContentView to the Grid

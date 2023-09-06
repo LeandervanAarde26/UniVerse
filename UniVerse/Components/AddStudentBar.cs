@@ -4,17 +4,25 @@ using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
 using System.Diagnostics;
+using UniVerse.ViewModels;
 
 namespace UniVerse.Components
 {
 
 
-    public class RightBar : ContentView
+    public class AddStudentBar : ContentView
     {
         public string PageType { get; set; }
         public List<String> DropList {get; set; }
-        public RightBar(string pgType, List<String> dropLst)
+
+        private AddStaffViewModel StaffVM;
+
+
+        public AddStudentBar(string pgType, List<String> dropLst)
         {
+
+            StaffVM = new AddStaffViewModel(new Services.RestService());
+            BindingContext = StaffVM;
 
             PageType = pgType;
             DropList = dropLst;
@@ -112,8 +120,9 @@ namespace UniVerse.Components
             {
                 Placeholder = PageType +  " Name",
                 Style = inputStyle
-
             };
+
+            name.SetBinding(Entry.TextProperty, new Binding("NameEntry", source: StaffVM));
 
             Entry surname = new()
             {
@@ -121,11 +130,15 @@ namespace UniVerse.Components
                 Style = inputStyle
             };
 
+            surname.SetBinding(Entry.TextProperty, new Binding("SurnameEntry", source: StaffVM));
+
             Entry studentNumber = new()
             {
                 Placeholder = PageType + " Number",
                 Style = inputStyle
             };
+
+            studentNumber.SetBinding(Entry.TextProperty, new Binding("NumberEntry", source: StaffVM));
 
             var listOptions = DropList;
 
@@ -143,6 +156,9 @@ namespace UniVerse.Components
             studentRole.SelectedItem = PageType + " Type";
             studentRole.TextColor = Colors.Black;
             studentRole.TitleColor = Colors.Black;
+
+
+            studentRole.SetBinding(Picker.SelectedIndexProperty, new Binding("RoleEntry", source: StaffVM));
 
             StackLayout showcase = new()
             {
@@ -172,6 +188,8 @@ namespace UniVerse.Components
 
             };
 
+            email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: StaffVM));
+
             Entry phoneNumber = new()
             {
                 Placeholder =  PageType + " Number",
@@ -179,12 +197,27 @@ namespace UniVerse.Components
                 MaxLength = 10
             };
 
+            phoneNumber.SetBinding(Entry.TextProperty, new Binding("CellEntry", source: StaffVM));
+
 
             Button button = new()
             {
                 Text =  "Add " + PageType,
                 BackgroundColor = Color.FromArgb("#2B2B2B"),
                 Margin = new Thickness(18, 6)
+            };
+
+            button.Clicked += async (sender, args) =>
+            {
+                try
+                {
+                    await StaffVM.AddNewStaff();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    //ErrorTitle.Text = ex.Message;
+                }
             };
 
             StackLayout stack = new()
