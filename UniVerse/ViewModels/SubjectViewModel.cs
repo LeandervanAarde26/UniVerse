@@ -48,7 +48,7 @@ namespace UniVerse.ViewModels
         {
             try
             {
-                await _restService.SaveTodoItemAsync(subject, isNewSubject: true);
+                await _restService.SaveSubjectAsync(subject, isNewSubject: true);
                 Debug.WriteLine("Subject successfully saved.");
                 _ = GetAllSubjects();
             }

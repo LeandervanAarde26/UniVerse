@@ -26,14 +26,14 @@ namespace UniVerse.Services.SubjectServices
         }
 
         //add subject
-        public async Task SaveTodoItemAsync(SubjectModel subject, bool isNewSubject = false)
+        public async Task SaveSubjectAsync(SubjectModel subject, bool isNewSubject = false)
         {
             Uri subjectUri = new (string.Format(baseURL + "Subjects", string.Empty));
 
             try
             {
                 string json = JsonSerializer.Serialize(subject, _serializerOptions);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                StringContent content = new(json, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = null;
                 if (isNewSubject)
