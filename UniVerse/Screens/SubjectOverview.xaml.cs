@@ -23,6 +23,8 @@ public partial class SubjectOverview : ContentPage
     {
         base.OnAppearing();
 
+        studentStackLayout.Clear();
+
         await _peopleViewModel.GetAllStaff();
 
         if (BindingContext is NavOverviewViewModel viewModel)
