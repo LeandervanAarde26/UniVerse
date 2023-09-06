@@ -14,8 +14,8 @@ namespace UniVerse.Screens
 {
     public class StaffScreen : ContentPage
     {
-
         private PeopleViewModel viewModel;
+        private FlexLayout layout; // Declare layout as a class-level field
 
         public StaffScreen()
         {
@@ -77,7 +77,7 @@ namespace UniVerse.Screens
             studentRole.TitleColor = Colors.White;
 
 
-            FlexLayout layout = new()
+            layout = new FlexLayout() // Initialize the layout field
             {
                 Direction = FlexDirection.Row,
                 Wrap = FlexWrap.Wrap,
@@ -118,6 +118,8 @@ namespace UniVerse.Screens
 
             AddStaffBar right = new("Staff Member", list);
 
+
+
             grid.Children.Add(scrollView);
             Grid.SetRow(scrollView, 1);
             Grid.SetColumn(scrollView, 0);
@@ -140,18 +142,36 @@ namespace UniVerse.Screens
             async void GetAllStafMembersAsync()
             {
                 await viewModel.GetAllStaffMembers();
-                
+
                 foreach (var member in viewModel.AllStaffList)
                 {
                     var card = new Cardview(member.name, member.role, member.email, member.person_system_identifier, "Staff Member", member.id);
                     layout.Children.Add(card);
                 }
             }
+
+
+            right.PersonAdded += async (sender, e) =>
+            {
+                await ReloadStaffMembersAsync();
+            };
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             await viewModel.GetAllStaffMembers();
         }
+
+        private async Task ReloadStaffMembersAsync()
+        {
+            layout.Children.Clear(); // Clear the existing staff members from the layout
+            await viewModel.ReloadStudents(); // Reload the staff members
+            foreach (var member in viewModel.AllStaffList)
+            {
+                var card = new Cardview(member.name, member.role, member.email, member.person_system_identifier, "Staff Member", member.id);
+                layout.Children.Add(card);
+            }
+        }
+
     }
 }

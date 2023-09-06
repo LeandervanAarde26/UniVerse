@@ -3,21 +3,21 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
+using System;
 using System.Diagnostics;
 using UniVerse.ViewModels;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace UniVerse.Components
 {
-
-
     public class AddStaffBar : ContentView
     {
         private AddStaffViewModel viewModel;
         public string PageType { get; set; }
-        public List<String> DropList {get; set; }
+        public List<String> DropList { get; set; }
 
-        public int _selectedRoleIndex;
-
+        public event EventHandler PersonAdded; // Define the event
 
         public AddStaffBar(string pgType, List<String> dropLst)
         {
@@ -64,7 +64,7 @@ namespace UniVerse.Components
                 FontSize = 12,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.End,
-                Margin = new Thickness(5,0),
+                Margin = new Thickness(5, 0),
                 TextColor = Color.FromArgb("#407BFF"),
             };
 
@@ -73,13 +73,13 @@ namespace UniVerse.Components
                 var imagePickerOptions = new PickOptions
                 {
                     PickerTitle = "Select an image",
-               
+
                 };
 
                 var selectedImage = await GetImage(imagePickerOptions);
                 if (selectedImage != null)
                 {
-           
+
                     defaultimage.Source = selectedImage.FullPath;
                 }
             };
@@ -108,7 +108,7 @@ namespace UniVerse.Components
                 Content = innerLayout,
                 BackgroundColor = Color.FromArgb("#F6F7FB"),
                 Margin = new Thickness(22, 8),
-                Padding = new Thickness(10,2),
+                Padding = new Thickness(10, 2),
                 StrokeShape = new RoundRectangle
                 {
                     CornerRadius = new CornerRadius(6)
@@ -117,7 +117,7 @@ namespace UniVerse.Components
 
             Entry name = new()
             {
-                Placeholder = PageType +  " Name",
+                Placeholder = PageType + " Name",
                 Style = inputStyle
 
             };
@@ -126,7 +126,7 @@ namespace UniVerse.Components
 
             Entry surname = new()
             {
-                Placeholder = PageType +  " Surname",
+                Placeholder = PageType + " Surname",
                 Style = inputStyle
             };
             surname.SetBinding(Entry.TextProperty, new Binding("SurnameEntry", source: viewModel));
@@ -143,11 +143,11 @@ namespace UniVerse.Components
             Picker studentRole = new()
             {
                 Style = inputStyle,
-              
+
 
             };
 
-             foreach (var option in listOptions)
+            foreach (var option in listOptions)
             {
                 studentRole.Items.Add(option);
             }
@@ -161,7 +161,7 @@ namespace UniVerse.Components
 
             StackLayout showcase = new()
             {
-                
+
                 Children =
                 {
                     studentNumber,
@@ -190,7 +190,7 @@ namespace UniVerse.Components
 
             Entry phoneNumber = new()
             {
-                Placeholder =  PageType + " Number",
+                Placeholder = PageType + " Number",
                 Style = inputStyle,
                 MaxLength = 10
             };
@@ -198,12 +198,17 @@ namespace UniVerse.Components
 
             Button button = new()
             {
-                Text =  "Add " + PageType,
+                Text = "Add " + PageType,
                 BackgroundColor = Color.FromArgb("#2B2B2B"),
                 Margin = new Thickness(18, 6)
             };
 
-            button.Clicked += async (sender, e)  => { await viewModel.AddStaff(); };
+            button.Clicked += async (sender, e) =>
+            {
+                await viewModel.AddStaff();
+                // Trigger the PersonAdded event when a new person is added
+                OnPersonAdded(EventArgs.Empty);
+            };
 
             StackLayout stack = new()
             {
@@ -236,12 +241,11 @@ namespace UniVerse.Components
                     stack
                 },
 
-               
+
             };
             //FlexLayout.SetGrow(stack, 1);
             Content = layout;
         }
-
 
         public async Task<FileResult> GetImage(PickOptions pickOptions)
         {
@@ -267,6 +271,12 @@ namespace UniVerse.Components
             }
 
             return null;
+        }
+
+        // Raise the PersonAdded event
+        protected virtual void OnPersonAdded(EventArgs e)
+        {
+            PersonAdded?.Invoke(this, e);
         }
     }
 }

@@ -192,7 +192,7 @@ namespace UniVerse.ViewModels
                 StudentList.Add(member);
                 maximumChartValue++;
 
-                if(member.role == "Degree student")
+                if (member.role == "Degree student")
                 {
                     DegreeStudents++;
                 }
@@ -247,6 +247,8 @@ namespace UniVerse.ViewModels
             StaffChart.ToArray();
         }
 
+
+
         public async Task<AddpersonModel> AddStudent()
         {
 
@@ -269,7 +271,7 @@ namespace UniVerse.ViewModels
                 person_password = "password",
             };
 
-            
+
             await _restService.AddStudentAsync(person);
 
             GetAllstudents();
@@ -281,6 +283,12 @@ namespace UniVerse.ViewModels
             //SurnameEntry = String.Empty;
 
             return person;
+        }
+
+
+        public async Task ReloadStudents()
+        {
+            await GetAllstudents();
         }
     }
 }

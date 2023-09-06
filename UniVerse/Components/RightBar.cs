@@ -16,6 +16,8 @@ namespace UniVerse.Components
         public string PageType { get; set; }
         public List<String> DropList {get; set; }
 
+        public event EventHandler PersonAdded; // Define the event
+
         public int _selectedRoleIndex;
 
 
@@ -203,7 +205,7 @@ namespace UniVerse.Components
                 Margin = new Thickness(18, 6)
             };
 
-            button.Clicked += async (sender, e)  => { await viewModel.AddStudent(); };
+            button.Clicked += async (sender, e)  => { await viewModel.AddStudent(); OnPersonAdded(EventArgs.Empty); };
 
             StackLayout stack = new()
             {
@@ -267,6 +269,12 @@ namespace UniVerse.Components
             }
 
             return null;
+        }
+
+        // Raise the PersonAdded event
+        protected virtual void OnPersonAdded(EventArgs e)
+        {
+            PersonAdded?.Invoke(this, e);
         }
     }
 }

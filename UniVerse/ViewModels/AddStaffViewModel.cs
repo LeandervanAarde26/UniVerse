@@ -202,5 +202,10 @@ namespace UniVerse.ViewModels
 
             return person;
         }
+
+        public async Task ReloadStaffMembers()
+        {
+            await GetAllStaffMembers();
+        }
     }
 }
