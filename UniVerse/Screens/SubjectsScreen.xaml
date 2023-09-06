@@ -30,7 +30,7 @@
                 </StackLayout>
             </ScrollView>-->
 
-            <CollectionView ItemsSource="{Binding SubjectList}" HeightRequest="800" HorizontalOptions="FillAndExpand">
+            <CollectionView ItemsSource="{Binding SubjectList}" MaximumHeightRequest="900" HorizontalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <components:SubjectCard BindingContext="{Binding}"/>
