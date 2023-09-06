@@ -30,7 +30,6 @@ namespace UniVerse.Components
 
         private void ToggleButton(object sender, EventArgs e)
         {
-            // Toggle the isActive state and update button appearance
             isActive = !isActive;
             UpdateButtonAppearance();
         }
