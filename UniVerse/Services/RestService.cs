@@ -182,7 +182,13 @@ namespace UniVerse.Services
             {
                 HttpResponseMessage response = await _client.DeleteAsync(uri);
                 if (response.IsSuccessStatusCode)
-                    Debug.WriteLine(@"\tTodoItem successfully deleted.");
+                {
+                    Debug.WriteLine(@"\tPerson successfully deleted.");
+                }
+                else
+                {
+                    Debug.WriteLine(@"\tPerson successfully deleted.");
+                }
             }
             catch (Exception ex)
             {

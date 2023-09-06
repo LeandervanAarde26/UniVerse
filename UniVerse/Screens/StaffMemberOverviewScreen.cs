@@ -155,6 +155,7 @@ namespace UniVerse.Screens
                 BackgroundColor = Color.FromArgb("#FF4040"),
                 ImageSource = ImageSource.FromFile("trash.png")
             };
+            delete.Clicked += DeleteStaffMember;
 
             StackLayout deleteStack = new()
             {
@@ -222,7 +223,6 @@ namespace UniVerse.Screens
                 if (viewModel.NavigationParameter is int memberIdValue)
                 {
                     StaffId = memberIdValue;
-                    Debug.WriteLine(StaffId);
                 }
             }
 
@@ -240,6 +240,22 @@ namespace UniVerse.Screens
                 enrollments = staffMember.enrollments;
 
                 CreateAndAddEnrollmentCards();
+            }
+        }
+
+        private async void DeleteStaffMember(object sender, EventArgs e)
+        {
+            bool answer = await DisplayAlert("Delete Staff Member", "Are you sure you want to delete this staff member?", "Yes", "No");
+
+            if (answer)
+            {
+                await _viewModel.DeletePerson(StaffId);
+                await DisplayAlert("Success!", "Staff member deleted successfully.", "OK");
+                _ = Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("Oops!", "The staff member was not deleted.", "OK");
             }
         }
 
