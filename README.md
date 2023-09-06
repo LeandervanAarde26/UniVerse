@@ -72,6 +72,7 @@ UniVerse is a robust and versatile cross-platform school management desktop appl
 * [.NET MAUI](https://learn.microsoft.com/en-us/dotnet/maui/)
 * [PostgreSQL](https://www.postgresql.org/)
 * [pgAdmin](https://www.pgadmin.org/)
+* [Aiven](https://aiven.io/)
 
 <!-- GETTING STARTED -->
 <!-- Make sure to add appropriate information about what prerequesite technologies the user would need and also the steps to install your project on their own mashines -->
