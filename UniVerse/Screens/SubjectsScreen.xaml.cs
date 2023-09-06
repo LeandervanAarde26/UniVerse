@@ -1,9 +1,10 @@
-﻿using UniVerse.Models;
+﻿using System.ComponentModel;
+using UniVerse.Models;
 using UniVerse.ViewModels;
 
 namespace UniVerse.Screens;
 
-public partial class SubjectsScreen : ContentPage
+public partial class SubjectsScreen : ContentPage, INotifyPropertyChanged
 {
     private SubjectViewModel viewModel;
     private PeopleViewModel peopleViewModel;
@@ -18,6 +19,19 @@ public partial class SubjectsScreen : ContentPage
             OnPropertyChanged(nameof(PickerItems));
         }
     }
+
+    private List<SubjectWithEnrollments> _subjects;
+    public List<SubjectWithEnrollments> Subjects
+    {
+        get { return _subjects; }
+        set
+        {
+            _subjects = value;
+            OnPropertyChanged(nameof(Subjects));
+        }
+    }
+
+
 
     private string _subjectName;
     public string SubjectName
@@ -154,18 +168,20 @@ public partial class SubjectsScreen : ContentPage
         viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
 
         peopleViewModel = new PeopleViewModel(new Services.RestService());
-       
         course_start.Date = DateTime.Today;
         PickerItems = new List<LecturerPickerItem>();
-        BindingContext = viewModel;   
+        BindingContext = this;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await viewModel.GetAllSubjects();
 
-        await peopleViewModel.GetAllLecturers();
+
+        var subjects = viewModel.GetAllSubjects();
+        var people = peopleViewModel.GetAllLecturers();
+
+        await Task.WhenAll(subjects, people);  
 
         PickerItems = peopleViewModel.StaffList.Select(lecturer => new LecturerPickerItem
         {
@@ -173,6 +189,7 @@ public partial class SubjectsScreen : ContentPage
             Name = lecturer.name
         }).ToList();
 
+        Subjects = viewModel.SubjectList.ToList();
     }
 
     private async void addSubject(object sender, EventArgs e)
