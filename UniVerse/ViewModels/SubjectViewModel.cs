@@ -15,6 +15,17 @@ namespace UniVerse.ViewModels
         public ObservableCollection<SubjectWithEnrollments> SubjectList { get; set; }
         public ObservableCollection<SubjectWithEnrollments> Subject { get; set; }
 
+        public int subjectCount = 0;
+        public int SubjectCount
+        {
+            get { return subjectCount; }
+            set
+            {
+                subjectCount = value;
+                OnPropertyChanged(nameof(SubjectCount));
+            }
+        }
+
         public SubjectViewModel(SubjectService restService)
         {
             _restService = restService;
@@ -27,6 +38,7 @@ namespace UniVerse.ViewModels
         {
             var subjects = await _restService.GetSubjectsAsync();
             SubjectList.Clear();
+            SubjectCount = subjects.Count;  
 
             foreach (var subject in subjects)
             {

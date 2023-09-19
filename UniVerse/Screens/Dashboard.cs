@@ -7,18 +7,26 @@ using UniVerse.Components;
 using UniVerse.ViewModels;
 using UniVerse.Controls.RadialBarChart;
 using UniVerse.Models;
+using UniVerse.Services.SubjectServices;
+
 
 namespace UniVerse.Screens;
 public class Dashboard : ContentPage
 {
     private readonly LoginViewModel _loginViewModel;
     private readonly PeopleViewModel _peopleViewModel;
+    private readonly SubjectViewModel _subjectViewModel;
+    private readonly StudentFeesViewModel _studentFunds;
+
     public Dashboard()
     {
         _loginViewModel = new LoginViewModel(new Services.RestService());
-        BindingContext = _loginViewModel;
         _peopleViewModel = new PeopleViewModel(new Services.RestService());
-        BindingContext = _peopleViewModel;
+        _subjectViewModel = new SubjectViewModel(new SubjectService());
+        _studentFunds = new StudentFeesViewModel(new Services.RestService());
+
+
+        BindingContext = this;
 
         Label pageHeading = new()
         {
@@ -283,8 +291,8 @@ public class Dashboard : ContentPage
         };
         FlexLayout subjectsInfo = new()
         {
-            JustifyContent = FlexJustify.Center,
-            Direction = FlexDirection.Column,
+            JustifyContent = FlexJustify.Start,
+   
             Children = {
                 subjectsNumberText,
                 subjectsTitleText,
@@ -327,7 +335,7 @@ public class Dashboard : ContentPage
 
         Label totalFundsText = new()
         {
-            Text = "Total Funds",
+            Text = "Total incoming funds",
             FontSize = 18,
             FontAttributes = FontAttributes.None,
             TextColor = Color.FromArgb("#2B2B2B"),
@@ -467,14 +475,30 @@ public class Dashboard : ContentPage
         {
            var studentGet =  _peopleViewModel.GetAllstudents();
            var staffGet =_peopleViewModel.GetAllStaff();
+           var subjectsCount = _subjectViewModel.GetAllSubjects();
+           var student =  _studentFunds.GetStudentAllFees();
 
-            await Task.WhenAll(studentGet, staffGet);
+            await Task.WhenAll(studentGet, staffGet, subjectsCount, student);
 
+            subjectsNumberText.Text = _subjectViewModel.SubjectCount.ToString();
             string username = await SecureStorage.Default.GetAsync("username");
             studentsGraph.Entries = _peopleViewModel.Chart;
             adminGraph.Entries = _peopleViewModel.StaffChart;
             AuthenticatedUser auth = LoginViewModel.AuthUser;
             welcomeHeading.Text = $"Hello, {auth.username} ";
+
+            var totalStudentFees = 0;
+
+            foreach (var studentfee in _studentFunds.StudentList)
+            {
+                totalStudentFees += studentfee.studentMonthlyFee;
+            }
+
+
+            var TotalIncome = totalStudentFees;
+
+
+            fundsText.Text = TotalIncome.ToString("C");
         }
     }
     protected override void OnAppearing()

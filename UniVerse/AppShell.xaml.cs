@@ -61,11 +61,6 @@ public partial class AppShell : Shell
         }
         FlyoutBehavior = FlyoutBehavior.Locked;
     }
-    //public async void Logout(object sender, EventArgs e)
-    //{
-    //    await _loginViewModel.LogOutUser();
-    //}
-
 
     async protected override void OnAppearing()
     {
