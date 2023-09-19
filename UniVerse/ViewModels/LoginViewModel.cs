@@ -78,10 +78,9 @@ namespace UniVerse.ViewModels
                 PasswordEntry = String.Empty;
                 AuthUser = auth;
                 App.Current.MainPage = new AppShell();
+                
                 AuthError = String.Empty;
 
-                await SecureStorage.Default.SetAsync("userEmail", auth.userEmail);
-                await SecureStorage.Default.SetAsync("username", auth.username);
             }
             catch(Exception ex)
             {
@@ -95,7 +94,7 @@ namespace UniVerse.ViewModels
             try
             {
                 AuthUser = null;
-                App.Current.MainPage = new LoginScreen();
+              
             }
             catch(Exception ex)
             {
