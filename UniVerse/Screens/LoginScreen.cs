@@ -84,11 +84,22 @@ namespace UniVerse.Screens
 
             Entry email = new()
             {
-                Placeholder = "Email",
+                Placeholder = "eg johnDoe@universe.com",
                 Style = inputStyle,
                 Margin = 0,  
               
             };
+
+            Label emailLabel = new()
+            {
+                Text = "Email",
+                FontSize = 15,
+                TextColor = Color.FromArgb("#2B2B2B"),
+                Margin = new Thickness(10, 5)
+
+            };
+
+
 
             email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: AuthVM));
 
@@ -103,11 +114,31 @@ namespace UniVerse.Screens
                 Style = borderStyle,
             };
 
+            StackLayout emailStack = new()
+            {
+                Children =
+                {
+                    emailLabel,
+                    emailBorder
+               
+                }
+            };
+
             email.Unfocused += ValidateEmail;
+
+            Label passwordLabel = new()
+            {
+                Text = "Password",
+                FontSize = 15,
+                TextColor = Color.FromArgb("#2B2B2B"),
+                Margin = new Thickness(10, 5, 0, 0)
+
+            };
+
 
             Entry password = new()
             {
-                Placeholder = "Password",
+                Placeholder = "eg. SuperSecretPassword",
                 Style = inputStyle,
                 IsPassword = true,
                 Margin = 0,
@@ -127,13 +158,24 @@ namespace UniVerse.Screens
                 Style = borderStyle,
             };
 
+
+            StackLayout passwordStack = new()
+            {
+                Children =
+                {
+                    passwordLabel,
+                    passwordBorder
+
+                }
+            };
+
             password.Unfocused += ValidatePassword;
 
             Button signinButton = new()
             {
                 Text = "Sign In",
                 BackgroundColor = Color.FromArgb("#2B2B2B"),
-                Margin = new Thickness(18, 15)
+                Margin = new Thickness(12, 15)
             };
 
             signinButton.Clicked +=  async (sender, args) =>
@@ -159,7 +201,7 @@ namespace UniVerse.Screens
                 JustifyContent = FlexJustify.Center,
                 Direction = FlexDirection.Column,
                 
-                Children = { loginTitle, ErrorTitle, emailBorder, passwordBorder, signinButton }
+                Children = { loginTitle, ErrorTitle, emailStack, passwordStack, signinButton }
             };
 
             Border loginCard = new()
@@ -172,7 +214,7 @@ namespace UniVerse.Screens
                 StrokeThickness = 0,
                 Content = login,
                 Stroke = Color.FromArgb("#DFE9FF"),
-                HorizontalOptions = LayoutOptions.FillAndExpand,
+                
                 StrokeShape = new RoundRectangle
                 {
                     CornerRadius = new CornerRadius(20)
@@ -233,7 +275,7 @@ namespace UniVerse.Screens
             }
             else
             {
-                colorString = Color.FromArgb("#FFFFFF");
+                colorString = Color.FromArgb("#29BA56");
             }
 
             // Find the parent Border by traversing the visual tree
@@ -250,7 +292,7 @@ namespace UniVerse.Screens
             if (password.Text == null)
                 return;
 
-            bool isValid = password.Text.Length >= 8;
+            bool isValid = password.Text.Length >= 5;
             Color colorString;
 
             if (!isValid)
