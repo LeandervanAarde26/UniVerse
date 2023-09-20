@@ -7,7 +7,7 @@ namespace UniVerse.Screens;
 public partial class SubjectsScreen : ContentPage, INotifyPropertyChanged
 {
     private SubjectViewModel viewModel;
-    private PeopleViewModel peopleViewModel;
+    private StaffViewModel peopleViewModel;
 
     private List<LecturerPickerItem> _pickerItems;
     public List<LecturerPickerItem> PickerItems
@@ -167,7 +167,7 @@ public partial class SubjectsScreen : ContentPage, INotifyPropertyChanged
         Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
         viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
 
-        peopleViewModel = new PeopleViewModel(new Services.RestService());
+        peopleViewModel = new StaffViewModel(new Services.StaffService.StaffService());
         course_start.Date = DateTime.Today;
         PickerItems = new List<LecturerPickerItem>();
         BindingContext = this;
@@ -183,7 +183,7 @@ public partial class SubjectsScreen : ContentPage, INotifyPropertyChanged
 
         await Task.WhenAll(subjects, people);  
 
-        PickerItems = peopleViewModel.StaffList.Select(lecturer => new LecturerPickerItem
+        PickerItems = peopleViewModel.Lecturers.Select(lecturer => new LecturerPickerItem
         {
             Id = lecturer.id,
             Name = lecturer.name

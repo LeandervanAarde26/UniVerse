@@ -15,6 +15,7 @@ public class Dashboard : ContentPage
 {
     private readonly LoginViewModel _loginViewModel;
     private readonly PeopleViewModel _peopleViewModel;
+    private readonly StaffViewModel _staffViewModel;
     private readonly SubjectViewModel _subjectViewModel;
     private readonly StudentFeesViewModel _studentFunds;
 
@@ -22,6 +23,7 @@ public class Dashboard : ContentPage
     {
         _loginViewModel = new LoginViewModel(new Services.RestService());
         _peopleViewModel = new PeopleViewModel(new Services.RestService());
+        _staffViewModel = new StaffViewModel(new Services.StaffService.StaffService());
         _subjectViewModel = new SubjectViewModel(new SubjectService());
         _studentFunds = new StudentFeesViewModel(new Services.RestService());
 
@@ -115,13 +117,6 @@ public class Dashboard : ContentPage
                     CornerRadius = new CornerRadius(20)
                 },
         };
-        //Image studentsGraph = new()
-        //{
-        //    Source = ImageSource.FromFile("image_picker.png"),
-        //    Aspect = Aspect.AspectFit,
-        //    MaximumHeightRequest = 150,
-        //    //MaximumWidthRequest = 200,
-        //};
 
         Label diplomaStudentsText = new()
         {
@@ -474,7 +469,7 @@ public class Dashboard : ContentPage
         async void GetUserDetails()
         {
            var studentGet =  _peopleViewModel.GetAllstudents();
-           var staffGet =_peopleViewModel.GetAllStaff();
+           var staffGet =_staffViewModel.GetAllStaffMembers();
            var subjectsCount = _subjectViewModel.GetAllSubjects();
            var student =  _studentFunds.GetStudentAllFees();
 
@@ -483,7 +478,7 @@ public class Dashboard : ContentPage
             subjectsNumberText.Text = _subjectViewModel.SubjectCount.ToString();
             string username = await SecureStorage.Default.GetAsync("username");
             studentsGraph.Entries = _peopleViewModel.Chart;
-            adminGraph.Entries = _peopleViewModel.StaffChart;
+            adminGraph.Entries = _staffViewModel.StaffChart;
             AuthenticatedUser auth = LoginViewModel.AuthUser;
             welcomeHeading.Text = $"Hello, {auth.username} ";
 
@@ -494,9 +489,7 @@ public class Dashboard : ContentPage
                 totalStudentFees += studentfee.studentMonthlyFee;
             }
 
-
             var TotalIncome = totalStudentFees;
-
 
             fundsText.Text = TotalIncome.ToString("C");
         }

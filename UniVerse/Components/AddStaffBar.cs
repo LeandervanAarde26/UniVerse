@@ -8,21 +8,20 @@ using UniVerse.ViewModels;
 
 namespace UniVerse.Components
 {
-
-
     public class AddStaffBar : ContentView
     {
-        private AddStaffViewModel viewModel;
+
+        private  ViewModels.StaffViewModel _staffViewModel;
         public string PageType { get; set; }
         public List<String> DropList {get; set; }
 
         public int _selectedRoleIndex;
 
-
-        public AddStaffBar(string pgType, List<String> dropLst)
+        public AddStaffBar(string pgType, List<String> dropLst, ViewModels.StaffViewModel viewModel)
         {
-            viewModel = new AddStaffViewModel(new Services.RestService());
-            BindingContext = viewModel;
+            _staffViewModel = viewModel;
+
+            BindingContext = _staffViewModel;
             PageType = pgType;
             DropList = dropLst;
             Style inputStyle = new(typeof(Entry))
@@ -47,7 +46,6 @@ namespace UniVerse.Components
                 FontAttributes = FontAttributes.Bold,
 
             };
-
 
             Image defaultimage = new()
             {
@@ -121,7 +119,7 @@ namespace UniVerse.Components
                 Style = inputStyle
 
             };
-            name.SetBinding(Entry.TextProperty, new Binding("NameEntry", source: viewModel));
+            name.SetBinding(Entry.TextProperty, new Binding("NameEntry", source: _staffViewModel));
 
 
             Entry surname = new()
@@ -129,22 +127,21 @@ namespace UniVerse.Components
                 Placeholder = PageType +  " Surname",
                 Style = inputStyle
             };
-            surname.SetBinding(Entry.TextProperty, new Binding("SurnameEntry", source: viewModel));
+            surname.SetBinding(Entry.TextProperty, new Binding("SurnameEntry", source: _staffViewModel));
 
             Entry studentNumber = new()
             {
                 Placeholder = PageType + " Number",
                 Style = inputStyle
             };
-            studentNumber.SetBinding(Entry.TextProperty, new Binding("Identifier", source: viewModel));
+            studentNumber.SetBinding(Entry.TextProperty, new Binding("Identifier", source: _staffViewModel));
 
             var listOptions = DropList;
 
             Picker studentRole = new()
             {
                 Style = inputStyle,
-              
-
+             
             };
 
              foreach (var option in listOptions)
@@ -155,9 +152,7 @@ namespace UniVerse.Components
             studentRole.TextColor = Colors.Black;
             studentRole.TitleColor = Colors.Black;
 
-            studentRole.SetBinding(Picker.SelectedIndexProperty, new Binding("RoleInput", source: viewModel));
-
-
+            studentRole.SetBinding(Picker.SelectedIndexProperty, new Binding("RoleInput", source: _staffViewModel));
 
             StackLayout showcase = new()
             {
@@ -186,7 +181,7 @@ namespace UniVerse.Components
                 Style = inputStyle
 
             };
-            email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: viewModel));
+            email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: _staffViewModel));
 
             Entry phoneNumber = new()
             {
@@ -194,7 +189,7 @@ namespace UniVerse.Components
                 Style = inputStyle,
                 MaxLength = 10
             };
-            phoneNumber.SetBinding(Entry.TextProperty, new Binding("Number", source: viewModel));
+            phoneNumber.SetBinding(Entry.TextProperty, new Binding("Number", source: _staffViewModel));
 
             Button button = new()
             {
@@ -203,7 +198,7 @@ namespace UniVerse.Components
                 Margin = new Thickness(18, 6)
             };
 
-            button.Clicked += async (sender, e)  => { await viewModel.AddStaff(); };
+            button.Clicked += async (sender, e)  => { await _staffViewModel.AddStaff(); };
 
             StackLayout stack = new()
             {
@@ -235,8 +230,6 @@ namespace UniVerse.Components
                     profileContainer,
                     stack
                 },
-
-               
             };
             //FlexLayout.SetGrow(stack, 1);
             Content = layout;
@@ -259,7 +252,6 @@ namespace UniVerse.Components
                         return result;
                     }
                 }
-
             }
             catch (Exception ex)
             {

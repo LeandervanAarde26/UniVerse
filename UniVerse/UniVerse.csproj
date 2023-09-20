@@ -54,6 +54,14 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 	<ItemGroup>
+	  <AndroidResource Remove="Services\NewFolder\**" />
+	  <Compile Remove="Services\NewFolder\**" />
+	  <EmbeddedResource Remove="Services\NewFolder\**" />
+	  <MauiCss Remove="Services\NewFolder\**" />
+	  <MauiXaml Remove="Services\NewFolder\**" />
+	  <None Remove="Services\NewFolder\**" />
+	</ItemGroup>
+	<ItemGroup>
 	  <None Remove="Resources\Images\Allen_Laing.png" />
 	  <None Remove="Resources\Images\edit_square.svg" />
 	  <None Remove="Resources\Images\edit.svg" />
@@ -99,7 +107,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Screens\" />
-	  <Folder Include="Services\NewFolder\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\ui_ux_design.svg" />

@@ -111,27 +111,8 @@ namespace UniVerse.ViewModels
     
         }
 
-        // Get Staff
-        public async Task GetAllStaffMembers()
-        {
-            var members = await _restService.RefreshDataAsync();
-            AllStaffList.Clear();
-
-            foreach (var member in members)
-            {
-                AllStaffList.Add(member);
-            }
-        }
 
    
-        //Get staff member by id
-        public async Task<LecturerWithCourses> GetStaffMember(int id)
-        {
-            var member = await _restService.GetLecturerByIdAsync(id);
-            StaffMember.Add(member);
-            return member;
-        }
-
         // Get Students
         public async Task GetAllStudents()
         {
@@ -144,17 +125,7 @@ namespace UniVerse.ViewModels
             }
         }
 
-        public async Task GetAllLecturers()
-        {
-            var members = await _restService.GetLecturersAsync();
-            StaffList.Clear();
-
-            foreach (var member in members)
-            {
-                StaffList.Add(member);
-            }
-        }
-
+ 
         //Get student member by id
         public async Task<SingleStudentWithCourses> GetStudent(int id)
         {
@@ -181,6 +152,7 @@ namespace UniVerse.ViewModels
                 await _restService.DeletePersonAsync(id);
                 var StaffMemberToRemove = StaffList.FirstOrDefault(p => p.id == id);
                 var StudentToRemove = StudentList.FirstOrDefault(p => p.id == id);
+
                 if (StaffMemberToRemove != null || StudentToRemove != null)
                 {
                     StaffList.Remove(StaffMemberToRemove);
@@ -226,42 +198,6 @@ namespace UniVerse.ViewModels
 
             Chart.ToArray();
         }
-
-
-        public async Task GetAllStaff()
-        {
-            var members = await _restService.GetStaffMembersAsync();
-            AllStaffList.Clear();
-            var LecturerStaff = 0;
-            var AdminStaff = 0;
-            var maximumChartValue = 0;
-
-
-            foreach (var member in members)
-            {
-                AllStaffList.Add(member);
-                maximumChartValue++;
-
-                if (member.role == "Lecturer")
-                {
-                    LecturerStaff++;
-                }
-                else
-                {
-                    AdminStaff++;
-                }
-            }
-            double LecturerPerecent = Math.Round((double)LecturerStaff / (double)maximumChartValue * 100, 1);
-            StaffChart.Add(new ChartEntry
-            {
-                Value = LecturerPerecent,
-                Color = Color.FromArgb("#6023FF"),
-                Text = "Visual Studio Code"
-            });
-
-            StaffChart.ToArray();
-        }
-
         public async Task SetPersonStatus(int id)
         {
             await _restService.UpdatePerson(id);
