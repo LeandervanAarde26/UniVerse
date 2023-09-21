@@ -38,97 +38,7 @@ namespace UniVerse.Services
                 WriteIndented = true
             };
         }
-
-        // Read staff memebers
-        public async Task<List<Person>> RefreshDataAsync()
-        {
-            People = new List<Person>();
-
-            Uri uri = new(string.Format(baseURL + "People/Staff"));
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    People = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-
-            return People;
-        }
-
-        // Get staff members by id
-        public async Task<LecturerWithCourses> GetLecturerByIdAsync(int id)
-        {
-            LecturerWithCourses Lect = new();
-            Uri lecturerUri = new(string.Format(baseURL + "People/Lecturer/{0}", id));
-
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(lecturerUri);
-
-                if(response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    Lect = JsonSerializer.Deserialize<LecturerWithCourses>(content, _serializerOptions);
-                    Debug.WriteLine($"Name: {Lect.lecturer_name}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-
-            return Lect;
-        }
-
-        public async Task<List<Person>> GetStaffMembersAsync()
-        {
-            Staff = new List<Person>();
-            Uri uri = new(string.Format(baseURL + "People/Staff"));
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    Staff = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-            return Staff;
-        }
-
- 
-
-        public async Task<List<Person>> GetLecturersAsync()
-        {
-            Staff = new List<Person>();
-            Uri uri = new(string.Format(baseURL + "People/Lecturers"));
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    Staff = JsonSerializer.Deserialize<List<Person>>(content, _serializerOptions);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-            return Staff;
-        }
-
+        
         // get students
         public async Task<List<Student>> GetStudentsAsync()
         {
@@ -233,7 +143,7 @@ namespace UniVerse.Services
 
             return AuthenticatedUser;
         }
-
+        //Update person active state
         public async Task UpdatePerson(int id)
         {
             Uri uri = new(string.Format(baseURL + "People/SetActive"));
@@ -256,8 +166,7 @@ namespace UniVerse.Services
                 Debug.WriteLine($"{ex.Message}");
             }
         }
-
-
+        //Adding students.
         public async Task<AddpersonModel> AddStudentAsync(AddpersonModel student)
         {
             if(student == null)
@@ -308,10 +217,7 @@ namespace UniVerse.Services
 
             return addStudent;
         }
-
-
-
-
+        //Get all fees.
         public async Task<List<LecturerFees>> GetFeesAsync()
         {
             LecturerFee = new List<LecturerFees>();
@@ -332,7 +238,6 @@ namespace UniVerse.Services
             }
             return LecturerFee;
         }
-
 
         public async Task<List<StudentFees>> GetStudentFeesAsync()
         {
@@ -471,59 +376,6 @@ namespace UniVerse.Services
             {
                 Debug.WriteLine(ex.Message);
             }
-        }
-
-
-
-        public async Task<AddpersonModel> AddStaffAsync(AddpersonModel staff)
-        {
-            if (staff == null)
-            {
-                return null;
-            }
-            Uri uri = new(string.Format(baseURL + "People/PostPeople", String.Empty));
-            AddpersonModel addStudent = null;
-            AddpersonModel newPerson = new()
-            {
-                person_id = 0,
-                person_system_identifier = staff.person_system_identifier,
-                first_name = staff.first_name,
-                last_name = staff.last_name,
-                person_email = staff.person_email,
-                added_date = DateTime.UtcNow,
-                person_active = true,
-                role = staff.role,
-                person_image = "None",
-                person_credits = 0,
-                person_cell = staff.person_cell,
-                needed_credits = 0,
-                person_password = "password",
-            };
-            var json = JsonSerializer.Serialize<AddpersonModel>(newPerson, _serializerOptions);
-            StringContent content = new(json, Encoding.UTF8, "application/json");
-
-            try
-            {
-
-                HttpResponseMessage res = await _client.PostAsync(uri, content);
-
-                if (res.IsSuccessStatusCode)
-                {
-                    string responseContent = await res.Content.ReadAsStringAsync();
-                    addStudent = JsonSerializer.Deserialize<AddpersonModel>(responseContent, _serializerOptions);
-
-                }
-                else
-                {
-                    Debug.WriteLine("Returned with unsuccessful response " + res);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Exception: {ex.Message}");
-            }
-
-            return addStudent;
         }
     }
 

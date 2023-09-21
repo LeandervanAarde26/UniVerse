@@ -10,16 +10,25 @@ using UniVerse.Components;
 using UniVerse.Models;
 using UniVerse.ViewModels;
 
+
 namespace UniVerse.Screens
 {
     public class StaffScreen : ContentPage
     {
 
-        private PeopleViewModel viewModel;
+        private StaffViewModel _staffViewModel;
+        public FlexLayout layout = new()
+        {
+            Direction = FlexDirection.Row,
+            Wrap = FlexWrap.Wrap,
+            JustifyContent = FlexJustify.Start,
+            AlignItems = FlexAlignItems.Start,
+        };
 
         public StaffScreen()
         {
-            viewModel = new PeopleViewModel(new Services.RestService());
+            _staffViewModel = new StaffViewModel(new Services.StaffService.StaffService());
+            BindingContext = _staffViewModel;
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
 
             Style inputStyle = new(typeof(Entry))
@@ -51,6 +60,11 @@ namespace UniVerse.Screens
                 Margin = new Thickness(0, 10, 20, 10)
             };
 
+            studentRole.SelectedIndexChanged += (sender, args) =>
+            {
+                FilterData();
+            };
+
             FlexLayout topContainer = new()
             {
                 JustifyContent = FlexJustify.SpaceBetween,
@@ -77,19 +91,10 @@ namespace UniVerse.Screens
             studentRole.TitleColor = Colors.White;
 
 
-            FlexLayout layout = new()
-            {
-                Direction = FlexDirection.Row,
-                Wrap = FlexWrap.Wrap,
-                JustifyContent = FlexJustify.Start,
-                AlignItems = FlexAlignItems.Start,
-            };
-
             ScrollView scrollView = new()
             {
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
-
                 Content = layout
             };
 
@@ -116,7 +121,7 @@ namespace UniVerse.Screens
             };
 
 
-            AddStaffBar right = new("Staff Member", list);
+            AddStaffBar right = new("Staff Member", list, _staffViewModel);
 
             grid.Children.Add(scrollView);
             Grid.SetRow(scrollView, 1);
@@ -136,12 +141,20 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
-            GetAllStafMembersAsync();
-            async void GetAllStafMembersAsync()
+
+          async void FilterData()
             {
-                await viewModel.GetAllStaffMembers();
-                
-                foreach (var member in viewModel.AllStaffList)
+                string selectedRole = studentRole.SelectedItem.ToString();
+
+                layout.Children.Clear();
+
+                var filteredStaff = _staffViewModel.AllStaffList.Where(member =>
+                  selectedRole == "All Staff" ||
+                  (selectedRole == "Admin Staff" && member.role == "Admin") || 
+                  (selectedRole == "Academic Staff" && member.role == "Lecturer") 
+              );
+
+                foreach (var member in filteredStaff)
                 {
                     var card = new Cardview(member.name, member.role, member.email, member.person_system_identifier, "Staff Member", member.id, member.is_active);
                     layout.Children.Add(card);
@@ -151,7 +164,15 @@ namespace UniVerse.Screens
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await viewModel.GetAllStaffMembers();
+            layout.Children.Clear();
+
+            await _staffViewModel.GetAllStaffMembers();
+
+            foreach (var member in _staffViewModel.AllStaffList)
+            {
+                var card = new Cardview(member.name, member.role, member.email, member.person_system_identifier, "Staff Member", member.id, member.is_active);
+                layout.Children.Add(card);
+            }
         }
     }
 }

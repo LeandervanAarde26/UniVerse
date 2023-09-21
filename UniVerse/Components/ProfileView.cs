@@ -102,7 +102,7 @@ namespace UniVerse.Components
             void GetUserDetails()
             {
                 AuthenticatedUser auth = LoginViewModel.AuthUser;
-                username.Text = auth.username;
+                username.Text = auth != null ? auth.username : "unauthenticated";
             }
 
         }

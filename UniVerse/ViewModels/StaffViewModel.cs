@@ -1,27 +1,34 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using UniVerse.Controls.RadialBarChart;
 using UniVerse.Models;
-using UniVerse.Services;
+using UniVerse.Services.StaffService;
 using static UniVerse.Models.LecturerOverviewModel;
 
 namespace UniVerse.ViewModels
 {
-    internal class AddStaffViewModel : BaseViewModel
+    public class StaffViewModel: BaseViewModel
     {
-        public RestService _restService;
-        // All of myt observerd properties 
+        public StaffService _staffService;
 
-        public ObservableCollection<Person> StaffList { get; set; }
-        public ObservableCollection<Person> AllStaffList { get; set; }
-        public ObservableCollection<Student> StudentList { get; set; }
+        private ObservableCollection<Person> _allStaffList = new ObservableCollection<Person>();
+        public ObservableCollection<Person> AllStaffList
+        {
+            get { return _allStaffList; }
+            set
+            {
+                _allStaffList = value;
+                OnPropertyChanged(nameof(AllStaffList));
+            }
+        }
+
+        public ObservableCollection<Person> Lecturers { get; set; }
+
         public ObservableCollection<LecturerWithCourses> StaffMember { get; set; }
-        public ObservableCollection<SingleStudentWithCourses> Student { get; set; }
-        public ObservableCollection<ChartEntry> Chart { get; set; }
         public ObservableCollection<ChartEntry> StaffChart { get; set; }
 
         public string _nameEntry = string.Empty;
@@ -90,46 +97,24 @@ namespace UniVerse.ViewModels
             }
         }
 
-        public AddStaffViewModel(RestService restService) //instance of the restservice goes here
+        public StaffViewModel(StaffService staffService)
         {
-            _restService = restService;
-            StaffList = new ObservableCollection<Person>();
-            StudentList = new ObservableCollection<Student>();
-            StaffMember = new ObservableCollection<LecturerWithCourses>();
-            Student = new ObservableCollection<SingleStudentWithCourses>();
-            Chart = new ObservableCollection<ChartEntry>();
-            StaffChart = new ObservableCollection<ChartEntry>();
+            _staffService = staffService;
             AllStaffList = new ObservableCollection<Person>();
+            StaffMember = new ObservableCollection<LecturerWithCourses>();
+            StaffChart = new ObservableCollection<ChartEntry>();
             NameEntry = String.Empty;
             EmailEntry = String.Empty;
             Number = String.Empty;
             Identifier = String.Empty;
             SurnameEntry = String.Empty;
+            Lecturers = new ObservableCollection<Person>();
         }
 
-        // Get Staff
+        // Getting all the staffmembers to display
         public async Task GetAllStaffMembers()
         {
-            var members = await _restService.RefreshDataAsync();
-            StaffList.Clear();
-
-            foreach (var member in members)
-            {
-                StaffList.Add(member);
-            }
-        }
-
-        //Get staff member by id
-        public async Task<LecturerWithCourses> GetStaffMember(int id)
-        {
-            var member = await _restService.GetLecturerByIdAsync(id);
-            StaffMember.Add(member);
-            return member;
-        }
-
-        public async Task GetAllStaff()
-        {
-            var members = await _restService.GetStaffMembersAsync();
+            var members = await _staffService.GetStaffMembersAsync();
             AllStaffList.Clear();
             var LecturerStaff = 0;
             var AdminStaff = 0;
@@ -161,6 +146,14 @@ namespace UniVerse.ViewModels
             StaffChart.ToArray();
         }
 
+        // Getting a single staffmember
+        public async Task<LecturerWithCourses> GetStaffMember(int id)
+        {
+            var member = await _staffService.GetLecturerByIdAsync(id);
+            StaffMember.Add(member);
+            return member;
+        }
+
         public async Task<AddpersonModel> AddStaff()
         {
 
@@ -183,10 +176,24 @@ namespace UniVerse.ViewModels
                 person_password = "password",
             };
 
-            
-            await _restService.AddStaffAsync(person);
+            var newMember = await _staffService.AddStaffAsync(person);
 
-            GetAllStaff();
+            Person newStaffMember = new Person()
+            {
+                id = newMember.person_id,
+                person_system_identifier = newMember.person_system_identifier,
+                name = $"{newMember.first_name} {newMember.last_name}",
+                email = newMember.person_email,
+                role = newMember.role == 1 ? "Admin" : "Lecturer",
+                person_credits = newMember.person_credits,
+                needed_credits = newMember.needed_credits,
+                is_active = newMember.person_active
+            };
+
+            //AllStaffList.Add(newStaffMember);
+            AllStaffList.Clear();
+
+            await GetAllStaffMembers();
 
             NameEntry = String.Empty;
             EmailEntry = String.Empty;
@@ -194,13 +201,19 @@ namespace UniVerse.ViewModels
             Identifier = String.Empty;
             SurnameEntry = String.Empty;
 
-            //NameEntry = String.Empty;
-            //EmailEntry = String.Empty;
-            //Number = String.Empty;
-            //Identifier = String.Empty;
-            //SurnameEntry = String.Empty;
-
             return person;
+        }
+
+        //Getting all the lecturerers
+        public async Task GetAllLecturers()
+        {
+            var members = await _staffService.GetLecturersAsync();
+            Lecturers.Clear();
+
+            foreach (var member in members)
+            {
+                Lecturers.Add(member);
+            }
         }
     }
 }

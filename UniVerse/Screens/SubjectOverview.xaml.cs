@@ -8,14 +8,14 @@ public partial class SubjectOverview : ContentPage
 {
     public int SubjectId { get; set; }
     private readonly SubjectViewModel _viewModel;
-    private PeopleViewModel _peopleViewModel;
+    private readonly StaffViewModel _staffViewModel;
 
     public SubjectOverview()
 	{
 		InitializeComponent();
 
         _viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
-        _peopleViewModel = new PeopleViewModel(new Services.RestService());
+        _staffViewModel = new StaffViewModel(new Services.StaffService.StaffService());
         BindingContext = _viewModel;
     }
 
@@ -25,7 +25,7 @@ public partial class SubjectOverview : ContentPage
 
         studentStackLayout.Clear();
 
-        await _peopleViewModel.GetAllStaff();
+        await _staffViewModel.GetAllStaffMembers();
 
         if (BindingContext is NavOverviewViewModel viewModel)
         {

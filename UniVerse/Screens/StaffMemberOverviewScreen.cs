@@ -13,7 +13,8 @@ namespace UniVerse.Screens
 	public class StaffMemberOverviewScreen : ContentPage
 	{
         public int StaffId { get; private set; }
-        private PeopleViewModel _viewModel;
+        private StaffViewModel _viewModel;
+        private PeopleViewModel _peopleViewModel;
 
         private readonly Label name;
         private readonly Label role;
@@ -26,7 +27,8 @@ namespace UniVerse.Screens
 
         public StaffMemberOverviewScreen()
 		{
-            _viewModel = new PeopleViewModel(new Services.RestService());
+            _viewModel = new StaffViewModel(new Services.StaffService.StaffService());
+            _peopleViewModel = new PeopleViewModel(new Services.RestService());
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             NavigationPage.SetHasNavigationBar(this, false);
          
@@ -245,18 +247,20 @@ namespace UniVerse.Screens
 
         private async void DeleteStaffMember(object sender, EventArgs e)
         {
-            bool answer = await DisplayAlert("Delete Staff Member", "Are you sure you want to delete this staff member?", "Yes", "No");
+            //bool answer = await DisplayAlert("Delete Staff Member", "Are you sure you want to delete this staff member?", "Yes", "No");
 
-            if (answer)
-            {
-                await _viewModel.DeletePerson(StaffId);
-                await DisplayAlert("Success!", "Staff member deleted successfully.", "OK");
-                _ = Navigation.PopAsync();
-            }
-            else
-            {
-                await DisplayAlert("Oops!", "The staff member was not deleted.", "OK");
-            }
+            await _peopleViewModel.DeletePerson(StaffId);
+            //await DisplayAlert("Success!", "Staff member deleted successfully.", "OK");
+            await Navigation.PopAsync();
+
+            //if (answer)
+            //{
+
+            //}
+            //else
+            //{
+            //    await DisplayAlert("Oops!", "The staff member was not deleted.", "OK");
+            //}
         }
 
         private void CreateAndAddEnrollmentCards()

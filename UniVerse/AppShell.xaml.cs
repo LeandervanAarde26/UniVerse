@@ -45,7 +45,10 @@ public partial class AppShell : Shell
             BorderColor = Colors.Transparent
         };
 
-        //logout.Clicked += Logout;
+        logout.Clicked += (sender, args) =>
+        {
+            Environment.Exit(0);
+        };
 
         FlyoutFooter = logout;
        
@@ -54,15 +57,10 @@ public partial class AppShell : Shell
         {
             Items.Add(item);
        
-           
+        
         }
         FlyoutBehavior = FlyoutBehavior.Locked;
     }
-    //public async void Logout(object sender, EventArgs e)
-    //{
-    //    await _loginViewModel.LogOutUser();
-    //}
-
 
     async protected override void OnAppearing()
     {
