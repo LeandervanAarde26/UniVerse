@@ -13,25 +13,26 @@ namespace UniVerse.Components
 {
     public class StudentOverViewRightBar : ContentView
     {
-        private readonly PeopleViewModel _peopleViewModel;
+        private readonly StudentViewModel _studentViewModel;
 
         public int person_id { get; set; }
         public StudentOverViewRightBar(int id) 
         {
-            person_id = id; 
+            person_id = id;
 
-            _peopleViewModel = new PeopleViewModel(new Services.RestService());
-            BindingContext = _peopleViewModel;
+            _studentViewModel = new StudentViewModel(new Services.StudentServices.StudentService());
+            BindingContext = _studentViewModel;
             var ChartData = new ChartEntry[]
             {
                 new ChartEntry
                 {
                     Value = 71,
                     Color = Color.FromArgb("#407BFF"),
-                    Text = "Visual Studio Code"
+                
                 },
             };
 
+            
 
             Image image = new()
             {
@@ -40,18 +41,18 @@ namespace UniVerse.Components
                 MaximumHeightRequest = 350
             };
 
-            //Chart
             RadialBarChart radialBarChart = new()
             {
-                BarSpacing = 0,
-                BarThickness = 8,
+                BarSpacing = 5,
+                BarThickness = 12,
                 WidthRequest = 350,
                 HeightRequest = 250,
                 FontSize = 12,
                 MaxValue = 100,
+                //ShowLabels = false,
                 BarBackgroundColor = Color.FromArgb("#E9F0FF"),
                 Entries = ChartData,
-                VerticalOptions = LayoutOptions.Start,
+                //Margin = new Thickness(10, 5, 0, 0),
                 LegendText = "Achieved Credits",
                 LegendText2 = "Needed Credits"
             };
@@ -64,28 +65,7 @@ namespace UniVerse.Components
                 Margin = new Thickness(5),
                 Content = radialBarChart
             };
-            //Chart
-
-            //Delete
-
-            //Button delete = new()
-            //{
-            //    Margin = new Thickness(8, 12),
-            //    Text = "Delete Staff Member",
-            //    BackgroundColor = Color.FromArgb("#FF4040"),
-            //    ImageSource = ImageSource.FromFile("trash.png")
-            //};
-
-            //StackLayout deleteStack = new()
-            //{
-            //    VerticalOptions = LayoutOptions.End,
-            //    Children =
-            //    {
-            //        delete
-            //    }
-            //};
-            //Delete
-
+   
             //Page Content
             Grid grid = new()
             {
@@ -109,21 +89,16 @@ namespace UniVerse.Components
             grid.Children.Add(frame);
             Grid.SetRow(frame, 1);
        
-
-            //grid.Children.Add(deleteStack); 
-            //Grid.SetRow(deleteStack, 2);
-            //Page Content
-
             Content = grid;
 
             GetUserDetails();
 
             async void GetUserDetails()
             {
-                await _peopleViewModel.GetStudent(id);
-                radialBarChart.Entries = _peopleViewModel.SingleStudentChart;
+                await _studentViewModel.GetStudent(person_id);
+                radialBarChart.Entries = _studentViewModel.SingleStudentChart;
+                radialBarChart.CenterText = $"{_studentViewModel.Student.FirstOrDefault().needed_credits}";
             }
         }
-
     }
 }

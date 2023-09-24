@@ -9,14 +9,19 @@ using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
-
     public class StudentScreen : ContentPage
     {
-        private readonly PeopleViewModel viewModel;
-
+        private StudentViewModel _studentViewModel { get; set; }
+        FlexLayout layout = new()
+        {
+            Direction = FlexDirection.Row,
+            Wrap = FlexWrap.Wrap,
+            JustifyContent = FlexJustify.Start,
+            AlignItems = FlexAlignItems.Start,
+        };
         public StudentScreen()
         {
-            viewModel = new PeopleViewModel(new Services.RestService());
+            _studentViewModel = new StudentViewModel(new Services.StudentServices.StudentService());
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style inputStyle = new(typeof(Entry))
             {
@@ -74,15 +79,6 @@ namespace UniVerse.Screens
             studentRole.TextColor = Colors.White;
             studentRole.TitleColor = Colors.White;
 
-
-            FlexLayout layout = new()
-            {
-                Direction = FlexDirection.Row,
-                Wrap = FlexWrap.Wrap,
-                JustifyContent = FlexJustify.Start,
-                AlignItems = FlexAlignItems.Start,
-            };
-
             ScrollView scrollView = new()
             {
                 VerticalOptions = LayoutOptions.Center,
@@ -133,25 +129,18 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
-
-            GetAllStudentsAsync();
-
-            async void GetAllStudentsAsync()
-            {
-
-                await viewModel.GetAllStudents();
-
-                foreach (var Student in viewModel.StudentList)
-                {
-                    var card = new Cardview(Student.name, Student.person_system_identifier, Student.email, Student.role, "Student", Student.id, Student.is_active);
-                    layout.Children.Add(card);
-                }
-            }
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await viewModel.GetAllStudents();
+            layout.Children.Clear();
+            await _studentViewModel.GetAllstudents();
+
+            foreach (var Student in _studentViewModel.StudentList)
+            {
+                var card = new Cardview(Student.name, Student.person_system_identifier, Student.email, Student.role, "Student", Student.id, Student.is_active);
+                layout.Children.Add(card);
+            }
         }
     }
 }

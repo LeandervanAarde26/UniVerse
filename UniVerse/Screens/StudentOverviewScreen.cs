@@ -28,13 +28,15 @@ namespace UniVerse.Screens
         private readonly Label studentNumber;
         private int achievedCredits;
         private int neededCredites;
+        private StudentOverViewRightBar right;
 
         private List<SubjectEnrollments> enrollments;
         private readonly FlexLayout layout;
 
-        public StudentOverviewScreen()
+        public StudentOverviewScreen(int id)
         {
             _viewModel = new PeopleViewModel(new Services.RestService());
+            right = new StudentOverViewRightBar(id);
 
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style textStyle = new(typeof(Label))
@@ -152,7 +154,7 @@ namespace UniVerse.Screens
                 Content = layout
             };
 
-            StudentOverViewRightBar right = new(StudentId);
+            //StudentOverViewRightBar right = new(StudentId);
 
             Button delete = new()
             {
@@ -241,6 +243,7 @@ namespace UniVerse.Screens
                 neededCredites = student.needed_credits;
                 studentNumber.Text = student.person_system_identifier;
 
+                right = new StudentOverViewRightBar(student.student_id);
                 enrollments = student.enrollments;
 
                 CreateAndAddEnrollmentCards();
