@@ -79,6 +79,11 @@ namespace UniVerse.Screens
             studentRole.TextColor = Colors.White;
             studentRole.TitleColor = Colors.White;
 
+            studentRole.SelectedIndexChanged += (sender, args) =>
+            {
+                FilterData();
+            };
+
             ScrollView scrollView = new()
             {
                 VerticalOptions = LayoutOptions.Center,
@@ -107,7 +112,7 @@ namespace UniVerse.Screens
                 "Degree Student",
                 "Certificate Student"
             };
-            RightBar right = new("Student", list);
+            RightBar right = new("Student", list, _studentViewModel);
 
 
             // Add the ContentView to the Grid
@@ -129,13 +134,34 @@ namespace UniVerse.Screens
             Grid.SetColumn(topContainer, 0);
 
             Content = grid;
+
+            async void FilterData()
+            {
+                string selectedRole = studentRole.SelectedItem.ToString();
+
+                layout.Children.Clear();
+
+                var filteredStaff = _studentViewModel.StudentList.Where(member =>
+                  selectedRole == "All Students" ||
+                  (selectedRole == "Degree Student" && member.role == "Degree student") ||
+                  (selectedRole == "Certificate Student" && member.role == "Diploma Student")
+              );
+
+                foreach (var member in filteredStaff)
+                {
+                    var card = new Cardview(member.name, member.role, member.email, member.person_system_identifier, "Student", member.id, member.is_active);
+                    layout.Children.Add(card);
+                }
+            }
+
+
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             layout.Children.Clear();
             await _studentViewModel.GetAllstudents();
-
+         
             foreach (var Student in _studentViewModel.StudentList)
             {
                 var card = new Cardview(Student.name, Student.person_system_identifier, Student.email, Student.role, "Student", Student.id, Student.is_active);

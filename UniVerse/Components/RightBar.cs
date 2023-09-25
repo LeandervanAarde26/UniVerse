@@ -13,16 +13,18 @@ namespace UniVerse.Components
     public class RightBar : ContentView
     {
         private PeopleViewModel viewModel;
+        private StudentViewModel _studentViewModel;
         public string PageType { get; set; }
         public List<String> DropList {get; set; }
 
         public int _selectedRoleIndex;
 
 
-        public RightBar(string pgType, List<String> dropLst)
+        public RightBar(string pgType, List<String> dropLst, StudentViewModel vModel)
         {
             viewModel = new PeopleViewModel(new Services.RestService());
-            BindingContext = viewModel;
+            _studentViewModel = vModel;
+            BindingContext = _studentViewModel;
             PageType = pgType;
             DropList = dropLst;
             Style inputStyle = new(typeof(Entry))
@@ -121,7 +123,7 @@ namespace UniVerse.Components
                 Style = inputStyle
 
             };
-            name.SetBinding(Entry.TextProperty, new Binding("NameEntry", source: viewModel));
+            name.SetBinding(Entry.TextProperty, new Binding("NameEntry", source: _studentViewModel));
 
 
             Entry surname = new()
@@ -129,14 +131,14 @@ namespace UniVerse.Components
                 Placeholder = PageType +  " Surname",
                 Style = inputStyle
             };
-            surname.SetBinding(Entry.TextProperty, new Binding("SurnameEntry", source: viewModel));
+            surname.SetBinding(Entry.TextProperty, new Binding("SurnameEntry", source: _studentViewModel));
 
             Entry studentNumber = new()
             {
                 Placeholder = PageType + " Number",
                 Style = inputStyle
             };
-            studentNumber.SetBinding(Entry.TextProperty, new Binding("Identifier", source: viewModel));
+            studentNumber.SetBinding(Entry.TextProperty, new Binding("Identifier", source: _studentViewModel));
 
             var listOptions = DropList;
 
@@ -155,7 +157,7 @@ namespace UniVerse.Components
             studentRole.TextColor = Colors.Black;
             studentRole.TitleColor = Colors.Black;
 
-            studentRole.SetBinding(Picker.SelectedIndexProperty, new Binding("RoleInput", source: viewModel));
+            studentRole.SetBinding(Picker.SelectedIndexProperty, new Binding("RoleInput", source: _studentViewModel));
 
 
 
@@ -186,7 +188,7 @@ namespace UniVerse.Components
                 Style = inputStyle
 
             };
-            email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: viewModel));
+            email.SetBinding(Entry.TextProperty, new Binding("EmailEntry", source: _studentViewModel));
 
             Entry phoneNumber = new()
             {
@@ -194,7 +196,7 @@ namespace UniVerse.Components
                 Style = inputStyle,
                 MaxLength = 10
             };
-            phoneNumber.SetBinding(Entry.TextProperty, new Binding("Number", source: viewModel));
+            phoneNumber.SetBinding(Entry.TextProperty, new Binding("Number", source: _studentViewModel));
 
             Button button = new()
             {
@@ -203,7 +205,7 @@ namespace UniVerse.Components
                 Margin = new Thickness(18, 6)
             };
 
-            button.Clicked += async (sender, e)  => { await viewModel.AddStudent(); };
+            button.Clicked += async (sender, e)  => { await _studentViewModel.AddStudent(); };
 
             StackLayout stack = new()
             {

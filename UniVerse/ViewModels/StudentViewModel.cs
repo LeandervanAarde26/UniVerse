@@ -12,7 +12,7 @@ namespace UniVerse.ViewModels
 {
    
 
-    internal class StudentViewModel: BaseViewModel
+    public class StudentViewModel: BaseViewModel
     {
         public StudentService _studentService;
         public ObservableCollection<Student> StudentList { get; set; }
@@ -150,7 +150,56 @@ namespace UniVerse.ViewModels
 
             return student;
         }
+        public async Task<AddpersonModel> AddStudent()
+        {
+
+            int userRole = RoleInput == 1 ? 3 : 4;
+
+            AddpersonModel person = new()
+            {
+                person_id = 0,
+                person_system_identifier = Identifier,
+                first_name = NameEntry,
+                last_name = SurnameEntry,
+                person_email = EmailEntry,
+                added_date = DateTime.UtcNow,
+                person_active = true,
+                role = userRole,
+                person_image = "None",
+                person_credits = 0,
+                person_cell = Number,
+                needed_credits = userRole == 3 ? 180 : 75,
+                person_password = "password",
+            };
 
 
+            var newStudent  = await _studentService.AddStudentAsync(person);
+
+            Student newStudentEnrolled = new()
+            {
+                id = newStudent.person_id,
+                image = "",
+                name = newStudent.first_name + " " + newStudent.last_name,
+                email = newStudent.person_email,
+                role = newStudent.role == 3 ? "Degree Student" : "Diploma Student",
+                person_credits = 0,
+                person_system_identifier = newStudent.person_system_identifier,
+                needed_credits = newStudent.role == 3 ? 180 : 75,
+                is_active = true,
+            };
+
+            StudentList.Clear();
+
+
+            await GetAllstudents();
+
+            //NameEntry = String.Empty;
+            //EmailEntry = String.Empty;
+            //Number = String.Empty;
+            //Identifier = String.Empty;
+            //SurnameEntry = String.Empty;
+
+            return person;
+        }
     }
 }

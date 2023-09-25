@@ -20,6 +20,7 @@ namespace UniVerse.Screens
     {
         public int StudentId { get; private set; }
         private PeopleViewModel _viewModel;
+        private  readonly StudentViewModel _studentViewModel;
 
         private readonly Label name;
         private readonly Label role;
@@ -37,6 +38,7 @@ namespace UniVerse.Screens
         {
             _viewModel = new PeopleViewModel(new Services.RestService());
             right = new StudentOverViewRightBar(id);
+            _studentViewModel = new StudentViewModel(new Services.StudentServices.StudentService());
 
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style textStyle = new(typeof(Label))
@@ -231,7 +233,7 @@ namespace UniVerse.Screens
                 }
             }
 
-            var student = await _viewModel.GetStudent(StudentId);
+            var student = await _studentViewModel.GetStudent(StudentId);
 
             if (student != null)
             {
