@@ -17,5 +17,6 @@ namespace UniVerse.Services
         Task PayAdmins();
         Task CollectFromStudents();
         Task UpdatePerson(int id);
+        Task UpdateCellPhone(int id, string phoneNumber);
     }
 }

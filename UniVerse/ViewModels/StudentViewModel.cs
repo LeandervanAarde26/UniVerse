@@ -189,15 +189,13 @@ namespace UniVerse.ViewModels
             };
 
             StudentList.Clear();
-
-
             await GetAllstudents();
 
-            //NameEntry = String.Empty;
-            //EmailEntry = String.Empty;
-            //Number = String.Empty;
-            //Identifier = String.Empty;
-            //SurnameEntry = String.Empty;
+            NameEntry = String.Empty;
+            EmailEntry = String.Empty;
+            Number = String.Empty;
+            Identifier = String.Empty;
+            SurnameEntry = String.Empty;
 
             return person;
         }

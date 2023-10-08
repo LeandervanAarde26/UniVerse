@@ -166,6 +166,37 @@ namespace UniVerse.Services
                 Debug.WriteLine($"{ex.Message}");
             }
         }
+
+        public async Task UpdateCellPhone(int id, string phoneNumber)
+        {
+            Debug.WriteLine("Hey");
+            try
+            {
+                var data = new
+                {
+                    Id = id,
+                    PhoneNumber = phoneNumber
+                };
+                var json = JsonSerializer.Serialize(data, _serializerOptions);
+                Uri uri = new(baseURL + "People/UpdateNumber");
+                StringContent stringContent = new(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _client.PutAsync(uri, stringContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine(responseContent);
+
+                } else
+                {
+                    Debug.WriteLine($"HTTP request failed with status code {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"{ex.Message}");
+            }
+        }
+
         //Adding students.
         public async Task<AddpersonModel> AddStudentAsync(AddpersonModel student)
         {

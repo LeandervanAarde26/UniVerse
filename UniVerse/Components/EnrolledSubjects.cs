@@ -54,11 +54,11 @@ namespace UniVerse.Components
 
             Image subjectImage = new()
             {
-                Source = "devreplace.png",
+                Source = "development.png",
                 VerticalOptions = LayoutOptions.Center,
                 Margin = new Thickness(-10, 0, 10, 0),
                 Aspect = Aspect.AspectFit,
-                MaximumHeightRequest = 150,
+                MaximumHeightRequest = 100,
 
             };
 

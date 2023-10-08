@@ -92,6 +92,17 @@ namespace UniVerse.ViewModels
             }
         }
 
+        public string _phoneNumberEntry = string.Empty;
+        public string PhoneNumberEntry
+        {
+            get { return _phoneNumberEntry; }
+            set
+            {
+                _phoneNumberEntry = value;
+                OnPropertyChanged(nameof(PhoneNumberEntry));
+            }
+        }
+
         public PeopleViewModel(RestService restService) //instance of the restservice goes here
         {
             _restService = restService;
@@ -237,6 +248,11 @@ namespace UniVerse.ViewModels
             //SurnameEntry = String.Empty;
 
             return person;
+        }
+
+        public async Task UpdateNumber(int id)
+        {
+            await _restService.UpdateCellPhone(id, PhoneNumberEntry);
         }
     }
 }

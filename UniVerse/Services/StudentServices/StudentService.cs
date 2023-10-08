@@ -88,9 +88,9 @@ namespace UniVerse.Services.StudentServices
                 person_active = true,
                 role = student.role,
                 person_image = "None",
-                person_credits = 10,
+                person_credits = 0,
                 person_cell = student.person_cell,
-                needed_credits = 180,
+                needed_credits = student.needed_credits,
                 person_password = "password",
             };
             var json = JsonSerializer.Serialize<AddpersonModel>(newPerson, _serializerOptions);
