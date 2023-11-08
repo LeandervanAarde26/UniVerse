@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using UniVerse.Components;
 using UniVerse.Models;
@@ -20,6 +21,8 @@ namespace UniVerse.Screens
     {
         public int StudentId { get; private set; }
         private PeopleViewModel _viewModel;
+        private  readonly StudentViewModel _studentViewModel;
+
 
         private readonly Label name;
         private readonly Label role;
@@ -28,13 +31,27 @@ namespace UniVerse.Screens
         private readonly Label studentNumber;
         private int achievedCredits;
         private int neededCredites;
+        private StudentOverViewRightBar right;
 
         private List<SubjectEnrollments> enrollments;
         private readonly FlexLayout layout;
 
-        public StudentOverviewScreen()
+        public StudentOverviewScreen(int id)
         {
             _viewModel = new PeopleViewModel(new Services.RestService());
+            right = new StudentOverViewRightBar(id);
+            _studentViewModel = new StudentViewModel(new Services.StudentServices.StudentService());
+            BindingContext = this;
+
+            Style inputStyle = new(typeof(Entry))
+            {
+                Setters =
+                {
+                    new Setter { Property = InputView.BackgroundColorProperty, Value = Colors.White },
+                    new Setter { Property = InputView.MarginProperty, Value = new Thickness(0,0,0,0) },
+                    new Setter { Property = InputView.TextColorProperty, Value = Color.FromArgb("#2B2B2B") }
+                }
+            };
 
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style textStyle = new(typeof(Label))
@@ -108,6 +125,34 @@ namespace UniVerse.Screens
                 Style = textStyle,
             };
 
+            Entry phoneNumber = new()
+            {
+                Placeholder = "New Phone Number",
+                Style = inputStyle,
+                WidthRequest = 220
+            };
+
+            phoneNumber.SetBinding(Entry.TextProperty, new Binding("PhoneNumberEntry", source: _viewModel));
+
+            Button button = new()
+            {
+                Text = "Update Student",
+                BackgroundColor = Color.FromArgb("#2B2B2B"),
+                Margin = new Thickness(18, 6)
+            };
+
+            button.Clicked += UpdateStudentNumber;
+
+            HorizontalStackLayout Hlayout = new()
+            {
+                Margin = 0,
+              
+                Children =
+                {
+                    phoneNumber, button
+                }
+            };
+
             StackLayout stackLayout = new()
             {
                 Padding = new Thickness(10, 0),
@@ -119,7 +164,8 @@ namespace UniVerse.Screens
                     studentNumber,
                     role,
                     cell,
-                    mail
+                    mail,
+                    Hlayout
                 }
             };
 
@@ -152,7 +198,7 @@ namespace UniVerse.Screens
                 Content = layout
             };
 
-            StudentOverViewRightBar right = new(StudentId);
+            //StudentOverViewRightBar right = new(StudentId);
 
             Button delete = new()
             {
@@ -229,7 +275,7 @@ namespace UniVerse.Screens
                 }
             }
 
-            var student = await _viewModel.GetStudent(StudentId);
+            var student = await _studentViewModel.GetStudent(StudentId);
 
             if (student != null)
             {
@@ -241,6 +287,7 @@ namespace UniVerse.Screens
                 neededCredites = student.needed_credits;
                 studentNumber.Text = student.person_system_identifier;
 
+                right = new StudentOverViewRightBar(student.student_id);
                 enrollments = student.enrollments;
 
                 CreateAndAddEnrollmentCards();
@@ -249,18 +296,23 @@ namespace UniVerse.Screens
 
         private async void DeleteStudent(object sender, EventArgs e)
         {
-            bool answer = await DisplayAlert("Delete Student", "Are you sure you want to delete this student?", "Yes", "No");
+            //bool answer = await DisplayAlert("Delete Student", "Are you sure you want to delete this student?", "Yes", "No");
 
-            if (answer)
-            {
+            //if (answer)
+            //{
                 await _viewModel.DeletePerson(StudentId);
-                await DisplayAlert("Success!", "Student deleted successfully.", "OK");
+                //await DisplayAlert("Success!", "Student deleted successfully.", "OK");
                 _ = Navigation.PopAsync();
-            }
-            else
-            {
-                await DisplayAlert("Oops!", "The student was not deleted.", "OK");
-            }
+            //}
+            //else
+            //{
+            //    await DisplayAlert("Oops!", "The student was not deleted.", "OK");
+            //}
+        }
+
+        private async void UpdateStudentNumber(object sender, EventArgs e)
+        {
+            await _viewModel.UpdateNumber(StudentId);
         }
 
         private void CreateAndAddEnrollmentCards()

@@ -122,6 +122,20 @@ namespace UniVerse.Controls.RadialBarChart
             set { SetValue(TextColorProperty, value); }
         }
 
+        public static readonly BindableProperty CenterTextProperty =
+            BindableProperty.Create(
+                nameof(CenterText),
+                typeof(string),
+                typeof(RadialBarChart),
+                defaultValue: null,
+                propertyChanged: Invalidate);
+
+        public string CenterText
+        {
+            get { return (string)GetValue(CenterTextProperty); }
+            set { SetValue(CenterTextProperty, value); }
+        }
+
         public static readonly BindableProperty FontSizeProperty =
             BindableProperty.Create(
                 nameof(FontSize),

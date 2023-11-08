@@ -9,14 +9,19 @@ using UniVerse.ViewModels;
 
 namespace UniVerse.Screens
 {
-
     public class StudentScreen : ContentPage
     {
-        private readonly PeopleViewModel viewModel;
-
+        private StudentViewModel _studentViewModel { get; set; }
+        FlexLayout layout = new()
+        {
+            Direction = FlexDirection.Row,
+            Wrap = FlexWrap.Wrap,
+            JustifyContent = FlexJustify.Start,
+            AlignItems = FlexAlignItems.Start,
+        };
         public StudentScreen()
         {
-            viewModel = new PeopleViewModel(new Services.RestService());
+            _studentViewModel = new StudentViewModel(new Services.StudentServices.StudentService());
             Shell.SetBackgroundColor(this, Color.FromArgb("#F6F7FB"));
             Style inputStyle = new(typeof(Entry))
             {
@@ -74,13 +79,9 @@ namespace UniVerse.Screens
             studentRole.TextColor = Colors.White;
             studentRole.TitleColor = Colors.White;
 
-
-            FlexLayout layout = new()
+            studentRole.SelectedIndexChanged += (sender, args) =>
             {
-                Direction = FlexDirection.Row,
-                Wrap = FlexWrap.Wrap,
-                JustifyContent = FlexJustify.Start,
-                AlignItems = FlexAlignItems.Start,
+                FilterData();
             };
 
             ScrollView scrollView = new()
@@ -111,7 +112,7 @@ namespace UniVerse.Screens
                 "Degree Student",
                 "Certificate Student"
             };
-            RightBar right = new("Student", list);
+            RightBar right = new("Student", list, _studentViewModel);
 
 
             // Add the ContentView to the Grid
@@ -134,24 +135,38 @@ namespace UniVerse.Screens
 
             Content = grid;
 
-            GetAllStudentsAsync();
-
-            async void GetAllStudentsAsync()
+            async void FilterData()
             {
+                string selectedRole = studentRole.SelectedItem.ToString();
 
-                await viewModel.GetAllStudents();
+                layout.Children.Clear();
 
-                foreach (var Student in viewModel.StudentList)
+                var filteredStaff = _studentViewModel.StudentList.Where(member =>
+                  selectedRole == "All Students" ||
+                  (selectedRole == "Degree Student" && member.role == "Degree student") ||
+                  (selectedRole == "Certificate Student" && member.role == "Diploma Student")
+              );
+
+                foreach (var member in filteredStaff)
                 {
-                    var card = new Cardview(Student.name, Student.person_system_identifier, Student.email, Student.role, "Student", Student.id, Student.is_active);
+                    var card = new Cardview(member.name, member.role, member.email, member.person_system_identifier, "Student", member.id, member.is_active);
                     layout.Children.Add(card);
                 }
             }
+
+
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await viewModel.GetAllStudents();
+            layout.Children.Clear();
+            await _studentViewModel.GetAllstudents();
+         
+            foreach (var Student in _studentViewModel.StudentList)
+            {
+                var card = new Cardview(Student.name, Student.person_system_identifier, Student.email, Student.role, "Student", Student.id, Student.is_active);
+                layout.Children.Add(card);
+            }
         }
     }
 }

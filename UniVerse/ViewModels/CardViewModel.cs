@@ -13,7 +13,7 @@ namespace UniVerse.ViewModels
             if (buttonText == "Student")
             {
                 var viewModel = new NavOverviewViewModel { NavigationParameter = id };
-                await Shell.Current.Navigation.PushAsync(new StudentOverviewScreen { BindingContext = viewModel });
+                await Shell.Current.Navigation.PushAsync(new StudentOverviewScreen(id){ BindingContext = viewModel });
             }
             else if (buttonText == "Staff Member")
             {

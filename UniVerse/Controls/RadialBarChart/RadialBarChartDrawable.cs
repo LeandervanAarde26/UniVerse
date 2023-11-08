@@ -33,6 +33,7 @@ namespace UniVerse.Controls.RadialBarChart
             var barThickness = (float)_chart.BarThickness;
             var legend = _chart.LegendText;
             var legend2 = _chart.LegendText2;
+            var centerText = _chart.CenterText;
             var firstEntry = _chart.Entries.FirstOrDefault().Color;
       
             canvas.StrokeSize = barThickness;
@@ -76,7 +77,7 @@ namespace UniVerse.Controls.RadialBarChart
                 radius += spacing;
 
             }
-            DrawCenterText(canvas, center, fontSize);
+            DrawCenterText(canvas, center, fontSize, centerText );
             DrawLegend(canvas, center, radius, fontSize, _chart.Entries.FirstOrDefault().Color, legend, legend2);
         
         }
@@ -96,9 +97,9 @@ namespace UniVerse.Controls.RadialBarChart
                 clockwise: true,
                 closed: false);
         }
-        private static void DrawCenterText(ICanvas canvas, PointF center , float fontSize)
+        private static void DrawCenterText(ICanvas canvas, PointF center , float fontSize, string centerText)
         {
-            string text = "100 \nCredits";
+            string text = centerText;
             var textSize = canvas.GetStringSize(
                 text,
                 Font.Default,

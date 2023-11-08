@@ -9,24 +9,20 @@ using UniVerse.Controls.RadialBarChart;
 using UniVerse.Models;
 using UniVerse.Services.SubjectServices;
 
-
 namespace UniVerse.Screens;
 public class Dashboard : ContentPage
 {
-    private readonly LoginViewModel _loginViewModel;
-    private readonly PeopleViewModel _peopleViewModel;
+
+    private readonly StudentViewModel _studentViewModel;
     private readonly StaffViewModel _staffViewModel;
     private readonly SubjectViewModel _subjectViewModel;
     private readonly StudentFeesViewModel _studentFunds;
-
     public Dashboard()
     {
-        _loginViewModel = new LoginViewModel(new Services.RestService());
-        _peopleViewModel = new PeopleViewModel(new Services.RestService());
         _staffViewModel = new StaffViewModel(new Services.StaffService.StaffService());
         _subjectViewModel = new SubjectViewModel(new SubjectService());
         _studentFunds = new StudentFeesViewModel(new Services.RestService());
-
+        _studentViewModel = new StudentViewModel(new Services.StudentServices.StudentService());
 
         BindingContext = this;
 
@@ -118,17 +114,6 @@ public class Dashboard : ContentPage
                 },
         };
 
-        Label diplomaStudentsText = new()
-        {
-            Text = "Diploma Students",
-            FontSize = 18,
-            FontAttributes = FontAttributes.None,
-            TextColor = Color.FromArgb("#2B2B2B"),
-            HorizontalOptions = LayoutOptions.Start,
-            VerticalOptions = LayoutOptions.Center,
-            Margin = new Thickness(10, 10, 0, 0)
-        };
-
         //viewStudents.Clicked += ShowThePopup;
 
         var ChartData = new ChartEntry[]
@@ -155,6 +140,7 @@ public class Dashboard : ContentPage
             //Margin = new Thickness(10, 5, 0, 0),
             LegendText = "Degree Students",
             LegendText2 = "Diploma",
+            CenterText = "students"
         };
 
         FlexLayout studentInfo = new()
@@ -190,30 +176,8 @@ public class Dashboard : ContentPage
             //Margin = new Thickness(10, 10, 0, 0),
             LegendText = "Lecturer",
             LegendText2 = "Admin",
+            CenterText = "Staff"
         };
-
-        Label adminStaffText = new()
-        {
-            Text = "Admin Staff",
-            FontSize = 18,
-            FontAttributes = FontAttributes.None,
-            TextColor = Color.FromArgb("#2B2B2B"),
-            HorizontalOptions = LayoutOptions.Start,
-            VerticalOptions = LayoutOptions.Center,
-            Margin = new Thickness(10, 10, 0, 0)
-        };
-
-        Label academicText = new()
-        {
-            Text = "Academic Staff",
-            FontSize = 18,
-            FontAttributes = FontAttributes.None,
-            TextColor = Color.FromArgb("#2B2B2B"),
-            HorizontalOptions = LayoutOptions.Start,
-            VerticalOptions = LayoutOptions.Center,
-            Margin = new Thickness(10, 10, 0, 0)
-        };
-
 
         FlexLayout adminInfo = new()
         {
@@ -468,7 +432,7 @@ public class Dashboard : ContentPage
 
         async void GetUserDetails()
         {
-           var studentGet =  _peopleViewModel.GetAllstudents();
+           var studentGet =  _studentViewModel.GetAllstudents();
            var staffGet =_staffViewModel.GetAllStaffMembers();
            var subjectsCount = _subjectViewModel.GetAllSubjects();
            var student =  _studentFunds.GetStudentAllFees();
@@ -476,8 +440,7 @@ public class Dashboard : ContentPage
             await Task.WhenAll(studentGet, staffGet, subjectsCount, student);
 
             subjectsNumberText.Text = _subjectViewModel.SubjectCount.ToString();
-            string username = await SecureStorage.Default.GetAsync("username");
-            studentsGraph.Entries = _peopleViewModel.Chart;
+            studentsGraph.Entries = _studentViewModel.Chart;
             adminGraph.Entries = _staffViewModel.StaffChart;
             AuthenticatedUser auth = LoginViewModel.AuthUser;
             welcomeHeading.Text = $"Hello, {auth.username} ";

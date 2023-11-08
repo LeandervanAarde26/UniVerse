@@ -92,6 +92,17 @@ namespace UniVerse.ViewModels
             }
         }
 
+        public string _phoneNumberEntry = string.Empty;
+        public string PhoneNumberEntry
+        {
+            get { return _phoneNumberEntry; }
+            set
+            {
+                _phoneNumberEntry = value;
+                OnPropertyChanged(nameof(PhoneNumberEntry));
+            }
+        }
+
         public PeopleViewModel(RestService restService) //instance of the restservice goes here
         {
             _restService = restService;
@@ -114,35 +125,35 @@ namespace UniVerse.ViewModels
 
    
         // Get Students
-        public async Task GetAllStudents()
-        {
-            var members = await _restService.GetStudentsAsync();
-            StudentList.Clear();
+        //public async Task GetAllStudents()
+        //{
+        //    var members = await _restService.GetStudentsAsync();
+        //    StudentList.Clear();
 
-            foreach (var member in members)
-            {
-                StudentList.Add(member);
-            }
-        }
+        //    foreach (var member in members)
+        //    {
+        //        StudentList.Add(member);
+        //    }
+        //}
 
  
         //Get student member by id
-        public async Task<SingleStudentWithCourses> GetStudent(int id)
-        {
-            var student = await _restService.GetStudentByIdAsync(id);
-            Student.Add(student);
-            double studentCredits = Math.Round((double)student.person_credits / (double)student.needed_credits * 100, 1);
-            SingleStudentChart.Add(new ChartEntry
-            {
-                Value = studentCredits,
-                Color = Color.FromArgb("#6023FF"),
-                Text = "Visual Studio Code"
-            });
+        //public async Task<SingleStudentWithCourses> GetStudent(int id)
+        //{
+        //    var student = await _restService.GetStudentByIdAsync(id);
+        //    Student.Add(student);
+        //    double studentCredits = Math.Round((double)student.person_credits / (double)student.needed_credits * 100, 1);
+        //    SingleStudentChart.Add(new ChartEntry
+        //    {
+        //        Value = studentCredits,
+        //        Color = Color.FromArgb("#6023FF"),
+        //        Text = "Visual Studio Code"
+        //    });
 
-            Chart.ToArray();
+        //    Chart.ToArray();
 
-            return student;
-        }
+        //    return student;
+        //}
 
         //Delete person
         public async Task DeletePerson(int id)
@@ -237,6 +248,11 @@ namespace UniVerse.ViewModels
             //SurnameEntry = String.Empty;
 
             return person;
+        }
+
+        public async Task UpdateNumber(int id)
+        {
+            await _restService.UpdateCellPhone(id, PhoneNumberEntry);
         }
     }
 }
