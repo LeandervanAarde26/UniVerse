@@ -99,4 +99,17 @@ public partial class SubjectOverview : ContentPage
             await DisplayAlert("Oops!", "The subject was not deleted.", "OK");
         }
     }
+
+    private void AssignStudent(object sender, EventArgs e)
+    {
+        var selectedStudent = studentPicker.SelectedItem?.ToString();
+        Debug.WriteLine(selectedStudent);
+    }
+
+    private void AssignLecturer(object sender, EventArgs e)
+    {
+        var selectedLecturer = lectPicker.SelectedItem?.ToString();
+        Debug.WriteLine(selectedLecturer);
+    }
+
 }
