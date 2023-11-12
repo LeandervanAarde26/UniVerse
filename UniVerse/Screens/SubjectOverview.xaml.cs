@@ -9,6 +9,7 @@ public partial class SubjectOverview : ContentPage
     public int SubjectId { get; set; }
     private readonly SubjectViewModel _viewModel;
     private readonly StaffViewModel _staffViewModel;
+    private readonly StudentViewModel _studentViewModel;
 
     public SubjectOverview()
 	{
@@ -16,6 +17,7 @@ public partial class SubjectOverview : ContentPage
 
         _viewModel = new SubjectViewModel(new Services.SubjectServices.SubjectService());
         _staffViewModel = new StaffViewModel(new Services.StaffService.StaffService());
+        _studentViewModel = new StudentViewModel(new Services.StudentServices.StudentService());
         BindingContext = _viewModel;
     }
 
@@ -26,6 +28,19 @@ public partial class SubjectOverview : ContentPage
         studentStackLayout.Clear();
 
         await _staffViewModel.GetAllStaffMembers();
+        await _studentViewModel.GetAllstudents();
+
+        // Populate lectPicker with staff members
+        foreach (var staffMember in _staffViewModel.AllStaffList)
+        {
+            lectPicker.Items.Add(staffMember.name);
+        }
+
+        // Populate studentPicker with student names
+        foreach (var student in _studentViewModel.StudentList)
+        {
+            studentPicker.Items.Add(student.name);
+        }
 
         if (BindingContext is NavOverviewViewModel viewModel)
         {
