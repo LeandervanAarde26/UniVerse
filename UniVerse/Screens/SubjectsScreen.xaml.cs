@@ -31,8 +31,6 @@ public partial class SubjectsScreen : ContentPage, INotifyPropertyChanged
         }
     }
 
-
-
     private string _subjectName;
     public string SubjectName
     {

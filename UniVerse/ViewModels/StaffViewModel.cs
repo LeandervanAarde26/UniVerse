@@ -97,6 +97,8 @@ namespace UniVerse.ViewModels
             }
         }
 
+        public SubjectViewModel SubjectViewModel { get; internal set; }
+
         public StaffViewModel(StaffService staffService)
         {
             _staffService = staffService;

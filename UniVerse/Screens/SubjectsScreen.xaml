@@ -10,7 +10,6 @@
            
             <!-- Three-quarters of the page for the first column -->
             <ColumnDefinition Width="70*"/>
-            <!-- One-quarter of the page for the second column -->
             <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
 

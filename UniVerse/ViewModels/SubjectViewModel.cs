@@ -43,7 +43,6 @@ namespace UniVerse.ViewModels
             foreach (var subject in subjects)
             {
                 SubjectList.Add(subject);
-                Debug.WriteLine(subject.subjectName);
             }
         }
 
@@ -62,7 +61,7 @@ namespace UniVerse.ViewModels
         {
             try
             {
-                await _restService.DeletePersonAsync(id);
+                await _restService.DeleteSubjectAsync(id);
                 var SubjectToRemove = SubjectList.FirstOrDefault(p => p.subjectId == id);
                 if (SubjectToRemove != null)
                 {

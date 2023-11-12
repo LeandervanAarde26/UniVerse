@@ -203,7 +203,7 @@ namespace UniVerse.Screens
             Button delete = new()
             {
                 Margin = new Thickness(8, 12),
-                Text = "Delete Staff Member",
+                Text = "Delete Student",
                 BackgroundColor = Color.FromArgb("#FF4040"),
                 ImageSource = ImageSource.FromFile("trash.png")
             };
