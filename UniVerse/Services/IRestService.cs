@@ -5,7 +5,7 @@ namespace UniVerse.Services
 {
     public interface IRestService
     {
-        Task<List<Student>> GetStudentsAsync();
+
         Task<AuthenticatedUser> PostDataAsync(string email, string password);
         Task<List<LecturerFees>> GetFeesAsync();
         Task<List<StudentFees>> GetStudentFeesAsync();

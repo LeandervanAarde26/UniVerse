@@ -410,7 +410,7 @@ public class Dashboard : ContentPage
             }
         };
 
-        DashboardRightbar right = new("Upcoming Events");
+        DashboardRightbar right = new("Events This year");
 
         grid.Children.Add(dashboardGrid);
         Grid.SetRow(dashboardGrid, 1);

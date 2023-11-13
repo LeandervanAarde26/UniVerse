@@ -39,52 +39,6 @@ namespace UniVerse.Services
             };
         }
         
-        // get students
-        public async Task<List<Student>> GetStudentsAsync()
-        {
-            Students = new List<Student>();
-            Uri uri = new(string.Format(baseURL + "People/Students"));
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    Students = JsonSerializer.Deserialize<List<Student>>(content, _serializerOptions);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-            return Students;
-        }
-
-        // get student by id
-        public async Task<SingleStudentWithCourses> GetStudentByIdAsync(int id)
-        {
-            SingleStudentWithCourses Student = new();
-            Uri studentUri = new(string.Format(baseURL + "People/student/{0}", id));
-
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(studentUri);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    Student = JsonSerializer.Deserialize<SingleStudentWithCourses>(content, _serializerOptions);
-                    Debug.WriteLine($"Name: {Student.student_name}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-
-            return Student;
-        }
-
         //Delete people
         public async Task DeletePersonAsync(int id)
         {
