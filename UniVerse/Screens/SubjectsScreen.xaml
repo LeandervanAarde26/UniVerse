@@ -10,7 +10,6 @@
            
             <!-- Three-quarters of the page for the first column -->
             <ColumnDefinition Width="70*"/>
-            <!-- One-quarter of the page for the second column -->
             <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
 
@@ -24,7 +23,7 @@
                 FontAttributes="Bold"
                 TextColor="{DynamicResource Key=Gray900}"
                 Padding="0, 0, 0, 20"/>
-            <CollectionView ItemsSource="{Binding Subjects}" MaximumHeightRequest="1300" HorizontalOptions="FillAndExpand">
+            <CollectionView ItemsSource="{Binding Subjects}" MaximumHeightRequest="1800" HorizontalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <components:SubjectCard BindingContext="{Binding}"/>
@@ -59,10 +58,10 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Entry x:Name="subject_code" Placeholder="Subject Code" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Text="{Binding SubjectCode}"/>
+                        <Entry x:Name="subject_code" Placeholder="Subject Code" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B" Text="{Binding SubjectCode}" Margin="0, 0, 5, 0"/>
 
                         <!--I don't know why the title color isn't showing up because it was earlier lol-->
-                        <Picker x:Name="picker" Grid.Column="1" BackgroundColor="{DynamicResource Primary}" Margin="5, 0, 0, 0" TitleColor="{DynamicResource Gray400}" Title="Select Lecturer"
+                        <Picker TextColor="{DynamicResource Gray900}" x:Name="picker" Grid.Column="1" BackgroundColor="{DynamicResource Primary}" Margin="5, 0, 0, 0"
                                 ItemsSource="{Binding PickerItems}" ItemDisplayBinding="{Binding Name}"/>
                     </Grid>
 

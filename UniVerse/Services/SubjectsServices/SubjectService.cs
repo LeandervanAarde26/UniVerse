@@ -6,7 +6,7 @@ using UniVerse.Services.SubjectService;
 
 namespace UniVerse.Services.SubjectServices
 {
-    public class SubjectService : ISubjectService
+    public class SubjectService : ISubjectService 
     {
         HttpClient _client;
         //base api URL 
@@ -74,7 +74,7 @@ namespace UniVerse.Services.SubjectServices
         }
 
         //Delete subject
-        public async Task DeletePersonAsync(int id)
+        public async Task DeleteSubjectAsync(int id)
         {
             Uri uri = new(string.Format(baseURL + "Subjects/{0}", id));
 

@@ -68,10 +68,9 @@
             <Frame BackgroundColor="White" BorderColor="Transparent" Margin="0, 0, 0, 20">
                 <VerticalStackLayout>
                     <Label Text="Add Student to Subject" TextColor="{DynamicResource Gray900}" FontSize="24" FontAttributes="Bold" Margin="0, 0, 0, 20"/>
-                    <!--I'll make these entries a search, just gotta figure it out-->
-                    <Entry Placeholder="Student" BackgroundColor="{DynamicResource Primary}" TextColor="#2B2B2B"/>
+                    <Picker TextColor="{DynamicResource Gray900}" x:Name="studentPicker" Grid.Column="1" BackgroundColor="{DynamicResource Primary}" Margin="5, 0, 0, 0"/>
                     <!--<SearchBar PlaceholderColor="{DynamicResource Gray900}" Placeholder="Search..." BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Gray900}"/>-->
-                    <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
+                    <Button Text="Assign Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0" Clicked="AssignStudent"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -90,9 +89,8 @@
                             <Label x:Name="emailOfLect" FontSize="16" TextColor="{DynamicResource Gray400}"/>
                         </VerticalStackLayout>
                     </FlexLayout>
-                    <!--I'll make these entries a search, just gotta figure it out-->
-                    <SearchBar Placeholder="Search Lecturers..." BackgroundColor="{DynamicResource Primary}" CancelButtonColor="{DynamicResource Blue}"/>
-                    <Button Text="Add Student" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0"/>
+                    <Picker TextColor="{DynamicResource Gray900}" x:Name="lectPicker" Grid.Column="1" BackgroundColor="{DynamicResource Primary}" Margin="5, 0, 0, 0"/>
+                    <Button Text="Assign Lecturer" BackgroundColor="#2B2B2B" Margin="0, 20, 0, 0" Clicked="AssignLecturer"/>
                 </VerticalStackLayout>
             </Frame>
             <Button Text="Delete Subject" BackgroundColor="{DynamicResource Red}" Margin="0, 20, 0, 0" Clicked="DeleteSubject"/>

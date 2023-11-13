@@ -5,7 +5,7 @@
              x:Class="UniVerse.Components.SubjectCard">
 
     <!--Subject Card-->
-    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" Padding="50, 40, 50,40" Margin="0, 0, 0, 20">
+    <Frame BackgroundColor="{DynamicResource Key=Blue200}" BorderColor="Transparent" Padding="50, 40, 50,40" Margin="0, 0, 0, 20" HeightRequest="350">
         <HorizontalStackLayout >
             <!--Subject Image-->
             <Image Source="ui_ux_design.png"/>
@@ -14,7 +14,7 @@
             <FlexLayout Margin="40,0, 0, 0" Direction="Column" JustifyContent="SpaceBetween" HorizontalOptions="CenterAndExpand">
                 <!--Subject name & Code-->
                 <HorizontalStackLayout>
-                    <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="600">
+                    <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="630">
                         <Label Text="{Binding subjectName}"
                            TextColor="{DynamicResource Gray900}"
                            FontSize="20"
@@ -25,7 +25,7 @@
                     </VerticalStackLayout>
                     <!--Edit Button-->
                     <!--Trying to figure out how to get this image to stay at the end even when resising the screen?-->
-                    <Button x:Name="toggleButton" Text="Inactive" BackgroundColor="Red" Clicked="ToggleButton" Margin="0, 20, 0, 0" WidthRequest="100"/>
+                    <Button x:Name="toggleButton" Text="Inactive" BackgroundColor="Red" Clicked="ToggleButton" WidthRequest="100"/>
                 </HorizontalStackLayout>
                 <!--Subject Description-->
 
@@ -33,10 +33,10 @@
                        MaxLines="2"
                        TextColor="{DynamicResource Gray900}"
                        FontSize="16"
-                       MaximumWidthRequest="650"/>
+                       WidthRequest="700"/>
                 <!--Students-->
                 <HorizontalStackLayout>
-                    <HorizontalStackLayout WidthRequest="520">
+                    <HorizontalStackLayout WidthRequest="550">
                         <!-- <components:StudentList/> ehh?-->
                         <Image Aspect="AspectFill"
                                 Source="student_profile.png"

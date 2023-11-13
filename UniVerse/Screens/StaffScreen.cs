@@ -142,17 +142,17 @@ namespace UniVerse.Screens
 
             Content = grid;
 
-          async void FilterData()
+            async void FilterData()
             {
                 string selectedRole = studentRole.SelectedItem.ToString();
 
                 layout.Children.Clear();
 
                 var filteredStaff = _staffViewModel.AllStaffList.Where(member =>
-                  selectedRole == "All Staff" ||
-                  (selectedRole == "Admin Staff" && member.role == "Admin") || 
-                  (selectedRole == "Academic Staff" && member.role == "Lecturer") 
-              );
+                    selectedRole == "All Staff" ||
+                    (selectedRole == "Admin Staff" && member.role == "Admin") || 
+                    (selectedRole == "Academic Staff" && member.role == "Lecturer") 
+                );
 
                 foreach (var member in filteredStaff)
                 {

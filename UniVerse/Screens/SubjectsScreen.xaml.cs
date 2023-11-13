@@ -31,8 +31,6 @@ public partial class SubjectsScreen : ContentPage, INotifyPropertyChanged
         }
     }
 
-
-
     private string _subjectName;
     public string SubjectName
     {
@@ -177,11 +175,10 @@ public partial class SubjectsScreen : ContentPage, INotifyPropertyChanged
     {
         base.OnAppearing();
 
-
         var subjects = viewModel.GetAllSubjects();
         var people = peopleViewModel.GetAllLecturers();
 
-        await Task.WhenAll(subjects, people);  
+        await Task.WhenAll(subjects, people);
 
         PickerItems = peopleViewModel.Lecturers.Select(lecturer => new LecturerPickerItem
         {
