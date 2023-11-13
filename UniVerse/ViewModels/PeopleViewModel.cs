@@ -176,79 +176,13 @@ namespace UniVerse.ViewModels
             }
         }
 
-        public async Task GetAllstudents()
-        {
-            var members = await _restService.GetStudentsAsync();
-            StudentList.Clear();
-            var DegreeStudents = 0;
-            var DiplomaStudents = 0;
-            var maximumChartValue = 0;
 
-
-            foreach (var member in members)
-            {
-                StudentList.Add(member);
-                maximumChartValue++;
-
-                if(member.role == "Degree student")
-                {
-                    DegreeStudents++;
-                }
-                else
-                {
-                    DiplomaStudents++;
-                }
-            }
-            double DegreePercent = Math.Round((double)DegreeStudents / (double)maximumChartValue * 100, 1);
-            Chart.Add(new ChartEntry
-            {
-                Value = DegreePercent,
-                Color = Color.FromArgb("#6023FF"),
-                Text = "Visual Studio Code"
-            });
-
-            Chart.ToArray();
-        }
         public async Task SetPersonStatus(int id)
         {
             await _restService.UpdatePerson(id);
         }
 
-        public async Task<AddpersonModel> AddStudent()
-        {
 
-            int userRole = RoleInput == 1 ? 3 : 4;
-
-            AddpersonModel person = new()
-            {
-                person_id = 0,
-                person_system_identifier = Identifier,
-                first_name = NameEntry,
-                last_name = SurnameEntry,
-                person_email = EmailEntry,
-                added_date = DateTime.UtcNow,
-                person_active = true,
-                role = userRole,
-                person_image = "None",
-                person_credits = 0,
-                person_cell = Number,
-                needed_credits = 0,
-                person_password = "password",
-            };
-
-            
-            await _restService.AddStudentAsync(person);
-
-            GetAllstudents();
-
-            //NameEntry = String.Empty;
-            //EmailEntry = String.Empty;
-            //Number = String.Empty;
-            //Identifier = String.Empty;
-            //SurnameEntry = String.Empty;
-
-            return person;
-        }
 
         public async Task UpdateNumber(int id)
         {
