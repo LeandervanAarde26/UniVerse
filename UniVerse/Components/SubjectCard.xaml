@@ -11,7 +11,7 @@
             <Image Source="ui_ux_design.png"/>
 
             <!--Subject Information-->
-            <FlexLayout Margin="40,0, 0, 0" Direction="Column" JustifyContent="SpaceBetween" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource Orange}">
+            <FlexLayout Margin="40,0, 0, 0" Direction="Column" JustifyContent="SpaceBetween" HorizontalOptions="CenterAndExpand">
                 <!--Subject name & Code-->
                 <HorizontalStackLayout>
                     <VerticalStackLayout HorizontalOptions="EndAndExpand" WidthRequest="630">
